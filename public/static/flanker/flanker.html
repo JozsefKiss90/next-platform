@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flanker Task</title>
+    <meta charset='UTF-8'>
+    <script src="jspsych-7.1/jspsych.js"></script>
+    <script src="jspsych-7.1/plugin-html-keyboard-response.js"></script>
+    <script src="jspsych-7.1/plugin-image-keyboard-response.js"></script>
+    <script src="jspsych-7.1/plugin-preload.js"></script>
+    <script src="jspsych-7.1/plugin-survey-html-form.js"></script>
+    <script src="jspsych-7.1/plugin-call-function.js"></script>
+    <link href="jspsych-7.1/jspsych.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    
+  </body>
+  <script>
+
+  
+function foo(callback) {
+  httpRequest = new XMLHttpRequest();
+  httpRequest.open('GET','stimuli.svg',false); 
+  httpRequest.overrideMimeType("image/svg+xml");
+  httpRequest.onreadystatechange = function () {
+      if (httpRequest.readyState === 4) { 
+          if (httpRequest.status === 200) { 
+              callback(httpRequest.responseXML.documentElement); 
+              
+          }
+      }
+  };
+  httpRequest.send();
+}
+
+function foo_2(callback) {
+  httpRequest = new XMLHttpRequest();
+  httpRequest.open('GET', 'fixation.svg', false); 
+  httpRequest.overrideMimeType("image/svg+xml");
+  httpRequest.onreadystatechange = function () {
+      if (httpRequest.readyState === 4) { // request is done
+          if (httpRequest.status === 200) { // successfully
+              callback(httpRequest.responseXML.documentElement); // we're calling our method
+              
+          }
+      }
+  };
+  httpRequest.send();
+}
+  
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString(length) {
+let result = ' ';
+const charactersLength = characters.length;
+for ( let i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+}
+
+return result;
+}
+var sub_id = generateString(6);
+
+
+/* initialize jsPsych */
+var jsPsych = initJsPsych({
+  on_finish: function() {
+    jsPsych.data.displayData(),
+    saveData("experiment_data_".concat(sub_id),collectData())
+  }
+});
+
+    /* create timeline */
+    var timeline = [];
+
+    /* preload images */
+    var preload = {
+      type: jsPsychPreload,
+      message: [svgArr]
+    };
+    timeline.push(preload);
+
+    var form_trial = {
+        type: jsPsychSurveyHtmlForm,
+        preamble: '<p> Kérlek add meg a neved</b> </p>',
+        html: '<p> Név: <input name="first_name" type="text" /></p>'
+      };
+    timeline.push(form_trial);
+
+    /* define welcome message trial */
+    var welcome = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "Üdvözöllek a kísérletben. Nyomj meg egy gombot a folytatáshoz."
+    };
+    timeline.push(welcome);
+
+    /* define instructions trial */
+    var instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `
+        <p>Ebben a kísérletben, a képernyőn láthatő körökön belül különböző alakzatok jelennek meg.</p><p>A feladatod jelezni, hogy a  körökön belül 
+       egy négyzet vagy egy rombusz található-e.</p>
+        <p>Ha  négyzet, nyomd meg a billentyűzeten az <strong>F</strong>-t, ha rombusz akkor pedig nyomd meg a <strong>J</strong>-t.</p>
+        <p>Próbálj meg minél gyorsabban válaszolni! </p>
+        <div style='width: 700px;'>
+        <div style='float: left;'><img src='img/left_1.png'></img>
+        <p style='margin-left:60px;' class='small'><strong> F gomb</strong></p></div>
+        <div style='float: right;'><img src='img/right_1.png'></img>
+        <p style='margin-right:60px;' class='small'><strong>J gomb</strong></p></div>
+        </div>
+        <div style='margin-top:300px; width: 700px; margin-left:20px;''> <p><strong>Nyomj meg egy gombot a folytatáshoz.</strong></p> </div>
+      `,
+      post_trial_gap: 2000
+    };
+    timeline.push(instructions);
+
+    /* define trial stimuli array for timeline variables */
+
+
+  var svgArr = []
+
+ var res = foo(function (result) {
+  svgArr.push(result)
+ });
+var fixArr = []
+ var res_2 = foo_2(function (result_2) {
+  fixArr.push(result_2)
+ });
+
+fixation =  fixArr[0].innerHTML
+
+console.log(fixation)
+
+    var atrr = ["M285 435 L315 435 L315 465 L285 465", "M280 465 L320 465 L300 430 Z", "M285 465 L315 465 L315 445 L300 430 L285 445 Z"]
+    var allNT = ["M285 135 L315 135 L315 165 L285 165", "M155 210 L185 210 L185 240 L155 240","M155 360 L185 360 L185 390 L155 390", "M285 435 L315 435 L315 465 L285 465","M415 360 L445 360 L445 390 L415 390","M415 210 L445 210 L445 240 L415 240", "M280 165 L320 165 L300 130 Z", "M150 240 L190 240 L170 205 Z", "M150 390 L190 390 L170 355 Z", "M280 465 L320 465 L300 430 Z", "M410 390 L450 390 L430 355 Z", "M410 240 L450 240 L430 205 Z","M280 135 L320 135 L300 170 Z","M150 210 L190 210 L170 245 Z","M150 360 L190 360 L170 395 Z", "M280 435 L320 435 L300 470 Z","M410 360 L450 360 L430 395 Z","M410 210 L450 210 L430 245 Z", "M285 165 L315 165 L315 145 L300 130 L285 145 Z", "M285 135 L315 135 L315 155 L300 170 L285 155 Z", "M155 240 L185 240 L185 220 L170 205 L155 220 Z", "M155 210 L185 210 L185 230 L170 245 L155 230 Z", "M155 390 L185 390 L185 370 L170 355 L155 370 Z", "M155 360 L185 360 L185 380 L170 395 L155 380 Z","M285 465 L315 465 L315 445 L300 430 L285 445 Z","M285 435 L315 435 L315 455 L300 470 L285 455 Z,","M415 390 L445 390 L445 370 L430 355 L415 370 Z", "M415 360 L445 360 L445 380 L430 395 L415 380 Z", "M415 240 L445 240 L445 220 L430 205 L415 220 Z", "M415 210 L445 210 L445 230 L430 245 L415 230 Z", "M280 135 L310 135 L320 165 L290 165", "M150 210 L180 210 L190 240 L160 240", "M150 360 L180 360 L190 390 L160 390", "M280 435 L310 435 L320 465 L290 465", "M410 360 L440 360 L450 390 L420 390", "M410 210 L440 210 L450 240 L420 240"]
+    var atrr3 = ["M285 135 L315 135 L315 165 L285 165", "M155 210 L185 210 L185 240 L155 240","M155 360 L185 360 L185 390 L155 390", "M285 435 L315 435 L315 465 L285 465","M415 360 L445 360 L445 390 L415 390","M415 210 L445 210 L445 240 L415 240"]
+    var tri = ["M280 165 L320 165 L300 130 Z", "M150 240 L190 240 L170 205 Z", "M150 390 L190 390 L170 355 Z", "M280 465 L320 465 L300 430 Z", "M410 390 L450 390 L430 355 Z", "M410 240 L450 240 L430 205 Z","M280 135 L320 135 L300 170 Z","M150 210 L190 210 L170 245 Z","M150 360 L190 360 L170 395 Z", "M280 435 L320 435 L300 470 Z","M410 360 L450 360 L430 395 Z","M410 210 L450 210 L430 245 Z"]
+    var haus = ["M285 165 L315 165 L315 145 L300 130 L285 145 Z", "M285 135 L315 135 L315 155 L300 170 L285 155 Z", "M155 240 L185 240 L185 220 L170 205 L155 220 Z", "M155 210 L185 210 L185 230 L170 245 L155 230 Z", "M155 390 L185 390 L185 370 L170 355 L155 370 Z", "M155 360 L185 360 L185 380 L170 395 L155 380 Z","M285 465 L315 465 L315 445 L300 430 L285 445 Z","M285 435 L315 435 L315 455 L300 470 L285 455 Z,","M415 390 L445 390 L445 370 L430 355 L415 370 Z", "M415 360 L445 360 L445 380 L430 395 L415 380 Z", "M415 240 L445 240 L445 220 L430 205 L415 220 Z", "M415 210 L445 210 L445 230 L430 245 L415 230 Z"]
+    var para = ["M280 135 L310 135 L320 165 L290 165", "M150 210 L180 210 L190 240 L160 240", "M150 360 L180 360 L190 390 L160 390", "M280 435 L310 435 L320 465 L290 465", "M410 360 L440 360 L450 390 L420 390", "M410 210 L440 210 L450 240 L420 240"]
+    var up =["M280 165 L320 165 L300 130 Z", "M150 240 L190 240 L170 205 Z", "M150 390 L190 390 L170 355 Z", "M280 465 L320 465 L300 430 Z", "M410 390 L450 390 L430 355 Z", "M410 240 L450 240 L430 205 Z","M285 165 L315 165 L315 145 L300 130 L285 145 Z", "M155 240 L185 240 L185 220 L170 205 L155 220 Z", "M155 390 L185 390 L185 370 L170 355 L155 370 Z","M285 465 L315 465 L315 445 L300 430 L285 445 Z","M415 390 L445 390 L445 370 L430 355 L415 370 Z", "M415 240 L445 240 L445 220 L430 205 L415 220 Z",]
+    var triUp = ["M280 165 L320 165 L300 130 Z", "M150 240 L190 240 L170 205 Z", "M150 390 L190 390 L170 355 Z", "M280 465 L320 465 L300 430 Z", "M410 390 L450 390 L430 355 Z", "M410 240 L450 240 L430 205 Z"]
+    var triDown = ["M280 135 L320 135 L300 170 Z","M150 210 L190 210 L170 245 Z","M150 360 L190 360 L170 395 Z", "M280 435 L320 435 L300 470 Z","M410 360 L450 360 L430 395 Z","M410 210 L450 210 L430 245 Z"]
+    var hausUp = ["M285 165 L315 165 L315 145 L300 130 L285 145 Z", "M155 240 L185 240 L185 220 L170 205 L155 220 Z", "M155 390 L185 390 L185 370 L170 355 L155 370 Z","M285 465 L315 465 L315 445 L300 430 L285 445 Z","M415 390 L445 390 L445 370 L430 355 L415 370 Z", "M415 240 L445 240 L445 220 L430 205 L415 220 Z"]
+    var hausDown = ["M285 135 L315 135 L315 155 L300 170 L285 155 Z", "M155 210 L185 210 L185 230 L170 245 L155 230 Z", "M155 360 L185 360 L185 380 L170 395 L155 380 Z", "M285 435 L315 435 L315 455 L300 470 L285 455 Z,", "M415 360 L445 360 L445 380 L430 395 L415 380 Z", "M415 210 L445 210 L445 230 L430 245 L415 230 Z"]
+    var down = ["M280 135 L320 135 L300 170 Z","M150 210 L190 210 L170 245 Z","M150 360 L190 360 L170 395 Z", "M280 435 L320 435 L300 470 Z","M410 360 L450 360 L430 395 Z","M410 210 L450 210 L430 245 Z", "M285 135 L315 135 L315 155 L300 170 L285 155 Z", "M155 210 L185 210 L185 230 L170 245 L155 230 Z", "M155 360 L185 360 L185 380 L170 395 L155 380 Z", "M285 435 L315 435 L315 455 L300 470 L285 455 Z,", "M415 360 L445 360 L445 380 L430 395 L415 380 Z", "M415 210 L445 210 L445 230 L430 245 L415 230 Z"]
+    
+    var responses = ["f", "j"]
+
+    var flankers = ["congruent", "incongruent"]
+    
+    var rotations = [["rotate(0 300 150)", "rotate(0 170 225)", "rotate(0 170 375)", "rotate(0 300 450)", "rotate(0 430 375)", "rotate(0 430 225)"], ["rotate(45 300 150)", "rotate(45 170 225)", "rotate(45 170 375)", "rotate(45 300 450)", "rotate(45 430 375)", "rotate(45 430 225)"]]
+    
+    var distractors = ["M270 270 L330 270 L330 330 L270 330"]
+
+    var locations = ["translate(-257 0)", "translate(257 0)", "translate(-257 0) rotate(45 300 300)", "translate(257 0) rotate(45 300 300)"]
+
+    function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array
+}
+
+console.log(rotations.length)
+
+test_stimuli = []
+
+for (r = 0; r < rotations.length; r++) {
+  rot = rotations[r]
+  for (l = 0; l < locations.length; l++) {
+    for (i = 0; i < atrr3.length; i++) {   
+
+      var svg = svgArr[0].getElementsByTagName('svg')[0];
+      var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+      newElement.setAttribute("d", atrr3[i]); 
+      newElement.setAttribute("transform", rot[i]); 
+      svg.appendChild(newElement);
+      var dis = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+      dis.setAttribute("d", "M270 270 L330 270 L330 330 L270 330"); 
+      dis.setAttribute("transform", locations[l]); 
+      svg.appendChild(dis);
+      var svg = '<div>' + svg.outerHTML + '</div>'
+      newElement.removeAttribute("transform", rot[i]); 
+      newElement.removeAttribute("d", atrr3[i]);  
+      dis.removeAttribute("d", "M270 270 L330 270 L330 330 L270 330"); 
+      stims = [{
+        stimulus:svg,
+        correct_response: responses[r],
+        data: {
+          flanker_type: flankers [r],
+          load: 1,
+          trial_id : 'stim'
+        }
+      }]
+
+        for (j = 0; j < stims.length; j++) {
+          test_stimuli.push(stims[j])
+      }
+
+      }
+
+    for (i = 0; i < atrr3.length; i++) {   
+
+      var svg = svgArr[0].getElementsByTagName('svg')[0];
+      var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+      var newElement2 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+
+      newElement.setAttribute("d", atrr3[i]); 
+      newElement.setAttribute("transform", rot[i]);  
+      str1 = atrr3[i].slice(1,3)
+      pos1 = str1.concat(atrr3[i].slice(5,6))
+
+      function checkPos(p1) {
+        shuffleArray(tri)
+        str2 = tri[i].slice(1,3)
+        p2 = str2.concat(tri[i].slice(5,6)) 
+        if (p1 != p2) {
+          return newElement2.setAttribute("d",tri[i]);
+        }
+        return checkPos(p1)
+      }
+
+
+      checkPos(pos1)
+
+      svg.appendChild(newElement);
+      svg.appendChild(newElement2);
+      var dis = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+      dis.setAttribute("d", "M270 270 L330 270 L330 330 L270 330"); 
+      dis.setAttribute("transform", locations[l]); 
+      svg.appendChild(dis);
+      var svg = '<div>' + svg.outerHTML + '</div>' 
+      newElement.removeAttribute("transform", rot[i]);  
+      newElement.removeAttribute("d", atrr3[i]);
+      newElement2.removeAttribute("d", tri[i]);
+      dis.removeAttribute("d", "M270 270 L330 270 L330 330 L270 330"); 
+      stims = [{
+      stimulus:svg,
+      correct_response: responses[r],
+      data: {
+          flanker_type: flankers [r],
+          load: 2,
+          trial_id : "stim"
+      }
+      }]
+
+        for (j = 0; j < stims.length; j++) {
+          test_stimuli.push(stims[j])
+          }
+      }
+
+
+      for (i = 0; i < atrr3.length; i++) {   
+
+      var svg = svgArr[0].getElementsByTagName('svg')[0];
+      var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+      var newElement2 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+      var newElement3 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+      var newElement4 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+
+      newElement.setAttribute("d", atrr3[i]);  
+      newElement.setAttribute("transform", rot[i]);    
+            str1 = atrr3[i].slice(1,3)
+            pos1 = str1.concat(atrr3[i].slice(5,6))
+
+            function checkPos(p1) {
+                shuffleArray(tri)
+                str2 = tri[i].slice(1,3)
+                p2 = str2.concat(tri[i].slice(5,6)) 
+                shuffleArray(haus)
+                str3 = haus[i].slice(1,3)
+                p3 = str3.concat(haus[i].slice(5,6)) 
+                shuffleArray(para)
+                str4 = para[i].slice(1,3)
+                p4 = str4.concat(para[i].slice(5,6)) 
+                if ((p1 != p2) && (p1 != p3) && (p2 != p3) && (p2 != p4) && (p1 != p4) && (p3 != p4)) {
+                  return [tri[i], haus[i], para[i]]
+                }
+                return checkPos(p1)
+              }
+              
+            arr = checkPos(pos1)
+
+                newElement2.setAttribute("d",arr[0]);
+                newElement3.setAttribute("d",arr[1]);
+                newElement4.setAttribute("d",arr[2]);
+
+                svg.appendChild(newElement)
+                svg.appendChild(newElement2)
+                svg.appendChild(newElement3)
+                svg.appendChild(newElement4)
+                
+                var dis = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+                dis.setAttribute("d", "M270 270 L330 270 L330 330 L270 330"); 
+                dis.setAttribute("transform", locations[l]); 
+                svg.appendChild(dis);
+                
+                var svg = '<div>' + svg.outerHTML + '</div>'
+                newElement.removeAttribute("transform", rot[i]);   
+                newElement.removeAttribute("d", atrr3[i]);
+                newElement2.removeAttribute("d", arr[0]);
+                newElement3.removeAttribute("d", arr[1]);
+                newElement4.removeAttribute("d", arr[2]);
+                dis.removeAttribute("d", "M270 270 L330 270 L330 330 L270 330"); 
+                
+                stims = [{
+                  stimulus:svg,
+                  correct_response: responses[r],
+                  data: {
+                    flanker_type: flankers [r],
+                    load: 4,
+                    trial_id :  "stim"
+                  }
+                }]
+
+                  for (j = 0; j < stims.length; j++) {
+                    test_stimuli.push(stims[j])
+                }
+
+          }
+
+          for (i = 0; i < atrr3.length; i++) {   
+
+          var svg = svgArr[0].getElementsByTagName('svg')[0];
+          var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+          var newElement2 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+          var newElement3 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+          var newElement4 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+          var newElement5 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+          var newElement6 = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+
+          newElement.setAttribute("d", atrr3[i]);  
+          newElement.setAttribute("transform", rot[i]);  
+
+          str1 = atrr3[i].slice(1,3)
+          pos1 = str1.concat(atrr3[i].slice(5,6))
+
+          function checkPos(p1) {
+              shuffleArray(triUp)
+              str2 = triUp[i].slice(1,3)
+              p2 = str2.concat(triUp[i].slice(5,6)) 
+              shuffleArray(hausUp)
+              str3 = hausUp[i].slice(1,3)
+              p3 = str3.concat(hausUp[i].slice(5,6)) 
+              shuffleArray(triDown)
+              str4 = triDown[i].slice(1,3)
+              p4 = str4.concat(triDown[i].slice(5,6)) 
+              shuffleArray(hausDown)
+              str5 = hausDown[i].slice(1,3)
+              p5 = str5.concat(hausDown[i].slice(5,6)) 
+              shuffleArray(para)
+              str6 = para[i].slice(1,3)
+              p6 = str6.concat(para[i].slice(5,6)) 
+              if ((p1 != p2) && (p1 != p3) && (p2 != p3) && (p2 != p4) && (p1 != p4) && (p3 != p4) && (p3 != p5) && (p3 != p6)
+              && (p5 != p4) && (p5 != p6) && (p1 != p5) && (p1 != p6) && (p2 != p5) && (p2 != p6) && (p4 != p6)) {
+                return [triUp[i], hausUp[i], triDown[i],  hausDown[i], para[i]]
+              }
+              return checkPos(p1)
+            }
+            
+          arr = checkPos(pos1)
+
+              newElement2.setAttribute("d",arr[0]);
+              newElement3.setAttribute("d",arr[1]);
+              newElement4.setAttribute("d",arr[2]);
+              newElement5.setAttribute("d",arr[3]);
+              newElement6.setAttribute("d",arr[4]);
+              
+              svg.appendChild(newElement)
+              svg.appendChild(newElement2)
+              svg.appendChild(newElement3)
+              svg.appendChild(newElement4)
+              svg.appendChild(newElement5)
+              svg.appendChild(newElement6)
+
+              var dis = document.createElementNS("http://www.w3.org/2000/svg", 'path'); 
+              dis.setAttribute("d", "M270 270 L330 270 L330 330 L270 330"); 
+              dis.setAttribute("transform", locations[l]); 
+              svg.appendChild(dis);
+
+              var svg = '<div>' + svg.outerHTML + '</div>'
+              newElement.removeAttribute("transform", rot[i]);  
+              newElement.removeAttribute("d", atrr3[i]); 
+              newElement2.removeAttribute("d", arr[0]);
+              newElement3.removeAttribute("d", arr[1]);
+              newElement4.removeAttribute("d", arr[2]);
+              newElement5.removeAttribute("d", arr[3]);
+              newElement6.removeAttribute("d", arr[4]);
+              dis.removeAttribute("d", "M270 270 L330 270 L330 330 L270 330"); 
+
+              stims = [{
+                stimulus:svg,
+                correct_response: responses[r],
+                data: {
+                  flanker_type: flankers [r],
+                  load: 6,
+                  trial_id : "stim"
+                }
+              }]
+
+            for (j = 0; j < stims.length; j++) {
+              test_stimuli.push(stims[j])
+          }
+
+      }
+
+  }
+
+}
+
+console.log(test_stimuli)
+
+test_stimuli = shuffleArray(test_stimuli)
+
+var block1_trials = test_stimuli.slice(0, 32)
+var block2_trials = test_stimuli.slice(32, 64)
+var block3_trials = test_stimuli.slice(64, 96)
+var block4_trials = test_stimuli.slice(96, 128)
+var block5_trials = test_stimuli.slice(128, 160)
+var block6_trials = test_stimuli.slice(160, 192)
+
+blocks = [block1_trials, block2_trials, block3_trials, block4_trials, block5_trials, block6_trials]
+
+console.log(block1_trials)
+
+for (i = 0; i < blocks.length; i++) {
+
+  var fixation = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: fixation,
+      choices: "NO_KEYS",
+      trial_duration: function(){
+        return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750, 1000, 1250, 1500, 1750, 2000], 1)[0];
+      },
+      data: {
+        task: 'fixation'
+      }
+    };
+
+    var test = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: jsPsych.timelineVariable('stimulus'),
+      choices: ['f', 'j'],
+      data: {
+        task: 'response',
+        correct_response: jsPsych.timelineVariable('correct_response')
+      },
+      on_finish: function(data){
+        data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+      }
+    };
+
+    /* define test procedure */
+    var test_procedure = {
+      timeline: [fixation, test],
+      timeline_variables: blocks[i],
+      repetitions: 1,
+    };
+
+    timeline.push(test_procedure);
+
+    var rest_block = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: '<div class = centerbox><p class = block-text>Most tarts egy rövid szünetet! Nyomj meg egy gombot a folytatáshoz.</p></div>',
+     
+      trial_duration: 180000,
+      data: {
+        trial_id: "rest block"
+      },
+      post_trial_gap: 1000
+      };
+
+    timeline.push(rest_block);
+    }
+
+    /* define fixation and test trials */
+   
+
+    /* define debrief */
+    var debrief_block = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function() {
+
+        var trials = jsPsych.data.get().filter({task: 'response'});
+        var correct_trials = trials.filter({correct: true});
+        var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+        var rt = Math.round(correct_trials.select('rt').mean());
+
+        return `<p>You responded correctly on ${accuracy}% of the trials.</p>
+          <p>Your average response time was ${rt}ms.</p>
+          <p>Press any key to complete the experiment. Thank you!</p>`;
+
+      }
+    };
+    timeline.push(debrief_block);
+
+    function saveData(name, data){
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'write_data.php'); // 'write_data.php' is the path to the php file described above.
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({filename: name, filedata: data}));
+    }
+
+    /* start the experiment */
+    jsPsych.run(timeline);
+
+    
+  </script>
+</html>
+
