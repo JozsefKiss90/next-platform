@@ -1,15 +1,12 @@
 import Navbar from './navbar'
 import React, { ReactNode } from "react";
-
-interface Props {
-    children?: ReactNode
-    // any props that come into the component
-}
+import { SessionProvider } from "next-auth/react"
+import {signIn, signOut, useSession} from "next-auth/react";
 
 export default function Layout({ children }: any) {
+
   return (
     <>
-      <Navbar />
       <main>{children}</main>
     </>
   )

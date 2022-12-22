@@ -1,13 +1,17 @@
 import { symbolName } from "typescript"
 import styles from "../styles/Navbar.module.scss"
 import Link from "next/link"
+import {signIn, signOut, useSession} from "next-auth/react";
 
 export default function Navbar(){
+
+    const { data: session, status } = useSession();
+    console.log({session, status})
     return(         
     <>
         <div className={styles.area}></div>
         <nav className={styles.mainMenu}>
-            <ul>
+            <ul style={{opacity:'1'}} className={`${!session && status !== 'loading' ? styles.loading : styles.loaded}`}>
                 <li className={styles.linkTag}>
                     <Link  href={{ pathname:"/experiments"}}>
                     <i className="fa fa-home fa-2x fa-fw"></i>
@@ -15,8 +19,6 @@ export default function Navbar(){
                             Dashboard
                         </span>
                     </Link>
-                  
-                  
                 </li>
                 <li className={styles.linkTag}>
                     <Link href="#">
@@ -86,17 +88,35 @@ export default function Navbar(){
                     </Link>
                 </li>
             </ul> 
-
             <ul className={styles.logout}>
+              {!session && status !== 'loading' && (
+                  <li className={styles.linkTag}>
+                  <Link href="api/auth/sigin">
+                        <i className="fa fa-power-off fa-2x fa-fw"></i>
+                           <span className={styles.navText} onClick={(e)=>{
+                               e.preventDefault()
+                               signIn('github')
+                           }}>
+                               Log In
+                           </span>
+                   </Link>
+               </li>  
+              )}
+              {session &&(
                 <li className={styles.linkTag}>
                    <Link href="#">
                          <i className="fa fa-power-off fa-2x fa-fw"></i>
-                        <span className={styles.navText}>
+                            <span className={styles.navText}  onClick={(e)=>{
+                                e.preventDefault()
+                                signOut()
+                            }}>
                             Logout
                         </span>
                     </Link>
                 </li>  
+              )}
             </ul>
+          
         </nav>
     </>
     )
