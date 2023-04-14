@@ -1,16 +1,46 @@
+
+const scriptTag = document.currentScript
+const scriptData = scriptTag.dataset
+
+console.log(scriptData.email)
+ 
 var jsPsych = initJsPsych({
-  on_finish: function() {
+  on_finish: async function() {
+
+    var trials = jsPsych.data.get().filter({task: 'response'});
+    var correct_trials = trials.filter({correct: true});
+    var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+    var rt = Math.round(correct_trials.select('rt').mean());
+
+    var values = {
+      rt : rt, 
+      email: scriptData.email,
+      acc: accuracy,
+    }
+
+    const options = {
+      method: "POST",
+      headers: {"Content-type": "application/json; charset=UTF-8"},
+      body: JSON.stringify(values)
+    }
+
     jsPsych.data.displayData();
+    await fetch('../api/auth/rt', options)
+    .then(res => res.json())
+    .then((data) => {
+        if(data) window.location.replace('http://localhost:3000')
+    })
+    .catch(err => console.log(err))
   }
 });
 
 /* create timeline */
-var timeline = [];
+var timeline = [];  
 
 /* preload images */
 var preload = {
   type: jsPsychPreload,
-  images: ['img/blue.png', 'img/orange.png']
+  images: ['/img/blue.png', '/img/orange.png']
 };
 timeline.push(preload);
 
@@ -31,9 +61,9 @@ var instructions = {
     <p>If the circle is <strong>orange</strong>, press the letter J 
     as fast as you can.</p>
     <div style='width: 700px;'>
-    <div style='float: left;'><img src='img/blue.png'></img>
+    <div style='float: left;'><img src='/img/blue.png'></img>
     <p class='small'><strong>Press the F key</strong></p></div>
-    <div style='float: right;'><img src='img/orange.png'></img>
+    <div style='float: right;'><img src='/img/orange.png'></img>
     <p class='small'><strong>Press the J key</strong></p></div>
     </div>
     <p>Press any key to begin.</p>
@@ -44,8 +74,8 @@ timeline.push(instructions);
 
 /* define trial stimuli array for timeline variables */
 var test_stimuli = [
-  { stimulus: "img/blue.png",  correct_response: 'f'},
-  { stimulus: "img/orange.png",  correct_response: 'j'}
+  { stimulus: "/img/blue.png",  correct_response: 'f'},
+  { stimulus: "/img/orange.png",  correct_response: 'j'}
 ];
 
 /* define fixation and test trials */
@@ -78,7 +108,7 @@ var test = {
 var test_procedure = {
   timeline: [fixation, test],
   timeline_variables: test_stimuli,
-  repetitions: 5,
+  repetitions: 0,
   randomize_order: true
 };
 timeline.push(test_procedure);

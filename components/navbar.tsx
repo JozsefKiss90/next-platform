@@ -1,7 +1,7 @@
 import { symbolName } from "typescript"
 import styles from "../styles/Navbar.module.scss"
 import Link from "next/link"
-import {signIn, signOut, useSession} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 
 export default function Navbar(){
 
@@ -89,20 +89,7 @@ export default function Navbar(){
                 </li>
             </ul> 
             <ul className={styles.logout}>
-              {!session && status !== 'loading' && (
-                  <li className={styles.linkTag}>
-                  <Link href="api/auth/sigin">
-                        <i className="fa fa-power-off fa-2x fa-fw"></i>
-                           <span className={styles.navText} onClick={(e)=>{
-                               e.preventDefault()
-                               signIn('github')
-                           }}>
-                               Log In
-                           </span>
-                   </Link>
-               </li>  
-              )}
-              {session &&(
+              {session && (
                 <li className={styles.linkTag}>
                    <Link href="#">
                          <i className="fa fa-power-off fa-2x fa-fw"></i>
