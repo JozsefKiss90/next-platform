@@ -1,7 +1,17 @@
 import Script from 'next/script'
 import Head from 'next/head'
+import { useEffect } from 'react';
 
 export default function Flanker() {
+
+  useEffect(() => {
+    async function runTask() {
+      const module = await import('../../public/static/flanker.js');
+      module.default();
+    }
+    runTask();
+  }, []);
+
   return (
   <div>
     <Head>

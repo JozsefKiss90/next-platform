@@ -1,30 +1,21 @@
-function getStimuli(callback) {
-    httpRequest = new XMLHttpRequest();
-    httpRequest.open('GET','static/flanker/stimuli.svg',false); 
-    httpRequest.overrideMimeType("image/svg+xml");
-    httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState === 4) { 
-            if (httpRequest.status === 200) { 
-                callback(httpRequest.responseXML.documentElement); 
-            }
-        }
-    };
-    httpRequest.send();
+import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
+export default async function runTask() {
+  
+  async function getStimuli() {
+
+    const response = await fetch('../static/flanker/stimuli.svg')
+    const text = await response.text();
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(text, 'image/svg+xml');
+    return svgDoc.documentElement;
   }
   
-  function getFixation(callback) {
-    httpRequest = new XMLHttpRequest();
-    httpRequest.open('GET', 'static/flanker/fixation.svg', false); 
-    httpRequest.overrideMimeType("image/svg+xml");
-    httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState === 4) { 
-            if (httpRequest.status === 200) { 
-                callback(httpRequest.responseXML.documentElement);
-                
-            }
-        }
-    };
-    httpRequest.send();
+  async function getFixation() {
+    const response = await fetch('../static/flanker/fixation.svg');
+    const text = await response.text();
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(text, 'image/svg+xml');
+    return svgDoc.documentElement;
   }
     
   const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -39,7 +30,7 @@ function getStimuli(callback) {
   }
   var sub_id = generateString(6);
   
-  var jsPsych = initJsPsych({
+  var jsPsych =  initJsPsych({
     on_finish: function() {
       var trials = jsPsych.data.get().filter({task: 'response'});
       var name = jsPsych.data.get().filter({trial_type: 'survey-html-form'});
@@ -49,7 +40,7 @@ function getStimuli(callback) {
       var survey = jsPsych.data.get().filter({trial_type :'survey-text'}).trials[0].response.Q0;
       let allData = getData(respArr)
       let loads = calculateRt(allData)
-      console.log(loads)
+
       var data = {
         rTime : rt, 
         acc : accuracy,
@@ -74,10 +65,23 @@ function getStimuli(callback) {
       );
   
   var timeline = [];
-  
+
+  async function loadStimuli() {
+    try {
+      const stimuli = await getStimuli()
+      return stimuli
+    }
+    catch(error) {
+      console.log(error)
+      return null
+    }
+  }
+
+  const stimuli = await loadStimuli();
+
   var preload = {
     type: jsPsychPreload,
-    message: [svgArr]
+    message: [loadStimuli()]
     };
     
   timeline.push(preload);
@@ -109,24 +113,24 @@ function getStimuli(callback) {
     pages: ["Üdvözöllek a kísérletben.", 
     ` 
       <div style='position : relative; height:500px; '>
-        <p>Ebben a kísérletben a képernyőn látható körökön belül különböző betűk jelennek meg.</p><p>A feladatod jelezni, hogy a  körökön belül 
+        <p>Ebben a kísérletben a képernyőn különböző betűk jelennek meg.</p><p>A feladatod jelezni, hogy a  körökön <strong>belül</strong>  
         egy N vagy egy X található-e <br> (mindig csak egyféle célinger jelenik meg, azaz vagy csak N-t vagy X-t fogsz látni).</p>
         <p>Ha  N, nyomd meg a billentyűzeten az <strong>N</strong>-t, ha X akkor pedig nyomd meg a <strong>X</strong>-t.</p>
-        <div style='float: left; margin-left:60px;'><img style='width:50%; height=50%;' src='img/betuN.png'></img>
+        <div style='float: left; margin-left:60px;'><img style='width:50%; height=50%;' src='../static/flanker/img/betuN.png'></img>
         <p style='margin-left:60px;' class='small'><strong> N gomb</strong></p></div>
-        <div style='float: right; margin-right:60px;'><img style='width:50%; height=50%;' src='img/betuX.png'></img>
+        <div style='float: right; margin-right:60px;'><img style='width:50%; height=50%;' src='../static/flanker/img/betuX.png'></img>
         <p style='margin-right:60px;' class='small'><strong>X gomb</strong></p></div>
         </div>
     `,
     ` 
       <div style='position:relative; height:460px; display: flex; align-items: center; justify-content: center; flex-direction: column;'>
         <p style="line-height=20px; width:750px">
-          A körökön belül a célingerek melett különböző zavaró ingerek (S,Z,M,W,H) jelenhetnek meg, mennyiségük szerint 1, 3 vagy 5. <br> 
-          A körökön kívül a jobb vagy bal oldalon mindig megjelenik egy zavaró inger. <br> Ez lehet a célingerrel azonos (pl. célinger: N, zavaró: N) vagy ellentétes (pl. célinger: X, zavaró: N).
+          A körökön <strong>belül</strong>  a célingerek melett különböző zavaró ingerek (S,Z,M,W,H) jelenhetnek meg, mennyiségük szerint 1, 3 vagy 5. <br> 
+          A körökön <strong>kívül</strong>  a jobb vagy bal oldalon mindig megjelenik egy zavaró inger. <br> Ez lehet a célingerrel azonos (pl. célinger: N, zavaró: N) vagy ellentétes (pl. célinger: X, zavaró: N).
         </p> 
         <div style='display: flex; justify-content: center;'>
-          <div style='width:250px; height:225px; padding-right:50px;'><img style='width:250px; height:225px;' src='img/betu62.png'></img></div>
-          <div style='width:250px; height:225px; padding-left:50px;'><img style='width:250px; height:225px;' src='img/betuI.png'></img></div>
+          <div style='width:250px; height:225px; padding-right:50px;'><img style='width:250px; height:225px;' src='../static/flanker/img/betu62.png'></img></div>
+          <div style='width:250px; height:225px; padding-left:50px;'><img style='width:250px; height:225px;' src='../static/flanker/img/betuI.png'></img></div>
         </div>  
       </div>
     `,
@@ -148,7 +152,7 @@ function getStimuli(callback) {
   timeline.push(instructions);
   
   var praticeTrial = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: htmlKeyboardResponse,
     stimulus: `
       <div style='position:relative; height:300px; display: flex; align-items: center; justify-content: center; flex-direction: column;'>
         <p>Most néhány gyakorló feladat fog következni.</p>
@@ -160,44 +164,45 @@ function getStimuli(callback) {
   
   timeline.push(praticeTrial);
   
-  var svgArr = []
   
-  var res = getStimuli(function (result) {
-    svgArr.push(result)
-   });
-  var fixArr = []
-   var res_2 = getFixation(function (result_2) {
-    fixArr.push(result_2)
-   });
+  async function loadFixation() {
+    try {
+      const fixationData = await getFixation();
+      return fixationData;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
   
-  var fixation =  fixArr[0].innerHTML
+  const fixation = await loadFixation()
+  console.log(fixation.innerHTML)
+  var rotations = [["rotate(0 300 150)", "rotate(0 170 225)", "rotate(0 170 375)", "rotate(0 300 450)", "rotate(0 430 375)", "rotate(0 430 225)"], ["rotate(45 300 150)", "rotate(45 170 225)", "rotate(45 170 375)", "rotate(45 300 450)", "rotate(45 430 375)", "rotate(45 430 225)"]]
   
-      var rotations = [["rotate(0 300 150)", "rotate(0 170 225)", "rotate(0 170 375)", "rotate(0 300 450)", "rotate(0 430 375)", "rotate(0 430 225)"], ["rotate(45 300 150)", "rotate(45 170 225)", "rotate(45 170 375)", "rotate(45 300 450)", "rotate(45 430 375)", "rotate(45 430 225)"]]
-      
-      var distractors = ["N", "X"]
+  var distractors = ["N", "X"]
+
+  var locations = [['550', '318'], ['550', '318'], ['550', '318'], ['20', '318'], ['20', '318'], ['20', '318'], ['550', '318'], ['550', '318'], ['550', '318'], ['20', '318'], ['20', '318'], ['20', '318']]
   
-      var locations = [['550', '318'], ['550', '318'], ['550', '318'], ['20', '318'], ['20', '318'], ['20', '318'], ['550', '318'], ['550', '318'], ['550', '318'], ['20', '318'], ['20', '318'], ['20', '318']]
-      
-      var targets =['N', 'N', 'N', 'N', 'N', 'N', 'X', 'X', 'X', 'X', 'X', 'X']
-      
-      var nonTargets = ['W', 'M', 'O', 'S', 'Z', 'H']
-      const locAttributes = [['300', '168'], ['300', '468'], ['170', '242'], ['430', '392'], ['170', '392'], ['430', '242'], ['300', '168'], ['300', '468'], ['170', '242'], ['430', '392'], ['170', '392'], ['430', '242']]
+  var targets =['N', 'N', 'N', 'N', 'N', 'N', 'X', 'X', 'X', 'X', 'X', 'X']
   
-      function shuffleArray(array) {
-        for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
-        return array
-      }
+  var nonTargets = ['W', 'M', 'O', 'S', 'Z', 'H']
+  const locAttributes = [['300', '168'], ['300', '468'], ['170', '242'], ['430', '392'], ['170', '392'], ['430', '242'], ['300', '168'], ['300', '468'], ['170', '242'], ['430', '392'], ['170', '392'], ['430', '242']]
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array
+  }
   
-  test_stimuli = []
+ var test_stimuli = []
   
-  for (r = 0; r < distractors.length; r++) {
-    dist = distractors[r]
-      for (i = 0; i < targets.length; i++) {   
+  for (let r = 0; r < distractors.length; r++) {
+   let dist = distractors[r]
+      for (let i = 0; i < targets.length; i++) {   
   
         let target = targets[i]
         let congruency
@@ -218,8 +223,9 @@ function getStimuli(callback) {
         } else {
           response = 'x'
         }
-  
-        var svg = svgArr[0].getElementsByTagName('svg')[0]
+        
+        
+        var svg = stimuli.getElementsByTagName('svg')[0];
   
         var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'text'); 
         newElement.textContent =  targets[i]
@@ -244,19 +250,19 @@ function getStimuli(callback) {
         while(newElement.attributes.length > 0)
           newElement.removeAttribute(newElement.attributes[0].name);
       
-        stims = [{
+       const stims = [{
           stimulus:svg,
           correct_response: response,
           flanker_type: congruency,
           load: 1,
           trial_id : 'stim'
         }]
-          for (j = 0; j < stims.length; j++) {
+          for (let j = 0; j < stims.length; j++) {
             test_stimuli.push(stims[j])
           }
         }
   
-      for (i = 0; i < targets.length; i++) {   
+      for (let i = 0; i < targets.length; i++) {   
   
           let target = targets[i]
         let congruency
@@ -278,7 +284,7 @@ function getStimuli(callback) {
           response = 'x'
         }
   
-        var svg = svgArr[0].getElementsByTagName('svg')[0]
+        var svg = stimuli.getElementsByTagName('svg')[0]
         
         var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'text');
         var newElement2 = document.createElementNS("http://www.w3.org/2000/svg", 'text');
@@ -294,7 +300,7 @@ function getStimuli(callback) {
       
         function checkPos(p1) {
           shuffleArray(locAttributes)
-          p2 = locAttributes[i] 
+        let  p2 = locAttributes[i] 
           if (p1.join('') != p2.join('')) {
             return p2
           }
@@ -331,7 +337,7 @@ function getStimuli(callback) {
         while(newElement2.attributes.length > 0)
           newElement2.removeAttribute(newElement2.attributes[0].name);
       
-        stims = [{
+       let stims = [{
         stimulus:svg,
         correct_response: response,
         flanker_type: congruency,
@@ -339,12 +345,12 @@ function getStimuli(callback) {
         trial_id : "stim"
         }]
   
-        for (j = 0; j < stims.length; j++) {
+        for (let j = 0; j < stims.length; j++) {
           test_stimuli.push(stims[j])
           }
       }
   
-      for (i = 0; i < targets.length; i++) {   
+      for (let i = 0; i < targets.length; i++) {   
   
           let target = targets[i]
         let congruency
@@ -366,7 +372,7 @@ function getStimuli(callback) {
           response = 'x'
         }
   
-        var svg = svgArr[0].getElementsByTagName('svg')[0]
+        var svg = stimuli.getElementsByTagName('svg')[0]
   
         var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'text');
         var newElement2 = document.createElementNS("http://www.w3.org/2000/svg", 'text');
@@ -383,20 +389,20 @@ function getStimuli(callback) {
   
         function checkPos(p1) {
           shuffleArray(locAttributes)
-          p2 = locAttributes[i]  
+        let  p2 = locAttributes[i]  
           shuffleArray(locAttributes)
-          p3 = locAttributes[i] 
+        let p3 = locAttributes[i] 
           shuffleArray(locAttributes)
-          p4 = locAttributes[i] 
+        let p4 = locAttributes[i] 
           if ((p1.join('') != p2.join('')) && (p1.join('') != p3.join('')) && (p2.join('') != p3.join('')) && (p2.join('') != p4.join('')) && (p1.join('') != p4.join('')) && (p3.join('') != p4.join(''))) {
             return [p2, p3, p4]
           }
           return checkPos(p1)
         }
                 
-        arr = checkPos(pos1)
+      let arr = checkPos(pos1)
         shuffleArray(nonTargets)
-        selectedNonTargets = [nonTargets[0], nonTargets[1], nonTargets[2]]
+      let selectedNonTargets = [nonTargets[0], nonTargets[1], nonTargets[2]]
         var locAttribute3 = checkPos(pos1)
   
         var newElement2 = document.createElementNS("http://www.w3.org/2000/svg", 'text');
@@ -450,19 +456,19 @@ function getStimuli(callback) {
           newElement4.removeAttribute(newElement4.attributes[0].name);
   
         
-        stims = [{
+       let stims = [{
           stimulus:svg,
           correct_response: response,
           flanker_type: congruency,
           load: 4,
           trial_id :  "stim"
         }]
-          for (j = 0; j < stims.length; j++) {
+          for (let j = 0; j < stims.length; j++) {
             test_stimuli.push(stims[j])
         }
       }
   
-      for (i = 0; i < targets.length; i++) {   
+      for (let i = 0; i < targets.length; i++) {   
   
         let target = targets[i]
         let congruency
@@ -484,7 +490,7 @@ function getStimuli(callback) {
           response = 'x'
         }
   
-        var svg = svgArr[0].getElementsByTagName('svg')[0]
+        var svg = stimuli.getElementsByTagName('svg')[0]
   
         var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'text');
         var newElement2 = document.createElementNS("http://www.w3.org/2000/svg", 'text');
@@ -503,15 +509,15 @@ function getStimuli(callback) {
   
         function checkPos(p1) {
           shuffleArray(locAttributes)
-          p2 = locAttributes[i]  
+        let p2 = locAttributes[i]  
           shuffleArray(locAttributes)
-          p3 = locAttributes[i] 
+        let p3 = locAttributes[i] 
           shuffleArray(locAttributes)
-          p4 = locAttributes[i] 
+        let p4 = locAttributes[i] 
           shuffleArray(locAttributes)
-          p5 = locAttributes[i]
+        let p5 = locAttributes[i]
           shuffleArray(locAttributes)
-          p6 = locAttributes[i]
+        let  p6 = locAttributes[i]
           if ((p1.join('') != p2.join('')) && (p1.join('') != p3.join('')) && (p2.join('') != p3.join('')) && (p2.join('') != p4.join('')) && (p1.join('') != p4.join('')) && (p3.join('') != p4.join('')) && (p3.join('') != p5.join('')) && (p3.join('') != p6.join(''))
                 && (p5.join('') != p4.join('')) && (p5.join('') != p6.join('')) && (p1.join('') != p5.join('')) && (p1.join('') != p6.join('')) && (p2.join('') != p5.join('')) && (p2.join('') != p6.join('')) && (p4.join('') != p6.join(''))) {
                   return [p2, p3, p4, p5, p6]
@@ -519,9 +525,9 @@ function getStimuli(callback) {
           return checkPos(p1)
         }
                 
-        arr = checkPos(pos1)
+        let arr = checkPos(pos1)
         shuffleArray(nonTargets)
-        selectedNonTargets = [nonTargets[0], nonTargets[1], nonTargets[2], nonTargets[3], nonTargets[4]]
+        let selectedNonTargets = [nonTargets[0], nonTargets[1], nonTargets[2], nonTargets[3], nonTargets[4]]
         var locAttribute3 = checkPos(pos1)
   
         var newElement2 = document.createElementNS("http://www.w3.org/2000/svg", 'text');
@@ -596,7 +602,7 @@ function getStimuli(callback) {
         while(newElement6.attributes.length > 0)
           newElement6.removeAttribute(newElement6.attributes[0].name);     
   
-        stims = [{
+        let stims = [{
           stimulus:svg,
           correct_response: response,
           flanker_type: congruency,
@@ -604,7 +610,7 @@ function getStimuli(callback) {
           trial_id :  "stim"
         }]
   
-      for (j = 0; j < stims.length; j++) {
+      for (let j = 0; j < stims.length; j++) {
         test_stimuli.push(stims[j])
         }
       } 
@@ -620,15 +626,15 @@ function getStimuli(callback) {
   
   //block2_trials, block3_trials, block4_trials, block5_trials, block6_trials
   //blocks = [block1_trials, block2_trials]
-  blocks = [block1_trials, block2_trials]
-  practice_block = [block3_trials]
-  console.log(test_stimuli)
+  let blocks = [block1_trials, block2_trials]
+  let practice_block = [block3_trials]
+ 
   var respArr = []
   
-  for (i = 0; i < practice_block.length; i++) {
+  for (let i = 0; i < practice_block.length; i++) {
     var prac_fixation = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: '<div>' + fixation + '</div>',
+        type: htmlKeyboardResponse,
+        stimulus: '<div>' + fixation.innerHTML + '</div>',
         choices: "NO_KEYS",
         trial_duration: 1000,
         data: {
@@ -637,14 +643,14 @@ function getStimuli(callback) {
       };
   
       var prac_display = {
-        type: jsPsychHtmlKeyboardResponse,
+        type: htmlKeyboardResponse,
         stimulus: jsPsych.timelineVariable('stimulus'),
         choices: "NO_KEYS",
         trial_duration: 200,
       };
   
       var pratice_display = {
-        type: jsPsychHtmlKeyboardResponse,
+        type: htmlKeyboardResponse,
         stimulus: "",
         choices: ['x', 'n'],
         trial_duration: null,
@@ -663,7 +669,7 @@ function getStimuli(callback) {
       };
   
     var feedback = {
-      type: jsPsychHtmlKeyboardResponse,
+      type: htmlKeyboardResponse,
       stimulus: function(){
         var last_trial_correct = jsPsych.data.getLastTrialData().trials[0].correct 
         var last_trial_rt = jsPsych.data.getLastTrialData().trials[0].rt
@@ -690,7 +696,7 @@ function getStimuli(callback) {
     timeline.push(pratice_procedure);
   
     var end_block = {
-      type: jsPsychHtmlKeyboardResponse,
+      type: htmlKeyboardResponse,
       stimulus: '<div class = centerbox><p class = block-text>Most következik a kísérleti rész. A továbbiakban már nem fogsz visszajelzést kapni a válaszaidról</p><p>Nyomj meg egy gombot a folytatáshoz.</p></div>',
       trial_duration: 180000,
       data: {
@@ -704,10 +710,10 @@ function getStimuli(callback) {
     timeline.push(end_block);
   
     let fix
-    for (i = 0; i < blocks.length; i++) {
+    for (let i = 0; i < blocks.length; i++) {
       fix = {
-          type: jsPsychHtmlKeyboardResponse,
-          stimulus:  fixation,
+          type: htmlKeyboardResponse,
+          stimulus:  fixation.innerHTML,
           choices: "NO_KEYS",
           trial_duration: 1000,
           data: {
@@ -716,14 +722,14 @@ function getStimuli(callback) {
         };
     
         var display = {
-          type: jsPsychHtmlKeyboardResponse,
+          type: htmlKeyboardResponse,
           stimulus: jsPsych.timelineVariable('stimulus'),
           choices: "NO_KEYS",
           trial_duration: 200
         };
     
         var test = {
-          type: jsPsychHtmlKeyboardResponse,
+          type: htmlKeyboardResponse,
           stimulus: "",
           choices: ['x', 'n'],
           trial_duration: null,
@@ -755,7 +761,7 @@ function getStimuli(callback) {
     timeline.push(test_procedure);
     
       var rest_block = {
-        type: jsPsychHtmlKeyboardResponse,
+        type: htmlKeyboardResponse,
         stimulus: '<div class = centerbox><p class = block-text>Most tarts egy rövid szünetet! Nyomj meg egy gombot a folytatáshoz.</p></div>',
         trial_duration: 180000,
         data: {
@@ -778,7 +784,7 @@ function getStimuli(callback) {
   timeline.push(survey_trial);
   
   var debrief_block = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: htmlKeyboardResponse,
     stimulus: function() {
       var trials = jsPsych.data.get().filter({task:'response'});
       var correct_trials = trials.filter({correct: true});
@@ -813,3 +819,4 @@ function getStimuli(callback) {
   
   /* start the experiment */
   jsPsych.run(timeline);
+}

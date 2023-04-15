@@ -12,6 +12,8 @@ const { GITHUB_ID = '', GITHUB_SECRET = ''} = process.env;
 
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
+  
+  //needs
   session: {
     strategy: "jwt",
     maxAge: 3000,

@@ -11,7 +11,6 @@ export default async function handler(req, res) {
         const {rt,email, acc} = req.body
         const checkDuplicate = await RtTask.find({email})
         console.log(checkDuplicate)
-        console.log('wut')
         if(checkDuplicate.length > 3) return res.status(422).json({message: 'user already exists'})
 
         RtTask.create({rt,email, acc}, function(err, data ){
