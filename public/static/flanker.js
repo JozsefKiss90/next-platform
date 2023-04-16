@@ -1,8 +1,15 @@
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
+import htmlButtonResponse from '@jspsych/plugin-html-button-response';
+import surveyText from '@jspsych/plugin-survey-text';
+import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
+import jsPsychInstructions from '@jspsych/plugin-instructions';
+import jsPsychSurveyHtmlForm from '@jspsych/plugin-survey-html-form';
+import jsPsychPreload from '@jspsych/plugin-preload';
+import {initJsPsych} from 'jspsych';
+
 export default async function runTask() {
   
   async function getStimuli() {
-
     const response = await fetch('../static/flanker/stimuli.svg')
     const text = await response.text();
     const parser = new DOMParser();
@@ -94,7 +101,7 @@ export default async function runTask() {
   timeline.push(enter_fullscreen);
   
   var trial_in_fullscreen = {
-    type: jsPsychHtmlButtonResponse,
+    type: htmlButtonResponse,
     stimulus: 'A kísérlet teljes képernyős módban fog futni, amint az alábbi gombra kattintasz.',
     choices: ['Kezdés.']
   }
@@ -775,7 +782,7 @@ export default async function runTask() {
     }
   
   var survey_trial = {
-    type: jsPsychSurveyText,
+    type: surveyText,
     questions: [
       {prompt: 'Észrevétel, visszajelzés, hiba. Ha nincs hagyd üresen,', rows: 6}
     ]

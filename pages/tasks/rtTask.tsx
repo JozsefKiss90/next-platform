@@ -19,7 +19,6 @@ export default function Page() {
   
     return(
       <div>
-          <Script src="https://unpkg.com/jspsych@7.3.1" strategy="beforeInteractive"></Script>
        </div>
       )
   }
