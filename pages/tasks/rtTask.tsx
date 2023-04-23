@@ -1,22 +1,20 @@
-import Script from 'next/script'
-import Head from 'next/head'
 import {useSession, getSession} from "next-auth/react";
 import { useEffect } from 'react';
 import 'jspsych/css/jspsych.css'
-export default function Page() {
+
+export default function Page({ email }) {
 
   useEffect(() => {
-    async function runTask() {
+    async function runTask(sessionEmail) {
       const module = await import('../../public/static/task2.js');
-      module.default();
+      module.default(sessionEmail);
     }
-    runTask();
+    runTask(email);
   }, []);
 
   const { data: session, status } = useSession();
   if(session){
-  //  let email : string = session.user.email
-  
+ 
     return(
       <div>
        </div>
@@ -26,7 +24,7 @@ export default function Page() {
 
 export async function getServerSideProps({ req } : any){
   const session = await getSession({ req })
-
+  const email = session?.user?.email || null
   if(!session){
     return {
       redirect : {
@@ -37,7 +35,7 @@ export async function getServerSideProps({ req } : any){
   }
 
   return {
-    props: { session }
+    props: { email }
   }
 
 }

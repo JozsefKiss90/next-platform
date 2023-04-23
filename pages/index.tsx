@@ -31,8 +31,8 @@ function User({ session }:any) {
   return(
    <>
       <div style={{marginLeft:'200px'}}>
-      <h5>{session.user.name}</h5>
-            <h5>{session.user.email}</h5>
+        <h5>{session.user.name}</h5>
+        <h5>{session.user.email}</h5>
       </div>
     <Navbar/>
    </>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/networks/external.css">
+  </head>
+  <style media="screen">
+
+    input[type=text]{
+      width: 23%;
+      padding: 5px 12px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    select {
+      width: 23%;
+      padding: 5px 12px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type=number] {
+      width: 8%;
+      padding: 5px 12px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .forms {
+      border-radius: 10px;
+      background-color: white;
+      padding: 20px;
+      margin: auto;
+      margin-top: 60px;
+      width: 60%;
+      max-height: 40rem;
+      /*border: 3px solid #73AD21;*/
+
+    }
+
+    button[type=button] {
+      width: 20%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    button[type=button]:hover {
+      background-color: green;
+
+    }
+  </style>
+  <body style="background-color:grey;">
+
+        <div class="forms">
+        <form action="">
+          <p style="line-height: 0.01rem;  margin-bottom: 15px;"><strong>Válaszd ki melyik játékkal játszol:</strong></p>
+          <input type="radio" id="cs" name="genres" checked value="Counter Strike" onClick="addRanks(this.id)">
+          <label for="cs">Counter Strike</label><br>
+          <input type="radio" id="lol" name="genres" value="Leauge of Legends" onClick="addRanks(this.id)">
+          <label for="lol">Leauge of Legends</label><br>
+          <input type="radio" id="fifa" name="genres" value="FIFA" onClick="addRanks(this.id)">
+          <label for="fifa">FIFA</label><br>
+          <input type="radio" id="ow" name="genres" value="Overwatch" onClick="addRanks(this.id)">
+          <label for="ow">Overwatch</label><br>
+          <input type="radio" id="sc" name="genres" value="StarCraft" onClick="addRanks(this.id)">
+          <label for="sc">StarCraft</label>
+        </form>
+        <form id="csForm" >
+           <p style="line-height:5px; margin-top: 20px;  margin-bottom: 7px;"><strong>Válaszd ki melyik ligában játszol:</strong></p>
+          <select id="sport" name="sport">
+            <option>Silver I</option>
+            <option>Silver II</option>
+            <option>Silver III</option>
+            <option>Silver IV</option>
+            <option>Silver Elite</option>
+            <option>Silver Elite Master</option>
+            <option>Gold Nova I</option>
+            <option>Gold Nova II</option>
+            <option>Gold Nova III</option>
+            <option>Gold Nova Master</option>
+            <option>Master Guardian I</option>
+            <option>Master Guardian II</option>
+            <option>Master Guardian Elite</option>
+            <option>Distinguished Master Guardian</option>
+            <option>Legendary Eagle</option>
+            <option>Legendary Master Eagle</option>
+            <option>Supreme Master First Class</option>
+            <option>Global Elite</option>
+          </select><br>
+        </form>
+        <form id="lolForm" style="display: none;">
+           <p style="line-height:5px; margin-top: 20px;  margin-bottom: 7px;"><strong>Válaszd ki melyik ligában játszol:</strong></p>
+          <select id="sport" name="sport">
+            <option>Iron</option>
+            <option>Bronze</option>
+            <option>Silver</option>
+            <option>Gold</option>
+            <option>Platinum</option>
+            <option>Diamond</option>
+            <option>Master</option>
+            <option>Grandmaster</option>
+            <option>Challanger</option>
+          </select><br>
+        </form>
+        <form id="fifaForm" style="display: none;">
+           <p style="line-height:5px; margin-top: 20px;  margin-bottom: 7px;"><strong>Válaszd ki melyik ligában játszol:</strong></p>
+          <select id="sport" name="sport">
+            <option>Rank 1</option>
+            <option>Rank 2</option>
+            <option>Rank 3</option>
+            <option>Rank 4</option>
+            <option>Rank 5</option>
+            <option>Rank 6</option>
+            <option>Rank 7</option>
+            <option>Rank 8</option>
+            <option>Rank 9</option>
+            <option>Rank 10</option>
+          </select><br>
+        </form>
+        <form id="owForm" style="display: none;">
+           <p style="line-height:5px; margin-top: 20px;  margin-bottom: 7px;"><strong>Válaszd ki melyik ligában játszol:</strong></p>
+          <select id="sport" name="sport">
+            <option>Bronze</option>
+            <option>Silver</option>
+            <option>Gold</option>
+            <option>Platinum</option>
+            <option>Diamond</option>
+            <option>Master</option>
+            <option>Grandmaster</option>
+          </select><br>
+        </form>
+        <form id="scForm" style="display: none;">
+           <p style="line-height:5px; margin-top: 20px;  margin-bottom: 7px;"><strong>Válaszd ki melyik ligában játszol:</strong></p>
+          <select id="sport" name="sport">
+            <option>Bronze</option>
+            <option>Silver</option>
+            <option>Gold</option>
+            <option>Platinum</option>
+            <option>Diamond</option>
+            <option>Master</option>
+            <option>Grandmaster</option>
+          </select><br>
+        </form>
+        <form>
+          <label for="age">Add meg az életkorod: </label><br>
+          <input type="number" id="age" name="age" value="18" min="10" max="100"><br>
+          <label for="age">Napi hány órát szoktál játszani? </label><br>
+          <input type="number" id="age" name="age" value="0" min="0" max="10">
+        </form>
+        <div id="consent">
+          <p id = "line">
+            A kutatás teljesen anonim módon történik. A megadott adatokon és a kísérlet eredményein kívül semmilyen további információ nem kerül felhasználásra.
+            Az alábbi gombra kattitva tudsz beleegyezni abba, hogy részt veszel a kutatásban.
+          </p>
+          <p>
+            <input type="checkbox" id="consent_checkbox" />
+            Hozzájárulok a kutatásban való részvételhez.
+          </p>
+        <button type="button" id="start">Kezdés</button>
+      </div>
+
+      </div>
+  </body>
+ <script>
+      var cs = document.getElementById("csForm")
+      var lol = document.getElementById("lolForm")
+      var fifa = document.getElementById("fifaForm")
+      var ow = document.getElementById("owForm")
+      var sc = document.getElementById("scForm")
+      
+      function addRanks(clicked_id) {
+      if(clicked_id == "cs") {
+          cs.style.removeProperty("display")
+          lol.style.display = "none";
+          fifa.style.display = "none";;
+          ow.style.display = "none";;
+          sc.style.display = "none";;
+      }
+      else if(clicked_id == "lol") {
+          lol.style.removeProperty("display")
+          cs.style.display = "none";;
+          fifa.style.display = "none";;
+          ow.style.display = "none";;
+          sc.style.display = "none";;
+      }
+      else if(clicked_id == "fifa") {
+          fifa.style.removeProperty("display")
+          lol.style.display = "none";;
+          cs.style.display = "none";;
+          ow.style.display = "none";;
+          sc.style.display = "none";;
+      }
+      else if(clicked_id == "ow") {
+          ow.style.removeProperty("display")
+          lol.style.display = "none";;
+          cs.style.display = "none";;
+          fifa.style.display = "none";;
+          sc.style.display = "none";;
+      }
+      else if(clicked_id == "sc") {
+          sc.style.removeProperty("display")
+          lol.style.display = "none";;
+          fifa.style.display = "none";;
+          ow.style.display = "none";;
+          cs.style.display = "none";;
+      }
+
+    }
+
+ </script>
+</html>

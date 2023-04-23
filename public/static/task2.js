@@ -3,13 +3,8 @@ import jsPsychPreload from '@jspsych/plugin-preload';
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 import imageKeyboardResponse from '@jspsych/plugin-image-keyboard-response';
 
-export default function runTask() {
- 
+export default function runTask(email) {
 
-    const scriptTag = document.currentScript;
-    const scriptData = scriptTag.dataset;
-  
- 
     var jsPsych = initJsPsych({
         on_finish: async function() {
 
@@ -20,7 +15,7 @@ export default function runTask() {
 
     var values = {
       rt : rt, 
-      email: scriptData.email,
+      email: email,
       acc: accuracy,
     }
 
@@ -29,12 +24,11 @@ export default function runTask() {
       headers: {"Content-type": "application/json; charset=UTF-8"},
       body: JSON.stringify(values)
     }
-
+    console.log({...values})
     jsPsych.data.displayData();
-    await fetch('../api/auth/rt', options)
-    .then(res => res.json())
-    
-    .catch(err => console.log(err))
+    await fetch('/api/auth/rt', options)
+      .then(res => res.json())
+      .catch(err => console.log(err))
   }
 });
 
