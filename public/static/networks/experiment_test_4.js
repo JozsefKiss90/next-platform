@@ -2,8 +2,7 @@ var resparr = []
 var networks = []
 var perf = []
 var valarr=[]
-
-
+ 
 function evalAttentionChecks() {
 	var check_percent = 1
 	if (run_attention_checks) {
@@ -20,15 +19,13 @@ function evalAttentionChecks() {
 }
 
 function assessPerformance() {
-	/* Function to calculate the "credit_var", which is a boolean used to
-	credit individual experiments in expfactory.
-	 */
+
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-		//record choices participants made
+	
 	var choice_counts = {}
 	choice_counts[-1] = 0
 	for (var k = 0; k < choices.length; k++) {
@@ -47,13 +44,11 @@ function assessPerformance() {
 			}
 		}
 	}
-	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
 		avg_rt = math.median(rt_array)
 	}
 
-		//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
 		if (choice_counts[key] > trial_count * 0.85) {
@@ -599,7 +594,7 @@ for (i = 0; i < block.data.length; i++) {
 
 	attention_network_task_experiment.push(attention_network_task_practice_trial)
 
-	var last_fixation = {
+	var last_fixation = { 
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
 		is_html: true,

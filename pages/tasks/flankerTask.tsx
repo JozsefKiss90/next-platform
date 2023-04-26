@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import 'jspsych/css/jspsych.css'
+
 export default function Flanker() {
 
   useEffect(() => {

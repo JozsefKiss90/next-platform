@@ -15,7 +15,7 @@ export default async function runTask() {
     const parser = new DOMParser();
     const svgDoc = parser.parseFromString(text, 'image/svg+xml');
     return svgDoc.documentElement;
-  }
+  } 
   
   async function getFixation() {
     const response = await fetch('../static/flanker/fixation.svg');
@@ -37,7 +37,7 @@ export default async function runTask() {
   }
   var sub_id = generateString(6);
   
-  var jsPsych =  initJsPsych({
+  var jsPsych =  initJsPsych({ 
     on_finish: function() {
       var trials = jsPsych.data.get().filter({task: 'response'});
       var name = jsPsych.data.get().filter({trial_type: 'survey-html-form'});
@@ -86,7 +86,7 @@ export default async function runTask() {
 
   const stimuli = await loadStimuli();
 
-  var preload = {
+  var preload = { 
     type: jsPsychPreload,
     message: [loadStimuli()]
     };
@@ -158,7 +158,7 @@ export default async function runTask() {
   
   timeline.push(instructions);
   
-  var praticeTrial = {
+  var practiceTrial = {
     type: htmlKeyboardResponse,
     stimulus: `
       <div style='position:relative; height:300px; display: flex; align-items: center; justify-content: center; flex-direction: column;'>
@@ -169,7 +169,7 @@ export default async function runTask() {
     post_trial_gap: 2000
   };
   
-  timeline.push(praticeTrial);
+  timeline.push(practiceTrial);
   
   
   async function loadFixation() {
@@ -470,9 +470,10 @@ export default async function runTask() {
           load: 4,
           trial_id :  "stim"
         }]
-          for (let j = 0; j < stims.length; j++) {
-            test_stimuli.push(stims[j])
-        }
+        
+      for (let j = 0; j < stims.length; j++) {
+          test_stimuli.push(stims[j])
+      }
       }
   
       for (let i = 0; i < targets.length; i++) {   
@@ -695,12 +696,12 @@ export default async function runTask() {
       trial_duration: 1000,
       post_trial_gap: 500,
     }
-    var pratice_procedure = {
+    var practice_procedure = {
         timeline: [prac_fixation, prac_display, pratice_display, feedback],
         timeline_variables: practice_block[i],
       };
   
-    timeline.push(pratice_procedure);
+    timeline.push(practice_procedure);
   
     var end_block = {
       type: htmlKeyboardResponse,
@@ -713,7 +714,6 @@ export default async function runTask() {
       };
   
     }
-  
     timeline.push(end_block);
   
     let fix
@@ -767,19 +767,19 @@ export default async function runTask() {
     
     timeline.push(test_procedure);
     
-      var rest_block = {
-        type: htmlKeyboardResponse,
-        stimulus: '<div class = centerbox><p class = block-text>Most tarts egy rövid szünetet! Nyomj meg egy gombot a folytatáshoz.</p></div>',
-        trial_duration: 180000,
-        data: {
-          trial_id: "rest block"
-        },
-        post_trial_gap: 1000
-        };
-      if(i != blocks.length-1) {
-        timeline.push(rest_block);
-      }
+    var rest_block = {
+      type: htmlKeyboardResponse,
+      stimulus: '<div class = centerbox><p class = block-text>Most tarts egy rövid szünetet! Nyomj meg egy gombot a folytatáshoz.</p></div>',
+      trial_duration: 180000,
+      data: {
+        trial_id: "rest block"
+      },
+      post_trial_gap: 1000
+      };
+    if(i != blocks.length-1) {
+      timeline.push(rest_block);
     }
+  }
   
   var survey_trial = {
     type: surveyText,
