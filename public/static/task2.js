@@ -6,7 +6,7 @@ import imageKeyboardResponse from '@jspsych/plugin-image-keyboard-response';
 export default function runTask(email) {
 
     var jsPsych = initJsPsych({
-        on_finish: async function() {
+        on_finish: async function() { 
 
     var trials = jsPsych.data.get().filter({task: 'response'});
     var correct_trials = trials.filter({correct: true});
@@ -25,8 +25,8 @@ export default function runTask(email) {
       body: JSON.stringify(values)
     }
     console.log({...values})
-    jsPsych.data.displayData();
-    await fetch('/api/auth/rt', options)
+    
+    await fetch('/api/rt', options)
       .then(res => res.json())
       .catch(err => console.log(err))
   }

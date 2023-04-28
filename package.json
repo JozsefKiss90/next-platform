@@ -11,6 +11,7 @@
   "dependencies": {
     "@jspsych/plugin-html-keyboard-response": "^1.1.2",
     "@jspsych/plugin-image-keyboard-response": "^1.1.2",
+    "@jspsych/plugin-instructions": "^1.1.2",
     "@jspsych/plugin-preload": "^1.1.2",
     "@next-auth/mongodb-adapter": "^1.1.1",
     "@next/font": "13.0.7",

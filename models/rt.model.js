@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const RtSchema = new Schema({
-    rt: { 
-        type: Number,
-        required: true
-      },
+      rt: { 
+          type: Number,
+          required: true
+        },
       email: {
         type: String,
         required: true

@@ -1,5 +1,5 @@
-import connectToDb from '../../../database/db'
-import RtTask from '../../../models/rt.model'
+import connectToDb from '../../database/db'
+import FlankerTask from '../../models/flanker.model'
 
 export default async function handler(req, res) {
     connectToDb()
@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     if(req.method === 'GET') {
         try {
-            const rtData = await RtTask.find();
+            const rtData = await FlankerTask.find();
             res.status(200).json({ data: rtData });
           } catch (error) {
             res.status(500).json({ message: 'Error fetching data', error });
@@ -16,12 +16,12 @@ export default async function handler(req, res) {
     else if(req.method === 'POST') {
         if(!req.body) return res.status(404).json({error:'form data is missing'})
         console.log("req body: " + {...req.body})
-        const {rt,email, acc} = req.body
-        const checkDuplicate = await RtTask.find({email})
+        const {rt,accuracy,email,loads} = req.body
+        const checkDuplicate = await FlankerTask.find({email})
         console.log(checkDuplicate)
         if(checkDuplicate.length > 3) return res.status(422).json({message: 'user already exists'})
 
-        RtTask.create({rt,email, acc}, function(err, data ){
+        FlankerTask.create({rt,accuracy,email,loads}, function(err, data ){
             if(err) {  
                 return res.status(404).json({err})
             }
@@ -32,6 +32,3 @@ export default async function handler(req, res) {
         res.status(500).json({message: 'HTTP method not valid'})
     }
 }
-
-
-

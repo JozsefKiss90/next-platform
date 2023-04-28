@@ -6,8 +6,9 @@ import jsPsychInstructions from '@jspsych/plugin-instructions';
 import jsPsychSurveyHtmlForm from '@jspsych/plugin-survey-html-form';
 import jsPsychPreload from '@jspsych/plugin-preload';
 import {initJsPsych} from 'jspsych';
+import { getData, calculateRt } from "../flanker/helpers.js";
 
-export default async function runTask() {
+export default async function runTask(email) {
   
   async function getStimuli() {
     const response = await fetch('../static/flanker/stimuli.svg')
@@ -49,12 +50,10 @@ export default async function runTask() {
       let loads = calculateRt(allData)
 
       var data = {
-        rTime : rt, 
-        acc : accuracy,
-        //name : name.trials[0].response[0].value,
-        name : '',
-        loads : loads,
-        survey : survey,
+        rt : rt, 
+        accuracy : accuracy,
+        email : email,
+        loads : loads
       }
       console.log(data)
       const endpoint = 'https://esport-metrics.herokuapp.com/api/flanker'
