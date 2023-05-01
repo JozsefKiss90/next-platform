@@ -288,34 +288,12 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
     left: 0.3em;
 }
 
-/* Buttons */
-.jspsych-btn, #jspsych-instructions-next, #jspsych-instructions-back {
-  font-size:23px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 12px 20px 12px 20px;
-  color: white;
-  background-color:cornflowerblue;
-  cursor: pointer;
-  line-height: 1.4;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-
 #jspsych-instructions-next, #jspsych-instructions-back {
  width: 300px;
 }
 
 #jspsych-instructions-next, #jspsych-instructions-back {
   padding: 12px 40px 12px 40px;
-}
-
-.jspsych-btn:hover, #jspsych-instructions-next:hover, #jspsych-instructions-back:hover {
-  border-color:#999;
-  background-color: darkblue;
 }
 
 #jspsych-survey-multi-choice-next {

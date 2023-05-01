@@ -77,6 +77,7 @@
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+    disabled
   }
   
   /* only apply the hover style on devices with a mouse/pointer that can hover - issue #977 */

@@ -66,6 +66,13 @@ export default function Experiments({...session}: any){
           <a href={'/tasks/flankerTask'}>
             <h1>Flanker Compatibility Task</h1>
           </a> 
+          <ProgressBar completed={completed} />
+        </div>
+        <div className="task">
+          <a href={'/tasks/networkTask'}>
+            <h1>Attention Network Task</h1>
+          </a>  
+          <ProgressBar completed={completed} />
         </div>
       </div>
     </> 

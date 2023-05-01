@@ -180,15 +180,7 @@ var instructionOne = {
 };
 timeline.push(instructionOne);
 
-const instructionText = '<div> <div style="text-align: center;"><p class="block-text">Ebben a kísérletben öt nyilat fogsz egymás mellett látni, amelyek jobbra vagy balra mutatnak (pl. &larr; &larr; &larr; &larr; &larr;, vagy &mdash; &mdash; &rarr; &mdash; &mdash;) és a képernyő tetején vagy alján jelenhetnek meg.</p></div><div style="text-align: center;"><p class="block-text">A feladatod jelezni, hogy a középen lévő nyíl melyik irányba mutat az ennek megefelelő irányú gombok lenyomásával.</p><p style="font-size: 60px;">&larr; &larr; <span style="color: rgba(0, 162, 232, 1);">&rarr;</span> &larr; &larr;</p><img style="display: block; margin: auto;" class="center-img" src="/img/buttons.png"></img></div><div style="text-align: center;"><p class="block-text">A nyilak megjelenése előtt egy csillag <span style="font-size: 30px; font-weight: bold;">*</span> tűnhet fel a képernyő egyes pontjain.</p><p class="block-text">A <span style="font-size: 30px; font-weight: bold;">*</span> megjelenésétől függetlenül, próbálj meg mindig a lehető leggyorsabban és legpontosabban válaszolni!</p></div><div style="text-align: center;"><p style="font-size: 24px;"><strong>Most néhány gyakorló feladat fog következni.</strong></p><p class="block-text">A gyakorlás során visszajelzést fogsz kapni a válaszaid helyességéről.</p><p class="block-text">A kísérlet ezt követő részében már nem fogsz ilyen visszajezést kapni.</p></div></div>'
-
 var instructionTwo = {
-  type: htmlKeyboardResponse,
-  stimulus: '<p style="text-align: justify; margin: 0 20px;">Ebben a kísérletben öt nyilat fogsz egymás mellett látni, amelyek jobbra vagy balra mutatnak (pl. &larr; &larr; &larr; &larr; &larr;, vagy &mdash; &mdash; &rarr; &mdash; &mdash;) és a képernyő tetején vagy alján jelenhetnek meg.</p>' + '<p style="text-align: justify;  margin: 0 20px;">A feladatod jelezni, hogy a középen lévő nyíl melyik irányba mutat az ennek megefelelő irányú gombok lenyomásával.</p><p style="font-size: 60px;">&larr; &larr; <span style="color: rgba(0, 162, 232, 1);">&rarr;</span> &larr; &larr;</p>' + '<img style=" margin: 20px; width:200px;" class="center-img" src="/img/buttons.png"></img>'
-};
-timeline.push(instructionTwo);
-
-var trial = {
   type: instructions ,
   pages: [
   '<p style="text-align: justify; margin: 0 100px;">Ebben a kísérletben öt nyilat fogsz egymás mellett látni, amelyek jobbra vagy balra mutatnak (pl. &larr; &larr; &larr; &larr; &larr;, vagy &mdash; &mdash; &rarr; &mdash; &mdash;) <br> és a képernyő tetején vagy alján jelenhetnek meg.</p>',
@@ -201,7 +193,7 @@ var trial = {
   button_label_next: "Tovább"
 }
 
-timeline.push(trial);
+timeline.push(instructionTwo);
 var fixation = {
   type: htmlKeyboardResponse,
   stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
@@ -549,6 +541,15 @@ async function assessPerformance() {
 		console.log(perf)
 
 }
+
+var survey_trial = {
+  type: surveyText,
+  questions: [
+    {prompt: 'Észrevétel, visszajelzés, hiba. Ha nincs hagyd üresen,', rows: 6}
+  ]
+}
+
+timeline.push(survey_trial);
 
 var debrief_block = {
   type: htmlKeyboardResponse,

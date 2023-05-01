@@ -6,7 +6,7 @@ import jsPsychInstructions from '@jspsych/plugin-instructions';
 import jsPsychSurveyHtmlForm from '@jspsych/plugin-survey-html-form';
 import jsPsychPreload from '@jspsych/plugin-preload';
 import {initJsPsych} from 'jspsych';
-import { getData, calculateRt } from "../flanker/helpers.js";
+import { getData, calculateRt } from "./flanker/helpers.js";
 
 export default async function runTask(email) {
   
@@ -779,17 +779,9 @@ export default async function runTask(email) {
       timeline.push(rest_block);
     }
   }
+
   
-  var survey_trial = {
-    type: surveyText,
-    questions: [
-      {prompt: 'Észrevétel, visszajelzés, hiba. Ha nincs hagyd üresen,', rows: 6}
-    ]
-  }
-  
-  timeline.push(survey_trial);
-  
-  var debrief_block = {
+var debrief_block = {
     type: htmlKeyboardResponse,
     stimulus: function() {
       var trials = jsPsych.data.get().filter({task:'response'});
