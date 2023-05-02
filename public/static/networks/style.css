@@ -45,3 +45,24 @@
   max-width: 20%;
   padding: 0px 4% 0px 0px;
 }
+
+.circle{
+  width:45px;
+  height:45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:45px;
+  -moz-border-radius:50px;
+  -webkit-border-radius:50px;
+  -khtml-border-radius:50px;
+  color:#fff;
+  background-color:#b9c1de;
+  position: absolute;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border: 2px solid #666;
+  cursor: pointer;
+  user-select: none;
+}
