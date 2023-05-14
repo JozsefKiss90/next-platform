@@ -10,9 +10,7 @@ export default function runTask(email, containerProp) {
 
     let zArray = [0,1,2,3,4,5]
 
-
     var firstElement = document.createElement("div")
-    firstElement.style.color ='white'
     firstElement.classList.add("circle");
     var secondElement
     var thirdElement
@@ -79,7 +77,6 @@ export default function runTask(email, containerProp) {
     }
 
     init()
-    console.log('initalized')
     let mins = 0
     let seconds = 0
     let tens = 0
@@ -87,7 +84,11 @@ export default function runTask(email, containerProp) {
     let appendSeconds = document.getElementById("seconds")
     let appendMins = document.getElementById("mins")
     let Interval;
- 
+    let timeToFinish
+    let minuteString 
+    let secondString 
+    let minuteNumber
+    let secondNumber
 
     firstElement.onclick = function() {
         clearInterval(Interval);
@@ -95,6 +96,12 @@ export default function runTask(email, containerProp) {
     }
     function startTimer () {
         tens++; 
+        timeToFinish = document.getElementById("finishTime").childNodes[0].innerHTML + document.getElementById("finishTime").childNodes[2].innerHTML
+        minuteString = document.getElementById("finishTime").childNodes[0].innerHTML;
+        secondString = document.getElementById("finishTime").childNodes[2].innerHTML;
+        secondNumber = parseInt(secondString);
+        minuteNumber = parseInt(minuteString);
+        console.log(minuteNumber + " " + secondNumber)
         
         if(tens <= 9){
             appendTens.innerHTML = "0" + tens;
@@ -103,7 +110,6 @@ export default function runTask(email, containerProp) {
             appendTens.innerHTML = tens;
             } 
         if (tens > 99) {
-            console.log(document.getElementById("finishTime").childNodes[0].innerHTML + document.getElementById("finishTime").childNodes[2].innerHTML);
             seconds++;
             appendSeconds.innerHTML = "0" + seconds;
             tens = 0;
@@ -154,8 +160,19 @@ export default function runTask(email, containerProp) {
                     secondElement.remove()
                     clearInterval(Interval);
                     var performance = document.getElementById("finishTime").childNodes[0].innerHTML + document.getElementById("finishTime").childNodes[2].innerHTML
-                    var dataObj = {'data' : JSON.stringify(performance)}
-                    sendData("experiment_data_".concat(sub_id),dataObj)  
+                    var data = {
+                        performance : performance, 
+                        email : email 
+                      }
+                    const endpoint = "/api/apm"
+                    fetch(endpoint, {
+                        method: "POST",
+                        headers: {"Content-type": "application/json; charset=UTF-8"},
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json()) 
+                    .then(json => console.log(json))
+                    .catch(err => console.log(err))  
                     //window.location.href = './finish.html';
                 }
                 this.removeEventListener('mousedown', handler_2)
@@ -204,7 +221,7 @@ export default function runTask(email, containerProp) {
                 event.target.style.left = randomRange(0, 400) + 'px'
                 event.target.style.top = randomRange(0, 100) + 'px'
                 event.target.style.zIndex = zArray[0]
-                firstElement.style.zIndex = zArray[4]
+                firstElement.style.zIndex = zArray[4] 
                 secondElement.style.zIndex = zArray[3]
                 thirdElement.style.zIndex = zArray[2]
                 fourthElement.style.zIndex = zArray[1]
@@ -238,8 +255,7 @@ export default function runTask(email, containerProp) {
 
         firstElement.addEventListener('mousedown', handler_1)
         firstElement.addEventListener('mousedown', function() {
-            console.log('wtf')
-            clearInterval(Interval);
+        clearInterval(Interval);
         Interval = setInterval(startTimer, 10);
         })
     }

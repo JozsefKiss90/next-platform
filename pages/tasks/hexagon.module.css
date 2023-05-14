@@ -1,28 +1,28 @@
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px; 
-    height: 300px; 
-    border: 1px solid rgb(40, 40, 40);
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+  
 .stopper {
-    width: 602px; 
+    width: 802px; 
     height: 30px;
-    background-color: green;
+    background-color: rgb(55, 55, 55);
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     position: absolute;
-    top:-31px;
     font-size: 1.2rem;
     color: white;
+    margin: 0 0 0 0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.3rem;
+}
+
+.stopper p {
+  margin-right: 20px;
 }
 
 .circle{

@@ -1,10 +1,9 @@
 import connectToDb from '../../database/db'
-import RtTask from '../../models/rt.model'
+import RtTask from '../../models/handEye.model'
 
 export default async function handler(req, res) {
     connectToDb()
     .catch(err=>res.json(err)) 
-
     if(req.method === 'GET') {
         try {
             const rtData = await RtTask.find();
@@ -16,12 +15,12 @@ export default async function handler(req, res) {
     else if(req.method === 'POST') {
         if(!req.body) return res.status(404).json({error:'form data is missing'})
         console.log("req body: " + {...req.body})
-        const {rt,email, acc} = req.body
+        const {performance, email} = req.body
         const checkDuplicate = await RtTask.find({email})
         console.log(checkDuplicate)
         if(checkDuplicate.length > 3) return res.status(422).json({message: 'user already exists'})
  
-        RtTask.create({rt,email, acc}, function(err, data ){
+        RtTask.create({performance,email}, function(err, data ){
             if(err) {  
                 return res.status(404).json({err})
             }

@@ -74,6 +74,12 @@ export default function Experiments({...session}: any){
           </a>  
           <ProgressBar completed={completed} />
         </div>
+        <div className="task">
+          <a href={'/tasks/apmTask'}>
+            <h1>Action Per Minute Task</h1>
+          </a>  
+          <ProgressBar completed={completed} />
+        </div>
       </div>
     </> 
   );
