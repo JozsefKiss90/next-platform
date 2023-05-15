@@ -8,7 +8,6 @@ import { useSession, getSession } from "next-auth/react"
 export default function Login(){  
     const { data: session } = useSession()
     const router = useRouter()
-   
     async function handleGoogleSignin(){
         const result = await signIn('google', { callbackUrl : "http://localhost:3000"})
         if (result?.error) {
@@ -28,30 +27,29 @@ export default function Login(){
         validate: login_validate,
         onSubmit
     })
-
-    async function onSubmit(values:any){
-
+    async function onSubmit(values: any) {
         const result = await signIn('credentials', {
           redirect: false,
           email: values.email,
           password: values.password,
           callbackUrl: 'http://localhost:3000'
         });
-        console.log(result)
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        const session = await getSession();
-        console.log(session)
+      
         if (result?.error) {
-          console.error("Error signing in:", result.error);
+          console.error('Error signing in:', result.error);
         } else {
-            console.log(result)
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          const session = await getSession();
+      
+          // Update the session with the role property
+          session.user.role = 'user';
+      
+          console.log('Session:', session);
+      
           router.push('/');
         }
       }
-      
-    
-    return (
-
+return (
     <section className='w-3/4 mx-auto flex flex-col gap-10'>
         <div className="title">
             <h1 className='text-gray-800 text-4xl font-bold py-4'>Explore</h1>
