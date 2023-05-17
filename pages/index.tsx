@@ -1,8 +1,6 @@
 
-import { SessionProvider } from "next-auth/react"
 import Link from "next/link"
 import Navbar from "../components/navbar"
-import {useState} from 'react'
 import {useSession, getSession} from "next-auth/react";
 
 export default function Home() {
@@ -43,8 +41,9 @@ function User({ session }:any) {
 export async function getServerSideProps(context){
 
   const session = await getSession(context, { withCredentials: true })
+  console.log("SESSION:")
   console.log(session)
-  if(!session){
+  if(!session){ 
     return {
       redirect : {
         destination: '/login',

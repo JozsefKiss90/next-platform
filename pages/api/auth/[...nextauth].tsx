@@ -4,10 +4,15 @@ import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectToDb from '../../../database/db'
 import User from '../../../models/user.model'
-import {compare} from 'bcryptjs'
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "../../../lib/mongodb"
-import { UserServiceImpl } from "../../../service/UserServiceImpl";
+import { userService  } from "../../../service/UserServiceImpl"
+import SignToken from "../../../service/SignToken";
+
+enum Role {
+  user = "user",
+  admin = "admin",
+}
 
 const { GITHUB_ID = '', GITHUB_SECRET = ''} = process.env;
 if (!process.env.NEXTAUTH_SECRET) {
@@ -45,31 +50,40 @@ export default NextAuth({
         if (!result) {
           throw new Error('no user found');
         }
-        result.role = 'user'
-        const checkPassword = await compare(credentials.password, result.password);
-        if (!checkPassword || result.email !== credentials.email) {
-          throw new Error('incorrect password');
-        }
-        
-
-        return result;      
+        const { email, password } = credentials;
+        return userService.signInCredentials(email, password);      
       },
-      credentials: {}
+   
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      /* Step 1: update the token based on the user object */
-      if (user) {
+    async signIn({ user, account, profile, email, credentials }) {
+      if (account?.provider === 'credentials') {
+        return true; 
+      }
+      const userEmail = profile?.email
+      const userByEmail = await User.findOne({email: userEmail})
+      console.log("USER IS:" + userByEmail)
+      if(!userByEmail) {
+        console.log("USER DOESNT EXIST")
+        return false; 
+      }
+      await User.findByIdAndUpdate(userByEmail._id, { role: Role.user });
+
+      return true; 
+    },
+    async jwt({ token, user}) {
+      if (user) { 
         token.role = user.role;
       }
       return token;
     },
-    session({ session, token }) {
-      /* Step 2: update the session.user based on the token object */
+    async session({ session, token }) {
+      console.log("USER TOKEN: "+token.role)
       if (token && session.user) {
         session.user.role = token.role;
       }
+      
       return session;
     },
   },

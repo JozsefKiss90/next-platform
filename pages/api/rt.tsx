@@ -1,10 +1,14 @@
 import connectToDb from '../../database/db'
 import RtTask from '../../models/rt.model'
-
+import { getSession } from 'next-auth/react';
 export default async function handler(req, res) {
+    const session =await getSession({req});
+    
+    if(!session|| session.user.role != 'user') {
+        res.status(403).json({ message: 'unauthorized'});
+    }
     connectToDb()
     .catch(err=>res.json(err)) 
-
     if(req.method === 'GET') {
         try {
             const rtData = await RtTask.find();

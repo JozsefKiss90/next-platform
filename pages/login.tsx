@@ -39,13 +39,7 @@ export default function Login(){
           console.error('Error signing in:', result.error);
         } else {
           await new Promise(resolve => setTimeout(resolve, 1000));
-          const session = await getSession();
-      
-          // Update the session with the role property
-          session.user.role = 'user';
-      
-          console.log('Session:', session);
-      
+         
           router.push('/');
         }
       }
