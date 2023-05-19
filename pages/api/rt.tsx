@@ -1,7 +1,9 @@
 import connectToDb from '../../database/db'
 import RtTask from '../../models/rt.model'
 import { getSession } from 'next-auth/react';
-export default async function handler(req, res) {
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const session =await getSession({req});
     
     if(!session || session.user.role != 'user') {

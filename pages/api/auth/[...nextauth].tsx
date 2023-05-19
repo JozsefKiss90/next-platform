@@ -7,14 +7,13 @@ import User from '../../../models/user.model'
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "../../../lib/mongodb"
 import { userService  } from "../../../service/UserServiceImpl"
-import SignToken from "../../../service/SignToken";
 
 enum Role {
   user = "user",
   admin = "admin",
 }
 
-const { GITHUB_ID = '', GITHUB_SECRET = ''} = process.env;
+const { GITHUB_ID, GITHUB_SECRET, GOOGLE_ID, GOOGLE_SECRET} = process.env;
 if (!process.env.NEXTAUTH_SECRET) {
   throw new Error("Please provide process.env.NEXTAUTH_SECRET");
 }
@@ -29,12 +28,12 @@ export default NextAuth({
  },
     providers: [
     GitHubProvider({
-      clientId: GITHUB_ID,
-      clientSecret: GITHUB_SECRET,
+      clientId: GITHUB_ID!,
+      clientSecret: GITHUB_SECRET!,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+      clientId: GOOGLE_ID!,
+      clientSecret: GOOGLE_SECRET!,
     }),
     CredentialsProvider({ 
       name: "Credentials",
@@ -61,9 +60,10 @@ export default NextAuth({
       if (account?.provider === 'credentials') {
         return true; 
       }
+      await connectToDb()
+          .catch(error => { error: 'connection failed'; });
       const userEmail = profile?.email
       const userByEmail = await User.findOne({email: userEmail})
-      console.log("USER IS:" + userByEmail)
       if(!userByEmail) {
         console.log("USER DOESNT EXIST")
         return false; 

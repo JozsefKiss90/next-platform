@@ -1,7 +1,8 @@
 import connectToDb from '../../database/db'
 import NetworkTask from '../../models/network.model'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     connectToDb()
     .catch(err=>res.json(err)) 
 

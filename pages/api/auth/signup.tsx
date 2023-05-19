@@ -1,8 +1,9 @@
 import connectToDb from '../../../database/db'
 import User from '../../../models/user.model'
 import {hash} from 'bcryptjs'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     connectToDb()
     .catch(err=>res.json(err)) 
 

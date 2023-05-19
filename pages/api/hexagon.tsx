@@ -1,7 +1,8 @@
 import connectToDb from '../../database/db'
 import HexagonTask from '../../models/hexagon.model'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     connectToDb()
     .catch(err=>res.json(err)) 
 

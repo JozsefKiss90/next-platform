@@ -1,7 +1,8 @@
 import connectToDb from '../../database/db'
 import FlankerTask from '../../models/flanker.model'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     connectToDb()
     .catch(err=>res.json(err)) 
 
@@ -17,9 +18,6 @@ export default async function handler(req, res) {
         if(!req.body) return res.status(404).json({error:'form data is missing'})
         console.log("req body: " + {...req.body})
         const {rt,accuracy,email,loads} = req.body
-        const checkDuplicate = await FlankerTask.find({email})
-        console.log(checkDuplicate)
-        if(checkDuplicate.length > 3) return res.status(422).json({message: 'user already exists'})
 
         FlankerTask.create({rt,accuracy,email,loads}, function(err, data ){
             if(err) {  

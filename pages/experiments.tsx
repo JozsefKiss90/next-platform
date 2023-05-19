@@ -17,7 +17,7 @@ export default function Experiments({...session}: any){
   const [completed, setCompleted] = useState<number>(0);
 
   useEffect(() => {
-    fetch('/api/auth/rt')
+    fetch('/api/rt')
       .then(res => res.json())
       .then(data => setTaskdata(data.data))
       .catch(err => console.log(err)) 

@@ -9,7 +9,7 @@ import {initJsPsych} from 'jspsych';
 import { getData, calculateRt } from "./flanker/helpers.js";
 
 export default async function runTask(email) {
-  
+   
   async function getStimuli() {
     const response = await fetch('../static/flanker/stimuli.svg')
     const text = await response.text();
@@ -25,38 +25,25 @@ export default async function runTask(email) {
     const svgDoc = parser.parseFromString(text, 'image/svg+xml');
     return svgDoc.documentElement;
   }
-    
-  const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  
-  function generateString(length) {
-    let result = ' ';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-  var sub_id = generateString(6);
   
   var jsPsych =  initJsPsych({ 
     on_finish: function() {
       var trials = jsPsych.data.get().filter({task: 'response'});
-      var name = jsPsych.data.get().filter({trial_type: 'survey-html-form'});
       var correct_trials = trials.filter({correct: true});
       var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
       var rt = Math.round(correct_trials.select('rt').mean());
-      var survey = jsPsych.data.get().filter({trial_type :'survey-text'}).trials[0].response.Q0;
+      //var survey = jsPsych.data.get().filter({trial_type :'survey-text'}).trials[0].response.Q0;
       let allData = getData(respArr)
-      let loads = calculateRt(allData)
+      let loads = calculateRt(allData) 
 
       var data = {
         rt : rt, 
         accuracy : accuracy,
-        email : email,
+        email : email, 
         loads : loads
       }
       console.log(data)
-      const endpoint = 'https://esport-metrics.herokuapp.com/api/flanker'
+      const endpoint = '/api/flanker'
       //jsPsych.data.displayData(),
       fetch(endpoint, {
               method: "POST",
@@ -624,8 +611,8 @@ export default async function runTask(email) {
   }
   
   test_stimuli = shuffleArray(test_stimuli)
-  var block1_trials = test_stimuli.slice(0, 31)
-  var block2_trials = test_stimuli.slice(32, 50)
+  var block1_trials = test_stimuli.slice(0, 2)
+  var block2_trials = test_stimuli.slice(0,1)
   var block3_trials = test_stimuli.slice(51, 60)
   var block4_trials = test_stimuli.slice(8, 10)
   var block5_trials = test_stimuli.slice(128, 160)
@@ -633,8 +620,8 @@ export default async function runTask(email) {
   
   //block2_trials, block3_trials, block4_trials, block5_trials, block6_trials
   //blocks = [block1_trials, block2_trials]
-  let blocks = [block1_trials, block2_trials]
-  let practice_block = [block3_trials]
+  let blocks = [block1_trials]
+  let practice_block = [block2_trials]
  
   var respArr = []
   

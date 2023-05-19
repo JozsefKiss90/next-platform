@@ -1,4 +1,3 @@
-import { symbolName } from "typescript"
 import styles from "../styles/Navbar.module.scss"
 import Link from "next/link"
 import {signOut, useSession} from "next-auth/react";

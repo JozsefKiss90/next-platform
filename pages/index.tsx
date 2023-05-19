@@ -1,7 +1,13 @@
 
-import Link from "next/link"
+import { Session } from "next-auth";
 import Navbar from "../components/navbar"
 import {useSession, getSession} from "next-auth/react";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+
+
+interface UserProps {
+  session: Session | null | undefined;
+}
 
 export default function Home() {
   
@@ -14,23 +20,17 @@ export default function Home() {
   )
 } 
 
-function Guest(){
-  return (
-    <main className="container mx-auto text-center py-20">
-          <h3 className='text-4xl font-bold'>Guest Homepage</h3>
-          <div className='flex justify-center'>
-            <Link href={'/login'}>Sign In</Link>
-          </div>
-      </main>
-  )
-}
 
-function User({ session }:any) {
+function User({ session }:UserProps) {
   return(
    <>
       <div style={{marginLeft:'200px'}}>
-        <h5>{session.user.name}</h5>
-        <h5>{session.user.email}</h5>
+      {session && (
+          <>
+            <h5>{session.user?.name}</h5>
+            <h5>{session.user?.email}</h5>
+          </>
+        )}
       </div>
     <Navbar/>
    </>
@@ -38,9 +38,9 @@ function User({ session }:any) {
 }
 
 
-export async function getServerSideProps(context){
-
-  const session = await getSession(context, { withCredentials: true })
+export async function getServerSideProps( context: GetServerSidePropsContext)
+ : Promise<GetServerSidePropsResult<{ session: Session | null }>>  {
+  const session = await getSession(context)
   console.log("SESSION:")
   console.log(session)
   if(!session){ 
