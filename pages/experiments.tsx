@@ -3,32 +3,36 @@ import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import ProgressBar from "../components/progressBar";
+import { Session, User } from "next-auth";
 
 interface UserData {
   email: string;
   taskName: string;
-  taskResult: number;
+  taskResult: number; 
 }
 
-export default function Experiments({...session}: any){
+interface UserProps {
+  session: Session | null | undefined;
+}
 
-  const [taskData, setTaskdata] = useState<any>();
-  const [userData, setUserData] = useState<UserData[]>();
+export default function Experiments({ session }: UserProps) {
+  const [taskData, setTaskData] = useState<UserData[] | undefined>();
+  const [userData, setUserData] = useState<UserData[] | undefined>();
   const [completed, setCompleted] = useState<number>(0);
 
   useEffect(() => {
     fetch('/api/rt')
       .then(res => res.json())
-      .then(data => setTaskdata(data.data))
+      .then(data => setTaskData(data.data))
       .catch(err => console.log(err)) 
   }, []);
 
   useEffect(() => {
-    if (taskData !== undefined) {
-      const userTaskData = taskData.filter((data: UserData) => data.email === session.user.email);
+    if (taskData !== undefined && session?.user?.email) {
+      const userTaskData = taskData.filter((data: UserData) => data.email === session?.user?.email);
       setUserData(userTaskData);
     }
-  }, [taskData, session.user.email]);
+  }, [taskData, session?.user?.email]);
 
   console.log(taskData)
   console.log(userData)
@@ -98,6 +102,6 @@ export async function getServerSideProps({ req }: any) {
   }
 
   return {
-    props: { ...session }
+    props: { session }
   }
 }

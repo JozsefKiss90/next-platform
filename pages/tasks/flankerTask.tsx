@@ -1,15 +1,18 @@
 import { useEffect } from 'react';
-import {useSession, getSession} from "next-auth/react";
+import {getSession} from "next-auth/react";
 import 'jspsych/css/jspsych.css'
 
-export default function Flanker({ email }) {
+interface TaskProps {
+  email: string | undefined;
+}
 
+export default function Flanker({ email} : TaskProps ) {
   useEffect(() => {
-    async function runTask(sessionEmail) {
-      const module = await import('../../public/static/flanker.js');
+    async function runTask(sessionEmail : string) {
+      const module = await import('../../public/static/flanker/flanker.js');
       module.default(sessionEmail);
     }
-    runTask(email);
+    runTask(email!);
   }, []); 
 
   return (

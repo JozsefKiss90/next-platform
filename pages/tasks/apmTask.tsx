@@ -2,11 +2,15 @@ import { useSession, getSession } from "next-auth/react"
 import { useEffect, useState } from 'react'
 import styles from './apm.module.css'
 
-export default function ApmTask({ email }) {
+interface TaskProps{
+  email: string | undefined;
+}
+
+export default function ApmTask({ email } : TaskProps ){
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    async function runTask(sessionEmail) {
+    async function runTask(sessionEmail: string) {
       const module = await import('../../public/static/apm/apm.js')
       let containerProp = document.getElementById('container')
       if (!containerProp) {
@@ -17,7 +21,7 @@ export default function ApmTask({ email }) {
         module.default(sessionEmail, containerProp)
       }
     }
-    runTask(email)
+    runTask(email! )
   }, [])
 
   const { data: session, status } = useSession()

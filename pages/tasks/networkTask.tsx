@@ -2,19 +2,22 @@ import {useSession, getSession} from "next-auth/react";
 import { useEffect, useState } from 'react';
 import 'jspsych/css/jspsych.css'
 
+interface TaskProps{
+  email: string | undefined;
+}
 
-export default function NetworkTask({ email }) {
+export default function NetworkTask({ email } : TaskProps) {
 
   const [loading, setLoading] = useState(true)
   const { data: session, status } = useSession();
   
   useEffect(() => {
-    async function runTask(sessionEmail) {
-      const module = await import('../../public/static/network.js');
+    async function runTask(sessionEmail : string) {
+      const module = await import('../../public/static/networks/network.js');
       module.default(sessionEmail);
     }
     console.log('ran')
-    runTask(email);
+    runTask(email!);
   }, [setLoading]);
 
   

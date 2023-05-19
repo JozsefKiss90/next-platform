@@ -1,13 +1,13 @@
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
-import htmlButtonResponse from '@jspsych/plugin-html-button-response';
+
 import surveyText from '@jspsych/plugin-survey-text';
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
 import instructions from '@jspsych/plugin-instructions';
 import jsPsychPreload from '@jspsych/plugin-preload';
 import {initJsPsych} from 'jspsych';
-import { create, all } from 'mathjs'
+import { create, all } from 'mathjs' 
 
-//import assesPerformance from './assesPerformance'
+import assesPerformance from './assesPerformance'
 export default function runTask (email) {
 
 const config = { }

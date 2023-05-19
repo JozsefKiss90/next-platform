@@ -2,14 +2,18 @@ import {useSession, getSession} from "next-auth/react";
 import { useEffect } from 'react';
 import 'jspsych/css/jspsych.css'
 
-export default function Page({ email }) {
+interface TaskProps{
+  email: string | undefined;
+}
+
+export default function Page({ email } : TaskProps) {
 
   useEffect(() => {
-    async function runTask(sessionEmail) {
-      const module = await import('../../public/static/task2.js');
+    async function runTask(sessionEmail : string) {
+      const module = await import('../../public/static/rt/rt.js');
       module.default(sessionEmail);
     }
-    runTask(email);
+    runTask(email!);
   }, []);
 
   const { data: session, status } = useSession();

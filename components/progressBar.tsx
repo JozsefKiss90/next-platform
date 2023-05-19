@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 
-export default function ProgressBar({ completed }) {
+interface ProgressProps {
+  completed : number
+}
+
+export default function ProgressBar({ completed } : ProgressProps) {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {

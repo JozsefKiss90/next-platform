@@ -6,7 +6,7 @@ import jsPsychInstructions from '@jspsych/plugin-instructions';
 import jsPsychSurveyHtmlForm from '@jspsych/plugin-survey-html-form';
 import jsPsychPreload from '@jspsych/plugin-preload';
 import {initJsPsych} from 'jspsych';
-import { getData, calculateRt } from "./flanker/helpers.js";
+import { getData, calculateRt } from "./helpers.js";
 
 export default async function runTask(email) {
    

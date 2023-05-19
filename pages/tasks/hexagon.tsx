@@ -3,7 +3,11 @@ import { useEffect } from 'react';
 import styles from "./hexagon.module.css"
 import { useRouter } from 'next/router';
 
-export default function Page({ email }) {
+interface TaskProps{
+  email: string | undefined;
+}
+
+export default function Page({ email } : TaskProps) {
   const router = useRouter();
   
   const handleRedirect = () => {
@@ -11,11 +15,11 @@ export default function Page({ email }) {
   };
   
   useEffect(() => {
-    async function runTask(sessionEmail, redirectCallback) {
+    async function runTask(sessionEmail : string, redirectCallback: () => void ) {
       const module = await import('../../public/static/hexagon/hexagon/hexagon.js');
       module.default(sessionEmail, redirectCallback);
     }
-    runTask(email,handleRedirect);
+    runTask(email!,handleRedirect);
   }, []);   
  
   const { data: session, status } = useSession();

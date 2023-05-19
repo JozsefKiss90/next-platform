@@ -1,13 +1,16 @@
-import { useLayoutEffect, useSession, getSession } from "next-auth/react"
+import { useSession, getSession } from "next-auth/react"
 import { useEffect, useRef } from "react"
 import styles from "./handEye.module.css"
-import { Container } from "react-bootstrap"
 
-export default function HandEye({ email }) {
+interface TaskProps{
+  email: string | undefined;
+}
+
+export default function HandEye({ email } : TaskProps) {
   const trialsRef = useRef(null)
 
   useEffect(() => {
-    async function runTask(sessionEmail) {
+    async function runTask(sessionEmail : string) {
       const module = await import("../../public/static/hand_eye/handEye.js")
       let trialsProp = trialsRef.current
       if (!trialsProp) {
@@ -21,7 +24,7 @@ export default function HandEye({ email }) {
         module.default(sessionEmail, trialsProp)
       }
     }
-    runTask(email)
+    runTask(email!)
   }, [email])
 
   const { data: session, status } = useSession()

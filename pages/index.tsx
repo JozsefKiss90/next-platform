@@ -1,25 +1,21 @@
 
 import { Session } from "next-auth";
 import Navbar from "../components/navbar"
-import {useSession, getSession} from "next-auth/react";
+import {getSession} from "next-auth/react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-
 
 interface UserProps {
   session: Session | null | undefined;
 }
 
-export default function Home() {
+export default function Home({session} : UserProps) {
   
-  const { data: session} = useSession();
-
   return (
       <>
         {User({ session })}
       </>
   )
 } 
-
 
 function User({ session }:UserProps) {
   return(
