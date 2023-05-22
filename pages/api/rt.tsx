@@ -6,7 +6,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const session =await getSession({req});
     
-    if(!session || session.user.role != 'user') {
+    if(!session || session.user?.role != 'user') {
         res.status(403).json({ message: 'unauthorized'});
     }
     connectToDb()
