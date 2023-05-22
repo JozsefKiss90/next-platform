@@ -1,5 +1,5 @@
 import Link from "next/link"
-import {signIn, signOut} from "next-auth/react";
+import {signIn} from "next-auth/react";
 import { useFormik } from 'formik';
 import login_validate from '../lib/validate';
 import { useRouter } from "next/router";
@@ -17,6 +17,13 @@ export default function Login(){
 
     async function handleGitHubSignin(){
         await signIn('github', { callbackUrl : "http://localhost:3000"})
+    } 
+
+    async function handleFacebookSignin(){
+        const result = await signIn('facebook', { callbackUrl : "http://localhost:3000"})
+        if (result?.error) {
+            console.error("Error signing in:", result.error)
+          }
     } 
 
     const formik = useFormik({
@@ -95,6 +102,11 @@ return (
             <div className="input-button">
                 <button type='button'  onClick={handleGitHubSignin}>
                     Sign In with Github 
+                </button>
+            </div>
+            <div className="input-button">
+                <button type='button'  onClick={handleFacebookSignin}>
+                    Sign In with Facebook 
                 </button>
             </div>
         </form>

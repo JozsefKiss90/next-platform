@@ -33,7 +33,6 @@ function User({ session }:UserProps) {
   )
 }
 
-
 export async function getServerSideProps( context: GetServerSidePropsContext)
  : Promise<GetServerSidePropsResult<{ session: Session | null }>>  {
   const session = await getSession(context)
