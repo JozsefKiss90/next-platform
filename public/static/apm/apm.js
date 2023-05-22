@@ -6,7 +6,7 @@ export default function runTask(email, containerProp) {
 
     let trials = 50
 
-    let zIndex = 999
+    let zIndex = 999 
 
     let zArray = [0,1,2,3,4,5]
 
