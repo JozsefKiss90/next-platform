@@ -16,7 +16,7 @@ export default function Page({ email } : TaskProps) {
   
   useEffect(() => {
     async function runTask(sessionEmail : string, redirectCallback: () => void ) {
-      const module = await import('../../public/static/hexagon/modules/hexagon.js');
+      const module = await import('../../public/static/hexagon/modules/hexagon');
       module.default(sessionEmail, redirectCallback);
     }
     runTask(email!,handleRedirect);
