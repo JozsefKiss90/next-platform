@@ -7,7 +7,7 @@ import {initJsPsych} from 'jspsych';
 import { getData, calculateRt } from "./helpers.js";
 
 export default async function runTask(email) {
-   //"WTF"
+
   async function getStimuli() {
     const response = await fetch('../static/flanker/stimuli.svg')
     const text = await response.text();
