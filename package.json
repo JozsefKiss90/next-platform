@@ -2,6 +2,9 @@
   "name": "platform",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.17.6"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +12,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@jspsych/plugin-fullscreen": "^1.2.0",
+    "@jspsych/plugin-html-button-response": "^1.1.2",
     "@jspsych/plugin-html-keyboard-response": "^1.1.2",
     "@jspsych/plugin-image-keyboard-response": "^1.1.2",
     "@jspsych/plugin-instructions": "^1.1.2",
@@ -21,7 +26,6 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
     "eslint": "8.30.0",
-    "eslint-config-next": "13.0.7",
     "formik": "^2.2.9",
     "jsdom": "^21.1.1",
     "jsonwebtoken": "^9.0.0",
@@ -40,6 +44,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/bcryptjs": "^2.4.2",
-    "@types/jsonwebtoken": "^9.0.2"
+    "@types/jsonwebtoken": "^9.0.2",
+    "eslint-config-next": "^13.4.3"
   }
 }
