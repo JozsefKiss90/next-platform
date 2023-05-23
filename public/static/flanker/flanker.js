@@ -1,15 +1,13 @@
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 import htmlButtonResponse from '@jspsych/plugin-html-button-response';
-import surveyText from '@jspsych/plugin-survey-text';
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
 import jsPsychInstructions from '@jspsych/plugin-instructions';
-import jsPsychSurveyHtmlForm from '@jspsych/plugin-survey-html-form';
 import jsPsychPreload from '@jspsych/plugin-preload';
 import {initJsPsych} from 'jspsych';
 import { getData, calculateRt } from "./helpers.js";
 
 export default async function runTask(email) {
-   
+   //"WTF"
   async function getStimuli() {
     const response = await fetch('../static/flanker/stimuli.svg')
     const text = await response.text();
@@ -91,13 +89,6 @@ export default async function runTask(email) {
     stimulus: 'A kísérlet teljes képernyős módban fog futni, amint az alábbi gombra kattintasz.',
     choices: ['Kezdés.']
   }
-  
-  var form_trial = {
-    type: jsPsychSurveyHtmlForm,
-    preamble: '<p> Kérlek add meg a neved</b> </p>',
-    html: '<p> Név: <input name="first_name" type="text"/></p>',
-    dataAsArray : true
-  };
   
   //timeline.push(form_trial);
   
