@@ -7,7 +7,6 @@ import jsPsychPreload from '@jspsych/plugin-preload';
 import {initJsPsych} from 'jspsych';
 import { create, all } from 'mathjs' 
 
-import assesPerformance from './assesPerformance'
 export default function runTask (email) {
 
 const config = { }
