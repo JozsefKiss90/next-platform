@@ -8,6 +8,7 @@ import User from '../../../models/user.model'
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "../../../lib/mongodb"
 import { userService  } from "../../../service/UserServiceImpl"
+import { URL } from 'url';
 
 enum Role {
   user = "user",
@@ -35,6 +36,7 @@ export default NextAuth({
     GoogleProvider({
       clientId: GOOGLE_ID!,
       clientSecret: GOOGLE_SECRET!,
+      callbackUrl: 'https://platform-app.herokuapp.com/api/auth/callback/google'
     }),
     FacebookProvider({
       clientId: FACEBOOK_ID!,
@@ -67,6 +69,16 @@ export default NextAuth({
       }
       user.role = Role.user 
       return true; 
+    },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin or the Heroku app's base URL
+      const parsedUrl = new URL(url);
+      if (parsedUrl.origin === baseUrl || parsedUrl.origin === 'https://platform-app.herokuapp.com') {
+        return url;
+      }
+      return baseUrl;
     },
     async jwt({ token, user}) {
       if (user) { 
