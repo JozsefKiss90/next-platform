@@ -36,7 +36,6 @@ export default NextAuth({
     GoogleProvider({
       clientId: GOOGLE_ID!,
       clientSecret: GOOGLE_SECRET!,
-      callbackUrl: 'https://platform-app.herokuapp.com/api/auth/callback/google'
     }),
     FacebookProvider({
       clientId: FACEBOOK_ID!,
