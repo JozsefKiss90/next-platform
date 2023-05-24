@@ -25,11 +25,12 @@ export default function Register() {
             body: JSON.stringify(values)
         }
 
-        await fetch('http://localhost:3000/api/auth/signup', options)
+        await fetch('/api/auth/signup', options)
             .then(res => res.json())
             .then((data) => {
-                if(data) router.push('http://localhost:3000')
+                if(data) router.push('/')
             })
+            .catch(error => console.error(error))
     }
     
     return(
