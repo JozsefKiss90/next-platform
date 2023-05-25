@@ -65,16 +65,7 @@ export default NextAuth({
       if (account?.provider === 'credentials') {
         return true; 
       }
-      await connectToDb()
-          .catch(error => { error: 'connection failed'; });
-      const userEmail = profile?.email
-      const userByEmail = await User.findOne({email: userEmail})
-      if(!userByEmail) {
-        console.log("USER DOESNT EXIST")
-        return false; 
-      }
-      await User.findByIdAndUpdate(userByEmail._id, { role: Role.user });
-
+      user.role = Role.user 
       return true; 
     },
     async jwt({ token, user}) {

@@ -15,38 +15,43 @@ export default function Page({ email } : TaskProps) {
   };
    
   useEffect(() => {
-    async function runTask(sessionEmail : string, redirectCallback: () => void) {
-      const module = await import('../../public/static/hexagon/modules/hexagon'); 
-      let canvas = document.getElementById("canvas");
-      let appendTens = document.getElementById("tens");
-      let appendSeconds = document.getElementById("seconds");
-      let appendMins = document.getElementById("mins");
+    async function runTask(sessionEmail: string, redirectCallback: () => void) {
+      const module = await import('../../public/static/hexagon/modules/hexagon');
+      const hexagonModule = module.default; // Access the default export
+      let canvas = document.getElementById('canvas');
+      let appendTens = document.getElementById('tens');
+      let appendSeconds = document.getElementById('seconds');
+      let appendMins = document.getElementById('mins');
       let props = {
-        canvas : canvas,
-        tens : appendTens,
+        canvas: canvas,
+        tens: appendTens,
         seconds: appendSeconds,
-        mins : appendMins,
-      }
-      if (!props.canvas || !props.mins || props.tens || props.seconds) {
-        await new Promise((resolve) => window.requestAnimationFrame(resolve))
-        canvas = document.getElementById('canvas')
-        appendTens = document.getElementById("tens");
-        appendSeconds = document.getElementById("seconds");
-        appendMins = document.getElementById("mins");
-        props = {
-          canvas : canvas,
-          tens : appendTens,
-          seconds: appendSeconds,
-          mins : appendMins,
-        }
-      }
-      if (props.canvas && props.mins && props.tens && props.seconds) {
-        module.default(sessionEmail,redirectCallback, props)
+        mins: appendMins,
+      };
+      if (!props.canvas || !props.mins || !props.tens || !props.seconds) {
+        // Retry obtaining elements after a short delay
+        setTimeout(() => {
+          canvas = document.getElementById('canvas');
+          appendTens = document.getElementById('tens');
+          appendSeconds = document.getElementById('seconds');
+          appendMins = document.getElementById('mins');
+          props = {
+            canvas: canvas,
+            tens: appendTens,
+            seconds: appendSeconds,
+            mins: appendMins,
+          };
+          if (props.canvas && props.mins && props.tens && props.seconds) {
+            hexagonModule(sessionEmail, redirectCallback, props);
+          }
+        }, 100);
+      } else {
+        hexagonModule(sessionEmail, redirectCallback, props);
       }
     }
-    runTask(email!,handleRedirect); 
-  }, []);   
- 
+    runTask(email!, handleRedirect);
+  }, []);
+  
   const { data: session, status } = useSession();
   if(session){
     return( 
