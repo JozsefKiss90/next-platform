@@ -27,7 +27,7 @@ export default function Page({ email } : TaskProps) {
         seconds: appendSeconds,
         mins : appendMins,
       }
-      if (!props.canvas || !props.mins || props.tens || props.seconds) {
+      if (!props) {
         await new Promise((resolve) => window.requestAnimationFrame(resolve))
         canvas = document.getElementById('canvas')
         appendTens = document.getElementById("tens");
