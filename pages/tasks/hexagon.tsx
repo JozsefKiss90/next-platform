@@ -1,6 +1,6 @@
 import { useSession, getSession } from "next-auth/react";
 import { useEffect, useRef } from 'react';
-import styles from "./hexagon.module.css";
+import styles from "./hexagon.module.css"
 import { useRouter } from 'next/router';
 
 interface TaskProps {
@@ -21,31 +21,43 @@ export default function Page({ email }: TaskProps) {
 
   useEffect(() => {
     async function runTask(sessionEmail: string, redirectCallback: () => void) {
-      const script = document.createElement('script');
-      script.src = '/static/hexagon/modules/hexagon.js';
-      script.async = true;
+      const module = await import('../../public/static/hexagon/modules/hexagon');
+      const hexagonModule = module.default; // Access the default export
 
-      script.onload = () => {
-        const hexagonModule = (window as any).runTask; // Assuming the hexagon module exports the runTask function globally
+      let canvas = canvasRef.current;
+      let appendTens = appendTensRef.current;
+      let appendSeconds = appendSecondsRef.current;
+      let appendMins = appendMinsRef.current;
 
-        let canvas = canvasRef.current;
-        let appendTens = appendTensRef.current;
-        let appendSeconds = appendSecondsRef.current;
-        let appendMins = appendMinsRef.current;
-
-        let props = {
-          canvas,
-          tens: appendTens,
-          seconds: appendSeconds,
-          mins: appendMins,
-        };
-
-        if (props.canvas && props.mins && props.tens && props.seconds) {
-          hexagonModule(sessionEmail, redirectCallback, props);
-        }
+      let props = {
+        canvas,
+        tens: appendTens,
+        seconds: appendSeconds,
+        mins: appendMins,
       };
 
-      document.body.appendChild(script);
+      if (!props.canvas || !props.mins || !props.tens || !props.seconds) {
+        // Retry obtaining elements after a short delay
+        setTimeout(() => {
+          canvas = canvasRef.current;
+          appendTens = appendTensRef.current;
+          appendSeconds = appendSecondsRef.current;
+          appendMins = appendMinsRef.current;
+
+          props = {
+            canvas,
+            tens: appendTens,
+            seconds: appendSeconds,
+            mins: appendMins,
+          };
+
+          if (props.canvas && props.mins && props.tens && props.seconds) {
+            hexagonModule(sessionEmail, redirectCallback, props);
+          }
+        }, 1000);
+      } else {
+        hexagonModule(sessionEmail, redirectCallback, props);
+      }
     }
 
     runTask(email!, handleRedirect);
