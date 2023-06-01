@@ -78,13 +78,6 @@
   color: #727272;
 }
 
-.input_text input:-webkit-autofill {
-  background-color: rgb(91, 4, 4) !important;
-}
-.input_text input:autofill {
-  background-color:  rgb(91, 4, 4) !important;
-}
-
 .input_text::placeholder {
   color: #727272;
 }
@@ -93,7 +86,7 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  right: 10px; /* Adjust the position as needed */
+  right: 10px;
   color: #9f9f9f;
   width: 18px;
   cursor: pointer;
@@ -110,7 +103,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-image: linear-gradient(to right, #3c0266, #6666fb);
+  background-image: linear-gradient(to right, #450176, #a46af5);
   border-radius: 5px;
   text-align: center;
   color: #ffffff;
@@ -131,7 +124,7 @@
   align-items: center;
   justify-content: center;
   width: 70%;
-  background-image: linear-gradient(to right, #3c0266, #6666fb);
+  background-image: linear-gradient(to right, #450176, #a46af5);
   border-radius: 5px;
   text-align: center;
   color: #ffffff;
@@ -141,8 +134,8 @@
 }
 
 .singup_button:hover {
-  background-image: linear-gradient(to right, #ffffff, #f0f0f0);
-  border: 1px solid #0000ff;
+  background-image: linear-gradient(to right, #9CBF82, #719E00);
+  border: 1px solid #fcfcfc;
   color: #4d4d4d;
 }
 
@@ -152,8 +145,8 @@
 }
 
 .button:hover {
-  background-image: linear-gradient(to right, #ffffff, #f0f0f0);
-  border: 1px solid #0000ff;
+  background-image: linear-gradient(to right,#5B950A, #BAFE89);
+  border: 1px solid #fafccf;
   color: #4d4d4d;
 }
 
