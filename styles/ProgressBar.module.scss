@@ -1,0 +1,82 @@
+$color-black: hsl(0, 0%, 5%);
+$color-color: hsl(117, 100%, 72%);
+
+$color-html: hsl(12, 100%, 50%);
+
+$porcent-html: 99;
+
+@function strokeDashoffset($num) {
+  @return 190 - (190 * $num) / 100;
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90px;
+ // background-color: $color-black;
+}
+
+.container__progressbars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  min-width: 100px;
+  width: 100%;
+  min-height: 100%;
+}
+
+.progressbar {
+    position: relative;
+    width: 100px; /* Adjust the width as per your requirement */
+    height: 100px; /* Adjust the height as per your requirement */
+     /* Adjust the margin as per your requirement */
+    transform: rotate(270deg); 
+    bottom: 5px;
+  }
+  
+  
+  .progressbar__svg-circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 6; /* Adjust the stroke width as per your requirement */
+    stroke-dasharray: 190;
+    stroke-dashoffset: 190;
+    stroke: hsl(121, 71%, 48%);
+    stroke-linecap: round;
+   
+  }
+
+.shadow {
+  &-html {
+    filter: drop-shadow(0 0 6px $color-color);
+  }
+}
+
+.circle {
+  &-html {
+    animation: anim_circle-html 1s ease-in-out forwards;
+  }
+}
+
+.progressbar__text {
+  position: absolute;
+  top: 50%;
+  left: 49%;
+  //padding: 0.25em 0.5em;
+  color: hsl(121, 100%, 41%);
+  font-family: 'Share Tech Mono', monospace;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 0.25em;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+@keyframes anim_circle-html {
+    to {
+        stroke-dashoffset: strokeDashoffset($porcent-html); 
+    }
+  }

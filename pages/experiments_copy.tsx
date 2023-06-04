@@ -4,9 +4,6 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import ProgressBar from "../components/progressBar";
 import { Session, User } from "next-auth";
-import { AppContext } from "../components/layout"
-import {useContext } from "react";
-import Image from 'next/image';
 
 interface UserData {
   email: string;
@@ -18,15 +15,7 @@ interface UserProps {
   session: Session | null | undefined;
 }
 
-interface AppContextValue {
-  isHovered: boolean;
-  setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 export default function Experiments({ session }: UserProps) {
-
-  const { isHovered } = useContext(AppContext)  as AppContextValue;;
-
   const [taskData, setTaskData] = useState<UserData[] | undefined>();
   const [userData, setUserData] = useState<UserData[] | undefined>();
   const [completed, setCompleted] = useState<number>(0);
@@ -68,43 +57,35 @@ export default function Experiments({ session }: UserProps) {
   }, [userData]);
 
   return (
-    <div>
+    <>
       <Navbar />
-      <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
-        <div className={styles.task}>
+      <div className={styles.main}>
+        <div className="task">
           <a href={'/tasks/rtTask'}>
-            <h2>Reaction Time</h2>
+            <h1>Simple Reaction Time Task</h1>
           </a>
-          <Image
-              className={styles.icon_style}
-              src="/img/icons/svgArrow.svg"
-              alt="SVG Icon"
-              width={300}
-              height={24}
-            
-            />      
-          <ProgressBar completed={30} />
+          <ProgressBar completed={completed} />
         </div>
-        <div className={styles.task}>
+        <div className="task">
           <a href={'/tasks/flankerTask'}>
             <h1>Flanker Compatibility Task</h1>
           </a> 
           <ProgressBar completed={completed} />
         </div>
-        <div className={styles.task}>
+        <div className="task">
           <a href={'/tasks/networkTask'}>
             <h1>Attention Network Task</h1>
           </a>  
           <ProgressBar completed={completed} />
         </div>
-        <div className={styles.task}>
+        <div className="task">
           <a href={'/tasks/apmTask'}>
             <h1>Action Per Minute Task</h1>
           </a>  
           <ProgressBar completed={completed} />
         </div>
       </div>
-    </div> 
+    </> 
   );
 }
 

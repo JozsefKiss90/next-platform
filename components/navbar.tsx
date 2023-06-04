@@ -1,18 +1,27 @@
 import styles from "../styles/Navbar2.module.scss"
 import Link from "next/link"
 import {signOut, useSession} from "next-auth/react";
-import { faFlaskVial  } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import '../node_modules/@fortawesome/fontawesome-svg-core/styles.css'
+import { AppContext } from "./layout"
+import {useContext } from "react";
 import Image from 'next/image';
 
 export default function Navbar(){
 
+    const { setIsHovered } = useContext(AppContext);
     const { data: session, status } = useSession();
+
+    
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
 
     return(          
     <>   
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar}  onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <ul style={{opacity:'1'}} className={`${styles.navbar_nav} ${!session && status !== 'loading' ? styles.loading : styles.loaded}`}>    
         <li className={styles.logo}>
             <Link  href={{ pathname:"/experiments"}}  className={styles.nav_link_arrow}>
@@ -96,7 +105,7 @@ export default function Navbar(){
 
         <li  className={styles.nav_item} id="themeButton">
         {session && (
-            <Link href="#" className={styles.nav_link}>
+            <Link href="#" className={styles.nav_link} onClick={(e)=>{e.preventDefault(); signOut()}}>
                 <Image
                     className={styles.icon_style}
                     src="/img/icons/svgPower.svg"
@@ -111,12 +120,6 @@ export default function Navbar(){
     
         </ul>
     </nav>
-
-  <main>
-    <h1>CSS is Cool</h1>
-
-  </main>
-        
     </>
     )
 }

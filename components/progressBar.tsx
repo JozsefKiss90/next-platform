@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styles from "../styles/ProgressBar.module.scss";
 
 interface ProgressProps {
   completed : number
@@ -11,32 +12,15 @@ export default function ProgressBar({ completed } : ProgressProps) {
     setWidth(completed);
   }, [completed]);
 
-  const containerStyles = {
-    width: '30%',
-    height: '20px',
-    backgroundColor: "#e0e0de",
-    borderRadius: 50,
-    margin: 0,
-  };
-
-  const fillerStyles = {
-    height: "100%",
-    width: `${width}%`,
-    backgroundColor: "rgb(0, 220, 29)",
-    borderRadius: "inherit",
-    transition: "width 1s ease-in-out",
-  };
-
-  const labelStyles = {
-    padding: 5,
-    color: "white",
-    fontWeight: "bold",
-  };
-
   return (
-    <div style={containerStyles}>
-      <div style={fillerStyles}>
-        <span style={labelStyles}>{`${width}%`}</span>
+    <div className={styles.container}>
+      <div className={styles.container__progressbars}>
+        <div className={styles.progressbar}>
+          <svg className={styles.progressbar__svg}>
+            <circle cx="50" cy="50" r="25" className={`${styles["progressbar__svg-circle"]} ${styles["circle-html"]} ${styles["shadow-html"]}`}></circle>
+          </svg>
+          <span className={`${styles.progressbar__text} ${styles["shadow-html"]}`}>99</span>
+        </div>
       </div>
     </div>
   );
