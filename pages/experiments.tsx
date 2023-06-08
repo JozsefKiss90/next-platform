@@ -77,13 +77,17 @@ export default function Experiments({ session }: UserProps) {
           </a>
           <Image
               className={styles.icon_style}
-              src="/img/icons/svgArrow.svg"
+              src="/img/icons/svgLightning.svg"
               alt="SVG Icon"
-              width={300}
-              height={24}
-            
+              width={60}
+              height={60}
             />      
           <ProgressBar completed={30} />
+          <button className={styles.task_button}>
+                <p>
+                  Start
+                </p>
+            </button>
         </div>
         <div className={styles.task}>
           <a href={'/tasks/flankerTask'}>

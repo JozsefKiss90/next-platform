@@ -17,7 +17,7 @@ export default function ProgressBar({ completed } : ProgressProps) {
       <div className={styles.container__progressbars}>
         <div className={styles.progressbar}>
           <svg className={styles.progressbar__svg}>
-            <circle cx="50" cy="50" r="25" className={`${styles["progressbar__svg-circle"]} ${styles["circle-html"]} ${styles["shadow-html"]}`}></circle>
+            <circle cx="50" cy="50" r="20" className={`${styles["progressbar__svg-circle"]} ${styles["circle-html"]} ${styles["shadow-html"]}`}></circle>
           </svg>
           <span className={`${styles.progressbar__text} ${styles["shadow-html"]}`}>99</span>
         </div>
