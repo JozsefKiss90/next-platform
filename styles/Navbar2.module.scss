@@ -1,3 +1,16 @@
+@font-face {
+  font-family: 'Toxi';
+  src: url('/fonts/toxigenesis.otf') format('opentype');
+  /* You can also specify other font properties here */
+}
+
+@font-face {
+  font-family: 'Batman';
+  src: url('/fonts/BruceForeverRegular-X3jd2.ttf') format('opentype');
+  /* You can also specify other font properties here */
+}
+
+
 .navbar {
   position: fixed;
   background-color: var(--bg-primary);
@@ -30,7 +43,7 @@
   width: 8rem;
   color: var(--text-primary);
   text-decoration: none;
-  filter: grayscale(100%) ;
+  filter: grayscale(100%);
 }
 
 .nav_link_arrow {
@@ -58,6 +71,9 @@
   display: none;
   margin-left: 1rem;
   white-space: nowrap;
+  font-family: 'Toxi';
+  font-size: 18px;
+  text-shadow: 1px 1px #ff0062;
 }
 
 .nav_link svg {
@@ -79,12 +95,29 @@
   filter: saturate(1) contrast(1);
 }
 
-.nav_link:hover .hover_effect {
+.nav_link:hover .hover_effect_profile {
+  content: url('/img/icons/svgProfile.svg');
+}
+ 
+.nav_link:hover .hover_effect_info {
   content: url('/img/icons/svgInfo.svg');
 }
 
+.nav_link:hover .hover_effect_envelope { 
+  content: url('/img/icons/svgEnvelope.svg');
+}
+
+.nav_link:hover .hover_effect_desktop {
+  content: url('/img/icons/svgDesktop.svg');
+}
+
+.nav_link:hover .hover_effect_flask {
+  content: url('/img/icons/svgFlask.svg');
+}
+ 
+
 .fa_primary {
-  color: #f885e8;
+  color: #ff5194;
 }
 
 .fa_secondary {
@@ -115,12 +148,15 @@
 
 .logo_text
 {
+  font-family: 'Batman';
   display: inline;
   position: absolute;
   left: -999px;
   transition: var(--transition-speed);
   font-size: 20px;
   letter-spacing: 0px;
+  color: #ffffff;
+  text-shadow: 2px 2px #ff0062;
 }
 
 .navbar:hover .logo .svg_icon {

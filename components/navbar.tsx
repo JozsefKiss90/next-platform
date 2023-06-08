@@ -2,14 +2,13 @@ import styles from "../styles/Navbar2.module.scss"
 import Link from "next/link"
 import {signOut, useSession} from "next-auth/react";
 import { AppContext } from "./layout"
-import {useContext } from "react";
+import {useContext, useState } from "react";
 import Image from 'next/image';
 
 export default function Navbar(){
 
     const { setIsHovered } = useContext(AppContext);
     const { data: session, status } = useSession();
-
     
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -39,7 +38,7 @@ export default function Navbar(){
         <li className={styles.nav_item}>
             <Link href="#" className={styles.nav_link}>
                 <Image
-                    className={styles.icon_style}
+                     className={`${styles.icon_style} ${styles.hover_effect_desktop}`}
                     src="/img/icons/svgDesktop_2.svg"
                     alt="SVG Icon"
                     width={50}
@@ -52,8 +51,8 @@ export default function Navbar(){
         <li className={styles.nav_item}>
             <Link href="#" className={styles.nav_link}>
                 <Image
-                    className={styles.icon_style}
-                    src="/img/icons/svgIcon_1.svg"
+                    className={`${styles.icon_style} ${styles.hover_effect_flask}`}
+                    src="/img/icons/svgFlask_2.svg"
                     alt="SVG Icon"
                     width={50}
                     height={50}
@@ -65,7 +64,7 @@ export default function Navbar(){
         <li className={styles.nav_item}>
             <Link href="#" className={styles.nav_link}>
             <Image
-                    className={styles.icon_style_saturated}
+                    className={`${styles.icon_style} ${styles.hover_effect_profile}`}
                     src="/img/icons/svgProfile_2.svg"
                     alt="SVG Icon"
                     width={55}
@@ -80,7 +79,7 @@ export default function Navbar(){
         <li className={styles.nav_item}>
             <Link href="#" className={`${styles.nav_link}`}>
                 <Image
-                    className={`${styles.icon_style_saturated} ${styles.hover_effect}`}
+                    className={`${styles.icon_style} ${styles.hover_effect_info}`}
                     src="/img/icons/svgInfo_2.svg"
                     alt="SVG Icon"
                     width={50}
@@ -93,8 +92,8 @@ export default function Navbar(){
         <li className={styles.nav_item}>
             <Link href="#" className={styles.nav_link}>
                 <Image
-                    className={`${styles.icon_style_saturated}`}
-                    src="/img/icons/svgEnvelope.svg"
+                    className={`${styles.icon_style_saturated} ${styles.hover_effect_envelope}`}
+                    src="/img/icons/svgEnvelope_2.svg"
                     alt="SVG Icon"
                     width={50}
                     height={40}
