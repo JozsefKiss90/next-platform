@@ -1,8 +1,19 @@
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('/fonts/TechnoRaceItalic-eZRWe.otf') format('opentype');
+  /* You can also specify other font properties here */
+}
+
+@font-face {
+  font-family: 'Batman';
+  src: url('/fonts/BruceForeverRegular-X3jd2.ttf') format('opentype');
+  /* You can also specify other font properties here */
+}
+
 .main {
-  margin-left: 150px;
+  margin-left: 180px;
   margin-top: 30px;
   display: flex;
-
   align-items: center;
   display: flex;
   flex-wrap: wrap;
@@ -28,11 +39,11 @@
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(8, 8, 8, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
   border-radius: 5px;
-  transition: transform 0.65s ease;
+  transition: transform 0.2s ease;
 }
 
 .task:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .task a {
@@ -55,10 +66,11 @@
 
 .task h2 {
   position: relative;
-  top: 20px;
   color: white;
-  font-family: 'Share Tech Mono', monospace;
-  //text-shadow: 0 0  3px white;
+  font-family: 'Batman', monospace;
+  font-weight: 200;
+  font-size: 17px;
+  bottom: 5px;
 }
 
 
@@ -66,16 +78,24 @@
   display: flex;
   justify-content: center;
   position: relative;
-  top: 15px;
+  bottom: 10px;
    /* Center the image horizontally */
 }
 
-
+.icon_style_flanker {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  bottom: 10px;
+}
 .main a {
   width: 100%;
 }
 
 .task_button {
+  height: 33px;
+  width: 50px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -84,11 +104,30 @@
   background-color: white;
   border: 1px solid white;
   border-radius: 5px;
-  padding: 10px 15px;
+  padding: 10px 35px;
+  bottom: 10px;
+  cursor: pointer;
 }
 
 .task_button p{
   color: #23232e;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
+  font-family: 'Batman', monospace;
+  //font-family: 'Share Tech Mono', monospace;
+}
+
+.task_button:hover {
+  background-color:#23232e;
+}
+
+.task_button:hover p {
+  color: white;
+}
+
+.amp_style {
+  font-family: 'MyCustomFont', sans-serif;
+  font-size: 38px;
+  margin: 20px;
+  letter-spacing: 3px;
 }

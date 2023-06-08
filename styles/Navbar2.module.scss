@@ -119,6 +119,8 @@
   position: absolute;
   left: -999px;
   transition: var(--transition-speed);
+  font-size: 20px;
+  letter-spacing: 0px;
 }
 
 .navbar:hover .logo .svg_icon {

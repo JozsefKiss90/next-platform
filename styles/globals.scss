@@ -1,5 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@font-face {
+  font-family: 'Batman';
+  src: url('/fonts/BruceForeverRegular-X3jd2.ttf') format('opentype');
+  /* You can also specify other font properties here */
+}
 
 * {
   box-sizing: border-box;
@@ -35,7 +40,9 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   height: 100%;
-  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  font-family: 'Batman', monospace;
+  //font-family: 'Poppins', sans-serif;
 }
 
 body {

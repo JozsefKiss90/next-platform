@@ -51,14 +51,14 @@ export default function Experiments({ session }: UserProps) {
   useEffect(() => {
     if (userData !== undefined) {
       switch (userData.length) {
-        case 1:
+        case 2:
           setCompleted(33);
           break;
         case 2:
           setCompleted(66);
           break;
         case 3:
-          setCompleted(100);
+          setCompleted(200);
           break;
         default:
           setCompleted(0);
@@ -82,30 +82,62 @@ export default function Experiments({ session }: UserProps) {
               width={60}
               height={60}
             />      
-          <ProgressBar completed={30} />
           <button className={styles.task_button}>
-                <p>
-                  Start
-                </p>
-            </button>
+            <p>
+              Start
+            </p>
+          </button>
+          <ProgressBar completed={90} />
         </div>
         <div className={styles.task}>
           <a href={'/tasks/flankerTask'}>
-            <h1>Flanker Compatibility Task</h1>
+            <h2>Flanker Task</h2>
           </a> 
-          <ProgressBar completed={completed} />
+           <Image
+              className={styles.icon_style_flanker}
+              src="/img/icons/svgFlanker.svg"
+              alt="SVG Icon"
+              width={100}
+              height={80}
+            />      
+          <button className={styles.task_button}>
+            <p>
+              Start
+            </p>
+          </button>
+          <ProgressBar completed={90} />
         </div>
         <div className={styles.task}>
           <a href={'/tasks/networkTask'}>
-            <h1>Attention Network Task</h1>
+            <h2>Attention Network Task</h2>
           </a>  
-          <ProgressBar completed={completed} />
+           <Image
+              className={styles.icon_style}
+              src="/img/icons/svgArrow.svg"
+              alt="SVG Icon"
+              width={200}
+              height={60}
+            />      
+          <button className={styles.task_button}>
+            <p>
+              Start
+            </p>
+          </button>
+          <ProgressBar completed={90} />
         </div>
         <div className={styles.task}>
           <a href={'/tasks/apmTask'}>
-            <h1>Action Per Minute Task</h1>
+            <h2>Action Per Minute Task</h2>
           </a>  
-          <ProgressBar completed={completed} />
+          <h1 className={`${styles.amp_style} ${styles.icon_style}`}>
+            AMP
+          </h1>
+          <button className={styles.task_button}>
+            <p>
+              Start
+            </p>
+          </button>
+          <ProgressBar completed={90} />
         </div>
       </div>
     </div> 

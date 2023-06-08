@@ -12,15 +12,17 @@ export default function ProgressBar({ completed } : ProgressProps) {
     setWidth(completed);
   }, [completed]);
 
+  const fillerWidth = {
+    width: `${width}%`
+  }; 
+  
   return (
     <div className={styles.container}>
-      <div className={styles.container__progressbars}>
-        <div className={styles.progressbar}>
-          <svg className={styles.progressbar__svg}>
-            <circle cx="50" cy="50" r="20" className={`${styles["progressbar__svg-circle"]} ${styles["circle-html"]} ${styles["shadow-html"]}`}></circle>
-          </svg>
-          <span className={`${styles.progressbar__text} ${styles["shadow-html"]}`}>99</span>
-        </div>
+      <div className={styles.filler_styles} style={fillerWidth}>
+        <span className={styles.label_styles}></span>
+      </div>
+      <div className={styles.progress_text}>
+        {`${width}%`}
       </div>
     </div>
   );
