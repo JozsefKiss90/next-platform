@@ -7,6 +7,7 @@ import { Session, User } from "next-auth";
 import { AppContext } from "../components/layout"
 import {useContext } from "react";
 import Image from 'next/image';
+import styles2 from "../styles/Index.module.scss"
 
 interface UserData {
   email: string;
@@ -64,11 +65,12 @@ export default function Experiments({ session }: UserProps) {
           setCompleted(0);
           break;
       }
-    }
+    } 
   }, [userData]);
 
-  return (
-    <div>
+  return ( 
+    <>
+      <div>
       <Navbar />
       <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
         <div className={styles.task}>
@@ -85,7 +87,7 @@ export default function Experiments({ session }: UserProps) {
           <button className={styles.task_button}>
             <p>
               Start
-            </p>
+            </p> 
           </button>
           <ProgressBar completed={90} />
         </div>
@@ -109,7 +111,7 @@ export default function Experiments({ session }: UserProps) {
         </div>
         <div className={styles.task}>
           <a href={'/tasks/networkTask'}>
-            <h2>Attention Network Task</h2>
+            <h2>Attentional Networks</h2>
           </a>  
            <Image
               className={styles.icon_style}
@@ -127,11 +129,29 @@ export default function Experiments({ session }: UserProps) {
         </div>
         <div className={styles.task}>
           <a href={'/tasks/apmTask'}>
-            <h2>Action Per Minute Task</h2>
+            <h2>Action Per Minute</h2>
           </a>  
           <h1 className={`${styles.amp_style} ${styles.icon_style}`}>
-            AMP
+            AMP 
           </h1>
+          <button className={styles.task_button}>
+            <p>
+              Start
+            </p>
+          </button>
+          <ProgressBar completed={90} />
+        </div>
+        <div className={styles.task}>
+          <a href={'/tasks/apmTask'}>
+            <h2>Hand Eye Coordination</h2>
+          </a>  
+          <Image
+              className={styles.icon_style}
+              src="/img/icons/svgAim.svg"
+              alt="SVG Icon"
+              width={60}
+              height={60}
+            />      
           <button className={styles.task_button}>
             <p>
               Start
@@ -141,6 +161,13 @@ export default function Experiments({ session }: UserProps) {
         </div>
       </div>
     </div> 
+    {session && (
+      <>
+        <h4>{session.user?.name}</h4>
+        <h4 className={styles2.email}>{session.user?.email}</h4>
+      </>
+    )}
+    </>
   );
 }
 

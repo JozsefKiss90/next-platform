@@ -34,7 +34,7 @@
   width: calc(33.33% - 100px);
   height: 250px;
   margin: 30px;
-  background-color: #23232e;
+  background-color: rgba(12, 12, 106, 0.70);
   border: 2px solid rgb(255, 255, 255);
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(8, 8, 8, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
@@ -53,9 +53,9 @@
   justify-content: center;
   height: 100%;
   text-decoration: none;
-  color: inherit;
+  color: inherit; 
 }
-
+ 
 
 .task > * {
   margin: 10px;
@@ -69,7 +69,7 @@
   color: white;
   font-family: 'Batman', monospace;
   font-weight: 200;
-  font-size: 17px;
+  font-size: 18px;
   bottom: 5px;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .task_button:hover {
-  background-color:#23232e;
+  background-color:#ff0062;
 }
 
 .task_button:hover p {
@@ -130,4 +130,5 @@
   font-size: 38px;
   margin: 20px;
   letter-spacing: 3px;
+  margin: 25px;
 }

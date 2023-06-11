@@ -37,10 +37,7 @@ export async function getServerSideProps({ req } : any){
       }
     }
   }
-
   return {
     props: { email }
   }
-
 }
-

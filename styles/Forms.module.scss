@@ -1,4 +1,4 @@
-.form_wrapper {
+.form_wrapper { 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,6 +37,7 @@
 .title h1{
   text-align: center;
   color: #323232;
+  font-family: 'Poppins', sans-serif;
 }
 
 .title p{
@@ -44,6 +45,7 @@
   color: #323232;
   line-height: 20px;
   padding: 10px 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .input_group {
@@ -140,7 +142,7 @@
 }
 
 .button_icon {
-  position: relative;
+  position: relative; 
   left: 20px;
 }
 
@@ -154,6 +156,7 @@
   font-size: small;
   text-align: center;
   color: #ffffff;
+  font-family: 'Poppins', sans-serif;
 }
 
 

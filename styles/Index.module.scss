@@ -1,0 +1,16 @@
+.username {
+
+}
+
+.credentials_container {
+    position: relative;
+    height: 100vh; /* or any desired height */
+}
+
+.email {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0 20px 20px 0;
+  color: white;
+}

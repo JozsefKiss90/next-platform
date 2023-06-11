@@ -3,6 +3,7 @@ import { Session } from "next-auth";
 import Navbar from "../components/navbar"
 import {getSession} from "next-auth/react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import styles from "../styles/Index.module.scss"
 
 interface UserProps {
   session: Session | null | undefined;
@@ -20,11 +21,11 @@ export default function Home({session} : UserProps) {
 function User({ session }:UserProps) {
   return(
    <>
-      <div style={{marginLeft:'200px'}}>
+      <div className={styles.credentials_container}>
       {session && (
           <>
-            <h5>{session.user?.name}</h5>
-            <h5>{session.user?.email}</h5>
+            <h4>{session.user?.name}</h4>
+            <h4 className={styles.email}>{session.user?.email}</h4>
           </>
         )}
       </div>

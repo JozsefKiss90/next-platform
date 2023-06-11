@@ -63,6 +63,19 @@ export default function Navbar(){
 
         <li className={styles.nav_item}>
             <Link href="#" className={styles.nav_link}>
+                <Image
+                    className={`${styles.icon_style} ${styles.hover_effect_alien}`}
+                    src="/img/icons/svgAlien_2.svg"
+                    alt="SVG Icon"
+                    width={50}
+                    height={40}
+                    />            
+                <span className={styles.link_text}>Games</span>
+            </Link>
+        </li>
+
+        <li className={styles.nav_item}>
+            <Link href="#" className={styles.nav_link}>
             <Image
                     className={`${styles.icon_style} ${styles.hover_effect_profile}`}
                     src="/img/icons/svgProfile_2.svg"
@@ -92,7 +105,7 @@ export default function Navbar(){
         <li className={styles.nav_item}>
             <Link href="#" className={styles.nav_link}>
                 <Image
-                    className={`${styles.icon_style_saturated} ${styles.hover_effect_envelope}`}
+                    className={`${styles.icon_style} ${styles.hover_effect_envelope}`}
                     src="/img/icons/svgEnvelope_2.svg"
                     alt="SVG Icon"
                     width={50}
@@ -106,11 +119,11 @@ export default function Navbar(){
         {session && (
             <Link href="#" className={styles.nav_link} onClick={(e)=>{e.preventDefault(); signOut()}}>
                 <Image
-                    className={styles.icon_style}
-                    src="/img/icons/svgPower.svg"
+                    className={`${styles.icon_style} ${styles.hover_effect_power}`}
+                    src="/img/icons/svgPower_2.svg"
                     alt="SVG Icon"
-                    width={40}
-                    height={40}
+                    width={45}
+                    height={45}
                 />            
                 <span className={styles.link_text}>Logout</span>
             </Link>
