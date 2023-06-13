@@ -5,9 +5,15 @@ import { AppContext } from "./layout"
 import {useContext, useState } from "react";
 import Image from 'next/image';
 
+interface AppContextValue {
+    setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
+    isDarkMode: boolean;
+  }
+
 export default function Navbar(){
 
-    const { setIsHovered } = useContext(AppContext);
+    const { setIsHovered } = useContext(AppContext) as AppContextValue;;
+    const { isDarkMode } = useContext(AppContext)  as AppContextValue;
     const { data: session, status } = useSession();
     
     const handleMouseEnter = () => {
@@ -20,10 +26,10 @@ export default function Navbar(){
 
     return(          
     <>   
-    <nav className={styles.navbar}  onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <nav className={styles.navbar} style={isDarkMode ? { filter: "grayscale(100%)" } : {}} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <ul style={{opacity:'1'}} className={`${styles.navbar_nav} ${!session && status !== 'loading' ? styles.loading : styles.loaded}`}>    
         <li className={styles.logo}>
-            <Link  href={{ pathname:"/experiments"}}  className={styles.nav_link_arrow}>
+            <Link  href={""}  className={styles.nav_link_arrow}>
             <span className={`${styles.link_text} ${styles.logo_text}`}>Esport Lab</span>
             <Image
                 className={`${styles.icon_style} ${styles.svg_icon} exclude_link`}
@@ -49,7 +55,7 @@ export default function Navbar(){
         </li>
 
         <li className={styles.nav_item}>
-            <Link href="#" className={styles.nav_link}>
+            <Link href={{ pathname:"/experiments"}} className={styles.nav_link}>
                 <Image
                     className={`${styles.icon_style} ${styles.hover_effect_flask}`}
                     src="/img/icons/svgFlask_2.svg"
@@ -75,7 +81,7 @@ export default function Navbar(){
         </li>
 
         <li className={styles.nav_item}>
-            <Link href="#" className={styles.nav_link}>
+            <Link href={{ pathname:"/user_form"}} className={styles.nav_link}>
             <Image
                     className={`${styles.icon_style} ${styles.hover_effect_profile}`}
                     src="/img/icons/svgProfile_2.svg"

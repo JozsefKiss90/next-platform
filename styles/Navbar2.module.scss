@@ -30,6 +30,8 @@
 
 .nav_item {
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .nav_item:last-child {

@@ -4,15 +4,28 @@ import styles from '../styles/UserForm.module.scss';
 import Navbar from "../components/navbar";
 import {getRankOptions, getBestRankOptions} from './hooks/rankOptions'
 import {getSession} from "next-auth/react";
-
+import {signOut, useSession} from "next-auth/react";
+import { AppContext } from "../components/layout"
+import { useContext } from 'react';
+import styles2 from '../styles/Layout.module.scss'
 interface TaskProps{
     email: string | undefined; 
+  }
+
+interface AppContextValue {
+    setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+    isDarkMode: boolean;
   }
 
 export default function UserForm({ email } : TaskProps) {
 
   const [waringMessage, setWaringMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');  
+  
+  const [verifyModal, setVerifyModal] = useState(false)
+  
+  const { setIsDarkMode } = useContext(AppContext)  as AppContextValue;
+  const { isDarkMode } = useContext(AppContext)  as AppContextValue;
 
   const {
       games,
@@ -89,11 +102,28 @@ export default function UserForm({ email } : TaskProps) {
             setWaringMessage('Required field is missing!');
           }
       }
+      const deleteAccount = (email: string | undefined) => {
+        console.log('EMAIL IS: ' + email)
+     
+       let options = {
+          method: "DELETE",
+          headers: {"Content-type": "application/json; charset=UTF-8"},
+          body: JSON.stringify({email})
+      }
+        fetch('/api/deleteAccount', options)
+            .then(res => {
+              console.log('Response:', res);
+              return res.json();
+            })
+            .then(() => setSuccessMessage('Account deleted!'))
+            //.then(() => signOut())
+            .catch(err => console.log(err))
+        }
 
       return (
         <>
         <Navbar />
-        <div className={styles.container}>
+        <div className={styles.container} style={verifyModal ? { display: "none" } : {}}>
           <h1 className={styles.heading}>Game and Player Ranking</h1>
           {games.map((game) => (
             <div className={styles.gameContainer} key={game.id}>
@@ -157,7 +187,36 @@ export default function UserForm({ email } : TaskProps) {
             {waringMessage && <p style={{color:'red', marginTop:'10px'}}>{waringMessage}</p>}
             {successMessage && <p style={{color:'rgba(51, 255, 0, 0.7)', marginTop:'10px'}}>{successMessage}</p>}
           </div>
+          <div>
+            <button className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true)}}>
+                <p>
+                    Delete Account
+                </p>
+            </button>
+          </div>
         </div>
+        {verifyModal && <div className={styles.modal}>
+              <p>
+                Are you sure?
+              </p> 
+              <div className={styles.modal_buttons}>
+                <div>
+                  <button>
+                    <p>
+                      Yes
+                    </p>
+                  </button>
+                </div>
+               <div>
+                <button onClick={(e)=> {e.preventDefault(); setVerifyModal(false),  setIsDarkMode(false)}}>
+                    <p>
+                      No
+                    </p>
+                  </button>
+               </div>
+              </div>
+              </div>
+              }
         </>
       );
 }

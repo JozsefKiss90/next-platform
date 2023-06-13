@@ -1,11 +1,10 @@
 import styles from "../styles/Experiments.module.scss";
 import { getSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import Navbar from "../components/navbar";
 import ProgressBar from "../components/progressBar";
 import { Session, User } from "next-auth";
 import { AppContext } from "../components/layout"
-import {useContext } from "react";
 import Image from 'next/image';
 import styles2 from "../styles/Index.module.scss"
 
@@ -21,12 +20,11 @@ interface UserProps {
 
 interface AppContextValue {
   isHovered: boolean;
-  setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Experiments({ session }: UserProps) {
 
-  const { isHovered } = useContext(AppContext)  as AppContextValue;;
+  const { isHovered } = useContext(AppContext)  as AppContextValue;
 
   const [taskData, setTaskData] = useState<UserData[] | undefined>();
   const [userData, setUserData] = useState<UserData[] | undefined>();
