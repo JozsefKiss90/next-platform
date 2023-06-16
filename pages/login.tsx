@@ -7,10 +7,8 @@ import { useSession } from 'next-auth/react';
 import styles from '../styles/Forms.module.scss';
 import Image from 'next/image'
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi"
-import { useEffect, useState } from 'react';
 
 export default function Login() {
-  const { data: session } = useSession();
   const router = useRouter();
 
   async function handleGoogleSignin() {

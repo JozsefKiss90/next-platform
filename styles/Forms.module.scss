@@ -1,4 +1,5 @@
-.form_wrapper { 
+/* Default styles for computer screen */
+.form_wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,32 +16,65 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 25%;
+  max-width: 25%;
   border: 1px solid rgb(90, 90, 90);
   border-radius: 20px;
   padding: 10px 30px;
   overflow: hidden;
 }
 
+
+@media (max-width: 391px) and (max-height: 860px) {
+  .form_wrapper {
+    height: 100vh;
+    background-position: center;
+  }
+
+  .form_container {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px; 
+  }
+
+  .form_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 390px) and (max-height: 860px) {
+  .form_wrapper {
+    height: 100vh;
+    background-position: center;
+  }
+
+  .form_container {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px; 
+  }
+}
+
+/* Remaining styles */
 .form_content {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .title {
   text-align: center;
 }
 
-
-.title h1{
+.title h1 {
   text-align: center;
   color: #323232;
   font-family: 'Poppins', sans-serif;
 }
 
-.title p{
+.title p {
   font-size: 16px;
   color: #323232;
   line-height: 20px;
@@ -61,7 +95,7 @@
 
 .input_group input {
   width: 100%;
-  border: none; 
+  border: none;
   outline: none;
   font-size: 14px;
   margin: 10px 0 10px 10px;
@@ -69,10 +103,9 @@
   color: #727272;
 }
 
-
 .input_text input {
   width: 100%;
-  border: none; 
+  border: none;
   outline: none;
   font-size: 14px;
   margin: 10px 0 10px 10px;
@@ -94,7 +127,17 @@
   cursor: pointer;
 }
 
-.input-button {
+.input_group .icon {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 10px;
+  color: #9f9f9f;
+  width: 18px;
+  cursor: pointer;
+}
+
+.input_button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,7 +160,7 @@
 
 .button a {
   display: block;
-  padding: 0; 
+  padding: 0;
   margin: 0;
 }
 
@@ -142,25 +185,24 @@
 }
 
 .button_icon {
-  position: relative; 
+  position: relative;
   left: 20px;
 }
 
 .button:hover {
-  background-image: linear-gradient(to right,#5B950A, #BAFE89);
+  background-image: linear-gradient(to right, #5B950A, #BAFE89);
   border: 1px solid #fafccf;
   color: #4d4d4d;
 }
 
-.singup{
+.singup {
   font-size: small;
   text-align: center;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
 
-
-.singup_link a{
+.singup_link a {
   display: flex;
   justify-content: center;
   font-size: 14px;

@@ -6,7 +6,6 @@ import ProgressBar from "../components/progressBar";
 import { Session, User } from "next-auth";
 import { AppContext } from "../components/layout"
 import Image from 'next/image';
-import styles2 from "../styles/Index.module.scss"
 
 interface UserData {
   email: string;
@@ -159,12 +158,6 @@ export default function Experiments({ session }: UserProps) {
         </div>
       </div>
     </div> 
-    {session && (
-      <>
-        <h4>{session.user?.name}</h4>
-        <h4 className={styles2.email}>{session.user?.email}</h4>
-      </>
-    )}
     </>
   );
 }

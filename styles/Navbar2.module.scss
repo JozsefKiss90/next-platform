@@ -7,13 +7,17 @@
   font-family: 'Batman';
   src: url('/fonts/BruceForeverRegular-X3jd2.ttf') format('opentype');
 }
-
-
+ 
 .navbar {
   position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease, margin-left 600ms;
   overflow: hidden;
+  height: 100%; /* Set the navbar height to 100% */
+}
+
+.navbar .simplebar-content {
+  height: 100% !important;
 }
 
 .navbar_nav {
@@ -25,7 +29,7 @@
   align-items: center;
   height: 100%;
   opacity: 0.5;
-
+  width: 100%;
 }
 
 .nav_item {
@@ -49,6 +53,16 @@
   filter: grayscale(70%);
 }
 
+.nav_link_mobile {
+  display: none;
+  align-items: center;
+  height: 5rem;
+  width: 8rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(70%);
+}
+
 .nav_link_arrow {
   display: flex;
   align-items: center;
@@ -56,17 +70,17 @@
   width: 8rem;
   color: var(--text-primary);
   text-decoration: none;
-  filter: grayscale(70%) ;
+  filter: grayscale(70%);
 }
 
-.nav_link:hover  {
+.nav_link:hover {
   filter: grayscale(0%) opacity(1);
   background: var(--bg-secondary);
   color: var(--text-secondary);
   width: 103%;
 }
 
-.navbar:hover  .nav_link_arrow{
+.navbar:hover .nav_link_arrow {
   filter: grayscale(0%) opacity(1);
 }
 
@@ -86,18 +100,18 @@
 }
 
 .icon_style {
- margin-left: 20px;
+  margin-left: 20px;
 }
 
 .nav_link:hover .hover_effect_profile {
   content: url('/img/icons/svgProfile.svg');
 }
- 
+
 .nav_link:hover .hover_effect_info {
   content: url('/img/icons/svgInfo.svg');
 }
 
-.nav_link:hover .hover_effect_envelope { 
+.nav_link:hover .hover_effect_envelope {
   content: url('/img/icons/svgEnvelope.svg');
 }
 
@@ -116,14 +130,13 @@
 .nav_link:hover .hover_effect_alien {
   content: url('/img/icons/svgAlien.svg');
 }
- 
 
 .fa_primary {
   color: #ff5194;
 }
 
 .fa_secondary {
-  --fa-secondary-color: "#511f3a"
+  --fa-secondary-color: "#511f3a";
 }
 
 .fa_primary,
@@ -143,13 +156,12 @@
   width: 100%;
 }
 
-.logo .svg_icon{
+.logo .svg_icon {
   transform: rotate(0deg);
   transition: var(--transition-speed);
 }
 
-.logo_text
-{
+.logo_text {
   font-family: 'Batman';
   display: inline;
   position: absolute;
@@ -168,29 +180,83 @@
   filter: none;
 }
 
+.iconTitle {
+  display: block;
+  color: white;
+  margin-left: 200px;
+}
+
+.scroll_container {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.main_container {
+  display: relative;
+  z-index: 0;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+  .scroll_container {
+    overflow-x: scroll;
+  }
+  .nav_item {
+    z-index: 999;
+  }
+ /* .nav_link{
+    display: none;
+  }
+
+  .nav_link_mobile{
+    display: flex;
+  }*/
+}
+
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
     bottom: 0;
-    width: 100vw;
+    width: 100%;
     height: 5rem;
+    overflow-y: scroll; 
+    scrollbar-width: thin; 
+    scrollbar-color: var(--text-primary) var(--bg-secondary);
   }
 
   .logo {
     display: none;
   }
 
-  .navbar-nav {
+  .navbar_nav {
     flex-direction: row;
   }
 
   .nav_link {
     justify-content: center;
   }
+
+  .iconTitle {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    color: white;
+    top: 85%;
+    margin-left: auto;
+  }
+
+  .iconTitle h4 {
+    text-align: center;
+  }
+
+  .main_container {
+    display: flex;
+    justify-content: center;
+  }
 }
 
-/* Large screens */
-@media only screen and (min-width: 600px) {
+/* Medium screens (e.g., iPhone) */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
   .navbar {
     top: 0;
     width: 6rem;
@@ -206,13 +272,45 @@
     display: inline;
   }
 
-  .navbar:hover .logo svg
-  {
+  .navbar:hover .logo svg {
     margin-left: 11rem;
   }
 
-  .navbar:hover .logo_text
-  {
+  .navbar:hover .logo_text {
+    left: 0px;
+  }
+
+  .iconTitle {
+    position: absolute;
+    display: block;
+    color: white;
+    top: 85%;
+    left: 0%;
+  }
+}
+
+/* Large screens (e.g., Samsung Galaxy) */
+@media only screen and (min-width: 769px) {
+  .navbar {
+    top: 0;
+    width: 6rem;
+    height: 100vh;
+  }
+
+  .navbar:hover {
+    width: 16rem;
+  }
+
+  .navbar:hover .link_text {
+    filter: grayscale(0%) opacity(1);
+    display: inline;
+  }
+
+  .navbar:hover .logo svg {
+    margin-left: 11rem;
+  }
+
+  .navbar:hover .logo_text {
     left: 0px;
   }
 }

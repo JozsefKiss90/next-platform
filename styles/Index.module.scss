@@ -3,8 +3,7 @@
 }
 
 .credentials_container {
-    position: relative;
-    height: 100vh; /* or any desired height */
+  top: 0;
 }
 
 .email {
@@ -13,4 +12,26 @@
   right: 0;
   margin: 0 20px 20px 0;
   color: white;
+}
+
+@media (min-width: 375px) {
+  .credentials_container {
+    display: flex;
+    justify-content: center;
+    z-index: -1;
+  }
+}
+
+@media (max-width: 360px) and (max-height: 740px) {
+  .credentials_container {
+    display: flex;
+    justify-content: center;
+    z-index: -1;
+}
+
+.credentials_container h4{
+  position: absolute;
+  top: 85%;
+  left: 0%;
+}
 }
