@@ -34,3 +34,9 @@
     font-size: 13px;
     font-family: 'Share Tech Mono', monospace;
 }
+
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+  .container {
+     width: 60%;
+  }
+}

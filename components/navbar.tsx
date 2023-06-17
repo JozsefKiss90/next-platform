@@ -40,21 +40,21 @@ export default function Navbar(){
     const [logoutIcon, setLogoutIcon] = useState("/img/icons/svgPower_2.svg")
 
     const resetIconStates = (targetIconState:string) => {
-      setDesktopIcon(targetIconState === 'desktop' ? desktopIcon : "/img/icons/svgDesktop_2.svg");
-      setExperimentIcon(targetIconState === 'experiment' ? experimentIcon : "/img/icons/svgFlask_2.svg");
-      setGameIcon(targetIconState === 'game' ? gameIcon : "/img/icons/svgAlien_2.svg");
-      setProfileIcon(targetIconState === 'profile' ? profileIcon : "/img/icons/svgProfile_2.svg");
-      setInfoIcon(targetIconState === 'info' ? infoIcon : "/img/icons/svgInfo_2.svg");
-      setMessageIcon(targetIconState === 'message' ? messageIcon : "/img/icons/svgEnvelope_2.svg");
-      setLogoutIcon(targetIconState === 'logout' ? logoutIcon : "/img/icons/svgPower_2.svg");
+      setDesktopIcon(targetIconState === 'desktop' ? "/img/icons/svgDesktop.svg" : "/img/icons/svgDesktop_2.svg");
+      setExperimentIcon(targetIconState === 'experiment' ? "/img/icons/svgFlask.svg" : "/img/icons/svgFlask_2.svg");
+      setGameIcon(targetIconState === 'game' ? "/img/icons/svgAlien.svg" : "/img/icons/svgAlien_2.svg");
+      setProfileIcon(targetIconState === 'profile' ? "/img/icons/svgProfile.svg" : "/img/icons/svgProfile_2.svg");
+      setInfoIcon(targetIconState === 'info' ? "/img/icons/svgInfo.svg" : "/img/icons/svgInfo_2.svg");
+      setMessageIcon(targetIconState === 'message' ? "/img/icons/svgEnvelope.svg" : "/img/icons/svgEnvelope_2.svg");
+      setLogoutIcon(targetIconState === 'logout' ? "/img/icons/svgPower.svg" : "/img/icons/svgPower_2.svg");
       setGrayscale({
-        grayscale_desktop: targetIconState === 'desktop' ? '' : 'grayscale(0)',
-        grayscale_experiment: targetIconState === 'experiment' ? '' : 'grayscale(0)',
-        grayscale_game: targetIconState === 'game' ? '' : 'grayscale(0)',
-        grayscale_profile: targetIconState === 'profile' ? '' : 'grayscale(0)',
-        grayscale_info: targetIconState === 'info' ? '' : 'grayscale(0)',
-        grayscale_message: targetIconState === 'message' ? '' : 'grayscale(0)',
-        grayscale_logout: targetIconState === 'logout' ? '' : 'grayscale(0)'
+        grayscale_desktop: targetIconState === 'desktop' ? 'grayscale(0)' : '',
+        grayscale_experiment: targetIconState === 'experiment' ? 'grayscale(0)' : '',
+        grayscale_game: targetIconState === 'game' ? 'grayscale(0)' : '',
+        grayscale_profile: targetIconState === 'profile' ? 'grayscale(0)' : '',
+        grayscale_info: targetIconState === 'info' ? 'grayscale(0)' : '',
+        grayscale_message: targetIconState === 'message' ? 'grayscale(0)' : '',
+        grayscale_logout: targetIconState === 'logout' ? 'grayscale(0)' : ''
       });
     };
 
@@ -72,6 +72,13 @@ export default function Navbar(){
 
     return (
         <div className={styles.main_container}>
+          <nav className={styles.mobile_navbar}>
+            <div className={styles.mobile_navbar_nav}>
+              <h1 className={`${styles.mobile_logo}`}>
+                Esport Lab
+              </h1>
+            </div>
+          </nav>
           <div className={styles.iconTitle}>
             <h4>{iconTitle}</h4>
           </div>
@@ -135,7 +142,7 @@ export default function Navbar(){
                 setGrayscale({...grayscaleObj, grayscale_game: 'grayscale(0)'})
                 resetIconStates('game');
                 }}>
-                <Link href="#" className={styles.nav_link}>
+                <Link href="#" className={styles.nav_link} style={{filter: `${grayscale.grayscale_game}`}}>
                   <Image
                     className={`${styles.icon_style} ${styles.hover_effect_alien}`}
                     src={gameIcon}
@@ -147,11 +154,16 @@ export default function Navbar(){
                 </Link>
               </li>
       
-              <li className={styles.nav_item} onTouchStart={() => handleIconTitle('Profile')}>
-                <Link href={{ pathname: "/user_form" }} className={styles.nav_link}>
+              <li className={styles.nav_item} onTouchStart={() => {
+                handleIconTitle('Profile');
+                setExperimentIcon("/img/icons/svgProfile.svg");
+                setGrayscale({...grayscaleObj, grayscale_profile: 'grayscale(0)'})
+                resetIconStates('profile');
+                }}>
+                <Link href={{ pathname: "/user_form" }} className={styles.nav_link} style={{filter: `${grayscale.grayscale_profile}`}}>
                   <Image
                     className={`${styles.icon_style} ${styles.hover_effect_profile}`}
-                    src="/img/icons/svgProfile_2.svg"
+                    src={profileIcon}
                     alt="SVG Icon"
                     width={55}
                     height={55}
@@ -161,11 +173,16 @@ export default function Navbar(){
                 </Link>
               </li>
       
-              <li className={styles.nav_item} onTouchStart={() => handleIconTitle('Information')}>
-                <Link href="#" className={`${styles.nav_link}`}>
+              <li className={styles.nav_item} onTouchStart={() => {
+                handleIconTitle('Information');
+                setExperimentIcon("/img/icons/svgInfo.svg");
+                setGrayscale({...grayscaleObj, grayscale_info: 'grayscale(0)'})
+                resetIconStates('info');
+                }}>
+                <Link href="#" className={`${styles.nav_link}`} style={{filter: `${grayscale.grayscale_info}`}}>
                   <Image
                     className={`${styles.icon_style} ${styles.hover_effect_info}`}
-                    src="/img/icons/svgInfo_2.svg"
+                    src={infoIcon}
                     alt="SVG Icon"
                     width={50}
                     height={50}
@@ -174,11 +191,16 @@ export default function Navbar(){
                 </Link>
               </li>
       
-              <li className={styles.nav_item} onTouchStart={() => handleIconTitle('Messages')}>
-                <Link href="#" className={styles.nav_link}>
+              <li className={styles.nav_item} onTouchStart={() => {
+                handleIconTitle('Messages');
+                setExperimentIcon("/img/icons/svgEnvelope.svg");
+                setGrayscale({...grayscaleObj, grayscale_message: 'grayscale(0)'})
+                resetIconStates('message');
+                }}>
+                <Link href="#" className={styles.nav_link} style={{filter: `${grayscale.grayscale_message}`}}>
                   <Image
                     className={`${styles.icon_style} ${styles.hover_effect_envelope}`}
-                    src="/img/icons/svgEnvelope_2.svg"
+                    src={messageIcon}
                     alt="SVG Icon"
                     width={50}
                     height={40}
@@ -187,12 +209,20 @@ export default function Navbar(){
                 </Link>
               </li>
       
-              <li className={styles.nav_item} onTouchStart={() => handleIconTitle('Logout')}>
+              <li className={styles.nav_item} onTouchStart={() => {
+                handleIconTitle('Logout');
+                setExperimentIcon("/img/icons/svgPower.svg");
+                setGrayscale({...grayscaleObj, grayscale_logout: 'grayscale(0)'})
+                resetIconStates('logout');
+                }}>
                 {session && (
-                  <Link href="#" className={styles.nav_link} onClick={(e) => { e.preventDefault(); signOut() }}>
+                  <Link href="#" className={styles.nav_link} 
+                    style={{filter: `${grayscale.grayscale_logout}`}}
+                    onClick={(e) => { e.preventDefault(); signOut() }}
+                    >
                     <Image
                       className={`${styles.icon_style} ${styles.hover_effect_power}`}
-                      src="/img/icons/svgPower_2.svg"
+                      src={logoutIcon}
                       alt="SVG Icon"
                       width={45}
                       height={45}

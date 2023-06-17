@@ -5,7 +5,7 @@
 }
 
 @font-face {
-  font-family: 'Batman';
+  font-family: 'Batman'; 
   src: url('/fonts/BruceForeverRegular-X3jd2.ttf') format('opentype');
   /* You can also specify other font properties here */
 }
@@ -133,4 +133,40 @@
   margin: 20px;
   letter-spacing: 3px;
   margin: 25px;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+.main {
+  margin-left: 0; 
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: transform 0.6s ease, margin-left 0.6s;
+  overflow: scroll;
+  position: relative;
+  z-index: -1;
+}
+
+.task {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 250px;
+  margin: 30px;
+  background-color: rgba(12, 12, 106, 0.70);
+  border: 2px solid rgb(255, 255, 255);
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(8, 8, 8, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  transition: transform 0.2s ease;
+}
+
+.task > * {
+  white-space:normal;
+}
 }
