@@ -177,7 +177,7 @@ export default function UserForm({ email } : TaskProps) {
               value={age}
               onChange={handleAgeChange}
             />
-          </div>
+          </div> 
           <div>
             <button className={styles.task_button} onClick={sendGameData}>
                 <p>

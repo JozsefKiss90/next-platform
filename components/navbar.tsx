@@ -72,10 +72,10 @@ export default function Navbar(){
 
     return (
         <div className={styles.main_container}>
-          <nav className={styles.mobile_navbar}>
+          <nav className={styles.mobile_navbar} style={isDarkMode ? { filter: "grayscale(100%)" } : {}}>
             <div className={styles.mobile_navbar_nav}>
               <h1 className={`${styles.mobile_logo}`}>
-                Esport Lab
+                ESPORT LAB
               </h1>
             </div>
           </nav>

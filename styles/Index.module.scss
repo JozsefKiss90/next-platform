@@ -14,24 +14,24 @@
   color: white;
 }
 
-@media (min-width: 375px) {
+@media (min-width: 390px) and (min-height: 844px){
   .credentials_container {
     display: none;
     justify-content: center;
     z-index: -1;
-  }
+}
 }
 
 @media (max-width: 360px) and (max-height: 740px) {
   .credentials_container {
-    display: flex;
+    display: none;
     justify-content: center;
     z-index: -1;
 }
 
-.credentials_container h4{
-  position: absolute;
-  top: 85%;
-  left: 0%;
-}
+  .credentials_container h4{
+    position: absolute;
+    top: 85%;
+    left: 0%;
+  }
 }
