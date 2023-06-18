@@ -20,14 +20,6 @@ export default function Home({session} : UserProps) {
 function User({ session }:UserProps) {
   return(
    <>
-      <div style={{marginLeft:'200px'}}>
-      {session && (
-          <>
-            <h5>{session.user?.name}</h5>
-            <h5>{session.user?.email}</h5>
-          </>
-        )}
-      </div>
     <Navbar/>
    </>
   )

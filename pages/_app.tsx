@@ -12,12 +12,14 @@ type AppPropsWithSession = AppProps & {
   };
 };
 
-
 export default function App({ Component, pageProps }: AppPropsWithSession) {
+
   return(
     <Layout>
       <SessionProvider session={pageProps.session}>
+      <div>
         <Component {...pageProps} />
+      </div>
       </SessionProvider>
     </Layout>
   )

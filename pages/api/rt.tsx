@@ -23,9 +23,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if(!req.body) return res.status(404).json({error:'form data is missing'})
         console.log("req body: " + {...req.body})
         const {rt,email, acc} = req.body
-        const checkDuplicate = await RtTask.find({email})
-        console.log(checkDuplicate)
-        if(checkDuplicate.length > 3) return res.status(422).json({message: 'user already exists'})
  
         RtTask.create({rt,email, acc}, function(err, data ){
             if(err) {  
