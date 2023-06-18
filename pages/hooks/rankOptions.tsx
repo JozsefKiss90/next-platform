@@ -91,6 +91,3 @@ export function getRankOptions(gameId:string) {
 export function getBestRankOptions(gameId :string) {
     return getRankOptions(gameId);
   }
-
-module.exports = {getRankOptions, getBestRankOptions}
-  

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ChangeEvent } from 'react';
 
-export const gameRanking = () => {
+export default function gameRanking() {
 
   const [cs, setCs] = useState({
     checked: false,

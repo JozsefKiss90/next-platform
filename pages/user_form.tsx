@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { gameRanking } from './hooks/gameRanking';
+import gameRanking from './hooks/gameRanking';
 import styles from '../styles/UserForm.module.scss';
 import Navbar from "../components/navbar";
 import {getRankOptions, getBestRankOptions} from './hooks/rankOptions'
