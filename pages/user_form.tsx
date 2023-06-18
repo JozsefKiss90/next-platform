@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import gameRanking from './hooks/gameRanking';
+import gameRanking from '../hooks/gameRanking';
 import styles from '../styles/UserForm.module.scss';
 import Navbar from "../components/navbar";
-import {getRankOptions, getBestRankOptions} from './hooks/rankOptions'
+import {getRankOptions, getBestRankOptions} from '../hooks/rankOptions'
 import {getSession} from "next-auth/react";
 import {signOut, useSession} from "next-auth/react";
 import { AppContext } from "../components/layout"
