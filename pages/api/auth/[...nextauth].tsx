@@ -39,10 +39,7 @@ export default NextAuth({
     }),
     FacebookProvider({
       clientId: FACEBOOK_ID!,
-      clientSecret: FACEBOOK_SECRET!,
-      profileFields: {
-        email: "email",
-      },
+      clientSecret: FACEBOOK_SECRET!
     }),
     CredentialsProvider({ 
       name: "Credentials",
