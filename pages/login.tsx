@@ -109,8 +109,8 @@ export default function Login() {
               </button>
             </div>
             <div className={styles.input_button}>
-              <button type="button" onClick={handleGitHubSignin} className={styles.button}>
-                Sign In with Github  <Image className={styles.button_icon} src={'/img/icons/github.svg'} width="20" height={20} alt={'image'} ></Image>
+              <button type="button" onClick={handleFacebookSignin} className={styles.button}>
+                Sign In with Facebook  <Image className={styles.button_icon} src={'/img/icons/github.svg'} width="20" height={20} alt={'image'} ></Image>
               </button>
             </div>
             <div className={styles.singup_link}>
