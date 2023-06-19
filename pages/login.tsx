@@ -12,18 +12,18 @@ export default function Login() {
   const router = useRouter();
 
   async function handleGoogleSignin() {
-    const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com//' });
+    const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
     if (result?.error) {
       console.error('Error signing in:', result.error);
     }
   }
 
   async function handleGitHubSignin() {
-    await signIn('github', { callbackUrl: 'https://platform-app.herokuapp.com//' });
+    await signIn('github', { callbackUrl: 'https://platform-app.herokuapp.com' });
   }
 
   async function handleFacebookSignin() {
-    const result = await signIn('facebook', { callbackUrl: 'https://platform-app.herokuapp.com//' });
+    const result = await signIn('facebook', { callbackUrl: 'https://platform-app.herokuapp.com' });
     if (result?.error) {
       console.error('Error signing in:', result.error);
     }
