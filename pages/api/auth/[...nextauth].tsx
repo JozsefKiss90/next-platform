@@ -69,10 +69,8 @@ export default NextAuth({
       user.role = Role.user 
       return true; 
     },
-    async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
+    async redirect({ url, baseUrl }) { 
       if (url.startsWith('/')) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin or the Heroku app's base URL
       const parsedUrl = new URL(url);
       if (parsedUrl.origin === baseUrl || parsedUrl.origin === 'https://platform-app.herokuapp.com') {
         return url;
