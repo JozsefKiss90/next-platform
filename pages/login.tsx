@@ -105,12 +105,12 @@ export default function Login() {
             </div>
             <div className={styles.input_button}>
               <button type="button" onClick={handleGoogleSignin} className={styles.button}>
-                Sign In with Google  <Image className={styles.button_icon} src={'/img/icons/google.svg'} width="20" height={20} alt={'image'} ></Image>
+                Sign In with Google  <Image className={styles.button_icon} src={'/img/icons/google.svg'} width="20" height="20" alt={'image'} ></Image>
               </button>
             </div>
             <div className={styles.input_button}>
               <button type="button" onClick={handleFacebookSignin} className={styles.button}>
-                Sign In with Facebook  <Image className={styles.button_icon} src={'/img/icons/github.svg'} width="20" height={20} alt={'image'} ></Image>
+                Sign In with Facebook <Image className={styles.button_icon_facebook} src={'/img/icons/facebook.svg'} width="25" height="25" alt={'image'} ></Image>
               </button>
             </div>
             <div className={styles.singup_link}>

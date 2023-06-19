@@ -91,6 +91,8 @@
   border-radius: 5px;
   padding: 0 10px;
   margin: 10px 0;
+  border: none;
+  outline: none;
 }
 
 .input_group input {
@@ -187,6 +189,11 @@
 .button_icon {
   position: relative;
   left: 20px;
+}
+
+.button_icon_facebook {
+  position: relative;
+  left: 10px;
 }
 
 .button:hover {

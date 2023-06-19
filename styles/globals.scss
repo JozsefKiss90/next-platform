@@ -122,7 +122,7 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  border: 1px solid #323232;;
+  border: none;
   -webkit-text-fill-color: #323232;;
   -webkit-box-shadow:  rgba(255, 255, 255);
   transition: background-color 5000s ease-in-out 0s;
