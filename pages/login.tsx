@@ -23,9 +23,11 @@ export default function Login() {
   }
 
   async function handleFacebookSignin() {
-    const result = await signIn('facebook', { callbackUrl: 'https://platform-app.herokuapp.com' });
-    if (result?.error) {
-      console.error('Error signing in:', result.error);
+    const result = await signIn('facebook', {
+      callbackUrl: 'https://platform-app.herokuapp.com/api/auth/callback/facebook'
+    });
+     if (result?.error) {
+     console.error('Error signing in:', result.error);
     }
   }
 
