@@ -12,34 +12,29 @@ export default function Login() {
 
   const router = useRouter();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [isImageLoaded_2, setIsImageLoaded_2] = useState(false);
+
   useEffect(() => {
     const image = new Image();
-    const image_2 = new Image();
     image.src = '/img/login_image.png';
-    image_2.src = '/backgrounds/bg3.jpg';
     image.onload = () => {
       setIsImageLoaded(true);
-    };
-    image_2.onload = () => {
-      setIsImageLoaded_2(true);
     };
   }, []);
 
   async function handleGoogleSignin() {
-    const result = await signIn('google', { callbackUrl: 'http://loclahost:3000' });
+    const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
     if (result?.error) {
       console.error('Error signing in:', result.error);
     }
   }
 
   async function handleGitHubSignin() {
-    await signIn('github', { callbackUrl: 'http://loclahost:3000' });
+    await signIn('github', { callbackUrl: 'https://platform-app.herokuapp.com' });
   }
 
   async function handleFacebookSignin() {
     const result = await signIn('facebook', {
-      callbackUrl: 'http://loclahost:3000'
+      callbackUrl: 'https://platform-app.herokuapp.com'
     });
      if (result?.error) {
      console.error('Error signing in:', result.error);
@@ -60,7 +55,7 @@ export default function Login() {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: 'http://loclahost:3000'
+      callbackUrl: 'https://platform-app.herokuapp.com'
     });
 
     if (result?.error) {
@@ -73,7 +68,7 @@ export default function Login() {
 
   return (
     <>
-    {isImageLoaded && isImageLoaded_2 && (
+    {isImageLoaded && (
       <section className={styles.form_wrapper}>
       <div className={styles.form_container}>
         <div className={styles.form_content}>

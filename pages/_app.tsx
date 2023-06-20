@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react"
 import  '../public/static/networks/default_style.css'
 import '../public/static/networks/style.css'
 import { Session } from 'next-auth';
+import Head from 'next/head';
 
 type AppPropsWithSession = AppProps & {
   pageProps: {
@@ -15,6 +16,10 @@ type AppPropsWithSession = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithSession) {
 
   return(
+    <>
+    <Head>
+      <link rel="preload" href="/backgrounds/bg3.jpg" as="image" />
+    </Head>
     <Layout>
       <SessionProvider session={pageProps.session}>
       <div>
@@ -22,5 +27,6 @@ export default function App({ Component, pageProps }: AppPropsWithSession) {
       </div>
       </SessionProvider>
     </Layout>
+    </>
   )
 }
