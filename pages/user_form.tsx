@@ -178,22 +178,21 @@ export default function UserForm({ email } : TaskProps) {
               onChange={handleAgeChange}
             />
           </div> 
-          <div>
+          <div className={styles.task_button_container}>
             <button className={styles.task_button} onClick={sendGameData}>
                 <p>
                     Save
                 </p>
             </button>
-            {waringMessage && <p style={{color:'red', marginTop:'10px'}}>{waringMessage}</p>}
-            {successMessage && <p style={{color:'rgba(51, 255, 0, 0.7)', marginTop:'10px'}}>{successMessage}</p>}
-          </div>
-          <div>
-            <button className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true)}}>
+            <button style={{padding:'20px 55px'}} className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true)}}>
                 <p>
                     Delete Account
                 </p>
             </button>
+            {waringMessage && <p style={{color:'red', marginTop:'10px'}}>{waringMessage}</p>}
+            {successMessage && <p style={{color:'rgba(51, 255, 0, 0.7)', marginTop:'10px'}}>{successMessage}</p>}
           </div>
+
         </div>
         {verifyModal && <div className={styles.modal}>
               <p>

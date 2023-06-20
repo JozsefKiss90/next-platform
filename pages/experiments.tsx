@@ -89,11 +89,13 @@ export default function Experiments({ session }: UserProps) {
               width={60}
               height={60}
             />      
-          <button className={styles.task_button}>
-            <p>
-              Start
-            </p> 
-          </button>
+            <a href={'/tasks/rtTask'}>
+              <button className={styles.task_button}>
+                <p>
+                  Start
+                </p>
+              </button>
+            </a>
           <ProgressBar completed={90} />
         </div>
         <div className={styles.task}>
@@ -107,29 +109,33 @@ export default function Experiments({ session }: UserProps) {
               width={100}
               height={80}
             />      
-          <button className={styles.task_button}>
-            <p>
-              Start
-            </p>
-          </button>
+            <a href={'/tasks/flankerTask'}>
+              <button className={styles.task_button}>
+                <p>
+                  Start
+                </p>
+              </button>
+            </a>
           <ProgressBar completed={90} />
         </div>
         <div className={styles.task}>
           <a href={'/tasks/networkTask'}>
             <h2>Attentional Networks</h2>
           </a>  
-           <Image
+            <Image
               className={styles.icon_style}
               src="/img/icons/svgArrow.svg"
               alt="SVG Icon"
               width={200}
               height={60}
             />      
-          <button className={styles.task_button}>
-            <p>
-              Start
-            </p>
-          </button>
+            <a href={'/tasks/networkTask'}>
+              <button className={styles.task_button}>
+                <p>
+                  Start
+                </p>
+              </button>
+            </a>
           <ProgressBar completed={90} />
         </div>
         <div className={styles.task}>
@@ -139,15 +145,17 @@ export default function Experiments({ session }: UserProps) {
           <h1 className={`${styles.amp_style} ${styles.icon_style}`}>
             AMP 
           </h1>
-          <button className={styles.task_button}>
-            <p>
-              Start
-            </p>
-          </button>
+            <a href={'/tasks/apmTask'}>
+            <button className={styles.task_button}>
+                <p>
+                  Start
+                </p>
+            </button>
+            </a>
           <ProgressBar completed={90} />
         </div>
         <div className={styles.task}>
-          <a href={'/tasks/apmTask'}>
+          <a href={'/tasks/handEyeTask'}>
             <h2>Hand Eye Coordination</h2>
           </a>  
           <Image
@@ -157,11 +165,13 @@ export default function Experiments({ session }: UserProps) {
               width={60}
               height={60}
             />      
+         <a href={'/tasks/handEyeTask'}>
           <button className={styles.task_button}>
-            <p>
-              Start
-            </p>
-          </button>
+              <p>
+                Start
+              </p>
+            </button>
+         </a>
           <ProgressBar completed={90} />
         </div>
       </div>
@@ -181,7 +191,7 @@ export default function Experiments({ session }: UserProps) {
             <button className={styles.task_button}>
               <p>
                 Start
-              </p> 
+              </p>
             </button>
             <ProgressBar completed={90} />
           </div>

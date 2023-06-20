@@ -1,5 +1,5 @@
 export let mins = 0;
-let seconds = 5;
+let seconds = 10;
 let tens = 0;
 
 export function startTimer(props) {

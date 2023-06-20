@@ -12,7 +12,7 @@
   position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease, margin-left 600ms;
-  overflow: hidden;
+  overflow: hidden; 
   height: 100%; 
 }
 
@@ -183,7 +183,6 @@
 
 .navbar:hover .logo .svg_icon {
   transform: rotate(-180deg);
-  transform: translate(50px 0);
   margin-left: 200px;
   filter: none;
 }

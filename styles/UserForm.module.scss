@@ -75,6 +75,15 @@
     margin-top: 20px;
 }
 
+.task_button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  margin-top: 20px;
+}
+
 .task_button {
     margin-top: 10px;
     height: 33px;
@@ -87,7 +96,7 @@
     background-color: white;
     border: 1px solid white;
     border-radius: 5px;
-    padding: 10px 35px;
+    padding: 20px 35px;
     cursor: pointer;
   }
   
@@ -101,6 +110,10 @@
   
 .task_button:hover {
   background-color:#ff0062;
+}
+
+.task_button:hover p {
+  color: white;
 }
 
 .modal {
