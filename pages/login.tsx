@@ -12,12 +12,17 @@ export default function Login() {
 
   const router = useRouter();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-
+  const [isImageLoaded_2, setIsImageLoaded_2] = useState(false);
   useEffect(() => {
     const image = new Image();
+    const image_2 = new Image();
     image.src = '/img/login_image.png';
+    image_2.src = '/backgrounds/bg3.jpg';
     image.onload = () => {
       setIsImageLoaded(true);
+    };
+    image_2.onload = () => {
+      setIsImageLoaded_2(true);
     };
   }, []);
 
@@ -68,7 +73,7 @@ export default function Login() {
 
   return (
     <>
-    {isImageLoaded && (
+    {isImageLoaded && isImageLoaded_2 && (
       <section className={styles.form_wrapper}>
       <div className={styles.form_container}>
         <div className={styles.form_content}>
