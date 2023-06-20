@@ -21,7 +21,7 @@ export default function Layout({ children }: LayoutProps) {
   console.log(isDarkMode)
   return (
     <AppContext.Provider value={{ isHovered, setIsHovered, isDarkMode, setIsDarkMode } as AppContextValue}>
-      <main className={isDarkMode ? styles.dark_mode : ''}>{children}</main>
+      <main className={`${styles.bg_class} ${isDarkMode ? styles.dark_mode : ''}`}>{children}</main>
     </AppContext.Provider>
    
   )
