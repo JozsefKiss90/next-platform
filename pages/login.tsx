@@ -3,12 +3,20 @@ import { signIn } from 'next-auth/react';
 import { useFormik } from 'formik';
 import login_validate from '../lib/validate';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react'; 
+import { useEffect, useState, useContext } from 'react'; 
 import styles from '../styles/Forms.module.scss';
 import NextImage  from 'next/image';
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi"
+import { AppContext } from "../components/layout"
+
+interface AppContextValue {
+  isLogin: boolean;
+  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export default function Login() {
+
+  const { isLogin, setIsLogin } = useContext(AppContext)  as AppContextValue;
 
   const router = useRouter();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -19,7 +27,10 @@ export default function Login() {
     image.onload = () => {
       setIsImageLoaded(true);
     };
-  }, []);
+    setIsLogin(true)
+  }, [isLogin]);
+
+
 
   async function handleGoogleSignin() {
     const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
@@ -68,7 +79,7 @@ export default function Login() {
 
   return (
     <>
-    {isImageLoaded && (
+    {isImageLoaded ? (
       <section className={styles.form_wrapper}>
       <div className={styles.form_container}>
         <div className={styles.form_content}>
@@ -141,6 +152,10 @@ export default function Login() {
         </div>
       </div>
     </section>
+    ): (
+      <div>
+        LOADING BRO
+      </div>
     )}
     </>
   )

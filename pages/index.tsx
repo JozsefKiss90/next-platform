@@ -6,7 +6,7 @@ import {getSession} from "next-auth/react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from "next/image";
 import { AppContext } from "../components/layout"
-import { useContext } from "react";
+import { useContext} from "react";
 
 interface UserProps {
   session: Session | null | undefined;
@@ -16,9 +16,8 @@ interface AppContextValue {
   isHovered: boolean;
 }
 
-
 export default function Home({session} : UserProps) {
-  
+
   return (
       <>
         {User({ session })}
@@ -26,7 +25,7 @@ export default function Home({session} : UserProps) {
   )
 } 
 
-function User({ session }:UserProps) {
+function User({ session } : UserProps) {
   const { isHovered } = useContext(AppContext)  as AppContextValue;
   return(
     <div style={{height:'100vh'}}>
@@ -51,7 +50,7 @@ function User({ session }:UserProps) {
               <p>Experiments</p>
             </button>
           </a> 
-          <a href="/profile">
+          <a href="/user_form">
             <button className={`${styles.task_button_index} ${styles.second_button}`}>
               <p>Profile</p>
             </button>
@@ -79,5 +78,4 @@ export async function getServerSideProps( context: GetServerSidePropsContext)
   return {
     props: { session }
   }
-
 }

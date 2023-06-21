@@ -21,12 +21,13 @@ interface UserProps {
 
 interface AppContextValue {
   isHovered: boolean;
+  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Experiments({ session }: UserProps) {
 
   const { isHovered } = useContext(AppContext)  as AppContextValue;
-
+ 
   const [taskData, setTaskData] = useState<UserData[] | undefined>();
   const [userData, setUserData] = useState<UserData[] | undefined>();
   const [completed, setCompleted] = useState<number>(0);

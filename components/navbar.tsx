@@ -11,13 +11,17 @@ import styles2 from "../styles/Index.module.scss"
 interface AppContextValue {
     setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
     isDarkMode: boolean;
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
 export default function Navbar(){
   
-    const { setIsHovered } = useContext(AppContext) as AppContextValue;;
-    const { isDarkMode } = useContext(AppContext)  as AppContextValue;
+    const { setIsHovered, setIsLogin, isDarkMode } = useContext(AppContext) as AppContextValue;;
     const { data: session, status } = useSession();
+
+    if(session) {
+      setIsLogin(true)
+    }
 
     const grayscaleObj = {
       grayscale_desktop : '',

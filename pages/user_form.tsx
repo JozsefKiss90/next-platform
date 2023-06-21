@@ -4,10 +4,9 @@ import styles from '../styles/UserForm.module.scss';
 import Navbar from "../components/navbar";
 import {getRankOptions, getBestRankOptions} from '../hooks/rankOptions'
 import {getSession} from "next-auth/react";
-import {signOut, useSession} from "next-auth/react";
 import { AppContext } from "../components/layout"
 import { useContext } from 'react';
-import styles2 from '../styles/Layout.module.scss'
+
 interface TaskProps{
     email: string | undefined; 
   }
@@ -53,7 +52,6 @@ export default function UserForm({ email } : TaskProps) {
                 gameTime: game.state.time,
                 age: age
             }
-            console.log(data)
         }
 
   const sendGameData = () => {
@@ -184,7 +182,7 @@ export default function UserForm({ email } : TaskProps) {
                     Save
                 </p>
             </button>
-            <button style={{padding:'20px 55px'}} className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true)}}>
+            <button style={{padding:'20px 55px'}} className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true), deleteAccount(email)}}>
                 <p>
                     Delete Account
                 </p>
