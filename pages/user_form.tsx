@@ -212,8 +212,8 @@ export default function UserForm({ email } : TaskProps) {
                   </button>
                </div>
               </div>
-              </div>
-              }
+            </div>
+          }
         </>
       );
 }

@@ -85,7 +85,7 @@ export default function Navbar(){
           </nav>
           <div className={styles.iconTitle}>
             <h4>{iconTitle}</h4>
-          </div>
+          </div> 
           <nav className={styles.navbar} style={isDarkMode ? { filter: "grayscale(100%)" } : {}} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <SimpleBar  className={styles.scroll_container}  style={{ height: '100%'}}>
             <ul style={{ opacity: '1' }} className={`${styles.navbar_nav} ${!session && status !== 'loading' ? styles.loading : styles.loaded}`}>

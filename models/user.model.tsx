@@ -1,3 +1,4 @@
+import { boolean } from 'mathjs';
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
 interface User extends Document {
@@ -23,7 +24,7 @@ const UserSchema = new Schema<User>({
   role: {
     type: String,
     required: true,
-  },
+  }
 });
 
 const UserModel: Model<User> =

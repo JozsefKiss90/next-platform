@@ -56,7 +56,7 @@ function User({ session } : UserProps) {
             </button>
           </a>
         </div>
-  </div>
+    </div>
     </div>
   )
 }

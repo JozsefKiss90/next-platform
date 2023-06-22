@@ -1,6 +1,6 @@
 import styles from "../styles/Experiments.module.scss";
 import { getSession } from "next-auth/react";
-import { useState, useEffect,useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import Navbar from "../components/navbar";
 import ProgressBar from "../components/progressBar";
 import { Session, User } from "next-auth";
@@ -8,6 +8,7 @@ import { AppContext } from "../components/layout"
 import Image from 'next/image';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Link from 'next/link';
 
 interface UserData {
   email: string;
@@ -31,6 +32,29 @@ export default function Experiments({ session }: UserProps) {
   const [taskData, setTaskData] = useState<UserData[] | undefined>();
   const [userData, setUserData] = useState<UserData[] | undefined>();
   const [completed, setCompleted] = useState<number>(0);
+  //const [verifyModal, setVerifyModal] = useState(false)
+  const [disableLink, setDisableLink] = useState(false);
+
+  useEffect(() => {
+    const hasCookie = localStorage.getItem('cookie_statistics_disabled')
+    if(hasCookie == 'true') {
+      setDisableLink(!disableLink)
+    }
+    console.log(disableLink)
+  }, []);
+
+  const [showModal, setShowModal] = useState(false);
+  console.log(disableLink)
+
+  const handleCookieWarning = () => {
+    setShowModal(!showModal);
+  };
+
+  const handleCookieDelete = () => {
+    setDisableLink(false)
+    localStorage.removeItem('cookie_statistics_disabled')
+  };
+
 
   useEffect(() => {
     fetch('/api/rt')
@@ -45,9 +69,6 @@ export default function Experiments({ session }: UserProps) {
       setUserData(userTaskData);
     }
   }, [taskData, session?.user?.email]);
-
-  console.log(taskData)
-  console.log(userData)
   
   useEffect(() => {
     if (userData !== undefined) {
@@ -69,7 +90,6 @@ export default function Experiments({ session }: UserProps) {
   }, [userData]);
 
   let slideStyle: React.CSSProperties = {
-
     display: 'block',
     marginTop: '100px'
   }
@@ -78,194 +98,243 @@ export default function Experiments({ session }: UserProps) {
     <>
       <div>
       <Navbar />
-      <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
-        <div className={styles.task}>
-          <a href={'/tasks/rtTask'}>
-            <h2>Reaction Time</h2>
-          </a>
-          <Image
-              className={styles.icon_style}
-              src="/img/icons/svgLightning.svg"
-              alt="SVG Icon"
-              width={60}
-              height={60}
-            />      
-            <a href={'/tasks/rtTask'}>
-              <button className={styles.task_button}>
-                <p>
-                  Start
-                </p>
-              </button>
-            </a>
-          <ProgressBar completed={90} />
-        </div>
-        <div className={styles.task}>
-          <a href={'/tasks/flankerTask'}>
-            <h2>Flanker Task</h2>
-          </a> 
-           <Image
-              className={styles.icon_style_flanker}
-              src="/img/icons/svgFlanker.svg"
-              alt="SVG Icon"
-              width={100}
-              height={80}
-            />      
-            <a href={'/tasks/flankerTask'}>
-              <button className={styles.task_button}>
-                <p>
-                  Start
-                </p>
-              </button>
-            </a>
-          <ProgressBar completed={90} />
-        </div>
-        <div className={styles.task}>
-          <a href={'/tasks/networkTask'}>
-            <h2>Attentional Networks</h2>
-          </a>  
-            <Image
-              className={styles.icon_style}
-              src="/img/icons/svgArrow.svg"
-              alt="SVG Icon"
-              width={200}
-              height={60}
-            />      
-            <a href={'/tasks/networkTask'}>
-              <button className={styles.task_button}>
-                <p>
-                  Start
-                </p>
-              </button>
-            </a>
-          <ProgressBar completed={90} />
-        </div>
-        <div className={styles.task}>
-          <a href={'/tasks/apmTask'}>
-            <h2>Action Per Minute</h2>
-          </a>  
-          <h1 className={`${styles.amp_style} ${styles.icon_style}`}>
-            AMP 
-          </h1>
-            <a href={'/tasks/apmTask'}>
-            <button className={styles.task_button}>
-                <p>
-                  Start
-                </p>
-            </button>
-            </a>
-          <ProgressBar completed={90} />
-        </div>
-        <div className={styles.task}>
-          <a href={'/tasks/handEyeTask'}>
-            <h2>Hand Eye Coordination</h2>
-          </a>  
-          <Image
-              className={styles.icon_style}
-              src="/img/icons/svgAim.svg"
-              alt="SVG Icon"
-              width={60}
-              height={60}
-            />      
-         <a href={'/tasks/handEyeTask'}>
-          <button className={styles.task_button}>
+      {showModal ? (<div className={styles.modal}>
               <p>
-                Start
-              </p>
-            </button>
-         </a>
-          <ProgressBar completed={90} />
-        </div>
-      </div>
-      <div style={{...slideStyle}}>
-      <Carousel showStatus={false} className={styles.container_mobile}>
-          <div className={styles.task}>
-            <a href={'/tasks/rtTask'}>
-              <h2>Reaction Time</h2>
-            </a>
-            <Image
-                className={styles.icon_style}
-                src="/img/icons/svgLightning.svg"
-                alt="SVG Icon"
-                width={60}
-                height={60}
-              />      
-            <button className={styles.task_button}>
-              <p>
-                Start
-              </p>
-            </button>
-            <ProgressBar completed={90} />
-          </div>
-          <div className={styles.task}>
-            <a href={'/tasks/flankerTask'}>
-              <h2>Flanker Task</h2>
-            </a> 
-            <Image
-                className={styles.icon_style_flanker}
-                src="/img/icons/svgFlanker.svg"
-                alt="SVG Icon"
-                width={100}
-                height={80}
-              />      
-            <button className={styles.task_button}>
-              <p>
-                Start
-              </p>
-            </button>
-            <ProgressBar completed={90} />
-          </div>
-          <div className={styles.task}>
-            <a href={'/tasks/networkTask'}>
-              <h2>Attentional Networks</h2>
-            </a>  
-            <Image
-                className={styles.icon_style}
-                src="/img/icons/svgArrow.svg"
-                alt="SVG Icon"
-                width={200}
-                height={60}
-              />      
-            <button className={styles.task_button}>
-              <p>
-                Start
-              </p>
-            </button>
-            <ProgressBar completed={90} />
-          </div>
-          <div className={styles.task}>
-            <a href={'/tasks/apmTask'}>
-              <h2>Action Per Minute</h2>
-            </a>  
-            <h1 className={`${styles.amp_style} ${styles.icon_style}`}>
-              AMP 
-            </h1>
-            <button className={styles.task_button}>
-              <p>
-                Start
-              </p>
-            </button>
-            <ProgressBar completed={90} />
-          </div>
-          <div className={styles.task}>
-            <a href={'/tasks/apmTask'}>
-              <h2>Hand Eye Coordination</h2>
-            </a>  
-            <Image
-                className={styles.icon_style}
-                src="/img/icons/svgAim.svg"
-                alt="SVG Icon"
-                width={60}
-                height={60}
-              />      
-            <button className={styles.task_button}>
-              <p>
-                Start
-              </p>
-            </button>
-            <ProgressBar completed={90} />
-          </div>
-      </Carousel>
-      </div>
+                Cookies for statistical data was disabled. Do you want to enable it?
+              </p> 
+              <div className={styles.modal_buttons}>
+                <div>
+                  <button onClick={(e)=> {e.preventDefault(); handleCookieWarning(); handleCookieDelete()}}>
+                      <p> 
+                        Yes
+                      </p>
+                  </button>
+                </div>
+               <div>
+                <button onClick={(e)=> {e.preventDefault(); handleCookieWarning()}}>
+                    <p>
+                      No
+                    </p>
+                  </button>
+               </div>
+              </div>
+            </div>) : (
+              <>
+              <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
+                <div className={styles.task}>
+                  {disableLink ? (
+                    <Link href=""><h2>Reaction Time</h2></Link>
+                  ) : (
+                    <Link href="/tasks/rtTask">
+                      <h2>Reaction Time</h2>
+                    </Link>
+                  )}
+                  <Image
+                      className={styles.icon_style}
+                      src="/img/icons/svgLightning.svg"
+                      alt="SVG Icon"
+                      width={60}
+                      height={60}
+                    />      
+                    {disableLink ? (
+                      <Link href={''}>
+                        <button className={styles.task_button} onClick={(e)=> {e.preventDefault(); handleCookieWarning() }}>
+                          <p>
+                            Start
+                          </p>
+                        </button>
+                      </Link>
+                      ) : (
+                        <Link href={'/tasks/rtTask'}>
+                        <button className={styles.task_button}>
+                          <p>
+                            Start
+                          </p>
+                        </button>
+                      </Link>
+                    )}
+                  <ProgressBar completed={90} />
+                </div>
+                <div className={styles.task}>
+                  <a href={'/tasks/flankerTask'}>
+                    <h2>Flanker Task</h2>
+                  </a> 
+                  <Image
+                      className={styles.icon_style_flanker}
+                      src="/img/icons/svgFlanker.svg"
+                      alt="SVG Icon"
+                      width={100}
+                      height={80}
+                    />      
+                    {disableLink ? (
+                      <Link href={''}>
+                        <button className={styles.task_button} onClick={() => { handleCookieWarning() }}>
+                          <p>
+                            Start
+                          </p>
+                        </button>
+                      </Link>
+                      ) : (
+                        <Link href={'/tasks/flankerTask'}>
+                        <button className={styles.task_button}>
+                          <p>
+                            Start
+                          </p>
+                        </button>
+                      </Link>
+                    )}
+                  <ProgressBar completed={90} />
+                </div>
+                <div className={styles.task}>
+                  <a href={'/tasks/networkTask'}>
+                    <h2>Attentional Networks</h2>
+                  </a>  
+                    <Image
+                      className={styles.icon_style}
+                      src="/img/icons/svgArrow.svg"
+                      alt="SVG Icon"
+                      width={200}
+                      height={60}
+                    />      
+                    <a href={'/tasks/networkTask'}>
+                      <button className={styles.task_button}>
+                        <p>
+                          Start
+                        </p>
+                      </button>
+                    </a>
+                  <ProgressBar completed={90} />
+                </div>
+                <div className={styles.task}>
+                  <a href={'/tasks/apmTask'}>
+                    <h2>Action Per Minute</h2>
+                  </a>  
+                  <h1 className={`${styles.amp_style} ${styles.icon_style}`}>
+                    AMP 
+                  </h1>
+                    <a href={'/tasks/apmTask'}>
+                    <button className={styles.task_button}>
+                        <p>
+                          Start
+                        </p>
+                    </button>
+                    </a>
+                  <ProgressBar completed={90} />
+                </div>
+                <div className={styles.task}>
+                  <a href={'/tasks/handEyeTask'}>
+                    <h2>Hand Eye Coordination</h2>
+                  </a>  
+                  <Image
+                      className={styles.icon_style}
+                      src="/img/icons/svgAim.svg"
+                      alt="SVG Icon"
+                      width={60}
+                      height={60}
+                    />      
+                <a href={'/tasks/handEyeTask'}>
+                  <button className={styles.task_button}>
+                      <p>
+                        Start
+                      </p>
+                    </button>
+                </a>
+                  <ProgressBar completed={90} />
+                </div>
+              </div>
+              <div style={{...slideStyle}}>
+              <Carousel showStatus={false} className={styles.container_mobile}>
+                  <div className={styles.task}>
+                    <a href={'/tasks/rtTask'}>
+                      <h2>Reaction Time</h2>
+                    </a>
+                    <Image
+                        className={styles.icon_style}
+                        src="/img/icons/svgLightning.svg"
+                        alt="SVG Icon"
+                        width={60}
+                        height={60}
+                      />      
+                    <button className={styles.task_button}>
+                      <p>
+                        Start
+                      </p>
+                    </button>
+                    <ProgressBar completed={90} />
+                  </div>
+                  <div className={styles.task}>
+                    <a href={'/tasks/flankerTask'}>
+                      <h2>Flanker Task</h2>
+                    </a> 
+                    <Image
+                        className={styles.icon_style_flanker}
+                        src="/img/icons/svgFlanker.svg"
+                        alt="SVG Icon"
+                        width={100}
+                        height={80}
+                      />      
+                    <button className={styles.task_button}>
+                      <p>
+                        Start
+                      </p>
+                    </button>
+                    <ProgressBar completed={90} />
+                  </div>
+                  <div className={styles.task}>
+                    <a href={'/tasks/networkTask'}>
+                      <h2>Attentional Networks</h2>
+                    </a>  
+                    <Image
+                        className={styles.icon_style}
+                        src="/img/icons/svgArrow.svg"
+                        alt="SVG Icon"
+                        width={200}
+                        height={60}
+                      />      
+                    <button className={styles.task_button}>
+                      <p>
+                        Start
+                      </p>
+                    </button>
+                    <ProgressBar completed={90} />
+                  </div>
+                  <div className={styles.task}>
+                    <a href={'/tasks/apmTask'}>
+                      <h2>Action Per Minute</h2>
+                    </a>  
+                    <h1 className={`${styles.amp_style} ${styles.icon_style}`}>
+                      AMP 
+                    </h1>
+                    <button className={styles.task_button}>
+                      <p>
+                        Start
+                      </p>
+                    </button>
+                    <ProgressBar completed={90} />
+                  </div>
+                  <div className={styles.task}>
+                    <a href={'/tasks/apmTask'}>
+                      <h2>Hand Eye Coordination</h2>
+                    </a>  
+                    <Image
+                        className={styles.icon_style}
+                        src="/img/icons/svgAim.svg"
+                        alt="SVG Icon"
+                        width={60}
+                        height={60}
+                      />      
+                    <button className={styles.task_button}>
+                      <p>
+                        Start
+                      </p>
+                    </button>
+                    <ProgressBar completed={90} />
+                  </div>
+              </Carousel>
+              </div>
+              </>
+            )
+          }
     </div> 
     </>
   );

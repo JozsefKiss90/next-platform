@@ -1,5 +1,6 @@
 import React, { ReactNode, createContext, useState  } from "react";
 import styles from '../styles/Layout.module.scss'
+import CookieConsent from './cookieConsent';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -28,8 +29,8 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <AppContext.Provider value={{isHovered, setIsHovered, isDarkMode, setIsDarkMode, isLogin, setIsLogin} as AppContextValue}>
+      <CookieConsent />
       <main className={`${isLogin ? styles.bg_class : ""} ${isDarkMode ? styles.dark_mode : ''}`}>{children}</main>
-    </AppContext.Provider>
-   
+    </AppContext.Provider>   
   )
 }

@@ -88,7 +88,6 @@ export default NextAuth({
       if (token && session.user) {
         session.user.role = token.role;
       }
-
       return session;
     },
   },
