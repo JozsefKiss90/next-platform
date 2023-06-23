@@ -100,20 +100,22 @@ export default function Register() {
                         </div>
                     </div>
                     {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>}
-
-                    {/* login buttons */}
-                    <div className={styles.input_button}>
-                        <button type="submit" className={styles.button}>
-                            Sign Up
-                        </button>
-                    </div>
-                    <div className={styles.input_button}>
-                        <p className={styles.singup}>
-                            Have an account?
-                        </p>
-                        <button type="submit" className={styles.button}>
-                            <Link style={{textDecoration: 'none'}} href={'/login'}>Sign In</Link>
-                        </button>
+                    <div style={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                        <div className={styles.input_button}>
+                            <button type="submit" className={styles.button}>
+                                Sign Up
+                            </button>
+                        </div>
+                        <div>
+                            <p className={styles.singup}>
+                                Have an account?
+                            </p>
+                       </div>
+                        <div className={styles.input_button}>
+                            <button type="submit" className={styles.button}>
+                                <Link style={{textDecoration: 'none'}} href={'/login'}>Sign In</Link>
+                            </button>
+                        </div>
                     </div>
                 </form>
                

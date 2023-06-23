@@ -187,13 +187,13 @@
 }
 
 .button_icon {
-  position: relative;
-  left: 20px;
+  position: absolute;
+  right: 20%;
 }
 
 .button_icon_facebook {
-  position: relative;
-  left: 10px;
+  position: absolute;
+  right: 20%;
 }
 
 .button:hover {
@@ -203,7 +203,7 @@
 }
 
 .singup {
-  font-size: small;
+  font-size: 15px;
   text-align: center;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
