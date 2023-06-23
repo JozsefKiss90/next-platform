@@ -27,25 +27,25 @@ export default function Login() {
     image.onload = () => {
       setIsImageLoaded(true);
     };
-    setIsLogin(true)
+  
   }, [isLogin]);
 
 
 
   async function handleGoogleSignin() {
-    const result = await signIn('google', { callbackUrl: 'http://localhost:3000' });
+    const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
     if (result?.error) {
       console.error('Error signing in:', result.error);
     }
   }
 
   async function handleGitHubSignin() {
-    await signIn('github', { callbackUrl: 'http://localhost:3000' });
+    await signIn('github', { callbackUrl: 'https://platform-app.herokuapp.com' });
   }
 
   async function handleFacebookSignin() {
     const result = await signIn('facebook', {
-      callbackUrl: 'http://localhost:3000'
+      callbackUrl: 'https://platform-app.herokuapp.com'
     });
      if (result?.error) {
      console.error('Error signing in:', result.error);
@@ -66,7 +66,7 @@ export default function Login() {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: 'http://localhost:3000'
+      callbackUrl: 'https://platform-app.herokuapp.com'
     });
 
     if (result?.error) {

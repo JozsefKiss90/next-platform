@@ -14,7 +14,7 @@ interface AppContextValue {
   isLogin: boolean;
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+ 
 interface AppContextValue {
   isLogin: boolean;
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,6 +26,7 @@ export default function Layout({ children }: LayoutProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLogin, setIsLogin] = useState(false)
+  console.log(isLogin)
 
   return (
     <AppContext.Provider value={{isHovered, setIsHovered, isDarkMode, setIsDarkMode, isLogin, setIsLogin} as AppContextValue}>
@@ -33,4 +34,4 @@ export default function Layout({ children }: LayoutProps) {
       <main className={`${isLogin ? styles.bg_class : ""} ${isDarkMode ? styles.dark_mode : ''}`}>{children}</main>
     </AppContext.Provider>   
   )
-}
+}  
