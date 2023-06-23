@@ -8,6 +8,7 @@ import styles from '../styles/Forms.module.scss';
 import NextImage  from 'next/image';
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi"
 import { AppContext } from "../components/layout"
+import Spinner from '../components/spinner';
 
 interface AppContextValue {
   isLogin: boolean;
@@ -154,7 +155,7 @@ export default function Login() {
     </section>
     ): (
       <div>
-        LOADING BRO
+        <Spinner></Spinner>
       </div>
     )}
     </>
