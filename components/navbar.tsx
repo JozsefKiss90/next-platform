@@ -146,7 +146,7 @@ export default function Navbar(){
                 setGrayscale({...grayscaleObj, grayscale_game: 'grayscale(0)'})
                 resetIconStates('game');
                 }}>
-                <Link href="#" className={styles.nav_link} style={{filter: `${grayscale.grayscale_game}`}}>
+                <Link href={{ pathname: "/games" }} className={styles.nav_link} style={{filter: `${grayscale.grayscale_game}`}}>
                   <Image
                     className={`${styles.icon_style} ${styles.hover_effect_alien}`}
                     src={gameIcon}

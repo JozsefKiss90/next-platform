@@ -146,7 +146,7 @@ const CookieConsent: React.FC = () => {
                   {expandedHandlers.includes('experiments') && (
                       <div onClick={() => handleHandlerClose()}>
                         <p className={styles.cookie_info}>
-                          Information about GitHub cookie handler goes here.
+                          Information about statistics cookie handler goes here.
                         </p>
                       </div>
                     )}

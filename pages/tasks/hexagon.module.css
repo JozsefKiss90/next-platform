@@ -45,3 +45,35 @@
     cursor: pointer;
     user-select: none;
 }
+
+
+@media only screen and (min-width: 391px) and (max-width: 844px) and (min-height: 390px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    transform: scale(0.9);
+  }
+  .stopper {
+    max-width: 801px; 
+    height: 30px;
+    background-color: rgb(55, 55, 55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 22px;
+    font-size: 1.2rem;
+    color: white;
+    margin: 0;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  
+}

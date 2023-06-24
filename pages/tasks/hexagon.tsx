@@ -37,7 +37,6 @@ export default function Page({ email }: TaskProps) {
       };
 
       if (!props.canvas || !props.mins || !props.tens || !props.seconds) {
-        // Retry obtaining elements after a short delay
         setTimeout(() => {
           canvas = canvasRef.current;
           appendTens = appendTensRef.current;
