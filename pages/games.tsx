@@ -146,12 +146,12 @@ export default function Experiments({ session }: UserProps) {
                       </Link>
                       ) : (
                         <Link href={'/tasks/hexagon'}>
-                        <button className={styles.task_button}>
-                          <p>
-                            Start
-                          </p>
-                        </button>
-                      </Link>
+                            <button className={styles.task_button}>
+                            <p>
+                                Start
+                            </p>
+                            </button>
+                        </Link>
                     )}
                   <ProgressBar completed={90} />
                 </div>
@@ -169,11 +169,13 @@ export default function Experiments({ session }: UserProps) {
                             width={60}
                             height={60}
                             />      
-                        <button className={styles.task_button}>
+                        <Link href={'/tasks/hexagon'}>
+                            <button className={styles.task_button}>
                             <p>
-                            Start
+                                Start
                             </p>
-                        </button>
+                            </button>
+                        </Link>
                         <ProgressBar completed={90} />
                     </div>
                     <div>
