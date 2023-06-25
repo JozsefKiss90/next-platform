@@ -204,6 +204,18 @@
   z-index: 0;
 }
 
+
+.mobile_logo{
+  font-family: 'Batman';
+  display: inline;
+  position: relative;
+  transition: var(--transition-speed);
+  letter-spacing: 0px;
+  color: #ffffff;
+  text-shadow: 2px 2px #ff0062;
+  z-index: 999;
+}
+
 @media only screen and (min-width: 375px) and (max-width: 600px) {
 .scroll_container {
   overflow-x: scroll;
@@ -231,20 +243,8 @@
     flex-direction: column;
     align-items: center;
   }
-
-.mobile_logo{
-  font-family: 'Batman';
-  display: inline;
-  position: relative;
-  transition: var(--transition-speed);
-  letter-spacing: 0px;
-  color: #ffffff;
-  text-shadow: 2px 2px #ff0062;
-  z-index: 999;
-}
 }
 
-/* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
     bottom: 0;
@@ -281,9 +281,29 @@
     display: flex;
     justify-content: center;
   }
+
+  .mobile_navbar{
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary);
+    transition: width 600ms ease, margin-left 600ms;
+    overflow: hidden;
+    height: 5rem; 
+    width: 100%;
+  }
+
+.mobile_navbar_nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
-/* Medium screens (e.g., iPhone) */
 @media only screen and (min-width: 601px) and (max-width: 768px) {
   .navbar {
     top: 0;
@@ -315,9 +335,29 @@
     top: 85%;
     left: 0%;
   }
+
+  .mobile_navbar{
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary);
+    transition: width 600ms ease, margin-left 600ms;
+    overflow: hidden;
+    height: 5rem; 
+    width: 100%;
+  }
+
+.mobile_navbar_nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
-/* Large screens (e.g., Samsung Galaxy) */
 @media only screen and (min-width: 769px) {
   .navbar {
     top: 0;
@@ -341,7 +381,30 @@
   .navbar:hover .logo_text {
     left: 0px;
   }
+
+  .mobile_navbar{
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary);
+    transition: width 600ms ease, margin-left 600ms;
+    overflow: hidden;
+    height: 5rem; 
+    width: 100%;
+  }
+
+.mobile_navbar_nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+  }
 }
+
 
 .dark {
   --text-primary: #b6b6b6;

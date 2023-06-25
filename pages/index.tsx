@@ -14,7 +14,7 @@ interface UserProps {
 
 interface AppContextValue {
   isHovered: boolean;
-}
+} 
 
 export default function Home({session} : UserProps) {
 

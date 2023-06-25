@@ -1,4 +1,4 @@
-import styles from "../styles/Navbar2.module.scss"
+import styles from "../styles/Navbar.module.scss"
 import Link from "next/link"
 import {signOut, useSession} from "next-auth/react";
 import { AppContext } from "./layout"
