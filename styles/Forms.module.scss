@@ -24,7 +24,7 @@
 }
 
 
-@media (max-width: 391px) and (max-height: 860px) {
+@media (max-width: 860px) {
   .form_wrapper {
     height: 100vh;
     background-position: center;
@@ -45,47 +45,6 @@
   }
 }
 
-@media (max-width: 390px) and (max-height: 860px) {
-  .form_wrapper {
-    height: 100vh;
-    background-position: center;
-  }
-
-  .form_container {
-    width: 100%;
-    max-width: 100%;
-    padding: 30px;
-    margin: 0 15px;
-  }
-}
-
-@media (min-width: 393px) and (max-height: 852px) {
-  .form_wrapper {
-    height: 100vh;
-    background-position: center;
-  }
-
-  .form_container {
-    width: 100%;
-    max-width: 100%;
-    padding: 30px;
-    margin: 0 15px;
-  }
-}
-
-@media (min-width: 414px) and (max-height: 896px) {
-  .form_wrapper {
-    height: 100vh;
-    background-position: center;
-  }
-
-  .form_container {
-    width: 100%;
-    max-width: 100%;
-    padding: 30px; 
-    margin: 0 15px;
-  }
-}
 
 .form_content {
   display: flex;
