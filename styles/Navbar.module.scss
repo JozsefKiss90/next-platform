@@ -163,6 +163,12 @@
   transition: var(--transition-speed);
 }
 
+.flag {
+  position: absolute;
+  bottom: 12px;
+  right: 30px;
+}
+
 .logo {
   font-weight: bold;
   text-transform: uppercase;

@@ -1,9 +1,11 @@
 import {useSession, getSession} from "next-auth/react";
 import { useEffect } from 'react';
 import 'jspsych/css/jspsych.css'
+import { Session } from "next-auth";
 
 interface TaskProps{
-  email: string | undefined;
+  email: string | undefined; 
+  session: Session | null
 }
 
 export default function Page({ email } : TaskProps) {
@@ -18,7 +20,7 @@ export default function Page({ email } : TaskProps) {
 
   const { data: session, status } = useSession();
   if(session){
- 
+    console.log("SESSION IS: " + session)
     return(
       <div>
        </div>

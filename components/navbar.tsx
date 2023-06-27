@@ -7,6 +7,7 @@ import Image from 'next/image';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css'; 
 import styles2 from "../styles/Index.module.scss"
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 interface AppContextValue {
     setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
@@ -76,6 +77,9 @@ export default function Navbar(){
 
     return (
         <div className={styles.main_container}>
+          <div className={styles.flag}  style={{padding:'8px 15px', border:'2px solid #ff5194', borderRadius: '5px', cursor:'pointer'}} >
+            <span style={{scale:'2.1'}} className="fi fi-us"></span>  
+          </div>
           <nav className={styles.mobile_navbar} style={isDarkMode ? { filter: "grayscale(100%)" } : {}}>
             <div className={styles.mobile_navbar_nav}>
               <h1 className={`${styles.mobile_logo}`}>

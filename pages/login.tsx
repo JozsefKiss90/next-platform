@@ -85,9 +85,9 @@ export default function Login() {
       <div className={styles.form_container}>
         <div className={styles.form_content}>
           <div className={styles.title}>
-            <h1>Explore</h1>
+            <h1>Esport Lab</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, officia?
+              An experimental platform  for e-sport players
             </p>
           </div>
 

@@ -62,7 +62,7 @@ export default function runTask(email,redirectCallback, props) {
     await drawBackgorund(angle,ctx)
     await drawCoordinates(ctx)
     await drawCenter(70, angle,ctx)
-    await drawController(n, color,ctx)
+    await drawController(n, color,ctx) 
     ctx.restore()
     handleCollisons(coordinates, gapped, parameters)
     if (mins < 0 && !requestSent) { 

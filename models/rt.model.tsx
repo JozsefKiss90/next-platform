@@ -6,23 +6,27 @@ interface Rt extends Document {
   acc: number;
 }
 
-const RtSchema = new Schema<Rt>({
-  rt: {
-    type: Number,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  acc: {
-    type: Number,
-    required: true,
-  },
-});
+let RtSchema: Model<Rt>;
+try {
+  RtSchema = mongoose.model<Rt>('rt_schema');
+} catch (error) {
+  RtSchema = mongoose.model<Rt>(
+    'rt_schema',
+    new Schema<Rt>({
+      rt: {
+        type: Number,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      acc: {
+        type: Number,
+        required: true,
+      },
+    }, { collection: 'rt_schema' })
+  );
+}
 
-const RtModel: Model<Rt> =
-  mongoose.models.rt_test ||
-  mongoose.model<Rt>('rt_test', RtSchema);
-
-export default RtModel;
+export default RtSchema;

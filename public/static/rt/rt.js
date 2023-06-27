@@ -22,7 +22,7 @@ export default function runTask(email) {
     const options = {
       method: "POST",
       headers: {"Content-type": "application/json; charset=UTF-8"},
-      body: JSON.stringify(values)
+      body: JSON.stringify(values) 
     }
     console.log({...values})
     

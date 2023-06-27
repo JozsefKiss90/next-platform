@@ -31,6 +31,7 @@
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
+    "flag-icons": "^6.7.0",
     "formik": "^2.2.9",
     "install": "^0.13.0",
     "jsdom": "^21.1.1",
