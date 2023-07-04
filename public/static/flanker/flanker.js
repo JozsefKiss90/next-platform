@@ -4,7 +4,7 @@ import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
 import jsPsychInstructions from '@jspsych/plugin-instructions';
 import jsPsychPreload from '@jspsych/plugin-preload';
 import {initJsPsych} from 'jspsych';
-import { getData, calculateRt } from "./helpers.js";
+import { getData, calculateRt } from "./helpers.js"; 
 
 export default async function runTask(email) {
 
@@ -100,10 +100,6 @@ export default async function runTask(email) {
         <p>Ebben a kísérletben a képernyőn különböző betűk jelennek meg.</p><p>A feladatod jelezni, hogy a  körökön <strong>belül</strong>  
         egy N vagy egy X található-e <br> (mindig csak egyféle célinger jelenik meg, azaz vagy csak N-t vagy X-t fogsz látni).</p>
         <p>Ha  N, nyomd meg a billentyűzeten az <strong>N</strong>-t, ha X akkor pedig nyomd meg a <strong>X</strong>-t.</p>
-        <div style='float: left; margin-left:60px;'><img style='width:50%; height=50%;' src='../static/flanker/img/betuN.png'></img>
-        <p style='margin-left:60px;' class='small'><strong> N gomb</strong></p></div>
-        <div style='float: right; margin-right:60px;'><img style='width:50%; height=50%;' src='../static/flanker/img/betuX.png'></img>
-        <p style='margin-right:60px;' class='small'><strong>X gomb</strong></p></div>
         </div>
     `,
     ` 

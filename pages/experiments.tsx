@@ -23,16 +23,18 @@ interface UserProps {
 interface AppContextValue {
   isHovered: boolean;
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  languageData: any
+  language: boolean
 }
 
 export default function Experiments({ session }: UserProps) {
 
-  const { isHovered } = useContext(AppContext)  as AppContextValue;
+  const { isHovered, languageData, language } = useContext(AppContext)  as AppContextValue;
  
   const [taskData, setTaskData] = useState<UserData[] | undefined>();
   const [userData, setUserData] = useState<UserData[] | undefined>();
   const [completed, setCompleted] = useState<number>(0);
-  //const [verifyModal, setVerifyModal] = useState(false)
+  const [mobileWarning, setmobileWarning] = useState(false)
   const [disableLink, setDisableLink] = useState(false);
 
   useEffect(() => {
@@ -123,10 +125,10 @@ export default function Experiments({ session }: UserProps) {
               <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
                 <div className={styles.task}>
                   {disableLink ? (
-                    <Link href=""><h2>Reaction Time</h2></Link>
+                    <Link href=""><h2>{language ? languageData.hun.experiments[0] :"Reaction Time"}</h2></Link>
                   ) : (
                     <Link href="/tasks/rtTask">
-                      <h2>Reaction Time</h2>
+                      <h2>{language ? languageData.hun.experiments[0] :"Reaction Time"}</h2>
                     </Link>
                   )}
                   <Image
@@ -157,7 +159,7 @@ export default function Experiments({ session }: UserProps) {
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/flankerTask'}>
-                    <h2>Flanker Task</h2>
+                    <h2>{language ? languageData.hun.experiments[1] : "Flanker Task"}</h2>
                   </a> 
                   <Image
                       className={styles.icon_style_flanker}
@@ -187,7 +189,7 @@ export default function Experiments({ session }: UserProps) {
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/networkTask'}>
-                    <h2>Attentional Networks</h2>
+                    <h2>{language ? languageData.hun.experiments[2] :"Attentional Networks"}</h2>
                   </a>  
                     <Image
                       className={styles.icon_style}
@@ -223,7 +225,7 @@ export default function Experiments({ session }: UserProps) {
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/handEyeTask'}>
-                    <h2>Hand Eye Coordination</h2>
+                    <h2>{language ? languageData.hun.experiments[3] :"Hand Eye Coordination"}</h2>
                   </a>  
                   <Image
                       className={styles.icon_style}
@@ -243,11 +245,25 @@ export default function Experiments({ session }: UserProps) {
                 </div>
               </div>
               <div style={{...slideStyle}}>
-              <Carousel showStatus={false} className={styles.container_mobile}>
+                {mobileWarning ? (
+                  <div className={styles.modal_2}>
+                  <p>
+                    The experiments can be completed on desktop.
+                  </p> 
+                  <div className={styles.modal_buttons}>
+                    <button onClick={()=>{setmobileWarning(!mobileWarning)}}>
+                          <p> 
+                            Ok
+                          </p>
+                      </button>
+                  </div>
+                </div>
+                ) : (
+                  <Carousel showStatus={false} className={styles.container_mobile}>
                   <div className={styles.task}>
-                    <a href={'/tasks/rtTask'}>
-                      <h2>Reaction Time</h2>
-                    </a>
+                    <h2 onClick={()=>{setmobileWarning(!mobileWarning)}}>
+                      {language ? languageData.hun.experiments[0] :"Reaction Time"}
+                    </h2>
                     <Image
                         className={styles.icon_style}
                         src="/img/icons/svgLightning.svg"
@@ -263,9 +279,7 @@ export default function Experiments({ session }: UserProps) {
                     <ProgressBar completed={90} />
                   </div>
                   <div className={styles.task}>
-                    <a href={'/tasks/flankerTask'}>
-                      <h2>Flanker Task</h2>
-                    </a> 
+                    <h2>{language ? languageData.hun.experiments[1] :"Flanker Task"}</h2>
                     <Image
                         className={styles.icon_style_flanker}
                         src="/img/icons/svgFlanker.svg"
@@ -281,9 +295,7 @@ export default function Experiments({ session }: UserProps) {
                     <ProgressBar completed={90} />
                   </div>
                   <div className={styles.task}>
-                    <a href={'/tasks/networkTask'}>
-                      <h2>Attentional Networks</h2>
-                    </a>  
+                    <h2>{language ? languageData.hun.experiments[2] :"Attentional Networks"}</h2>
                     <Image
                         className={styles.icon_style}
                         src="/img/icons/svgArrow.svg"
@@ -299,9 +311,7 @@ export default function Experiments({ session }: UserProps) {
                     <ProgressBar completed={90} />
                   </div>
                   <div className={styles.task}>
-                    <a href={'/tasks/apmTask'}>
-                      <h2>Action Per Minute</h2>
-                    </a>  
+                    <h2>Action Per Minute</h2>
                     <h1 className={`${styles.amp_style} ${styles.icon_style}`}>
                       AMP 
                     </h1>
@@ -313,9 +323,7 @@ export default function Experiments({ session }: UserProps) {
                     <ProgressBar completed={90} />
                   </div>
                   <div className={styles.task}>
-                    <a href={'/tasks/apmTask'}>
-                      <h2>Hand Eye Coordination</h2>
-                    </a>  
+                    <h2>{language ? languageData.hun.experiments[3] :"Hand Eye Coordination"}</h2>
                     <Image
                         className={styles.icon_style}
                         src="/img/icons/svgAim.svg"
@@ -331,6 +339,8 @@ export default function Experiments({ session }: UserProps) {
                     <ProgressBar completed={90} />
                   </div>
               </Carousel>
+                )
+                }
               </div>
               </>
             )

@@ -3,10 +3,10 @@ export default function runTask(email, containerProp) {
     const randomRange = (min, max) => {
         return Math.random() * (max - min) + min
     }
-
+    console.log('run')
     let trials = 50
 
-    let zIndex = 999 
+    let zIndex = 999  
 
     let zArray = [0,1,2,3,4,5]
 
@@ -23,48 +23,48 @@ export default function runTask(email, containerProp) {
     function init() {
 
         firstElement.innerHTML = trials
-        firstElement.style.left = randomRange(0, 400) + 'px'
-        firstElement.style.top = randomRange(0, 100) + 'px'
+        firstElement.style.left = randomRange(0, 500) + 'px'
+        firstElement.style.top = randomRange(0, 150) + 'px'
         firstElement.style.zIndex = 99
         firstElement.setAttribute("id", `order_${trials}`);
 
         secondElement = document.createElement("div")
         secondElement.classList.add("circle");
         secondElement.innerHTML = trials-1
-        secondElement.style.left = randomRange(0, 400) + 'px'
-        secondElement.style.top = randomRange(0, 100) + 'px'
+        secondElement.style.left = randomRange(0, 500) + 'px'
+        secondElement.style.top = randomRange(0, 150) + 'px'
         secondElement.style.zIndex = 98
         secondElement.setAttribute("id", `order_${trials-1}`);
 
         thirdElement = document.createElement("div")
         thirdElement.classList.add("circle");
         thirdElement.innerHTML = trials-2
-        thirdElement.style.left = randomRange(0, 400) + 'px'
-        thirdElement.style.top = randomRange(0, 100) + 'px'
+        thirdElement.style.left = randomRange(0, 500) + 'px'
+        thirdElement.style.top = randomRange(0, 150) + 'px'
         thirdElement.style.zIndex = 97
         thirdElement.setAttribute("id", `order_${trials-2}`);
 
         fourthElement = document.createElement("div")
         fourthElement.classList.add("circle");
         fourthElement.innerHTML = trials-3
-        fourthElement.style.left = randomRange(0, 400) + 'px'
-        fourthElement.style.top = randomRange(0, 100) + 'px'
+        fourthElement.style.left = randomRange(0, 500) + 'px'
+        fourthElement.style.top = randomRange(0, 150) + 'px'
         fourthElement.style.zIndex = 96
         fourthElement.setAttribute("id", `order_${trials-3}`);
 
         fifthElement = document.createElement("div")
         fifthElement.classList.add("circle");
         fifthElement.innerHTML = trials-4
-        fifthElement.style.left = randomRange(0, 400) + 'px'
-        fifthElement.style.top = randomRange(0, 100) + 'px'
+        fifthElement.style.left = randomRange(0, 500) + 'px'
+        fifthElement.style.top = randomRange(0, 150) + 'px'
         fifthElement.style.zIndex = 95
         fifthElement.setAttribute("id", `order_${trials-4}`);
 
         sixthElement = document.createElement("div")
         sixthElement.classList.add("circle");
         sixthElement.innerHTML = trials-5
-        sixthElement.style.left = randomRange(0, 400) + 'px'
-        sixthElement.style.top = randomRange(0, 100) + 'px'
+        sixthElement.style.left = randomRange(0, 500) + 'px'
+        sixthElement.style.top = randomRange(0, 150) + 'px'
         sixthElement.style.zIndex = 94
         sixthElement.setAttribute("id", `order_${trials-5}`);
          
@@ -129,8 +129,8 @@ export default function runTask(email, containerProp) {
     const handleOrder = () => {
 
         function handler_1(event){
-                event.target.style.left = randomRange(0, 400) + 'px'
-                event.target.style.top = randomRange(0, 100) + 'px'
+                event.target.style.left = randomRange(0, 500) + 'px'
+                event.target.style.top = randomRange(0, 150) + 'px'
                 event.target.style.zIndex = zArray[0]
                 secondElement.style.zIndex = zArray[5]
                 thirdElement.style.zIndex = zArray[4]
@@ -147,8 +147,8 @@ export default function runTask(email, containerProp) {
         }
 
         function handler_2(event){
-                event.target.style.left = randomRange(0, 400) + 'px'
-                event.target.style.top = randomRange(0, 100) + 'px'
+                event.target.style.left = randomRange(0, 500) + 'px'
+                event.target.style.top = randomRange(0, 150) + 'px'
                 event.target.style.zIndex = zArray[0]
                 firstElement.style.zIndex = zArray[1]
                 thirdElement.style.zIndex = zArray[5]
@@ -182,8 +182,8 @@ export default function runTask(email, containerProp) {
         }
 
         function handler_3(event){
-                event.target.style.left = randomRange(0, 400) + 'px'
-                event.target.style.top = randomRange(0, 100) + 'px'
+                event.target.style.left = randomRange(0, 500) + 'px'
+                event.target.style.top = randomRange(0, 150) + 'px'
                 event.target.style.zIndex = zArray[0]
                 firstElement.style.zIndex = zArray[2]
                 secondElement.style.zIndex = zArray[1]
@@ -200,8 +200,8 @@ export default function runTask(email, containerProp) {
         }
 
         function handler_4(event){
-                event.target.style.left = randomRange(0, 400) + 'px'
-                event.target.style.top = randomRange(0, 100) + 'px'
+                event.target.style.left = randomRange(0, 500) + 'px'
+                event.target.style.top = randomRange(0, 150) + 'px'
                 event.target.style.zIndex = zArray[0]
                 firstElement.style.zIndex = zArray[3]
                 secondElement.style.zIndex = zArray[2]
@@ -218,8 +218,8 @@ export default function runTask(email, containerProp) {
         }
 
         function handler_5(event){
-                event.target.style.left = randomRange(0, 400) + 'px'
-                event.target.style.top = randomRange(0, 100) + 'px'
+                event.target.style.left = randomRange(0, 500) + 'px'
+                event.target.style.top = randomRange(0, 150) + 'px'
                 event.target.style.zIndex = zArray[0]
                 firstElement.style.zIndex = zArray[4] 
                 secondElement.style.zIndex = zArray[3]
@@ -236,8 +236,8 @@ export default function runTask(email, containerProp) {
         }
 
         function handler_6(event){
-            event.target.style.left = randomRange(0, 400) + 'px'
-            event.target.style.top = randomRange(0, 100) + 'px'
+            event.target.style.left = randomRange(0, 500) + 'px'
+            event.target.style.top = randomRange(0, 150) + 'px'
             event.target.style.zIndex = zArray[0]
             firstElement.style.zIndex = zArray[5]
             secondElement.style.zIndex = zArray[4]

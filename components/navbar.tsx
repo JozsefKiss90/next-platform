@@ -2,27 +2,36 @@ import styles from "../styles/Navbar.module.scss"
 import Link from "next/link"
 import {signOut, useSession} from "next-auth/react";
 import { AppContext } from "./layout"
-import {useContext, useState } from "react";
+import {useContext, useEffect, useState } from "react";
 import Image from 'next/image';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css'; 
 import styles2 from "../styles/Index.module.scss"
 import "/node_modules/flag-icons/css/flag-icons.min.css";
+import { useRouter } from "next/router";
 
 interface AppContextValue {
     setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
     isDarkMode: boolean;
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+    languageData: any
+    language: boolean
+    setLanguage: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
 export default function Navbar(){
   
-    const { setIsHovered, setIsLogin, isDarkMode } = useContext(AppContext) as AppContextValue;;
+    const { setIsHovered, setIsLogin, isDarkMode, languageData, language, setLanguage} = useContext(AppContext) as AppContextValue;;
     const { data: session, status } = useSession();
 
     if(session) {
       setIsLogin(true)
     }
+
+    const router = useRouter();
+    const currentUrl = router.asPath;
+    console.log(currentUrl)
+
 
     const grayscaleObj = {
       grayscale_desktop : '',
@@ -43,6 +52,7 @@ export default function Navbar(){
     const [infoIcon, setInfoIcon] = useState("/img/icons/svgInfo_2.svg")
     const [messageIcon, setMessageIcon] = useState("/img/icons/svgEnvelope_2.svg")
     const [logoutIcon, setLogoutIcon] = useState("/img/icons/svgPower_2.svg")
+    const [isMobile, setIsMobile] = useState(false);
 
     const resetIconStates = (targetIconState:string) => {
       setDesktopIcon(targetIconState === 'desktop' ? "/img/icons/svgDesktop.svg" : "/img/icons/svgDesktop_2.svg");
@@ -75,11 +85,51 @@ export default function Navbar(){
         setIsHovered(false);
     };
 
+    useEffect(() => {
+      function handleResize() {
+        setIsMobile(window.innerWidth < 896); 
+      }
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
+
+    useEffect(() => {
+      console.log(isMobile);
+    
+      if (isMobile) {
+        if (currentUrl === "/") {
+          setGrayscale({...grayscaleObj, grayscale_desktop: 'grayscale(0)'});
+          setDesktopIcon("/img/icons/svgDesktop.svg");
+          setIconTitle('Desktop');
+        } else if (currentUrl === "/experiments") {
+          handleIconTitle('Experiments');
+          setExperimentIcon("/img/icons/svgFlask.svg");
+          setGrayscale({...grayscaleObj, grayscale_experiment: 'grayscale(0)'});
+        } else if (currentUrl === "/games") {
+          handleIconTitle('Games');
+          setGameIcon("/img/icons/svgAlien.svg");
+          setGrayscale({...grayscaleObj, grayscale_game: 'grayscale(0)'});
+        } else if (currentUrl === "/user_form") {
+          handleIconTitle('Profile');
+          setProfileIcon("/img/icons/svgProfile.svg");
+          setGrayscale({...grayscaleObj, grayscale_profile: 'grayscale(0)'});
+        } else if (currentUrl === "#") {
+          handleIconTitle('Information');
+          setInfoIcon("/img/icons/svgInfo.svg");
+          setGrayscale({...grayscaleObj, grayscale_info: 'grayscale(0)'});
+        } else if (currentUrl === "#") {
+          handleIconTitle('Messages');
+          setLogoutIcon("/img/icons/svgEnvelope.svg");
+          setGrayscale({...grayscaleObj, grayscale_message: 'grayscale(0)'});
+        } 
+      }
+    }, [isMobile]);
+    
     return (
         <div className={styles.main_container}>
-          <div className={styles.flag}  style={{padding:'8px 15px', border:'2px solid #ff5194', borderRadius: '5px', cursor:'pointer'}} >
-            <span style={{scale:'2.1'}} className="fi fi-us"></span>  
-          </div>
           <nav className={styles.mobile_navbar} style={isDarkMode ? { filter: "grayscale(100%)" } : {}}>
             <div className={styles.mobile_navbar_nav}>
               <h1 className={`${styles.mobile_logo}`}>
@@ -121,7 +171,7 @@ export default function Navbar(){
                     width={50}
                     height={50}
                   />
-                  <span className={styles.link_text}>Dashboard</span>
+                  <span className={styles.link_text}>{language ? languageData.hun.navbar[0] : languageData.eng.navbar[0]}</span>
                 </Link>
               </li>
       
@@ -140,7 +190,7 @@ export default function Navbar(){
                     width={50}
                     height={50}
                   />
-                  <span className={styles.link_text}>Experiments</span>
+                  <span className={styles.link_text}>{language ? languageData.hun.navbar[1] : languageData.eng.navbar[1]}</span>
                 </Link>
               </li>
       
@@ -158,7 +208,7 @@ export default function Navbar(){
                     width={50}
                     height={40}
                   />
-                  <span className={styles.link_text}>Games</span>
+                  <span className={styles.link_text}>{language ? languageData.hun.navbar[2] : languageData.eng.navbar[2]}</span>
                 </Link>
               </li>
       
@@ -177,7 +227,7 @@ export default function Navbar(){
                     height={40}
                     //style={{ marginLeft: '25px' }}
                   />
-                  <span className={styles.link_text}>Profile</span>
+                  <span className={styles.link_text}>{language ? languageData.hun.navbar[3] : languageData.eng.navbar[3]}</span>
                 </Link>
               </li>
       
@@ -195,7 +245,7 @@ export default function Navbar(){
                     width={50}
                     height={50}
                   />
-                  <span className={styles.link_text}>Information</span>
+                  <span className={styles.link_text}>{language ? languageData.hun.navbar[4] : languageData.eng.navbar[4]}</span>
                 </Link>
               </li>
       
@@ -213,7 +263,7 @@ export default function Navbar(){
                     width={50}
                     height={40}
                   />
-                  <span className={styles.link_text}>Messages</span>
+                  <span className={styles.link_text}>{language ? languageData.hun.navbar[5] : languageData.eng.navbar[5]}</span>
                 </Link>
               </li>
       
@@ -235,7 +285,7 @@ export default function Navbar(){
                       width={45}
                       height={45}
                     />
-                    <span className={styles.link_text}>Logout</span>
+                    <span className={styles.link_text}>{language ? languageData.hun.navbar[6] : languageData.eng.navbar[6]}</span>
                   </Link>
                 )}
               </li>
@@ -243,11 +293,25 @@ export default function Navbar(){
             </SimpleBar>
           </nav>
           {session && (
-          <div className={styles2.credentials_container}>
+          <>
+           <div className={styles2.credentials_container}>
             <h4>{session.user?.name}</h4>
             <h4 className={styles2.email}>{session.user?.email}</h4>
           </div>
+            <div onClick={() => setLanguage(!language)}  className={styles.flag}>
+              <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
+                <span style={{scale:"1.5", alignSelf:'center'}} className="fi fi-hu"></span>
+                <p className={language ? styles.flagBorderStyle : styles.flagDefaultStyle}>hun</p>
+              </div>
+              <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
+                <span style={{scale:"1.5",  alignSelf:'center'}}  className="fi fi-gb"></span>
+                <p className={!language ? styles.flagBorderStyle : styles.flagDefaultStyle}>eng</p>
+              </div>
+            </div>
+          </>
+          
         )}
+
         </div>
       );
       

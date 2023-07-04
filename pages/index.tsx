@@ -14,6 +14,8 @@ interface UserProps {
 
 interface AppContextValue {
   isHovered: boolean;
+  languageData: any
+  language: boolean
 } 
 
 export default function Home({session} : UserProps) {
@@ -26,7 +28,7 @@ export default function Home({session} : UserProps) {
 } 
 
 function User({ session } : UserProps) {
-  const { isHovered } = useContext(AppContext)  as AppContextValue;
+  const { isHovered, languageData, language} = useContext(AppContext)  as AppContextValue;
   return(
     <div style={{height:'100vh'}}>
     <Navbar/>
@@ -36,23 +38,23 @@ function User({ session } : UserProps) {
           src="/img/icons/svgAim.svg"
           alt="SVG Icon"
           width={90}
-          height={90}
+          height={90} 
         />      
-        <div className={styles.title_container}>
+        <div className={styles.title_container}> 
           <h1 className={styles.title_text_h1}>ESPORT LAB</h1>
         </div>
         <div className={styles.title_container}>
-          <h4 className={styles.title_text_h4}>Benchmarking e-sport players through video games.</h4>
+          <h4 className={styles.title_text_h4}>{language ? languageData.hun.index[0] : "Benchmarking E-sport players through video games"}.</h4>
         </div>
         <div className={styles.task_button_index_container}>
           <a href="/experiments">
             <button className={styles.task_button_index}>
-              <p>Experiments</p>
+              <p>{language ? languageData.hun.index[1] :"Experiments"}</p>
             </button>
           </a> 
           <a href="/user_form">
             <button className={`${styles.task_button_index} ${styles.second_button}`}>
-              <p>Profile</p>
+              <p>{language ? languageData.hun.index[2] : "Profile"}</p>
             </button>
           </a>
         </div>

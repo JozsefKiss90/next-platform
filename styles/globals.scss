@@ -20,7 +20,7 @@
   --bg-primary: rgba(12, 12, 106, 0.8);
   --bg-secondary: #0a0a4e;
   --transition-speed: 600ms;
-  background-color: #c6c6c6;
+  background-color: #c6c6c6; 
   position: relative;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -48,7 +48,7 @@ body::-webkit-scrollbar-thumb {
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   height: 100%;
   font-weight: 200;
   font-family: 'Batman', monospace;

@@ -61,7 +61,7 @@ export default function gameRanking() {
     { id: 'sc', label: 'Starcraft', state: sc, setState: setSc },
   ];
 
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState(14);
 
   const handleGameChecked = (game: { state: GameStateType, setState: React.Dispatch<React.SetStateAction<GameStateType>> }, checked: boolean) => {
     game.setState({ ...game.state, checked: checked });

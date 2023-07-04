@@ -121,12 +121,13 @@
 
 .credentials_container {
   top: 0;
+  left: auto;
 }
 
 .email {
   position: absolute; 
-  bottom: 0;
-  right: 75px;
+  bottom: -20px;
+  right:0;
   margin: 0 20px 20px 0;
   color: white;
 }
@@ -136,11 +137,16 @@
 @media (max-width: 896px) {
   .index_container {
     width: 350px;
-    top: 15%;
+    top: 10%;
+  }
+
+  .title_text_h1{
+    font-size: 30px;
   }
 
   .title_text_h4 { 
     width: 325px;
+    font-size: 14px;
   }
 
   .task_button_index {
@@ -160,11 +166,17 @@
   .task_button_index_container {
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 20px;
   }
 
   .credentials_container h4{
     position: absolute;
     top: 85%;
     left: 0%;
+  }
+
+  .icon_style_index{
+   position: relative;
+   top: 20px;
   }
 }

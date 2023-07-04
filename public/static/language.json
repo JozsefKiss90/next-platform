@@ -1,0 +1,12 @@
+{
+
+    "hun": {
+        "navbar" : ["Menü", "Kísérletek", "Játékok", "Profil", "Információ", "Kapcsolat", "Kijelentkezés"],
+        "index" : ["Benchmarking módszerek kidolgozása e-sportolók számára, videójátékokon keresztül", "Kísérletek", "Profil"],
+        "experiments": ["Reakció Idő", "Flanker Teszt", "Figyelmi Hálózatok", "Szem-kéz koordináció"],
+        "profile": ["Játék adatok", "Jelenlegi Rang:", "Legjobb Rang:", "Játékidő (óra):", "Életkor: ", "Mentés", "Fiók Törlése", "Biztosan törölni akarod a fiókod?", "Igen", "Nem"]
+    },
+    "eng": {
+        "navbar" : ["Dashboard", "Experiments", "Games", "Profile", "Information", "Contact", "Logout"]
+    }    
+}

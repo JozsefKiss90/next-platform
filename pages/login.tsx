@@ -156,6 +156,7 @@ export default function Login() {
     ): (
       <div>
         <Spinner></Spinner>
+        <h2>Loading...</h2>
       </div>
     )}
     </>

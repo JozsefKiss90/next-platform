@@ -14,6 +14,8 @@ interface TaskProps{
 interface AppContextValue {
     setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
     isDarkMode: boolean;
+    languageData: any
+    language: boolean
   }
 
 export default function UserForm({ email } : TaskProps) {
@@ -23,7 +25,7 @@ export default function UserForm({ email } : TaskProps) {
   
   const [verifyModal, setVerifyModal] = useState(false)
   
-  const { setIsDarkMode } = useContext(AppContext)  as AppContextValue;
+  const { setIsDarkMode, languageData, language } = useContext(AppContext)  as AppContextValue;
   const { isDarkMode } = useContext(AppContext)  as AppContextValue;
 
   const {
@@ -122,7 +124,7 @@ export default function UserForm({ email } : TaskProps) {
         <>
         <Navbar />
         <div className={styles.container} style={verifyModal ? { display: "none" } : {}}>
-          <h1 className={styles.heading}>Game and Player Ranking</h1>
+          <h1 className={styles.heading}>{language ? languageData.hun.profile[0] : "Game and Player Ranking"}</h1>
           {games.map((game) => (
             <div className={styles.gameContainer} key={game.id}>
               <input
@@ -135,7 +137,7 @@ export default function UserForm({ email } : TaskProps) {
               <label htmlFor={game.id} className={styles.label}>{game.label}</label>
               {game.state.checked && (
                 <div className={styles.gameDetails}>
-                  <label htmlFor={`${game.id}Rank`} className={styles.subLabel}>Current Rank:</label>
+                  <label htmlFor={`${game.id}Rank`} className={styles.subLabel}>{language ? languageData.hun.profile[1] : "Current Rank:"}</label>
                   <select
                     id={`${game.id}Rank`}
                     className={styles.select}
@@ -144,7 +146,7 @@ export default function UserForm({ email } : TaskProps) {
                     >
                     {getRankOptions(game.id)}
                     </select>
-                  <label htmlFor={`${game.id}BestRank`} className={styles.subLabel}>Highest Rank:</label>
+                  <label htmlFor={`${game.id}BestRank`} className={styles.subLabel}>{language ? languageData.hun.profile[2] : "Highest Rank:"}</label>
                   <select
                     id={`${game.id}BestRank`}
                     className={styles.select}
@@ -153,7 +155,7 @@ export default function UserForm({ email } : TaskProps) {
                     >
                     {getBestRankOptions(game.id)}
                   </select>
-                  <label htmlFor={`${game.id}Time`} className={styles.subLabel}>Game Time (in hours):</label>
+                  <label htmlFor={`${game.id}Time`} className={styles.subLabel}>{language ? languageData.hun.profile[3] : "Game Time (in hours):"}</label>
                   <input
                     type="number"
                     id={`${game.id}Time`}
@@ -167,7 +169,7 @@ export default function UserForm({ email } : TaskProps) {
           ))}
       
           <div className={styles.gameContainer}>
-            <label htmlFor="age" className={styles.label}>Age: </label>
+            <label htmlFor="age" className={styles.label}>{language ? languageData.hun.profile[4] : "Age: "}</label>
             <input
               type="number"
               id="age"
@@ -179,12 +181,12 @@ export default function UserForm({ email } : TaskProps) {
           <div className={styles.task_button_container}>
             <button className={styles.task_button} onClick={sendGameData}>
                 <p>
-                    Save
+                {language ? languageData.hun.profile[5] : "Save"}
                 </p>
             </button>
             <button style={{padding:'20px 55px'}} className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true), deleteAccount(email)}}>
                 <p>
-                    Delete Account
+                  {language ? languageData.hun.profile[6] : "Delete Account"}
                 </p>
             </button>
             {waringMessage && <p style={{color:'red', marginTop:'10px'}}>{waringMessage}</p>}
@@ -193,21 +195,21 @@ export default function UserForm({ email } : TaskProps) {
 
         </div>
         {verifyModal && <div className={styles.modal}>
-              <p>
-                Are you sure?
+              <p style={{textAlign:"center"}}>
+                {language ? languageData.hun.profile[7] : "Are you sure?"}
               </p> 
               <div className={styles.modal_buttons}>
                 <div>
                   <button>
                     <p>
-                      Yes
+                      {language ? languageData.hun.profile[8] : "Yes"}
                     </p>
                   </button>
                 </div>
                <div>
                 <button onClick={(e)=> {e.preventDefault(); setVerifyModal(false),  setIsDarkMode(false)}}>
                     <p>
-                      No
+                    {language ? languageData.hun.profile[9] : "No"}
                     </p>
                   </button>
                </div>

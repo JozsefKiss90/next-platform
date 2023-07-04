@@ -10,22 +10,22 @@ export default function HandEye({ email } : TaskProps) {
   const trialsRef = useRef(null)
 
   useEffect(() => {
-    async function runTask(sessionEmail : string) {
-      const module = await import("../../public/static/hand_eye/handEye.js")
-      let trialsProp = trialsRef.current
+    async function runTask(sessionEmail: string) {
+      const module = await import("../../public/static/hand_eye/handEye.js");
+      let trialsProp = trialsRef.current;
       if (!trialsProp) {
-        await new Promise((resolve) => {
-          window.requestAnimationFrame(resolve)
-        })
-        trialsProp = trialsRef.current
-      }
-      if (trialsProp) {
-        console.log(trialsRef)
-        module.default(sessionEmail, trialsProp)
+        setTimeout(() => {
+          trialsProp = trialsRef.current;
+          if (trialsProp) {
+            module.default(sessionEmail, trialsProp);
+          }
+        }, 1000);
+      } else {
+        module.default(sessionEmail, trialsProp);
       }
     }
-    runTask(email!)
-  }, [email])
+    runTask(email!);
+  }, [email]);
 
   const { data: session, status } = useSession()
   if (session) {

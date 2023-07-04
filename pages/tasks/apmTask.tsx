@@ -8,21 +8,25 @@ interface TaskProps{
 
 export default function ApmTask({ email } : TaskProps ){
   const [loading, setLoading] = useState(true)
-
+  
   useEffect(() => {
-    async function runTask(sessionEmail: string) {
-      const module = await import('../../public/static/apm/apm.js')
-      let containerProp = document.getElementById('container') 
+    async function runTask() {
+      const module = await import("../../public/static/apm/apm.js");
+      let containerProp = document.getElementById("container");
       if (!containerProp) {
-        await new Promise((resolve) => window.requestAnimationFrame(resolve))
-        containerProp = document.getElementById('container')
-      }
-      if (containerProp) {
-        module.default(sessionEmail, containerProp)
+        setTimeout(() => {
+          containerProp = document.getElementById("container");
+          if (containerProp) {
+            module.default(email, containerProp);
+          }
+        }, 1000);
+      } else {
+        module.default(email, containerProp);
       }
     }
-    runTask(email!)
-  }, [])
+
+    runTask();
+  }, []);
 
   const { data: session, status } = useSession()
   if(session ){
