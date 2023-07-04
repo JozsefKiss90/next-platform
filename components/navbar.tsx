@@ -298,16 +298,21 @@ export default function Navbar(){
             <h4>{session.user?.name}</h4>
             <h4 className={styles2.email}>{session.user?.email}</h4>
           </div>
-            <div onClick={() => setLanguage(!language)}  className={styles.flag}>
-              <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
-                <span style={{scale:"1.5", alignSelf:'center'}} className="fi fi-hu"></span>
-                <p className={language ? styles.flagBorderStyle : styles.flagDefaultStyle}>hun</p>
-              </div>
-              <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
-                <span style={{scale:"1.5",  alignSelf:'center'}}  className="fi fi-gb"></span>
-                <p className={!language ? styles.flagBorderStyle : styles.flagDefaultStyle}>eng</p>
-              </div>
+          <div onClick={() => setLanguage(!language)} className={styles.flag}>
+            <div className={styles.flagItem}>
+              <p className={language ? styles.flagBorderStyle : styles.flagDefaultStyle}>
+                <span className={styles.flagText}>hun</span>
+              </p>
+              <span style={{scale:'1.1'}} className="fi fi-hu"></span>
             </div>
+            <div className={styles.flagItem}>
+              <p className={!language ? styles.flagBorderStyle : styles.flagDefaultStyle}>
+                <span className={styles.flagText}>eng</span>
+              </p>
+              <span style={{scale:'1.1'}} className="fi fi-gb"></span>
+            </div>
+          </div>
+
           </>
           
         )}
