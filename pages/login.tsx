@@ -13,11 +13,13 @@ import Spinner from '../components/spinner';
 interface AppContextValue {
   isLogin: boolean;
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  languageData: any
+  language: boolean
 }
 
 export default function Login() {
 
-  const { isLogin, setIsLogin } = useContext(AppContext)  as AppContextValue;
+  const { isLogin, language, languageData } = useContext(AppContext)  as AppContextValue;
 
   const router = useRouter();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -29,7 +31,7 @@ export default function Login() {
       setIsImageLoaded(true);
     };
   
-  }, [isLogin]);
+  }, [isLogin]); 
 
 
 
@@ -86,8 +88,8 @@ export default function Login() {
         <div className={styles.form_content}>
           <div className={styles.title}>
             <h1>Esport Lab</h1>
-            <p>
-              An experimental platform  for e-sport players
+            <p style={{fontSize:'1.1rem'}}>
+            {language ? languageData.hun.login[0] : "An experimental platform  for e-sport players"}
             </p>
           </div>
 
@@ -127,36 +129,38 @@ export default function Login() {
 
             {/* login buttons */}
             <div className={styles.input_button}>
-              <button type="submit" className={styles.button}>Login</button>
+              <button type="submit" className={styles.button}>{language ? languageData.hun.login[1] : "Login"}</button>
             </div>
             <div className={styles.input_button}>
               <button type="button" onClick={handleGoogleSignin} className={styles.button}>
-                Sign In with Google  <NextImage className={styles.button_icon} src={'/img/icons/google.svg'} width="20" height="20" alt={'image'} ></NextImage>
+              {language ? languageData.hun.login[2] : "Sign In with Google"}
+                <NextImage className={styles.button_icon} src={'/img/icons/google.svg'} width="20" height="20" alt={'image'} ></NextImage>
               </button>
             </div>
             <div className={styles.input_button}>
               <button type="button" onClick={handleFacebookSignin} className={styles.button}>
-                Sign In with Facebook <NextImage className={styles.button_icon_facebook} src={'/img/icons/facebook.svg'} width="25" height="25" alt={'image'} ></NextImage>
+              {language ? languageData.hun.login[3] : "Sign In with Facebook"} 
+                <NextImage className={styles.button_icon_facebook} src={'/img/icons/facebook.svg'} width="25" height="25" alt={'image'} ></NextImage>
               </button>
             </div>
             <div className={styles.singup_link}>
                  <p className={styles.singup}>
-                  Don't have an account yet? 
+                 {language ? languageData.hun.login[4] : "Don't have an account yet?"} 
                 </p>
                 <div>
                 <button type="button" className={styles.singup_button}>
-                  <Link href={'/register'}>Sign Up</Link>
+                  <Link href={'/register'}>{language ? languageData.hun.login[5] : "Sign Up"} </Link>
                 </button>
                 </div>
             </div>
           </form>      
         </div>
       </div>
-    </section>
+    </section> 
     ): (
       <div>
         <Spinner></Spinner>
-        <h2>Loading...</h2>
+        <h2 className={styles.loadingText}>Loading...</h2>
       </div>
     )}
     </>

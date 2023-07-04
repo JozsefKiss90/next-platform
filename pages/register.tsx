@@ -3,8 +3,17 @@ import { useFormik } from 'formik';
 import { registerValidate } from '../lib/validate'
 import { useRouter } from "next/router";
 import styles from '../styles/Forms.module.scss';
+import { AppContext } from "../components/layout"
+import { useContext } from "react";
+
+interface AppContextValue {
+    languageData: any
+    language: boolean
+  }
 
 export default function Register() {
+
+    const {language, languageData } = useContext(AppContext)  as AppContextValue;
 
     const router = useRouter()
 
@@ -39,15 +48,15 @@ export default function Register() {
             <div className={styles.form_container}>
                 <div className={styles.form_content}>
                 <div className={styles.title}>
-                    <h1>Register</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, officia?</p>
+                    <h1>Esport Lab</h1>
+                    <p>{language ? languageData.hun.register[0] : "Register"}</p>
                 </div>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={styles.input_group}>
                         <div className={styles.input_wrapper}>
                             <input 
                             type="text"
-                            placeholder='Username'
+                            placeholder={language ? languageData.hun.register[1] : "Username"}
                             {...formik.getFieldProps('username')}
                             className={styles.input_text}
                             />
@@ -76,7 +85,7 @@ export default function Register() {
                         <div className={styles.input_wrapper}>
                             <input 
                             type = "password"
-                            placeholder='Password'
+                            placeholder={language ? languageData.hun.register[2] :'Password'}
                             {...formik.getFieldProps('password')}
                             className={styles.input_text}
                             />
@@ -90,7 +99,7 @@ export default function Register() {
                         <div className={styles.input_wrapper}>
                             <input 
                             type='password'
-                            placeholder='Confirm Password'
+                            placeholder={language ? languageData.hun.register[3] :'Confirm Password'}
                             {...formik.getFieldProps('cpassword')}
                             className={styles.input_text}
                             />
@@ -103,17 +112,17 @@ export default function Register() {
                     <div style={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}>
                         <div className={styles.input_button}>
                             <button type="submit" className={styles.button}>
-                                Sign Up
+                            {language ? languageData.hun.register[4] : "Sign Up"}
                             </button>
                         </div>
                         <div>
                             <p className={styles.singup}>
-                                Have an account?
+                            {language ? languageData.hun.register[5] :"Have an account?"}
                             </p>
                        </div>
                         <div className={styles.input_button}>
                             <button type="submit" className={styles.button}>
-                                <Link style={{textDecoration: 'none'}} href={'/login'}>Sign In</Link>
+                                <Link style={{textDecoration: 'none'}} href={'/login'}>   {language ? languageData.hun.register[6] :"Sign In"}</Link>
                             </button>
                         </div>
                     </div>

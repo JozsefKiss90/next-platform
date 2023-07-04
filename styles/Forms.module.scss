@@ -23,6 +23,14 @@
   overflow: hidden;
 }
 
+.loadingText {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: white;
+}
+
 
 @media (max-width: 860px) {
   .form_wrapper {
@@ -176,12 +184,12 @@
 
 .button_icon {
   position: absolute;
-  right: 20%;
+  right: 14%;
 }
 
 .button_icon_facebook {
   position: absolute;
-  right: 20%;
+  right: 14%;
 } 
 
 .button:hover {
