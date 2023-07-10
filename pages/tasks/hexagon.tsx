@@ -68,7 +68,7 @@ export default function Page({ email }: TaskProps) {
       <div className={styles.container}>
         <nav className={styles.stopper}>
           <p>Errors: <span id="countErrors">0</span></p>
-          <p id="finishTime">Time: <span ref={appendMinsRef}>00</span>:<span ref={appendSecondsRef}>05</span>:<span ref={appendTensRef}>00</span></p>
+          <p id="finishTime">Time: <span ref={appendMinsRef}>05</span>:<span ref={appendSecondsRef}>00</span>:<span ref={appendTensRef}>00</span></p>
         </nav>
         <canvas id="canvas" ref={canvasRef} width="800" height="500" style={{ border: '1px solid' }} />
       </div>
