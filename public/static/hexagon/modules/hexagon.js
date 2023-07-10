@@ -4,6 +4,7 @@ import {keyDownHandler, keyUpHandler, rightPressed, leftPressed} from "./handler
 import {coordinates, parameters, moveCoordiantes, drawCoordinates} from './coordinates.js'
 import {doesLineInterceptCircle, handleCollisons} from "./collision.js"
 import {startTimer,mins} from "./timer.js"   
+import {touchStartHandler, touchEndHandler, touchRight, touchLeft} from './touchHandlers.js'
 
 export const a = 2 * Math.PI / 6
 export const c = 2 * Math.PI / 180
@@ -18,13 +19,16 @@ export default function runTask(email,redirectCallback, props) {
   let n = 0
 
   let Interval
-  (async function () {
+  (async function () { 
       clearInterval(Interval);
       Interval = setInterval(() => startTimer(props), 10);
   })()
 
-  document.addEventListener("keydown", keyDownHandler, false)
+  document.addEventListener("keydown", keyDownHandler, false) 
   document.addEventListener("keyup", keyUpHandler, false)
+
+  document.addEventListener("touchstart", touchStartHandler, false);
+  document.addEventListener("touchend", touchEndHandler, false);
 
   let errors = document.getElementById("countErrors")
   errors.innerHTML = -1
@@ -41,6 +45,11 @@ export default function runTask(email,redirectCallback, props) {
     moveCoordiantes()
     if (requestSent) { 
       return
+    }
+    if (touchRight) {
+      n += 2;
+    } else if (touchLeft) {
+        n -= 2;
     }
     if(rightPressed) {
       n += 2
