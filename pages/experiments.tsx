@@ -247,11 +247,11 @@ export default function Experiments({ session }: UserProps) {
               <div style={{...slideStyle}}>
                 {mobileWarning ? (
                   <div className={styles.modal_2}>
-                  <p>
+                  <p style={{textAlign:'center'}}>
                     The experiments can be completed on desktop.
                   </p> 
                   <div className={styles.modal_buttons}>
-                    <button onClick={()=>{setmobileWarning(!mobileWarning)}}>
+                    <button style={{marginTop:'20px'}} className={styles.task_button} onClick={()=>{setmobileWarning(!mobileWarning)}}>
                           <p> 
                             Ok
                           </p>
