@@ -194,7 +194,7 @@ and (max-device-width : 2520px) {
     align-items: center;
     position: absolute;
     top: 0;
-    left: 0;
+  
     font-size: 1.2rem;
     color: white;
     margin: 0;
@@ -203,7 +203,7 @@ and (max-device-width : 2520px) {
   
 }
 
-@media only screen and (max-width: 648px) and (max-height: 361px) {
+@media only screen and (min-width: 896px) {
   .container {
     display: flex;
     justify-content: center;
@@ -228,7 +228,7 @@ and (max-device-width : 2520px) {
     color: white;
     font-family: 'Share Tech Mono', monospace;
     top: -70px;
-    left: -30px;
+  
   }
   
 }
