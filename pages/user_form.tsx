@@ -105,11 +105,11 @@ export default function UserForm({ email } : TaskProps) {
 
       const deleteAccount = (email: string | undefined) => {
         console.log('EMAIL IS: ' + email);
-      
+
         let options = {
-          method: "DELETE",
+          method: "PATCH",
           headers: { "Content-type": "application/json; charset=UTF-8" },
-          body: JSON.stringify({ email })
+          body: JSON.stringify({email:email}) 
         };
       
         fetch('/api/deleteAccount', options)
