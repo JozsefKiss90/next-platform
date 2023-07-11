@@ -295,7 +295,6 @@ export default function Navbar(){
           {session && (
           <>
            <div className={styles2.credentials_container}>
-            <h4>{session.user?.name}</h4>
             <h4 className={styles2.email}>{session.user?.email}</h4>
           </div>
           <div onClick={() => setLanguage(!language)} className={styles.flag}>

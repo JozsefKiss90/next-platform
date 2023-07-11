@@ -7,6 +7,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from "next/image";
 import { AppContext } from "../components/layout"
 import { useContext} from "react";
+import Link from "next/link"
 
 interface UserProps {
   session: Session | null | undefined;
@@ -47,16 +48,16 @@ function User({ session } : UserProps) {
           <h4 className={styles.title_text_h4}>{language ? languageData.hun.index[0] : "Benchmarking E-sport players through video games"}.</h4>
         </div>
         <div className={styles.task_button_index_container}>
-          <a href="/experiments">
+          <Link href="/experiments">
             <button className={styles.task_button_index}>
               <p>{language ? languageData.hun.index[1] :"Experiments"}</p>
             </button>
-          </a> 
-          <a href="/user_form">
+          </Link> 
+          <Link href="/user_form">
             <button className={`${styles.task_button_index} ${styles.second_button}`}>
               <p>{language ? languageData.hun.index[2] : "Profile"}</p>
             </button>
-          </a>
+          </Link>
         </div>
     </div>
     </div>
