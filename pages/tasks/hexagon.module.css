@@ -139,39 +139,6 @@
   
 }
 
-@media only screen 
-and (min-device-width : 1080px) 
-and (max-device-width : 2520px) {
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    transform: scale(0.9);
-  }
-  .stopper {
-    max-width: 800px; 
-    height: 30px;
-    background-color: rgb(55, 55, 55);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 1.2rem;
-    color: white;
-    margin: 0;
-    font-family: 'Share Tech Mono', monospace;
-  }
-  
-}
-
 @media only screen and (min-width: 740px) and (max-height: 361px) {
   .container {
     display: flex;
@@ -203,35 +170,6 @@ and (max-device-width : 2520px) {
   
 }
 
-@media only screen and (min-width: 896px) {
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: visible;
-    transform: scale(0.6);
-  }
-  .stopper {
-    max-width: 900px; 
-    height: 30px;
-    background-color: rgb(55, 55, 55);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    font-size: 1.2rem;
-    color: white;
-    font-family: 'Share Tech Mono', monospace;
-    top: -70px;
-  
-  }
-  
-}
 
 @media only screen and (min-width: 740px) and (max-height: 320px) {
   .container {
@@ -259,6 +197,36 @@ and (max-device-width : 2520px) {
     font-size: 1.2rem;
     color: white;
     font-family: 'Share Tech Mono', monospace;
+  }
+  
+}
+
+@media only screen and (min-width: 896px) and (max-height: 416px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: visible;
+    transform: scale(0.6);
+  }
+  .stopper {
+    max-width: 900px; 
+    height: 30px;
+    background-color: rgb(55, 55, 55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-size: 1.2rem;
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+    top: -70px;
+  
   }
   
 }
