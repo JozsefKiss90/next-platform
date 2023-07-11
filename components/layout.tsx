@@ -19,8 +19,7 @@ interface AppContextValue {
   language: boolean
   setLanguage: React.Dispatch<React.SetStateAction<boolean>>;
 }
- 
-console.log(languageData)
+
 export const AppContext= createContext({});
 
 export default function Layout({ children }: LayoutProps) {

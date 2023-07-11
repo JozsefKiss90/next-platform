@@ -6,7 +6,7 @@ import {getRankOptions, getBestRankOptions} from '../hooks/rankOptions'
 import {getSession} from "next-auth/react";
 import { AppContext } from "../components/layout"
 import { useContext } from 'react';
-
+import {signOut} from "next-auth/react";
 interface TaskProps{
     email: string | undefined; 
   }
@@ -102,23 +102,26 @@ export default function UserForm({ email } : TaskProps) {
             setWaringMessage('Required field is missing!');
           }
       }
+
       const deleteAccount = (email: string | undefined) => {
-        console.log('EMAIL IS: ' + email)
-     
-       let options = {
+        console.log('EMAIL IS: ' + email);
+      
+        let options = {
           method: "DELETE",
-          headers: {"Content-type": "application/json; charset=UTF-8"},
-          body: JSON.stringify({email})
-      }
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+          body: JSON.stringify({ email })
+        };
+      
         fetch('/api/deleteAccount', options)
-            .then(res => {
-              console.log('Response:', res);
-              return res.json();
-            })
-            .then(() => setSuccessMessage('Account deleted!'))
-            //.then(() => signOut())
-            .catch(err => console.log(err))
-        }
+          .then(res => {
+            console.log('Response:', res);
+            return res.json();
+          })
+          .then(() => setSuccessMessage('Account deleted!'))
+          .then(() => signOut())
+          .catch(err => console.log(err));
+      };
+      
 
       return (
         <>
@@ -184,7 +187,7 @@ export default function UserForm({ email } : TaskProps) {
                 {language ? languageData.hun.profile[5] : "Save"}
                 </p>
             </button>
-            <button style={{padding:'20px 55px'}} className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true), deleteAccount(email)}}>
+            <button style={{padding:'20px 55px'}} className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true)}}>
                 <p>
                   {language ? languageData.hun.profile[6] : "Delete Account"}
                 </p>
@@ -200,7 +203,7 @@ export default function UserForm({ email } : TaskProps) {
               </p> 
               <div className={styles.modal_buttons}>
                 <div>
-                  <button>
+                  <button onClick={()=>{deleteAccount(email)}}>
                     <p>
                       {language ? languageData.hun.profile[8] : "Yes"}
                     </p>
