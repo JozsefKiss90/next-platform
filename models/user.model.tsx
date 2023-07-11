@@ -6,6 +6,7 @@ interface User extends Document {
   email: string;
   password: string;
   role: string;
+  created: Date
 }
 
 const UserSchema = new Schema<User>({
@@ -24,6 +25,10 @@ const UserSchema = new Schema<User>({
   role: {
     type: String,
     required: true,
+  },
+  created: {
+    type: Date,
+    default: Date.now,
   }
 });
 
