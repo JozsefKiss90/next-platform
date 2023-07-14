@@ -26,7 +26,7 @@ export default function Layout({ children }: LayoutProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLogin, setIsLogin] = useState(false)
-  const [language, setLanguage] = useState(true)
+  const [language, setLanguage] = useState(true) 
 
   return (
     <AppContext.Provider value={{isHovered, setIsHovered, isDarkMode, setIsDarkMode, isLogin, setIsLogin, languageData, language, setLanguage} as AppContextValue}>
