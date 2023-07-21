@@ -12,7 +12,7 @@ type AppPropsWithSession = AppProps & {
     session: Session | null;
   };
 };
-
+ 
 export default function App({ Component, pageProps }: AppPropsWithSession) {
 
   return(
