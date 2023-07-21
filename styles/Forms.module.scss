@@ -1,0 +1,214 @@
+/* Default styles for computer screen */
+.form_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('/img/login_image.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.form_container {
+  background-color: rgba(151, 151, 151, 0.125);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 25%;
+  border: 1px solid rgb(90, 90, 90);
+  border-radius: 20px;
+  padding: 10px 30px;
+  overflow: hidden;
+}
+
+.loadingText {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: white;
+}
+
+
+@media (max-width: 860px) {
+  .form_wrapper {
+    height: 100vh;
+    background-position: center;
+  }
+
+  .form_container {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px;
+    margin: 0 15px; 
+  }
+
+  .form_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+
+.form_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+}
+
+.title h1 {
+  text-align: center;
+  color: #323232;
+  font-family: 'Poppins', sans-serif;
+}
+
+.title p {
+  font-size: 16px;
+  color: #323232;
+  line-height: 20px;
+  padding: 10px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.input_group {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  background: rgba(255, 255, 255);
+  border-radius: 5px;
+  padding: 0 10px;
+  margin: 10px 0;
+  border: none;
+  outline: none; 
+}
+
+.input_group input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  margin: 10px 0 10px 10px;
+  font-family: 'Poppins', sans-serif;
+  color: #727272;
+}
+
+.input_text input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  margin: 10px 0 10px 10px;
+  font-family: 'Poppins', sans-serif;
+  color: #727272;
+}
+
+.input_text::placeholder {
+  color: #727272;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 10px;
+  color: #9f9f9f;
+  width: 18px;
+  cursor: pointer;
+}
+
+.input_group .icon {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 10px;
+  color: #9f9f9f;
+  width: 18px;
+  cursor: pointer;
+}
+
+.input_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-image: linear-gradient(to right, #450176, #a46af5);
+  border-radius: 5px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 10px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.button a {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.singup_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  background-image: linear-gradient(to right, #450176, #a46af5);
+  border-radius: 5px; 
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 10px;
+  margin: 10px auto;
+}
+
+.singup_button:hover {
+  background-image: linear-gradient(to right, #9CBF82, #719E00);
+  border: 1px solid #fcfcfc;
+  color: #4d4d4d;
+}
+
+.button_icon {
+  position: absolute;
+  right: 14%;
+}
+
+.button_icon_facebook {
+  position: absolute;
+  right: 14%;
+} 
+
+.button:hover {
+  background-image: linear-gradient(to right, #5B950A, #BAFE89);
+  border: 1px solid #fafccf;
+  color: #4d4d4d;
+}
+
+.singup {
+  font-size: 15px;
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.singup_link a {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  padding: 0;
+}

@@ -1,0 +1,42 @@
+.container {
+  width: 35%;
+  height: 22px;
+  background-color: #ffffff;
+  border-radius: 50px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  filter: drop-shadow(0 0 6px rgb(80, 255, 104));
+}
+
+.filler_styles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgb(0, 245, 33);
+  border-radius: 50px;
+  transition: width 1s ease-in-out;
+}
+
+.label_styles {
+  position: relative;
+  color: white;
+  font-weight: bold;
+  z-index: 1;
+  border-radius: 50px;
+}
+
+.progress_text {
+    z-index: 1;
+    font-size: 13px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+  .container {
+     width: 60%;
+  }
+}

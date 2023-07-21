@@ -1,4 +1,4 @@
-function getData(responses) {
+export function getData(responses) {
   let incongruents = responses.filter(arr=>arr.flanker_type=='incongruent')
   let congruents = responses.filter(arr=>arr.flanker_type=='congruent')
   let congLoadOne = congruents.filter(arr=>arr.load==1)
@@ -17,7 +17,7 @@ function getData(responses) {
   return data
 }
 
-function calculateRt(collection) {
+export function calculateRt(collection) {
     let rtObj = {
      congruentLowLoadRt : Object.values(collection[0].congruents[0].lowLoad).reduce((total,item) =>{return total + item.rt}, 0) / collection[0].congruents[0].lowLoad.length,
      congruentHighLoadRt : Object.values(collection[0].congruents[1].highLoad).reduce((total,item) =>{return total + item.rt}, 0) / collection[0].congruents[1].highLoad.length,
