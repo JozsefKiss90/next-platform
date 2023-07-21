@@ -32,6 +32,6 @@ Right now I'm looking for deticated esport teams and players who can participate
 
 ## 📧 Contact
 
-For any inquiries or contributions, feel free to reach out.
+For any inquiries or contributions, feel free to reach out through esportkutatas@gmail.com.
 
 ---
