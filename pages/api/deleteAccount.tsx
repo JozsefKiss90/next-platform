@@ -25,7 +25,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   } else if (req.method === 'PATCH') {
     try {
-      console.log("FUCK")
       const email = req.body.email;
       const user = await UserModel.findOne({email:email});
       console.log("user: " + user)

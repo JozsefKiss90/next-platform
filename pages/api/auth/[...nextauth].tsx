@@ -62,7 +62,7 @@ export default NextAuth({
     })
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account}) {
       if (account?.provider === 'credentials') {
         return true; 
       }

@@ -8,26 +8,18 @@ interface TaskProps{
 
 export default function HandEye({ email } : TaskProps) {
   const trialsRef = useRef(null)
+  const { data: session, status } = useSession()
 
   useEffect(() => {
-    async function runTask(sessionEmail: string) {
-      const module = await import("../../public/static/hand_eye/handEye.js");
-      let trialsProp = trialsRef.current;
-      if (!trialsProp) {
-        setTimeout(() => {
-          trialsProp = trialsRef.current;
-          if (trialsProp) {
-            module.default(sessionEmail, trialsProp);
-          }
-        }, 1000);
-      } else {
-        module.default(sessionEmail, trialsProp);
-      }
+    const trials = trialsRef.current;
+    if(trials) {
+      import("../../public/static/hand_eye/handEye.js")
+        .then((module) => {
+          module.default(trials, email);
+        });
     }
-    runTask(email!);
-  }, [email]);
+  }, [session]);
 
-  const { data: session, status } = useSession()
   if (session) {
     return (
       <div id="container-2" className={styles.container_2}>

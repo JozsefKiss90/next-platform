@@ -19,8 +19,8 @@ export default function runTask(email, containerProp) {
     var sixthElement
 
     var container = containerProp
-     
-    function init() {
+     console.log(container)
+    function init(container) {
 
         firstElement.innerHTML = trials
         firstElement.style.left = randomRange(0, 500) + 'px'
@@ -76,7 +76,7 @@ export default function runTask(email, containerProp) {
         container.appendChild(sixthElement)
     }
 
-    init()
+    init(container)
     let mins = 0
     let seconds = 0
     let tens = 0

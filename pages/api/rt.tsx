@@ -6,16 +6,28 @@ import { getToken } from 'next-auth/jwt';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     
+    const session =await getSession({req});
+
     connectToDb()
     .catch(err=>res.json(err)) 
+    
     if(req.method === 'GET') {
-        try { 
-            const rtData = await RtTask.find();
-            res.status(200).json({ data: rtData }); 
-          } catch (error) {
-            res.status(500).json({ message: 'Error fetching data', error });
-          }
+        
+    const session = await getSession({req});
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    
+    if (!token || token !== 'mytoken') {
+        return res.status(403).json({ message: 'Forbidden' });
     }
+    try { 
+        const rtData = await RtTask.find();
+        res.status(200).json({ data: rtData }); 
+        } catch (error) {
+        res.status(500).json({ message: 'Error fetching data', error });
+        }
+    }
+
     else if(req.method === 'POST') {
         const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 

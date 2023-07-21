@@ -2,7 +2,7 @@ import  drawBackgorund  from "./background.js"
 import {drawCenter, drawController} from "./draw.js"
 import {keyDownHandler, keyUpHandler, rightPressed, leftPressed} from "./handlers.js"
 import {coordinates, parameters, moveCoordiantes, drawCoordinates} from './coordinates.js'
-import {doesLineInterceptCircle, handleCollisons} from "./collision.js"
+import {doesLineInterceptCircle, handleCollisons, collisionCoordinates} from "./collision.js"
 import {startTimer,mins} from "./timer.js"   
 import {touchStartHandler, touchEndHandler, touchRight, touchLeft} from './touchHandlers.js'
 
@@ -14,6 +14,7 @@ export let angle = -10
 let requestSent = false;
 
 export default function runTask(email,redirectCallback, props) {
+  
 
   let color
   let n = 0
@@ -59,12 +60,12 @@ export default function runTask(email,redirectCallback, props) {
     }
     let gapped 
     angle += -1
-    const intersects = doesLineInterceptCircle(circleCenter, 21)
+    const intersects = doesLineInterceptCircle(circleCenter, 24)
     color = intersects ? "red" : "white"
     let currentState = intersects
     previousState == false && currentState == true ? errors.innerHTML ++ : errors.innerHTML
     intersects == true ? previousState = true : previousState = false
-    ctx.clearRect(0,0,canvas.width,canvas.height)
+    ctx.clearRect(0, 0, props.canvas.width, props.canvas.height);
     ctx.save()
     ctx.translate(400, 250)
     ctx.globalCompositeOperation = "source-over"
@@ -72,6 +73,15 @@ export default function runTask(email,redirectCallback, props) {
     await drawCoordinates(ctx)
     await drawCenter(70, angle,ctx)
     await drawController(n, color,ctx) 
+    Object.values(collisionCoordinates).forEach(coord => {
+      coord.forEach(point => {
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, 5, 0, 2 * Math.PI, false);
+          ctx.fillStyle = 'red';  // color the points green
+          ctx.fill();
+          ctx.closePath();
+      });
+  });
     ctx.restore()
     handleCollisons(coordinates, gapped, parameters)
     if (mins < 0 && !requestSent) { 

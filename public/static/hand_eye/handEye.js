@@ -84,7 +84,7 @@ export default function runTask(email, trialsProp) {
 
     var myIntervalX = setInterval(function () {
         console.log(trials)
-        if(trials == 2) {   
+        if(trials == 10) {   
             clearInterval(myIntervalX)
             for (let i = 0; i < performanceX.length; i++) {
                 performance.push(performanceX[i] + performanceY[i])

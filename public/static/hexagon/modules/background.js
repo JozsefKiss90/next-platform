@@ -70,9 +70,9 @@ async function drawQuadrantSix(ctx) {
     angle *= Math.PI / 180
     ctx.save()
     ctx.translate(-400, -250)
-    ctx.translate(canvas.width/2, canvas.height/2); 
+    ctx.translate(ctx.canvas.width/2, ctx.canvas.height/2); 
     ctx.rotate(angle); 
-    ctx.translate(-(canvas.width/2), -(canvas.height/2));
+    ctx.translate(-(ctx.canvas.width/2), -(ctx.canvas.height/2));
     await drawQuadrantOne(ctx)
     await drawQuadrantTwo(ctx)
     await drawQuadrantThree(ctx)

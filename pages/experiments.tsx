@@ -127,7 +127,7 @@ export default function Experiments({ session }: UserProps) {
                   {disableLink ? (
                     <Link href=""><h2>{language ? languageData.hun.experiments[0] :"Reaction Time"}</h2></Link>
                   ) : (
-                    <Link href="/tasks/rtTask">
+                    <Link href="/tasks/reactionTime">
                       <h2>{language ? languageData.hun.experiments[0] :"Reaction Time"}</h2>
                     </Link>
                   )}
@@ -245,16 +245,16 @@ export default function Experiments({ session }: UserProps) {
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/visualMemoryTask'}>
-                    <h2>{language ? languageData.hun.experiments[3] :"Visual Memory"}</h2>
+                    <h2>{language ? languageData.hun.experiments[4] :"Visual Memory"}</h2>
                   </a>  
                   <Image
                       className={styles.icon_style}
-                      src="/img/icons/svgAim.svg"
+                      src="/img/icons/svgWm.svg"
                       alt="SVG Icon"
                       width={60}
                       height={60}
                     />      
-                <a href={'/tasks/handEyeTask'}>
+                <a href={'/tasks/simonTask'}>
                   <button className={styles.task_button}>
                       <p>
                         Start

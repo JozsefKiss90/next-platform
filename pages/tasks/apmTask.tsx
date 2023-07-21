@@ -1,5 +1,5 @@
 import { useSession, getSession } from "next-auth/react"
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from './apm.module.css'
 
 interface TaskProps{
@@ -7,29 +7,25 @@ interface TaskProps{
 }
 
 export default function ApmTask({ email } : TaskProps ){
-  const [loading, setLoading] = useState(true)
+  const { data: session, status } = useSession()
+  const containerRef = useRef(null);
   
   useEffect(() => {
-    async function runTask() {
-      const module = await import("../../public/static/apm/apm.js");
-      let containerProp = document.getElementById("container");
-      if (!containerProp) {
-        setTimeout(() => {
-          containerProp = document.getElementById("container");
-          if (containerProp) {
-            module.default(email, containerProp);
-          }
-        }, 1000);
-      } else {
-        module.default(email, containerProp);
-      }
-    }
+    const container = containerRef.current
+    console.log(container)
+    if(container) {
+      import("../../public/static/apm/apm.js")
+        .then((module) => {
+          module.default(email, container);
+        });
+    } 
+  }, [containerRef, session]);
 
-    runTask();
-  }, []);
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  } 
 
-  const { data: session, status } = useSession()
-  if(session ){
+  if(session && containerRef){
     return(
       <div id="container" className={styles.container}>
         <nav className={styles.stopper}>
@@ -55,5 +51,4 @@ export async function getServerSideProps({ req } : any){
   return {
     props: { email }
   }
-
-}
+} 
