@@ -1,4 +1,3 @@
-Benchmarking platform for e-sport players. The app utilize video games and cognitive psychological experiments to investigate attentional processes and skill learning. I used Next.js, MongoDB, OAuth 2.0 and SCSS for development. You can visit the site [`here`](https://platform-app.herokuapp.com).
 # Esport Lab Benchmarking Platform
 
 This application serves as a benchmarking platform for eSports players. Leveraging the thrilling medium of video games and cognitive psychological experiments, the platform lets us to explore the intricate details of attentional processes and skill acquisition.
