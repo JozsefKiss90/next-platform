@@ -3,7 +3,7 @@ import {drawCenter, drawController} from "./draw.js"
 import {keyDownHandler, keyUpHandler, rightPressed, leftPressed} from "./handlers.js"
 import {coordinates, parameters, moveCoordiantes, drawCoordinates} from './coordinates.js'
 import {doesLineInterceptCircle, handleCollisons, collisionCoordinates} from "./collision.js"
-import {startTimer,mins} from "./timer.js"   
+import {startTimer} from "./timer.js"   
 import {touchStartHandler, touchEndHandler, touchRight, touchLeft} from './touchHandlers.js'
 
 export const a = 2 * Math.PI / 6
