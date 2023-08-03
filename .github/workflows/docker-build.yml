@@ -27,4 +27,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: username/repo:latest # Replace with your Docker Hub username and repository name
+        tags: jozsefkiss90/esportlab:latest
