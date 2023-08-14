@@ -14,55 +14,54 @@ enum Role {
   admin = "admin",
 }
 
-const { GITHUB_ID, GITHUB_SECRET, GOOGLE_ID, GOOGLE_SECRET,FACEBOOK_ID, FACEBOOK_SECRET} = process.env;
-if (!process.env.NEXTAUTH_SECRET) {
-  throw new Error("Please provide process.env.NEXTAUTH_SECRET");
+const providers = [];
+
+if (process.env.GITHUB_ID && process.env.GITHUB_SECRET) {
+  providers.push(GitHubProvider({
+    clientId: process.env.GITHUB_ID,
+    clientSecret: process.env.GITHUB_SECRET
+  }));
 }
+
+if (process.env.GOOGLE_ID && process.env.GOOGLE_SECRET) {
+  providers.push(GoogleProvider({
+    clientId: process.env.GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_SECRET
+  }));
+}
+
+if (process.env.FACEBOOK_ID && process.env.FACEBOOK_SECRET) {
+  providers.push(FacebookProvider({
+    clientId: process.env.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET
+  }));
+}
+providers.push(CredentialsProvider({ 
+  name: "Credentials",
+  id: "credentials",
+  credentials: {
+    email: { label: "Email", type: "text" },
+    password: { label: "Password", type: "password" },
+  },
+  async authorize(credentials:any, req) {
+    await connectToDb()
+      .catch(error => { error: 'connection failed'; });
+    const result = await User.findOne({ email: credentials.email });
+    if (!result) {
+      throw new Error('no user found');
+    }
+    const { email, password } = credentials;
+    return userService.signInCredentials(email, password);      
+  },
+}));
 
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
-<<<<<<< HEAD
- 
-=======
-  
->>>>>>> deploy
   session: {
     strategy: "jwt", 
     maxAge: 3000,
   },
-    providers: [
-    GitHubProvider({
-      clientId: GITHUB_ID!,
-      clientSecret: GITHUB_SECRET!,
-    }),
-    GoogleProvider({
-      clientId: GOOGLE_ID!,
-      clientSecret: GOOGLE_SECRET!,
-    }),
-    FacebookProvider({
-      clientId: FACEBOOK_ID!,
-      clientSecret: FACEBOOK_SECRET!
-    }),
-    CredentialsProvider({ 
-      name: "Credentials",
-      id: "credentials",
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials:any, req) {
-        await connectToDb()
-          .catch(error => { error: 'connection failed'; });
-        const result = await User.findOne({ email: credentials.email });
-        if (!result) {
-          throw new Error('no user found');
-        }
-        const { email, password } = credentials;
-        return userService.signInCredentials(email, password);      
-      },
-   
-    })
-  ],
+    providers: providers,
   callbacks: {
     async signIn({ user, account}) {
       if (account?.provider === 'credentials') {
