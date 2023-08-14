@@ -14,6 +14,10 @@ enum Role {
   admin = "admin",
 }
 
+if (!process.env.NEXTAUTH_SECRET) {
+  throw new Error("Please provide process.env.NEXTAUTH_SECRET");
+}
+
 const providers = [];
 
 if (process.env.GITHUB_ID && process.env.GITHUB_SECRET) {
