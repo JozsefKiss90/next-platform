@@ -57,11 +57,11 @@ export default function Experiments({ session }: UserProps) {
 
 
   useEffect(() => {
-    fetch('/api/rt')
+    fetch('/api/gameStats')
       .then(res => res.json())
       .then(data => setTaskData(data.data))
       .catch(err => console.log(err)) 
-  }, []);
+  }, []);  
 
   useEffect(() => {
     if (taskData !== undefined && session?.user?.email) {

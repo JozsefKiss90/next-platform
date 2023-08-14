@@ -8,7 +8,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css'; 
 import styles2 from "../styles/Index.module.scss"
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"; 
 
 interface AppContextValue {
     setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,7 +22,7 @@ interface AppContextValue {
 export default function Navbar(){
   
     const { setIsHovered, setIsLogin, isDarkMode, languageData, language, setLanguage} = useContext(AppContext) as AppContextValue;;
-    const { data: session, status } = useSession();
+    const { data: session, status } = useSession(); 
 
     if(session) {
       setIsLogin(true)
@@ -92,7 +92,7 @@ export default function Navbar(){
       handleResize();
       window.addEventListener("resize", handleResize);
       return () => {
-        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("resize", handleResize); 
       };
     }, []);
 

@@ -33,8 +33,6 @@ export default function Login() {
   
   }, [isLogin]); 
 
-
-
   async function handleGoogleSignin() {
     const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
     if (result?.error) {

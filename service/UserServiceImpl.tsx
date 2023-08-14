@@ -6,11 +6,13 @@ import { UserService } from './UserService';
 export class UserServiceImpl implements UserService {
   async signInCredentials(email: string, password: string): Promise<User> {
     const user = await UserModel.findOne({ email });
-
-    if (!user) {
+    
+    if (!user) { 
       throw new Error('Invalid email or password');
     }
-
+    
+    //user.role = "user" as any; 
+    
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {

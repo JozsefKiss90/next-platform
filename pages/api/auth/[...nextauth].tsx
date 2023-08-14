@@ -8,7 +8,6 @@ import User from '../../../models/user.model'
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "../../../lib/mongodb"
 import { userService  } from "../../../service/UserServiceImpl"
-import { URL } from 'url';
 
 enum Role {
   user = "user",
@@ -23,11 +22,10 @@ if (!process.env.NEXTAUTH_SECRET) {
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   
-  //needs
   session: {
     strategy: "jwt", 
     maxAge: 3000,
- },
+  },
     providers: [
     GitHubProvider({
       clientId: GITHUB_ID!,
@@ -68,14 +66,6 @@ export default NextAuth({
       }
       user.role = Role.user 
       return true; 
-    },
-    async redirect({ url, baseUrl }) { 
-      if (url.startsWith('/')) return `${baseUrl}${url}`;
-      const parsedUrl = new URL(url);
-      if (parsedUrl.origin === baseUrl || parsedUrl.origin === 'https://platform-app.herokuapp.com') {
-        return url;
-      }
-      return baseUrl;
     },
     async jwt({ token, user}) {
       if (user) { 

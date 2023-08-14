@@ -20,7 +20,8 @@ export default function runTask(email, containerProp) {
 
     var container = containerProp
      console.log(container)
-    function init(container) {
+
+    function init(container) { 
 
         firstElement.innerHTML = trials
         firstElement.style.left = randomRange(0, 500) + 'px'
@@ -261,4 +262,5 @@ export default function runTask(email, containerProp) {
     }
 
     handleOrder()
+    //return takarító függvény
 }
