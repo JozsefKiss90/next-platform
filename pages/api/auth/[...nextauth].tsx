@@ -21,11 +21,15 @@ if (!process.env.NEXTAUTH_SECRET) {
 
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
+<<<<<<< HEAD
  
+=======
+  
+>>>>>>> deploy
   session: {
     strategy: "jwt", 
     maxAge: 3000,
- },
+  },
     providers: [
     GitHubProvider({
       clientId: GITHUB_ID!,
@@ -60,20 +64,11 @@ export default NextAuth({
     })
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account}) {
       if (account?.provider === 'credentials') {
         return true; 
       }
-      await connectToDb()
-          .catch(error => { error: 'connection failed'; });
-      const userEmail = profile?.email
-      const userByEmail = await User.findOne({email: userEmail})
-      if(!userByEmail) {
-        console.log("USER DOESNT EXIST")
-        return false; 
-      }
-      await User.findByIdAndUpdate(userByEmail._id, { role: Role.user });
-
+      user.role = Role.user 
       return true; 
     },
     async jwt({ token, user}) {
@@ -87,7 +82,6 @@ export default NextAuth({
       if (token && session.user) {
         session.user.role = token.role;
       }
-      
       return session;
     },
   },

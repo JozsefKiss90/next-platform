@@ -1,72 +1,73 @@
-import {useSession, getSession} from "next-auth/react";
-import { useEffect } from 'react';
+import { useSession, getSession } from "next-auth/react";
+import { useEffect, useRef } from 'react';
 import styles from "./hexagon.module.css"
 import { useRouter } from 'next/router';
 
-interface TaskProps{
+interface TaskProps  {
   email: string | undefined;
 }
 
-export default function Page({ email } : TaskProps) {
+export default function Page({ email }: TaskProps) {
   const router = useRouter();
-  
+
   const handleRedirect = () => {
-    router.push('/')
+    router.push('/');
   };
-   
-  useEffect(() => {
-    async function runTask(sessionEmail : string, redirectCallback: () => void) {
-      const module = await import('../../public/static/hexagon/modules/hexagon'); 
-      let canvas = document.getElementById("canvas");
-      let appendTens = document.getElementById("tens");
-      let appendSeconds = document.getElementById("seconds");
-      let appendMins = document.getElementById("mins");
-      let props = {
-        canvas : canvas,
-        tens : appendTens,
-        seconds: appendSeconds,
-        mins : appendMins,
-      }
-      if (!props.canvas || !props.mins || props.tens || props.seconds) {
-        await new Promise((resolve) => window.requestAnimationFrame(resolve))
-        canvas = document.getElementById('canvas')
-        appendTens = document.getElementById("tens");
-        appendSeconds = document.getElementById("seconds");
-        appendMins = document.getElementById("mins");
-        props = {
-          canvas : canvas,
-          tens : appendTens,
-          seconds: appendSeconds,
-          mins : appendMins,
-        }
-      }
-      if (props.canvas && props.mins && props.tens && props.seconds) {
-        module.default(sessionEmail,redirectCallback, props)
-      }
-    }
-    runTask(email!,handleRedirect); 
-  }, []);   
- 
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const appendTensRef = useRef<HTMLSpanElement>(null);
+  const appendSecondsRef = useRef<HTMLSpanElement>(null);
+  const appendMinsRef = useRef<HTMLSpanElement>(null);
   const { data: session, status } = useSession();
-  if(session){
-    return( 
+
+  useEffect(() => {
+    async function runTask(sessionEmail: string, redirectCallback: () => void) {
+      if (!canvasRef.current || !appendTensRef.current || !appendSecondsRef.current || !appendMinsRef.current) return;
+
+      const module = await import('../../public/static/hexagon/modules/hexagon');
+      const hexagonModule = module.default; // Access the default export
+
+      const props = {
+        canvas: canvasRef.current,
+        tens: appendTensRef.current,
+        seconds: appendSecondsRef.current,
+        mins: appendMinsRef.current,
+      };
+
+      hexagonModule(sessionEmail, redirectCallback, props);
+    }
+
+    if (session) {
+      runTask(email!, handleRedirect);
+    }
+  }, [session, canvasRef]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  } 
+
+  if(session) { 
+    return (
       <div className={styles.container}>
         <nav className={styles.stopper}>
-            <p>Errors: <span id="countErrors">0</span></p>
-            <p id="finishTime">Time: <span id="mins">00</span>:<span id="seconds">05</span>:<span id="tens">00</span></p>
+          <p>Errors: <span id="countErrors">0</span></p>
+          <p id="finishTime">Time: <span ref={appendMinsRef}>05</span>:<span ref={appendSecondsRef}>00</span>:<span ref={appendTensRef}>00</span></p>
         </nav>
-        <canvas id="canvas" width="800" height="500" style={{border: '1px solid'}}/>
-       </div>
-      )
+        <canvas id="canvas" ref={canvasRef} width="800" height="500" style={{ border: '1px solid' }} />
+      </div>
+    );
   }
+
+  return null;
 }
- 
-export async function getServerSideProps({ req } : any){
+
+export async function getServerSideProps({ req }: any) {
   const session = await getSession({ req })
   const email = session?.user?.email || null
-  if(!session){
+
+  if (!session) {
     return {
-      redirect : {
+      redirect: {
         destination: '/login',
         permanent: false
       }
@@ -76,6 +77,4 @@ export async function getServerSideProps({ req } : any){
   return {
     props: { email }
   }
-
 }
-

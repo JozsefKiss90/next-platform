@@ -3,7 +3,7 @@ import mongoose, { Document, Model, Schema } from 'mongoose';
 interface Hexagon extends Document {
   errorCount: number;
   email: string;
-  time: Date;
+ // time: Date;
 }
 
 let HexagonSchema: Model<Hexagon>;
@@ -11,7 +11,7 @@ try {
   HexagonSchema = mongoose.model<Hexagon>('hexagon_schema');
 } catch (error) {
   HexagonSchema = mongoose.model<Hexagon>(
-    'hexagon_schema',
+    'hexagon_schema', 
     new Schema<Hexagon>({
       errorCount: {
         type: Number,
@@ -21,7 +21,7 @@ try {
         type: String,
         required: true,
       },
-      time: { type: Date, default: Date.now },
+      //time: { type: Date, default: Date.now },
     }, { collection: 'hexagon_schema' })
   );
 }

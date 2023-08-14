@@ -1,3 +1,4 @@
+import { boolean } from 'mathjs';
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
 interface User extends Document {
@@ -5,6 +6,7 @@ interface User extends Document {
   email: string;
   password: string;
   role: string;
+  created: Date
 }
 
 const UserSchema = new Schema<User>({
@@ -24,6 +26,10 @@ const UserSchema = new Schema<User>({
     type: String,
     required: true,
   },
+  created: {
+    type: Date,
+    default: Date.now,
+  }
 });
 
 const UserModel: Model<User> =

@@ -7,7 +7,8 @@
     -webkit-border-radius:50px;
     -khtml-border-radius:50px;
     color:#fff;
-    background-color:#b9c1de;
+    background-color:#0086c9;
+    border: 2px solid whitesmoke;
     position: absolute;
 }
 
@@ -20,22 +21,25 @@
     -webkit-border-radius:50px;
     -khtml-border-radius:50px;
     color:#fff;
-    background-color:#b9c1de;
+    background-color:#0086c9;
+    border: 2px solid whitesmoke;
     position: absolute;
 }
 
 
 .textElement {
     position: absolute;
-    bottom: 300px;
+    bottom: 330px;
     font-size: 1.1rem;
     font-weight: 500;
+    text-align: justify;
+    color: rgb(225, 241, 255);
 }
 
 .container {
-    position: relative; /* Important */
-    width: 210px; /* Any width */
-    height: 210px; /* Any height */
+    position: relative;
+    width: 210px; 
+    height: 210px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,14 +48,16 @@
 }
 
 .container_2 {
-    position: relative;
-    width: 600px; /* Any width */
-    height: 300px; /* Any height */
-    background-color: green;
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(1, 226, 1);
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 6rem;
 }
 
 .lineX {
@@ -86,7 +92,7 @@
 .countdown {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 560px;
     color: #fff;
     font-size: 2rem;
     font-weight: 600;

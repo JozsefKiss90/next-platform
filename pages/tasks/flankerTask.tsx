@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'; 
 import {getSession} from "next-auth/react";
-import 'jspsych/css/jspsych.css'
+import 'jspsych/css/jspsych.css' 
 
 interface TaskProps {
-  email: string | undefined;
+  email: string | undefined; 
 }
 
 export default function Flanker({ email} : TaskProps ) {

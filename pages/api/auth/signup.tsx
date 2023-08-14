@@ -6,16 +6,15 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     connectToDb()
     .catch(err=>res.json(err)) 
-
+ 
     if(req.method === 'POST'){
         if(!req.body) return res.status(404).json({error:'form data is missing'})
-       
+        console.log( req.body)
         const {username,email, password} = req.body
         const checkDuplicate = await User.findOne({email})
-        console.log(checkDuplicate)
         if(checkDuplicate) return res.status(402).json({message: 'user already exists'})
 
-        User.create({username, email, password:await hash(password,12)}, function(err, data ){
+        User.create({username, email, password:await hash(password,12), role:"user"}, function(err, data ){
             if(err) return res.status(404).json({err})
             res.status(201).json({status:true, user:data})
         })

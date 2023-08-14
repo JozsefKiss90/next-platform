@@ -16,7 +16,6 @@ export default function NetworkTask({ email } : TaskProps) {
       const module = await import('../../public/static/networks/network.js');
       module.default(sessionEmail);
     }
-    console.log('ran')
     runTask(email!);
   }, [setLoading]);
 

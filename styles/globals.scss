@@ -1,15 +1,58 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@font-face {
+  font-family: 'Batman';
+  src: url('/fonts/BruceForeverRegular-X3jd2.ttf') format('opentype');
+  /* You can also specify other font properties here */
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+:root {
+  font-size: 16px;
+  font-family: 'Batman';
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: rgba(12, 12, 106, 0.8);
+  --bg-secondary: #0a0a4e;
+  --transition-speed: 600ms;
+  background-color: #c6c6c6; 
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+@media (min-width: 375px) {
+
+}
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #6649b8;
+}
+.simplebar-content {
+  height: 100% !important;
+}
+
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   height: 100%;
+  font-weight: 200;
+  font-family: 'Batman', monospace;
+  //font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -20,6 +63,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    
 }
 
 a {
@@ -53,4 +97,53 @@ nav ul,nav li {
 outline:0;
 margin:0;
 padding:0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #323232;;
+  -webkit-box-shadow:  rgba(255, 255, 255);
+  transition: background-color 5000s ease-in-out 0s;
+  font-family: 'Poppins', sans-serif;
+}
+
+.credentials_container {
+  position: relative;
+  height: 100vh; /* or any desired height */
+}
+
+.email {
+position: absolute;
+bottom: 0;
+right: 0;
+margin: 0 20px 20px 0;
+color: white;
+}
+
+@media (max-width: 391px) and (max-height: 860px) {
+  .simplebar-track {
+    background-color: #0a0a4e;
+  }
+  
+  .simplebar-scrollbar {
+    background-color: #ff3939;
+    border-radius: 5px;
+  }
+
+  .simplebar-scrollbar::before {
+    background-color:  #ff3939 !important;
+    opacity: 1 !important;
+  }
+
+  .simplebar-scrollbar:hover::before {
+    background-color:  #ff3939 !important;
+  }
 }

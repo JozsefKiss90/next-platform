@@ -1,6 +1,6 @@
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 
-import surveyText from '@jspsych/plugin-survey-text';
+import surveyText from '@jspsych/plugin-survey-text'; 
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
 import instructions from '@jspsych/plugin-instructions';
 import jsPsychPreload from '@jspsych/plugin-preload';
@@ -182,10 +182,10 @@ timeline.push(instructionOne);
 var instructionTwo = {
   type: instructions ,
   pages: [
-  '<p style="text-align: justify; margin: 0 100px;">Ebben a kísérletben öt nyilat fogsz egymás mellett látni, amelyek jobbra vagy balra mutatnak (pl. &larr; &larr; &larr; &larr; &larr;, vagy &mdash; &mdash; &rarr; &mdash; &mdash;) <br> és a képernyő tetején vagy alján jelenhetnek meg.</p>',
+  '<p style="text-align: center; margin: 0 100px;">Ebben a kísérletben öt nyilat fogsz egymás mellett látni, amelyek jobbra  vagy balra mutatnak <br> (pl. &larr; &larr; &larr; &larr; &larr;, vagy &mdash; &mdash; &rarr; &mdash; &mdash;) <br> és a képernyő tetején vagy alján jelenhetnek meg.</p>',
   '<p style="text-align: justify;  margin: 0 100px;">A feladatod jelezni, hogy a középen lévő nyíl melyik irányba mutat az ennek megefelelő irányú gombok lenyomásával.</p><p style="font-size: 60px;">&larr; &larr; <span style="color: rgba(0, 162, 232, 1);">&rarr;</span> &larr; &larr;</p>' +
   '<br>' + 
-  '<img style=" margin: 20px; width:200px;" class="center-img" src="/img/buttons.png"></img>'
+  '<img style="background-color:grey margin: 20px; width:200px;" class="center-img" src="/img/buttons.png"></img>'
   ],
   show_clickable_nav: true,
   button_label_previous: "Vissza",

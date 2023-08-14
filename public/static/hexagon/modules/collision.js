@@ -2,7 +2,7 @@ import {coordinates, parameters} from './coordinates.js'
 import {angle, a} from './hexagon.js'
 
 
-const collisionCoordiantes = {
+const collisionCoordinates = {
   A : [{x : 0, y : 0}, {x : 0, y : 0}],
   B : [{x : 0, y : 0}, {x : 0, y : 0}],
   C : [{x : 0, y : 0}, {x : 0, y : 0}],
@@ -19,10 +19,10 @@ function doesLineInterceptCircle(C, radius) {
 
   for (let i = 0; i < 6; i++) {
     detectors = {...detectors, 
-      ['v1x_' + `${i}`] : Object.values(collisionCoordiantes)[i][1].x -  Object.values(collisionCoordiantes)[i][0].x, 
-      ['v1y_' + `${i}`]  : Object.values(collisionCoordiantes)[i][1].y - Object.values(collisionCoordiantes)[i][0].y,
-      ['v2x_' + `${i}`]  : C.x - Object.values(collisionCoordiantes)[i][0].x,
-      ['v2y_' + `${i}`]  : C.y - Object.values(collisionCoordiantes)[i][0].y,
+      ['v1x_' + `${i}`] : Object.values(collisionCoordinates)[i][1].x -  Object.values(collisionCoordinates)[i][0].x, 
+      ['v1y_' + `${i}`]  : Object.values(collisionCoordinates)[i][1].y - Object.values(collisionCoordinates)[i][0].y,
+      ['v2x_' + `${i}`]  : C.x - Object.values(collisionCoordinates)[i][0].x,
+      ['v2y_' + `${i}`]  : C.y - Object.values(collisionCoordinates)[i][0].y,
     }
   }
   
@@ -40,12 +40,12 @@ function doesLineInterceptCircle(C, radius) {
   Object.keys(distances).forEach((key,i) => {
     let j = i*4 
     if(Object.values(units)[i] >= 0 && Object.values(units)[i] <= 1) {
-      distances[key] = (Object.values(collisionCoordiantes)[i][0].x + Object.values(detectors)[j] * Object.values(units)[i] - C.x) ** 2
-        + (Object.values(collisionCoordiantes)[i][0].y + Object.values(detectors)[j+1] * Object.values(units)[i] - C.y) ** 2;
+      distances[key] = (Object.values(collisionCoordinates)[i][0].x + Object.values(detectors)[j] * Object.values(units)[i] - C.x) ** 2
+        + (Object.values(collisionCoordinates)[i][0].y + Object.values(detectors)[j+1] * Object.values(units)[i] - C.y) ** 2;
     } else {
       distances[key] = Object.values(units)[i][1] < 0 ?
-        (Object.values(collisionCoordiantes)[i][0].x - C.x) ** 2 + (Object.values(collisionCoordiantes)[i][0].y - C.y) ** 2 :
-        (Object.values(collisionCoordiantes)[i][1].x- C.x) ** 2 + (Object.values(collisionCoordiantes)[i][1].y - C.y) ** 2;
+        (Object.values(collisionCoordinates)[i][0].x - C.x) ** 2 + (Object.values(collisionCoordinates)[i][0].y - C.y) ** 2 :
+        (Object.values(collisionCoordinates)[i][1].x- C.x) ** 2 + (Object.values(collisionCoordinates)[i][1].y - C.y) ** 2;
     }
   })
 
@@ -58,86 +58,86 @@ let len = 6
 
 function collisionOnX() {  
   for (let i = 1; i < len; i++) { 
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.x * Math.cos(a * (parameters.rndInt - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.x * Math.sin(a * (parameters.rndInt - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.x * Math.cos(a * (parameters.rndInt - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.x * Math.sin(a * (parameters.rndInt - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.x * Math.cos(a * (parameters.rndInt - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.x * Math.sin(a * (parameters.rndInt - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.x * Math.cos(a * (parameters.rndInt - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.x * Math.sin(a * (parameters.rndInt - (len - 1 - i)) + angle * Math.PI / 180)
   }
 } 
 
 function collisionOnX_2() {
   for (let i = 2; i < len; i++) {
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.x * Math.cos(a * (parameters.rndInt - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.x * Math.sin(a * (parameters.rndInt - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.x * Math.cos(a * (parameters.rndInt - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.x * Math.sin(a * (parameters.rndInt - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.x * Math.cos(a * (parameters.rndInt - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.x * Math.sin(a * (parameters.rndInt - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.x * Math.cos(a * (parameters.rndInt - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.x * Math.sin(a * (parameters.rndInt - (len - 1 - i)) + angle * Math.PI / 180)
   }
 }
 
 function gappedColllisionOnX() {
   for (let i = 0; i < len-1; i++) {  
     if(i == 1) continue
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.x * Math.cos(a * (len - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.x * Math.sin(a * (len - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.x * Math.cos(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.x * Math.sin(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.x * Math.cos(a * (len - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.x * Math.sin(a * (len - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.x * Math.cos(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.x * Math.sin(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
   }
 }
 
 function collisionOnY() {
   for (let i = 1; i < len; i++) {  
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.y * Math.cos(a * (parameters.rndInt2 - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.y * Math.sin(a * (parameters.rndInt2 - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.y * Math.cos(a * (parameters.rndInt2 - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.y * Math.sin(a * (parameters.rndInt2 - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.y * Math.cos(a * (parameters.rndInt2 - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.y * Math.sin(a * (parameters.rndInt2 - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.y * Math.cos(a * (parameters.rndInt2 - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.y * Math.sin(a * (parameters.rndInt2 - (len - 1 - i)) + angle * Math.PI / 180)
   }
 }
 
 function collisionOnY_2(){
   for (let i = 2; i < len; i++) { 
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.y * Math.cos(a * (parameters.rndInt2 - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.y * Math.sin(a * (parameters.rndInt2 - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.y * Math.cos(a * (parameters.rndInt2 - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.y * Math.sin(a * (parameters.rndInt2 - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.y * Math.cos(a * (parameters.rndInt2 - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.y * Math.sin(a * (parameters.rndInt2 - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.y * Math.cos(a * (parameters.rndInt2 - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.y * Math.sin(a * (parameters.rndInt2 - (len - 1 - i)) + angle * Math.PI / 180)
   }
 }
 
 function gappedColllisionOnY() {
   for (let i = 0; i < len-1; i++) { 
     if(i == 1) continue
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.y * Math.cos(a * (len - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.y * Math.sin(a * (len - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.y * Math.cos(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.y * Math.sin(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.y * Math.cos(a * (len - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.y * Math.sin(a * (len - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.y * Math.cos(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.y * Math.sin(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
   }
 }
 
 
 function collisionOnZ() {
   for (let i = 1; i < len; i++) { 
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.z * Math.cos(a * (parameters.rndInt3 - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.z * Math.sin(a * (parameters.rndInt3 - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.z * Math.cos(a * (parameters.rndInt3 - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.z * Math.sin(a * (parameters.rndInt3 - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.z * Math.cos(a * (parameters.rndInt3 - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.z * Math.sin(a * (parameters.rndInt3 - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.z * Math.cos(a * (parameters.rndInt3 - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.z * Math.sin(a * (parameters.rndInt3 - (len - 1 - i)) + angle * Math.PI / 180)
   }
 }
 
 function collisionOnZ_2(){
   for (let i = 2; i < len; i++) {
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.z * Math.cos(a * (parameters.rndInt3 - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.z * Math.sin(a * (parameters.rndInt3 - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.z * Math.cos(a * (parameters.rndInt3 - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.z * Math.sin(a * (parameters.rndInt3 - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.z * Math.cos(a * (parameters.rndInt3 - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.z * Math.sin(a * (parameters.rndInt3 - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.z * Math.cos(a * (parameters.rndInt3 - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.z * Math.sin(a * (parameters.rndInt3 - (len - 1 - i)) + angle * Math.PI / 180)
   }
 }
 
 function gappedColllisionOnZ() {
   for (let i = 0; i < len-1; i++) {
     if(i == 1) continue
-    Object.values(collisionCoordiantes)[i][0].x = coordinates.z * Math.cos(a * (len - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][0].y = coordinates.z * Math.sin(a * (len - (len - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].x = coordinates.z * Math.cos(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
-    Object.values(collisionCoordiantes)[i][1].y = coordinates.z * Math.sin(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].x = coordinates.z * Math.cos(a * (len - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][0].y = coordinates.z * Math.sin(a * (len - (len - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].x = coordinates.z * Math.cos(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
+    Object.values(collisionCoordinates)[i][1].y = coordinates.z * Math.sin(a * (len - (len - 1 - i)) + angle * Math.PI / 180)
   }
 }
 
@@ -189,4 +189,4 @@ function handleCollisons(coordinates, gapped, parameters) {
   handleCollisonOnZ(coordinates.z, gapped, parameters)
 }
 
-export {collisionCoordiantes,handleCollisons, doesLineInterceptCircle, handleCollisonOnX, handleCollisonOnY, handleCollisonOnZ}
+export {collisionCoordinates,handleCollisons, doesLineInterceptCircle, handleCollisonOnX, handleCollisonOnY, handleCollisonOnZ}
