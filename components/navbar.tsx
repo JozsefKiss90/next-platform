@@ -74,7 +74,7 @@ export default function Navbar(){
     };
 
     const handleIconTitle = (title : string) => {
-      setIconTitle(title)
+      setIconTitle(title) 
     }
     
     const handleMouseEnter = () => {
