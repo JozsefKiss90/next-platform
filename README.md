@@ -14,26 +14,26 @@ This application serves as a benchmarking platform for eSports players. Leveragi
 ---
 
 ## 🚀 Installation
-    To run the Esport Lab Benchmarking Platform locally using Docker:
+To run the Esport Lab Benchmarking Platform locally using Docker:
 
-    Ensure you have Docker installed on your machine. If not, download and install it from Docker's official website.
-    Pull the Docker image from Dockerhub:
+Ensure you have Docker installed on your machine. If not, download and install it from Docker's official website.
+Pull the Docker image from Dockerhub:
     
 ```
 docker pull jozsefkiss90/esportlab:latest
 ```
 
-    Run the Docker container with your MongoDB URI and NextAuth secret:
+Run the Docker container with your MongoDB URI and NextAuth secret:
 
 ``` 
 docker run -d -p 3000:3000 -e mongoURI='yourmongouri' -e NEXTAUTH_SECRET='yournextauthsecret' jozsefkiss90/esportlab:latest
 ```
 
-    Note: The mongoURI can be obtained from either MongoDB Atlas or MongoDB Compass:
+Note: The mongoURI can be obtained from either MongoDB Atlas or MongoDB Compass:
 
-    MongoDB Atlas: Set up a cluster on MongoDB Atlas, create a user under the Database Access tab, and obtain your connection string (URI) from the Connect options.
+MongoDB Atlas: Set up a cluster on MongoDB Atlas, create a user under the Database Access tab, and obtain your connection string (URI) from the Connect options.
 
-    MongoDB Compass: After installing MongoDB Compass, connect to your database and use the connection string (URI) displayed in the application.
+MongoDB Compass: After installing MongoDB Compass, connect to your database and use the connection string (URI) displayed in the application.
 
 ---
 
