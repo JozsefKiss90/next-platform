@@ -2,8 +2,6 @@
 
 Esport Lab is an online experimental psychological platform which is developed with the mission of scaling cognitive measurement to the next level. It applies various types of cognitve tasks from reaction time to working memory and games to gain insight into the psychology of games and mental processes. With the help of such measures we can integrate our observations of different cognitive abilites in one task which is engaging and fun.  
 
----
-
 ## 🛠️ Built with
 
 ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
