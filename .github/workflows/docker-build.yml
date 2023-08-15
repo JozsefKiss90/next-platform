@@ -26,5 +26,5 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        push: true
+        push: true 
         tags: jozsefkiss90/esportlab:latest
