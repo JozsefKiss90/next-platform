@@ -1,8 +1,8 @@
 # Esport Lab Benchmarking Platform
+---
 
 Esport Lab is an online experimental psychological platform which is developed with the mission of scaling cognitive measurement to the next level. It applies various types of cognitve tasks from reaction time to working memory and games to gain insight into the psychology of games and mental processes. With the help of such measures we can integrate our observations of different cognitive abilites in one task which is engaging and fun.  
 
----
 
 ## 🛠️ Built with
 
@@ -33,19 +33,13 @@ MongoDB Atlas: Set up a cluster on MongoDB Atlas, create a user under the Databa
 
 MongoDB Compass: After installing MongoDB Compass, connect to your database and use the connection string (URI) displayed in the application.
 
----
-
 ## 🖥️ Visit the site
 
 You can open the application [`here`](https://platform-app.herokuapp.com).
-
----   
-
+   
 ### 👥 Contribution
 
 Right now I'm looking for deticated esport teams and players who can participate in the experiments.
-
----
 
 ## 📧 Contact
 
