@@ -130,13 +130,13 @@ export default function Login() {
               <button type="submit" className={styles.button}>{language ? languageData.hun.login[1] : "Login"}</button>
             </div>
             <div className={styles.input_button}>
-              <button type="button" onClick={handleGoogleSignin} className={styles.button}>
+              <button type="button" disabled onClick={handleGoogleSignin} className={styles.button_disabled}>
               {language ? languageData.hun.login[2] : "Sign In with Google"}
                 <NextImage className={styles.button_icon} src={'/img/icons/google.svg'} width="20" height="20" alt={'image'} ></NextImage>
               </button>
             </div>
             <div className={styles.input_button}>
-              <button type="button" onClick={handleFacebookSignin} className={styles.button}>
+              <button type="button" disabled onClick={handleFacebookSignin} className={styles.button_disabled}>
               {language ? languageData.hun.login[3] : "Sign In with Facebook"} 
                 <NextImage className={styles.button_icon_facebook} src={'/img/icons/facebook.svg'} width="25" height="25" alt={'image'} ></NextImage>
               </button>

@@ -156,6 +156,21 @@
   cursor: pointer;
 }
 
+.button_disabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-image: linear-gradient(to right, #aaaaaa, #5d5d5d);
+  border-radius: 5px;
+  text-align: center;
+  color: #b6b6b6;
+  font-size: 16px;
+  padding: 10px 10px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
 .button a {
   display: block;
   padding: 0;
@@ -185,11 +200,13 @@
 .button_icon {
   position: absolute;
   right: 14%;
+  filter: grayscale(100%);
 }
 
 .button_icon_facebook {
   position: absolute;
   right: 14%;
+  filter: grayscale(100%);
 } 
 
 .button:hover {
