@@ -34,19 +34,19 @@ export default function Login() {
   }, [isLogin]); 
 
   async function handleGoogleSignin() {
-    const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
+    const result = await signIn('google', { callbackUrl: 'http://localhost:3001/login' });
     if (result?.error) {
       console.error('Error signing in:', result.error);
     }
   }
 
   async function handleGitHubSignin() {
-    await signIn('github', { callbackUrl: 'https://platform-app.herokuapp.com' });
+    await signIn('github', { callbackUrl: 'http://localhost:3001/login' });
   }
 
   async function handleFacebookSignin() {
     const result = await signIn('facebook', {
-      callbackUrl: 'https://platform-app.herokuapp.com'
+      callbackUrl: 'http://localhost:3001/login'
     });
      if (result?.error) {
      console.error('Error signing in:', result.error);
@@ -67,7 +67,7 @@ export default function Login() {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: 'https://platform-app.herokuapp.com'
+      callbackUrl: 'http://localhost:3001/login'
     });
 
     if (result?.error) {
@@ -85,7 +85,7 @@ export default function Login() {
       <div className={styles.form_container}>
         <div className={styles.form_content}>
           <div className={styles.title}>
-            <h1>Esport Lab</h1>
+            <h1>Esport sLab</h1>
             <p style={{fontSize:'1.1rem'}}>
             {language ? languageData.hun.login[0] : "An experimental platform  for e-sport players"}
             </p>
@@ -130,13 +130,13 @@ export default function Login() {
               <button type="submit" className={styles.button}>{language ? languageData.hun.login[1] : "Login"}</button>
             </div>
             <div className={styles.input_button}>
-              <button type="button" disabled onClick={handleGoogleSignin} className={styles.button_disabled}>
+              <button type="button"  onClick={handleGoogleSignin} className={styles.button_disabled}>
               {language ? languageData.hun.login[2] : "Sign In with Google"}
                 <NextImage className={styles.button_icon} src={'/img/icons/google.svg'} width="20" height="20" alt={'image'} ></NextImage>
               </button>
             </div>
             <div className={styles.input_button}>
-              <button type="button" disabled onClick={handleFacebookSignin} className={styles.button_disabled}>
+              <button type="button"  onClick={handleFacebookSignin} className={styles.button_disabled}>
               {language ? languageData.hun.login[3] : "Sign In with Facebook"} 
                 <NextImage className={styles.button_icon_facebook} src={'/img/icons/facebook.svg'} width="25" height="25" alt={'image'} ></NextImage>
               </button>
