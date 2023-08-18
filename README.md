@@ -23,7 +23,7 @@ docker pull jozsefkiss90/esportlab:latest
 Run the Docker container with your MongoDB URI and NextAuth secret:
 
 ``` 
-docker run -d -p 3000:3000 -e mongoURI='yourmongouri' -e NEXTAUTH_SECRET='yournextauthsecret' jozsefkiss90/esportlab:latest
+docker run -d -p 3000:3000 --env mongoURI='yourmongouri' --env NEXTAUTH_SECRET='yournextauthsecret' jozsefkiss90/esportlab:latest
 ```
 
 Note: The mongoURI can be obtained from either MongoDB Atlas or MongoDB Compass:
