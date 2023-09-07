@@ -11,10 +11,9 @@
 }
 
 .main {
-  margin-left: 180px; 
   margin-top: 30px;
   position: relative;
-  right: 50px;
+  left: 50px;
   align-items: center;
   flex-wrap: wrap;
   transition: transform 0.6s ease, margin-left 0.6s;
@@ -41,7 +40,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: calc(33.33% - 140px);
+  width: calc(33.33% - 160px);
   height: 250px;
   margin: 30px 50px 30px 30px; 
   background-color: rgba(12, 12, 106, 0.70);
@@ -50,7 +49,9 @@
   box-shadow: 0 4px 8px 0 rgba(8, 8, 8, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
   border-radius: 5px;
   transition: transform 0.2s ease;
+  word-wrap: break-word;
 }
+
 
 .task:hover {
   transform: scale(1.05);
@@ -75,11 +76,12 @@
 
 .task h2 {
   position: relative;
-  color: white;
+  color: rgb(255, 255, 255);
   font-family: 'Batman', monospace;
   font-weight: 200;
   font-size: 18px;
- 
+word-wrap: break-word;
+
 }
 
 .icon_style {
@@ -231,7 +233,7 @@
   }
 }
 
-@media only screen and (min-width: 360px) and (max-height:741px) {
+@media only screen and (max-width: 360px) and (max-height:741px) {
   .container_mobile {
     display: block;
     margin-top: 140px !important;

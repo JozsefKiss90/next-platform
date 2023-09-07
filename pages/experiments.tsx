@@ -119,7 +119,7 @@ export default function Experiments({ session }: UserProps) {
                     </p>
                   </button>
                </div>
-              </div> 
+              </div>  
             </div>) : (
               <>
               <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
