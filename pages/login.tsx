@@ -23,6 +23,8 @@ export default function Login() {
 
   const router = useRouter();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const image = new Image();
@@ -34,23 +36,28 @@ export default function Login() {
   }, [isLogin]); 
 
   async function handleGoogleSignin() {
+    setIsLoading(true); // set loading state to true
     const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
     if (result?.error) {
       console.error('Error signing in:', result.error);
     }
-  }
+    setIsLoading(false); // set loading state to false after the operation
+}
+
 
   async function handleGitHubSignin() {
     await signIn('github', { callbackUrl: 'https://platform-app.herokuapp.com' });
   }
 
   async function handleFacebookSignin() {
+    setIsLoading(true);
     const result = await signIn('facebook', {
       callbackUrl: 'https://platform-app.herokuapp.com'
     });
      if (result?.error) {
      console.error('Error signing in:', result.error);
     }
+    setIsLoading(false);
   }
 
   const formik = useFormik({
@@ -63,69 +70,72 @@ export default function Login() {
   });
 
   async function onSubmit(values: any) {
+    setIsLoading(true);
     const result = await signIn('credentials', {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: 'https://platform-app.herokuapp.com'
     });
-
+    setIsLoading(false);
+  
     if (result?.error) {
       console.error('Error signing in:', result.error);
+      setErrorMessage(language ? "Hibás jelszó vagy felhasználónév" :"Invalid credentials. Please try again."); // <-- Set the error message
     } else {
       await new Promise(resolve => setTimeout(resolve, 1000));
       router.push('/');
     }
   }
+  
 
   return (
     <>
-    {isImageLoaded ? (
-      <section className={styles.form_wrapper}>
-      <div className={styles.form_container}>
-        <div className={styles.form_content}>
-          <div className={styles.title}>
-            <h1>Esport Lab</h1>
-            <p style={{fontSize:'1.1rem'}}>
-            {language ? languageData.hun.login[0] : "An experimental platform  for e-sport players"}
-            </p>
-          </div>
+      {isImageLoaded ? (
+        <section className={styles.form_wrapper}>
+        <div className={styles.form_container}>
+          <div className={styles.form_content}>
+            <div className={styles.title}>
+              <h1>Esport Lab</h1>
+              <p style={{fontSize:'1.1rem'}}>
+              {language ? languageData.hun.login[0] : "An experimental platform  for e-sport players"}
+              </p>
+            </div>
 
-          <form style={{width: '100%'}} onSubmit={formik.handleSubmit}>
-          <div className={styles.input_group}>
-          <input
-                  type="email"
-                  placeholder="Email"
-                  {...formik.getFieldProps('email')}
-                  className={styles.input_text}
-                />  
-                <span className={styles.icon} >
-                      <HiAtSymbol size={25} />
-                </span>
-          </div>
-            {formik.errors.email && formik.touched.email ? (
-              <span className={styles.text_rose_500}>{formik.errors.email}</span>
-            ) : (
-              <></>
-            )}
-          <div className={styles.input_group}>
+            <form style={{width: '100%'}} onSubmit={formik.handleSubmit}>
+            {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{formik.errors.email}</span> : <></>}
+
+            <div className={styles.input_group}>
+            <input
+                    type="email"
+                    placeholder="Email"
+                    {...formik.getFieldProps('email')}
+                    className={styles.input_text}
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      setErrorMessage(""); // <-- Reset the error message
+                    }}
+                  />  
+                  <span className={styles.icon} >
+                        <HiAtSymbol size={25} />
+                  </span>
+            </div>
+            <div className={styles.input_group}>
             <input
                 type="password"
                 placeholder="password"
                 {...formik.getFieldProps('password')}
                 className={styles.input_text}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  setErrorMessage(""); // <-- Reset the error message
+                }}
               />
               <span className={styles.icon} >
                   <HiFingerPrint size={25} />
               </span>
           </div>
-            {formik.errors.password && formik.touched.password ? (
-              <span className={styles.text_rose_500}>{formik.errors.password}</span>
-            ) : (
-              <></>
-            )}
+          {errorMessage && <div className={styles.error}>{errorMessage}</div>}
 
-            {/* login buttons */}
             <div className={styles.input_button}>
               <button type="submit" className={styles.button}>{language ? languageData.hun.login[1] : "Login"}</button>
             </div>
@@ -154,6 +164,14 @@ export default function Login() {
           </form>      
         </div>
       </div>
+      <>
+          {isLoading ? (
+            <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000 }}>
+            <Spinner></Spinner>
+          </div>
+          
+          ) : ""}
+          </>
     </section> 
     ): (
       <div>
