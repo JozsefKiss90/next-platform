@@ -99,7 +99,7 @@ export default function Navbar(){
     useEffect(() => {
       console.log(isMobile);
     
-      if (isMobile) {
+ 
         if (currentUrl === "/") {
           setGrayscale({...grayscaleObj, grayscale_desktop: 'grayscale(0)'});
           setDesktopIcon("/img/icons/svgDesktop.svg");
@@ -125,8 +125,8 @@ export default function Navbar(){
           setLogoutIcon("/img/icons/svgEnvelope.svg");
           setGrayscale({...grayscaleObj, grayscale_message: 'grayscale(0)'});
         } 
-      }
-    }, [isMobile]);
+
+    }, []);
     
     return (
         <div className={styles.main_container}>
@@ -137,9 +137,11 @@ export default function Navbar(){
               </h1>
             </div>
           </nav>
+          {isMobile && (
           <div className={styles.iconTitle}>
             <h4>{iconTitle}</h4>
           </div> 
+          )}
           <nav className={styles.navbar} style={isDarkMode ? { filter: "grayscale(100%)" } : {}} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <SimpleBar  className={styles.scroll_container}  style={{ height: '100%'}}>
             <ul style={{ opacity: '1' }} className={`${styles.navbar_nav} ${!session && status !== 'loading' ? styles.loading : styles.loaded}`}>
