@@ -1,4 +1,4 @@
-export default function runTask(email, containerProp) {
+export default function runTask(email, containerProp, setDisplayInstruction) {
 
     const randomRange = (min, max) => {
         return Math.random() * (max - min) + min
@@ -127,9 +127,10 @@ export default function runTask(email, containerProp) {
         }
     }
 
-    const handleOrder = () => {
-
+    const handleOrder = (displayprop) => {
+       
         function handler_1(event){
+                displayprop(false)
                 event.target.style.left = randomRange(0, 500) + 'px'
                 event.target.style.top = randomRange(0, 150) + 'px'
                 event.target.style.zIndex = zArray[0]
@@ -261,6 +262,6 @@ export default function runTask(email, containerProp) {
         })
     }
 
-    handleOrder()
+    handleOrder(setDisplayInstruction)
     //return takarító függvény
 }

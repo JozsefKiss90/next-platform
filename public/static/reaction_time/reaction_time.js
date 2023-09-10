@@ -1,64 +1,120 @@
-export default function runTask(boxRef) {
+export default function runTask(boxRef, email) {
     let box = boxRef;
     let start = false;
     let startOfGreen;
     let clickedTooEarly = false;
     let reactionTimes = [];
     let trials = 0;
-    
+    let finished = false
+
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
     box.addEventListener('click', async () => {
-        if (box.style.backgroundColor === 'blue') {
+        if (box.style.backgroundColor === 'blue' || box.style.backgroundColor === '#c59700') {
             await delay(0); 
-            box.innerText = 'Wait for green';
+            if(trials == 2) {
+              await sendData()
+            } else {
+            box.innerText = 'Várj a zöldre.';
             await startTask();
-        } else if (!start) {
-            box.innerText = 'Wait for green';
-            start = true;
+            }
+        }
+        else if (!start) {
+            box.innerText = 'Várj a zöldre.';
+            start = true; 
             await startTask();
-        } else if (box.style.backgroundColor === 'green') {
+        } else if (box.style.backgroundColor === 'green' || box.style.backgroundColor === '#c59700') {
             let rt = Date.now() - startOfGreen;
             reactionTimes.push(rt);
-            trials++;
-            box.innerText = 'Reaction time: ' + rt + ' ms\n\nClick to continue';
-            box.style.backgroundColor = 'blue';
-        } else if (box.style.backgroundColor === 'blue' && trials < 10) {
-            await delay(500); // Give the user half a second to release the mouse button
-            box.innerText = 'Wait for green';
+            ++trials;
+            if(trials == 2) {
+                let sum = reactionTimes.reduce((a, b) => a + b, 0);
+                let avg = sum / reactionTimes.length;
+                box.innerText = 'Átlagos reakció idő: ' + avg.toFixed(2) + '\n\nFeladat teljesítve! ' + '\n\nKattints a befejezéshez.';
+                box.style.backgroundColor = '#c59700'
+                box.addEventListener('click', exit);
+            } else {
+                box.innerText = 'Reakció idő: ' + rt + ' ms\n\nKattints a folytatáshoz';
+                box.style.backgroundColor = 'blue';
+            }
+        } else if (box.style.backgroundColor === 'blue') {
+            await delay(500); 
+            box.innerText = 'Várj a zöldre';
             await startTask();
-        } else if (trials >= 10) {
-            let sum = reactionTimes.reduce((a, b) => a + b, 0);
-            let avg = sum / reactionTimes.length;
-            box.innerText = 'Average reaction time: ' + avg.toFixed(2) + ' ms';
         }
     });
 
-    // The main task
+    async function exit() {
+        window.location.href = "http://localhost:3000";
+        }
+
+    async function sendData() {
+        finished = true
+    
+        let sum = reactionTimes.reduce((a, b) => a + b, 0);
+        let avg = sum / reactionTimes.length;
+        box.innerText = 'Átlagos reakció idő: ' + avg.toFixed(2) + ' ms';
+        let values = {
+            rt : avg, 
+            email: email,
+          }
+          
+        const options = {
+        method: "POST",
+        headers: {"Content-type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(values) 
+        }
+        
+        await fetch('/api/rt', options)
+        .then(res => res.json())
+        .catch(err => console.log(err))
+    }
+
     async function startTask() {
-        clickedTooEarly = false; // Reset this here
+        clickedTooEarly = false; 
         box.style.backgroundColor = 'red';
-        let waitTime = Math.random() * 3000 + 2000; // 2000 to 5000 ms
-        // Race the delay against the premature click
+        let waitTime = Math.random() * 3000 + 1000; 
+ 
         await Promise.race([delay(waitTime), new Promise((resolve) => {
-            // Add an extra 'click' listener for the premature click
+           
             box.addEventListener('click', function listener() {
-                // Only resolve if it's a premature click
+      
                 if (start && box.style.backgroundColor === 'red') {
                     clickedTooEarly = true;
                     box.style.backgroundColor = 'blue';
-                    box.innerText = 'Too early response! Click to try again.';
-                    resolve(); // Resolve the promise immediately
-                    // Clean up by removing this listener
+                    box.innerText = 'Túl korai válasz! Kattints az újrakezdéshez.';
+                    resolve(); 
                     box.removeEventListener('click', listener);
                 }
             });
         })]);
 
-        if (!clickedTooEarly) { // Only proceed if the user didn't click too early
+        if (!clickedTooEarly) { 
             startOfGreen = Date.now();
             box.style.backgroundColor = 'green';
-            box.innerText = 'Click!';
+            box.innerText = 'Kattints!';
         }
+
+
+        /*if (trials == 2) {
+            finished = true
+            let sum = reactionTimes.reduce((a, b) => a + b, 0);
+            let avg = sum / reactionTimes.length;
+            box.innerText = 'Average reaction time: ' + avg.toFixed(2) + ' ms';
+            let values = {
+                rt : avg, 
+                email: email,
+              }
+
+            const options = {
+            method: "POST",
+            headers: {"Content-type": "application/json; charset=UTF-8"},
+            body: JSON.stringify(values) 
+            }
+            
+            await fetch('/api/rt', options)
+            .then(res => res.json())
+            .catch(err => console.log(err))
+        }*/
     }
 }

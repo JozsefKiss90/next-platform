@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import styles from "./visualMemory.module.css"
 import { getSession } from 'next-auth/react';
 
@@ -9,8 +9,8 @@ interface TaskProps{
 export default function Page({ email } : TaskProps ) {
   const gridRef = useRef(null);
   const buttonRef = useRef(null);
-
-  useEffect(() => {
+  const [started, setStarted] = useState(false)
+  useEffect(() => { 
     const grid = gridRef.current;
     const button = buttonRef.current; 
     if(grid && button) {
@@ -22,11 +22,11 @@ export default function Page({ email } : TaskProps ) {
   }, [gridRef, buttonRef]);
  
   return (
-    <div>
+    <div className={styles.container}>
       <h1 style={{color:'white'}}>Visual Working Memory Task</h1>
       <h2 style={{color:'white'}} id="level">Level: 1</h2>
       <div ref={gridRef} id="grid" className={styles.grid}></div>
-      <button ref={buttonRef} id="button">Start Test</button>
+      {!started && <button ref={buttonRef} className={styles.button} onClick={()=>{setStarted(true)}} id="button">Start Test</button>}
       <p id="status"></p> 
     </div>
   );

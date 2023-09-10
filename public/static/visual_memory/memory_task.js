@@ -7,6 +7,7 @@ const sequence = [];
 let playerSequence = [];
 let sequenceCount = 1;
 let attempts = 3;
+status.classList.add(styles.status);
 
 const button = buttonProp
 button.addEventListener('click', ()=> startTest())
@@ -70,9 +71,14 @@ function verifySequence() {
     }
     if(sequenceCount < 10) {
         sequenceCount++;
-        attempts = 3; // Reset the attempts count after successful completion of a level
-        document.body.style.backgroundColor = "green";
-        setTimeout(startTest, 1000); // Start the next level after 1s delay
+        attempts = 3;
+        setTimeout(() => {
+            document.body.style.backgroundColor = "green"; 
+        }, 200);
+        setTimeout(() => {
+            document.body.style.backgroundColor = ""; // Reset background color after 700ms
+        }, 900);
+        setTimeout(startTest, 1800); // Call startTest after 2000ms
     } else {
         status.innerHTML = "Congratulations, you completed all levels!";
     }

@@ -9,6 +9,8 @@ interface TaskProps{
 export default function ApmTask({ email } : TaskProps ){
  
   const containerRef = useRef(null);
+  const displayRef = useRef
+  const [displayInstruction, setDisplayInstruction] = useState(true)
   //plugins mappa a js fileoknak
   // plugin design pattern
   // useMemo ha sokszor renderelni, higher order functionba berakni  
@@ -17,12 +19,15 @@ export default function ApmTask({ email } : TaskProps ){
   //refactor kisebb komponensekre, i18, 
 
   useEffect(() => {
+    console.log(displayInstruction);
+ }, [displayInstruction]);
+
+  useEffect(() => {
     const container = containerRef.current
-    console.log(container) 
     if(container) {
       import("../../public/static/apm/apm.js")
         .then((module) => { 
-          module.default(email, container);
+          module.default(email, container,setDisplayInstruction);
         });
         //promissal visszakapni a cleanupot, 
     } 
@@ -30,12 +35,20 @@ export default function ApmTask({ email } : TaskProps ){
   }, [containerRef]);
   // session maradhat ha két komponens van
   // külön componens a session-re, egy másik a játéknak
+
+  console.log(displayInstruction)
     return(
-      <div id="container" ref={containerRef} className={styles.container}>
+    <div className={styles.amp_container}>
+    {displayInstruction && 
+      <div className={styles.instruction}>
+        Kattintsd végig csökkenő sorrendben a  körökön belül lévő számokat,<br /> amilyen gyorsan csak tudod.
+      </div>}
+     <div id="container" ref={containerRef} className={styles.container}>
         <nav className={styles.stopper}>
           <p id="finishTime"><span id="mins">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></p>
         </nav>
-      </div>
+      </div> 
+     </div>
     )
 }
 

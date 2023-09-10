@@ -11,4 +11,14 @@
     position: relative;
     top: 0;
     left: 0;
+    flex-direction: column;
+}
+
+.box p {
+    padding: 10px;
+}
+
+.container *{
+    font-family: 'Inter', sans-serif;
+    font-size: 1.7rem;
 }

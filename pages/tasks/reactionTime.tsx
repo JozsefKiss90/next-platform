@@ -5,7 +5,7 @@ import styles from './reactionTime.module.css'
 
 interface TaskProps{
   email: string | undefined; 
-  session: Session | null
+  session: Session | null 
 }
 
 export default function Page({ email } : TaskProps) {
@@ -14,11 +14,11 @@ export default function Page({ email } : TaskProps) {
   const boxRef = useRef(null) 
 
   useEffect(() => {
-    const box = boxRef.current
+    const box = boxRef.current 
     if(box) {
         import('../../public/static/reaction_time/reaction_time.js')
           .then((module:any) => {
-            module.default(box);
+            module.default(box, email);
           });
       }
     
@@ -27,8 +27,15 @@ export default function Page({ email } : TaskProps) {
   if(session){
     console.log("SESSION IS: " + session)
     return(
-       <div>
-         <div ref={boxRef} id="box" className={styles.box}>When the red box turns green, click on it as fast as you can. Click anywhere to start.</div>
+       <div className={styles.container}>
+         <div ref={boxRef} id="box" className={styles.box}>
+            <p>
+            Amikor a piros mező zöldre vált, kattints a rá, amilyen gyorsan csak tudsz.
+            </p>
+            <p>
+            Kattints a kezdéshez.
+            </p>
+         </div>
        </div>
       )
   }

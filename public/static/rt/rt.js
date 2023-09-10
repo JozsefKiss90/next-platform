@@ -16,7 +16,7 @@ export default function runTask(email) {
     var values = {
       rt : rt, 
       email: email,
-      acc: accuracy,
+      acc: accuracy, 
     }
 
     const options = {

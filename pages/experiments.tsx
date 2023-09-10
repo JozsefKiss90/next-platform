@@ -254,7 +254,7 @@ export default function Experiments({ session }: UserProps) {
                       width={60}
                       height={60}
                     />      
-                <a href={'/tasks/simonTask'}>
+                <a href={'/tasks/visualMemoryTask'}>
                   <button className={styles.task_button}>
                       <p>
                         Start
