@@ -399,9 +399,11 @@ export default function Experiments({ session, userStats }: UserProps) {
 }
 
 export async function getServerSideProps({ req }: any) {
+  const baseUrl = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+
   const session = await getSession({ req })
   const cookies = req.headers.cookie;
-  const res = await fetch('/api/gameStats', {
+  const res = await fetch(`${baseUrl}/api/gameStats`, {
     headers: {
       cookie: cookies
     }
