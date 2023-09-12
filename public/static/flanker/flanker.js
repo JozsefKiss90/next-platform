@@ -96,7 +96,7 @@ export default async function runTask(email) {
     type: jsPsychInstructions,
     pages: ["Üdvözöllek a kísérletben.", 
     ` 
-      <div style='position : relative; height:500px; '>
+      <div style='position : relative; height:200px; '>
         <p>Ebben a kísérletben a képernyőn különböző betűk jelennek meg.</p><p>A feladatod jelezni, hogy a  körökön <strong>belül</strong>  
         egy N vagy egy X található-e <br> (mindig csak egyféle célinger jelenik meg, azaz vagy csak N-t vagy X-t fogsz látni).</p>
         <p>Ha  N, nyomd meg a billentyűzeten az <strong>N</strong>-t, ha X akkor pedig nyomd meg a <strong>X</strong>-t.</p>
@@ -109,8 +109,8 @@ export default async function runTask(email) {
           A körökön <strong>kívül</strong>  a jobb vagy bal oldalon mindig megjelenik egy zavaró inger. <br> Ez lehet a célingerrel azonos (pl. célinger: N, zavaró: N) vagy ellentétes (pl. célinger: X, zavaró: N).
         </p> 
         <div style='display: flex; justify-content: center;'>
-          <div style='width:250px; height:225px; padding-right:50px;'><img style='width:250px; height:225px;' src='../static/flanker/img/betu62.png'></img></div>
-          <div style='width:250px; height:225px; padding-left:50px;'><img style='width:250px; height:225px;' src='../static/flanker/img/betuI.png'></img></div>
+          <div style='width:250px; height:225px; margin-right:100px;'><img style='width:250px; height:225px;' src='../img/left.png'></img></div>
+          <div style='width:250px; height:225px; margin-left:100px;'><img style='width:250px; height:225px;' src='../img/right_1.png'></img></div>
         </div>  
       </div>
     `,

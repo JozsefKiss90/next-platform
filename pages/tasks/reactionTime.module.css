@@ -1,6 +1,7 @@
+
 .box {
-    width: 100vw;
-    height: 50vh;
+    width: 100vw; /* Span the full viewport width */
+    height: 50vh; 
     background-color: blue;
     display: flex;
     align-items: center;
@@ -18,7 +19,13 @@
     padding: 10px;
 }
 
-.container *{
+.container {
+    width: 100vw; 
+    height: 100vh; 
+    background-color: aliceblue;
+}
+
+.container * {
     font-family: 'Inter', sans-serif;
     font-size: 1.7rem;
 }

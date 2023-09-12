@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Link from 'next/link';
+import { useRouter } from "next/router";
 
 interface UserData {
   email: string;
@@ -16,8 +17,21 @@ interface UserData {
   taskResult: number; 
 }
 
+interface GameStat {
+  _id: string;
+  game: string;
+  email: string;
+  rank: string;
+  bestRank: string;
+  gameTime: number;
+  age: number;
+  __v: number;
+}
+
+
 interface UserProps {
   session: Session | null | undefined;
+  userStats: GameStat | null | undefined;
 }
 
 interface AppContextValue {
@@ -27,36 +41,44 @@ interface AppContextValue {
   language: boolean
 }
 
-export default function Experiments({ session }: UserProps) {
+export default function Experiments({ session, userStats }: UserProps) {
 
   const { isHovered, languageData, language } = useContext(AppContext)  as AppContextValue;
- 
+  const router = useRouter();
+
   const [taskData, setTaskData] = useState<UserData[] | undefined>();
   const [userData, setUserData] = useState<UserData[] | undefined>();
   const [completed, setCompleted] = useState<number>(0);
   const [mobileWarning, setmobileWarning] = useState(false)
   const [disableLink, setDisableLink] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+
 
   useEffect(() => {
     const hasCookie = localStorage.getItem('cookie_statistics_disabled')
     if(hasCookie == 'true') {
       setDisableLink(!disableLink)
     }
-    console.log(disableLink)
   }, []);
-
-  const [showModal, setShowModal] = useState(false);
-  console.log(disableLink)
 
   const handleCookieWarning = () => {
     setShowModal(!showModal);
   };
 
+  const handleTaskStart = () => {
+    if (!userStats) {
+      setShowWarning(true);
+    } else {
+      router.push('/tasks/reactionTime');
+    }
+  };
+  
+  console.log(showWarning)
   const handleCookieDelete = () => {
     setDisableLink(false)
     localStorage.removeItem('cookie_statistics_disabled')
   };
-
 
   useEffect(() => {
     fetch('/api/rt')
@@ -100,7 +122,17 @@ export default function Experiments({ session }: UserProps) {
     <>
       <div>
       <Navbar />
-      {showModal ? (<div className={styles.modal}>
+      {showWarning ? (<div className={styles.popup}>
+        <h4 style={{padding:"20px"}}>
+            Még nem töltötted ki a profil adatokat!
+          </h4>
+          <Link href="/user_form" style={{display:'flex', justifyContent:'center'}}>
+            <button  className={styles.popup_button}>
+              <p>{language ? languageData.hun.index[2] : "Profile"}</p>
+            </button>
+          </Link>
+      </div>) :
+      showModal ? (<div className={styles.modal}>
               <p>
                 Cookies for statistical data was disabled. Do you want to enable it?
               </p> 
@@ -140,22 +172,18 @@ export default function Experiments({ session }: UserProps) {
                     />      
                     {disableLink ? (
                       <Link href={''}>
-                        <button className={styles.task_button} onClick={(e)=> {e.preventDefault(); handleCookieWarning() }}>
+                        <button className={styles.task_button} onClick={(e)=> {e.preventDefault(); handleCookieWarning(); }}>
                           <p>
                             Start
                           </p>
                         </button>
                       </Link>
                       ) : (
-                        <Link href={'/tasks/rtTask'}>
-                        <button className={styles.task_button}>
-                          <p>
-                            Start
-                          </p>
+                        <button className={styles.task_button} onClick={handleTaskStart}>
+                          <p>Start</p>
                         </button>
-                      </Link>
                     )}
-                  <ProgressBar completed={90} />
+                  <ProgressBar completed={100} />
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/flankerTask'}>
@@ -185,7 +213,7 @@ export default function Experiments({ session }: UserProps) {
                         </button>
                       </Link>
                     )}
-                  <ProgressBar completed={90} />
+                  <ProgressBar completed={100} />
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/networkTask'}>
@@ -205,7 +233,7 @@ export default function Experiments({ session }: UserProps) {
                         </p>
                       </button>
                     </a>
-                  <ProgressBar completed={90} />
+                  <ProgressBar completed={50} />
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/apmTask'}>
@@ -241,7 +269,7 @@ export default function Experiments({ session }: UserProps) {
                       </p>
                     </button>
                 </a>
-                  <ProgressBar completed={90} />
+                  <ProgressBar completed={10} />
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/visualMemoryTask'}>
@@ -261,7 +289,7 @@ export default function Experiments({ session }: UserProps) {
                       </p>
                     </button>
                 </a>
-                  <ProgressBar completed={90} />
+                  <ProgressBar completed={100} />
                 </div>
               </div>
               <div style={{...slideStyle}}>
@@ -296,7 +324,7 @@ export default function Experiments({ session }: UserProps) {
                         Start
                       </p>
                     </button>
-                    <ProgressBar completed={90} />
+                    <ProgressBar completed={100} />
                   </div>
                   <div className={styles.task}>
                     <h2>{language ? languageData.hun.experiments[1] :"Flanker Task"}</h2>
@@ -372,10 +400,21 @@ export default function Experiments({ session }: UserProps) {
 
 export async function getServerSideProps({ req }: any) {
   const session = await getSession({ req })
+  const cookies = req.headers.cookie;
+  const res = await fetch('http://localhost:3000/api/gameStats', {
+    headers: {
+      cookie: cookies
+    }
+  });
 
-  if (!session) {
-    return {
-      redirect : {
+  const gamesData = await res.json(); 
+  const email  = session?.user?.email
+  const filteredStats = gamesData.data.filter((data: { email: string | null | undefined; }) => data.email === email);
+  const userStats = filteredStats.length > 0 ? filteredStats[0] : null;
+
+  if (!session) { 
+    return {  
+      redirect : { 
         destination: '/login',
         permanent: false
       }
@@ -383,6 +422,6 @@ export async function getServerSideProps({ req }: any) {
   }
 
   return {
-    props: { session }
+    props: { session, userStats}
   }
 }

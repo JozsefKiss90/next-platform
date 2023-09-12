@@ -24,7 +24,7 @@ export default function Page({ email } : TaskProps) {
     
   }, [boxRef,session]);
 
-  if(session){
+  if(session){ 
     console.log("SESSION IS: " + session)
     return(
        <div className={styles.container}>

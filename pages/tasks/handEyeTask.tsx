@@ -11,7 +11,7 @@ export default function HandEye({ email } : TaskProps) {
   const { data: session, status } = useSession()
 
   useEffect(() => {
-    const trials = trialsRef.current;
+    const trials = trialsRef.current; 
     if(trials) {
       import("../../public/static/hand_eye/handEye.js")
         .then((module) => {

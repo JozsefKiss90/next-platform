@@ -1,4 +1,4 @@
-export default function runTask(email, trialsProp) {
+export default function runTask(trialsProp,email) {
     var elementX = document.getElementById('moveMeX')
     var elementY = document.getElementById('moveMeY')
     var container = document.getElementById('container-2')
@@ -55,7 +55,7 @@ export default function runTask(email, trialsProp) {
         }else if(yIsMoving){
             yIsMoving = !yIsMoving;
             var timeleft = 3;
-            var downloadTimer = setInterval(function(){
+            var downloadTimer = setInterval(function(){ 
             if(timeleft <= 0){
                 clearInterval(downloadTimer);
                 document.getElementById("countdown").innerHTML = "";
@@ -83,7 +83,7 @@ export default function runTask(email, trialsProp) {
     });
 
     var myIntervalX = setInterval(function () {
-        console.log(trials)
+        document.getElementById('trials').innerHTML = `${trials}/19`
         if(trials == 10) {   
             clearInterval(myIntervalX)
             for (let i = 0; i < performanceX.length; i++) {

@@ -26,11 +26,22 @@ function startTest() {
     status.innerHTML = "";
     level.innerHTML = "Level: " + sequenceCount;
     document.body.style.backgroundColor = "";
+
+    let lastNum = -1;  // a number that's not between 0 and 8 (initial invalid value)
+
     for(let i=0; i<sequenceCount; i++) {
-        sequence.push(Math.floor(Math.random() * 9));
+        let num;
+        do {
+            num = Math.floor(Math.random() * 9);
+        } while(num === lastNum);  // keep generating numbers until it's different from the last one
+
+        sequence.push(num);
+        lastNum = num;  // set the current number as the last number for the next iteration
     }
+
     showSequence(0);
 }
+
 
 function showSequence(index) {
     if(index < sequence.length) {
@@ -73,11 +84,11 @@ function verifySequence() {
         sequenceCount++;
         attempts = 3;
         setTimeout(() => {
-            document.body.style.backgroundColor = "green"; 
+            document.body.style.backgroundColor = "#27f827"; 
         }, 200);
         setTimeout(() => {
             document.body.style.backgroundColor = ""; // Reset background color after 700ms
-        }, 900);
+        }, 900); 
         setTimeout(startTest, 1800); // Call startTest after 2000ms
     } else {
         status.innerHTML = "Congratulations, you completed all levels!";

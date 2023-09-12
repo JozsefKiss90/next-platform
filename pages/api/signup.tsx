@@ -1,5 +1,5 @@
-import connectToDb from '../../../database/db'
-import User from '../../../models/user.model'
+import connectToDb from '../../database/db'
+import User from '../../models/user.model'
 import {hash} from 'bcryptjs'
 import { NextApiRequest, NextApiResponse } from 'next';
 

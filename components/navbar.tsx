@@ -9,6 +9,7 @@ import 'simplebar/dist/simplebar.min.css';
 import styles2 from "../styles/Index.module.scss"
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { useRouter } from "next/router"; 
+import { navItems } from "../hooks/navItems";
 
 interface AppContextValue {
     setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
@@ -318,7 +319,7 @@ export default function Navbar(){
           
         )}
 
-        </div>
+        </div> 
       );
       
 }

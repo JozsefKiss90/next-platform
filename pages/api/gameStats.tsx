@@ -1,14 +1,20 @@
 import GameModel from '../../models/game.model';
 import connectToDb from '../../database/db'
 import { getSession } from 'next-auth/react';
+import { getServerSession } from "next-auth";
+import { authOptions } from './auth/[...nextauth]';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const session =await getSession({req});
+    //const clientSessionString = req.headers['x-session'] as string;
+    //const clientSession = JSON.parse(clientSessionString);
     
+    const session = await getServerSession(req, res, authOptions)   
+    
+
     if(!session || session.user?.role != 'user') {
-        res.status(403).json({ message: 'unauthorized'});
-    } 
+        return res.status(403).json({ message: 'unauthorized'});
+    }
     connectToDb()
     .catch(err=>res.json(err)) 
     if(req.method === 'GET') {

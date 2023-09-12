@@ -8,18 +8,14 @@ import User from '../../../models/user.model'
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "../../../lib/mongodb"
 import { userService  } from "../../../service/UserServiceImpl"
-
-enum Role {
-  user = "user",
-  admin = "admin",
-}
+import type { NextAuthOptions } from 'next-auth'
 
 const { GITHUB_ID, GITHUB_SECRET, GOOGLE_ID, GOOGLE_SECRET,FACEBOOK_ID, FACEBOOK_SECRET} = process.env;
 if (!process.env.NEXTAUTH_SECRET) {
   throw new Error("Please provide process.env.NEXTAUTH_SECRET");
 }
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
   
   session: {
@@ -82,4 +78,12 @@ export default NextAuth({
     },
   },
   debug: process.env.NODE_ENV === "development",
-});
+}
+
+enum Role {
+  user = "user",
+  admin = "admin",
+}
+
+
+export default NextAuth(authOptions);

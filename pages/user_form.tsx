@@ -8,7 +8,7 @@ import { AppContext } from "../components/layout"
 import { useContext } from 'react';
 import {signOut} from "next-auth/react";
 interface TaskProps{
-    email: string | undefined; 
+    email: string | undefined;
   }
 
 interface AppContextValue {
@@ -89,7 +89,10 @@ export default function UserForm({ email } : TaskProps) {
 
               options = {
                   method: "POST",
-                  headers: {"Content-type": "application/json; charset=UTF-8"},
+                  headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                    //"X-Session": JSON.stringify(session) // Attach the session as a custom header
+                },
                   body: JSON.stringify(data)
               }
               fetch('/api/gameStats', options)
@@ -223,9 +226,10 @@ export default function UserForm({ email } : TaskProps) {
       );
 }
 
-export async function getServerSideProps({ req } : any){
+export async function getServerSideProps({ req } : any) {
     const session = await getSession({ req })
     const email = session?.user?.email || null
+    const noValue = null
     if(!session){
       return {
         redirect : {

@@ -229,7 +229,7 @@ var block5_trials = test_stimuli.slice(128, 160)
 var block6_trials = test_stimuli.slice(160, 192)
   
 //block2_trials, block3_trials, block4_trials, block5_trials, block6_trials
-//blocks = [block1_trials, block2_trials]
+blocks = [block1_trials, block2_trials]
 let blocks = [block1_trials]
 let practice_block = [block1_trials]
 
@@ -263,7 +263,7 @@ for (let i = 0; i < practice_block.length; i++) {
       type: htmlKeyboardResponse,
       stimulus: "",
       choices: ["ArrowLeft", "ArrowRight"],
-      trial_duration: 500,
+      trial_duration: null,
       data: {
         task: 'practice',
         correct_response: jsPsych.timelineVariable('correct_response'),
@@ -273,7 +273,7 @@ for (let i = 0; i < practice_block.length; i++) {
         cue: jsPsych.timelineVariable('cue'),
         cue_type: jsPsych.timelineVariable('cue_type')
       },
-      post_trial_gap: 0,
+      post_trial_gap: 1000,
       on_finish: function(data){
           data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
           data.rt = jsPsych.data.getLastTrialData().trials[0].rt;
@@ -308,7 +308,7 @@ for (let i = 0; i < practice_block.length; i++) {
       timeline_variables: practice_block[i],
     };
 
-//  timeline.push(practice_procedure);
+ timeline.push(practice_procedure);
 
   } 
 var end_block = {
@@ -328,7 +328,7 @@ for (let i = 0; i < blocks.length; i++) {
       type: htmlKeyboardResponse,
       stimulus: '<div>' + fixation.stimulus + '</div>',
       choices: "f",
-      trial_duration: 0,
+      trial_duration: 500,
       data: {
         task: 'fixation'
       }
@@ -337,7 +337,7 @@ for (let i = 0; i < blocks.length; i++) {
       type: htmlKeyboardResponse,
       stimulus: jsPsych.timelineVariable('cue'),
       choices: "f",
-      trial_duration: 0,
+      trial_duration: 1000,
       data: {
         task: 'cue'
       }
@@ -346,7 +346,7 @@ for (let i = 0; i < blocks.length; i++) {
     type: htmlKeyboardResponse,
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: null,
-    trial_duration: 0,
+    trial_duration: 1000,
     trial_id: jsPsych.timelineVariable('trial_id'),
   };
 
@@ -354,7 +354,7 @@ for (let i = 0; i < blocks.length; i++) {
     type: htmlKeyboardResponse,
     stimulus: "",
     choices: ["ArrowLeft", "ArrowRight"],
-    trial_duration: 0,
+    trial_duration: null,
     data: {
       task: 'test',
       correct_response: jsPsych.timelineVariable('correct_response'),
