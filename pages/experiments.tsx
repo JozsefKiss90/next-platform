@@ -401,7 +401,7 @@ export default function Experiments({ session, userStats }: UserProps) {
 export async function getServerSideProps({ req }: any) {
   const session = await getSession({ req })
   const cookies = req.headers.cookie;
-  const res = await fetch('http://localhost:3000/api/gameStats', {
+  const res = await fetch('/api/gameStats', {
     headers: {
       cookie: cookies
     }
