@@ -37,7 +37,7 @@ export default function Login() {
 
   async function handleGoogleSignin() {
     setIsLoading(true); // set loading state to true
-    const result = await signIn('google', { callbackUrl: 'http://localhost:3000' });
+    const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
     if (result?.error) {
       console.error('Error signing in:', result.error);
     }
