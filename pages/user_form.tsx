@@ -98,7 +98,7 @@ export default function UserForm({ email } : TaskProps) {
               fetch('/api/gameStats', options)
                   .then(res => res.json())
                   .then(() => setWaringMessage(''))
-                  .then(() => setSuccessMessage('Success!'))
+                  .then(() => setSuccessMessage('Mentve!'))
                   .catch(err => console.log(err))
           }
           if(data === undefined) {
@@ -159,7 +159,7 @@ export default function UserForm({ email } : TaskProps) {
                     value={game.state.bestRank}
                     onChange={(e) => handleGameBestRankChange(game, e.target.value)}
                     >
-                    {getBestRankOptions(game.id)}
+                    {getBestRankOptions(game.id)} 
                   </select>
                   <label htmlFor={`${game.id}Time`} className={styles.subLabel}>{language ? languageData.hun.profile[3] : "Game Time (in hours):"}</label>
                   <input

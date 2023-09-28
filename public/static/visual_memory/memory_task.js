@@ -12,7 +12,6 @@ status.classList.add(styles.status);
 const button = buttonProp
 button.addEventListener('click', ()=> startTest())
 
-// Create the grid
 for (let i = 0; i < 9; i++) {
     let square = document.createElement('div');
     square.classList.add(styles.square)
@@ -27,16 +26,16 @@ function startTest() {
     level.innerHTML = "Level: " + sequenceCount;
     document.body.style.backgroundColor = "";
 
-    let lastNum = -1;  // a number that's not between 0 and 8 (initial invalid value)
+    let lastNum = -1;  
 
     for(let i=0; i<sequenceCount; i++) {
         let num;
         do {
             num = Math.floor(Math.random() * 9);
-        } while(num === lastNum);  // keep generating numbers until it's different from the last one
+        } while(num === lastNum);  
 
         sequence.push(num);
-        lastNum = num;  // set the current number as the last number for the next iteration
+        lastNum = num;  
     }
 
     showSequence(0);
@@ -57,10 +56,10 @@ function playerMove(index) {
     grid.childNodes[index].classList.add(styles.clickedSquare);
     setTimeout(() => {
         grid.childNodes[index].classList.remove(styles.clickedSquare);
-    }, 200); // Remove the clicked-square class after 0.2s
+    }, 200); 
     playerSequence.push(index);
     if (playerSequence.length === sequence.length) {
-        setTimeout(verifySequence, 200); // We delay the verification for the transition to complete
+        setTimeout(verifySequence, 200); 
     }
 }
 
@@ -70,12 +69,12 @@ function verifySequence() {
             status.innerHTML = `Incorrect, you have ${--attempts} attempts remaining.`;
             document.body.style.backgroundColor = "red";
             if(attempts > 0) {
-                setTimeout(startTest, 1000); // Restart the level after 1s delay if there are attempts left
+                setTimeout(startTest, 1000);
                 return;
             } else {
                 status.innerHTML = "You have used all attempts. Please start again.";
                 sequenceCount = 1;
-                attempts = 3; // Reset the attempts count
+                attempts = 3; 
                 return;
             }
         }
@@ -87,9 +86,9 @@ function verifySequence() {
             document.body.style.backgroundColor = "#27f827"; 
         }, 200);
         setTimeout(() => {
-            document.body.style.backgroundColor = ""; // Reset background color after 700ms
+            document.body.style.backgroundColor = ""; 
         }, 900); 
-        setTimeout(startTest, 1800); // Call startTest after 2000ms
+        setTimeout(startTest, 1800); 
     } else {
         status.innerHTML = "Congratulations, you completed all levels!";
     }

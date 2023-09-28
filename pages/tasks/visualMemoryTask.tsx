@@ -19,14 +19,22 @@ export default function Page({ email } : TaskProps ) {
           module.default(grid, button, styles);
         });
     }
-  }, [gridRef, buttonRef]);
+  }, [gridRef, buttonRef]); 
  
   return (
     <div className={styles.container}>
       <h1 style={{color:'white'}}>Visual Working Memory Task</h1>
       <h2 style={{color:'white'}} id="level">Level: 1</h2>
       <div ref={gridRef} id="grid" className={styles.grid}></div>
-      {!started && <button ref={buttonRef} className={styles.button} onClick={()=>{setStarted(true)}} id="button">Start Test</button>}
+      {!started && 
+      <div style={{display:'flex', alignSelf:'center', flexDirection:'column', position:'relative', top:'30px'}}>
+        <h3 style={{color:'white'}}>
+          Click on the squares in the order the appear in red.
+        </h3>
+        <button ref={buttonRef} className={styles.button} onClick={()=>{setStarted(true)}} id="button">
+          Start Test
+        </button>
+      </div>}   
       <p id="status"></p> 
     </div>
   );

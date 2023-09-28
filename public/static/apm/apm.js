@@ -175,7 +175,7 @@ export default function runTask(email, containerProp, setDisplayInstruction) {
                     .then(response => response.json()) 
                     .then(json => console.log(json))
                     .catch(err => console.log(err))  
-                    //window.location.href = './finish.html';
+                    window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
                 }
                 this.removeEventListener('mousedown', handler_2)
                 thirdElement.addEventListener("mousedown", handler_3)

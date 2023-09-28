@@ -153,7 +153,7 @@ export default function Experiments({ session }: UserProps) {
                             </button>
                         </Link>
                     )}
-                  <ProgressBar completed={90} />
+                  <ProgressBar completed={100} />
                 </div>
               </div>
               <div style={{...slideStyle}}>

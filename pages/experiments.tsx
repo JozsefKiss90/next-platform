@@ -233,7 +233,7 @@ export default function Experiments({ session, userStats }: UserProps) {
                         </p>
                       </button>
                     </a>
-                  <ProgressBar completed={50} />
+                  <ProgressBar completed={100} />
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/apmTask'}>
@@ -249,7 +249,7 @@ export default function Experiments({ session, userStats }: UserProps) {
                         </p>
                     </button>
                     </a>
-                  <ProgressBar completed={90} />
+                  <ProgressBar completed={100} />
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/handEyeTask'}>
@@ -269,7 +269,7 @@ export default function Experiments({ session, userStats }: UserProps) {
                       </p>
                     </button>
                 </a>
-                  <ProgressBar completed={10} />
+                  <ProgressBar completed={100} />
                 </div>
                 <div className={styles.task}>
                   <a href={'/tasks/visualMemoryTask'}>
@@ -287,7 +287,7 @@ export default function Experiments({ session, userStats }: UserProps) {
                       <p>
                         Start
                       </p>
-                    </button>
+                    </button> 
                 </a>
                   <ProgressBar completed={100} />
                 </div>

@@ -20,6 +20,7 @@ interface AppContextValue {
 export default function Login() {
 
   const { isLogin, language, languageData } = useContext(AppContext)  as AppContextValue;
+  const baseUrl = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
 
   const router = useRouter();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -37,7 +38,7 @@ export default function Login() {
 
   async function handleGoogleSignin() {
     setIsLoading(true); // set loading state to true
-    const result = await signIn('google', { callbackUrl: 'https://platform-app.herokuapp.com' });
+    const result = await signIn('google', { callbackUrl: baseUrl });
     if (result?.error) {
       console.error('Error signing in:', result.error);
     }
@@ -46,13 +47,13 @@ export default function Login() {
 
 
   async function handleGitHubSignin() {
-    await signIn('github', { callbackUrl: 'https://platform-app.herokuapp.com' });
+    await signIn('github', { callbackUrl: baseUrl });
   }
 
   async function handleFacebookSignin() {
     setIsLoading(true);
     const result = await signIn('facebook', {
-      callbackUrl: 'https://platform-app.herokuapp.com'
+      callbackUrl: baseUrl
     });
      if (result?.error) {
      console.error('Error signing in:', result.error);
@@ -145,12 +146,7 @@ export default function Login() {
                 <NextImage className={styles.button_icon} src={'/img/icons/google.svg'} width="20" height="20" alt={'image'} ></NextImage>
               </button>
             </div>
-            <div className={styles.input_button}>
-              <button type="button" onClick={handleFacebookSignin} className={styles.button}>
-              {language ? languageData.hun.login[3] : "Sign In with Facebook"} 
-                <NextImage className={styles.button_icon_facebook} src={'/img/icons/facebook.svg'} width="25" height="25" alt={'image'} ></NextImage>
-              </button>
-            </div>
+          
             <div className={styles.singup_link}>
                  <p className={styles.singup}>
                  {language ? languageData.hun.login[4] : "Don't have an account yet?"} 

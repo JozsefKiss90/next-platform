@@ -29,10 +29,11 @@
 .square {
     width: 90px;
     height: 90px;
-    border: 1px solid black;
+    border: 2px solid rgb(86, 86, 86);
     background-color: lightgrey;
     transition: background-color 0.5s;
     margin: 5px;
+    border-radius: 10px;
 }
 
 .testSquare {
@@ -40,7 +41,7 @@
 }
 
 .clickedSquare {
-    background-color: blue;
+    background-color: rgb(0, 128, 255);
 }
 
 .button{
@@ -55,12 +56,12 @@
 }
 
 .transition_to_red {
-    background-color: red;
+    background-color: rgb(255, 38, 38);
     transition: background-color 0.5s;
 }
 
 .transition_to_green {
-    background-color: green;
+    background-color: rgb(2, 152, 2);
     transition: background-color 0.5s;
 }
 
@@ -72,6 +73,5 @@
     text-align: center;
     color: white;
     font-size: 1.2rem; 
-    /* any other styles you want to add */
 }
 

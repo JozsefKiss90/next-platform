@@ -22,7 +22,7 @@ export default function Page({ email } : TaskProps) {
   if(session){
     console.log("SESSION IS: " + session)
     return(
-      <div>
+      <div style={{cursor:'pointer'}}>
        </div>
       )
   }
