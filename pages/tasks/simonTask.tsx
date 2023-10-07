@@ -5,15 +5,13 @@ import styles from './simonTask.module.css'
 
 interface TaskProps{
   email: string | undefined; 
-  session: Session | null
 }
 
 export default function Page({ email } : TaskProps) {
 
-  const { data: session, status } = useSession();
   const containerRef = useRef(null) 
   const instructionsRef = useRef(null) 
-  const buttonRef = useRef(null) 
+  const buttonRef = useRef(null)  
 
   useEffect(() => {
     const container = containerRef.current
@@ -23,23 +21,20 @@ export default function Page({ email } : TaskProps) {
     if(container && instructions && button) {
         import('../../public/static/simon_task/simonTask.js')
           .then((module:any) => {
-            module.default(container,instructions,button, styles);
+            module.default(container,email,instructions,button,styles);
           });
       }
     
-  }, [containerRef,session]);
+  }, [containerRef]);
 
-  if(session){
-    console.log("SESSION IS: " + session)
-    return(
-        <div ref={containerRef} id="container" className={styles.container}>
-            <div ref={instructionsRef} id="instructions" className={styles.instructions}>
-                <p>Press 'a' for "left" and 'l' for "right". Press the start button to begin the task.</p>
-            </div>
-            <button ref={buttonRef} id="start-button" className={styles.startButton}>Start</button>
-        </div>
-      )
-  }
+  return( 
+      <div ref={containerRef} id="container" className={styles.container}>
+          <div ref={instructionsRef} id="instructions" className={styles.instructions}>
+              <p>Press 'A' for "left" and 'L' for "right". Press the start button to begin the task.</p>
+          </div>
+          <button ref={buttonRef} id="start-button" className={styles.startButton}>Start</button>
+      </div>
+    )
 }
 
 export async function getServerSideProps({ req } : any){
