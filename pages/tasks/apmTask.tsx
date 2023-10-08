@@ -6,6 +6,12 @@ interface TaskProps{
   email: string | undefined;
 }
 
+interface IGamePlugin {
+  initialize: (email: string, container: HTMLElement, setDisplayInstruction?: React.Dispatch<React.SetStateAction<boolean>>) => void;
+  cleanup?: () => void;
+}
+
+
 export default function ApmTask({ email } : TaskProps ){
  
   const containerRef = useRef(null);

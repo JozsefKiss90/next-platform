@@ -1,5 +1,5 @@
 import {useSession, getSession} from "next-auth/react";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Session } from "next-auth";
 import styles from './simonTask.module.css'
 
@@ -12,6 +12,11 @@ export default function Page({ email } : TaskProps) {
   const containerRef = useRef(null) 
   const instructionsRef = useRef(null) 
   const buttonRef = useRef(null)  
+  const [displayInstruction, setDisplayInstruction] = useState(true)
+  
+  useEffect(() => {
+    console.log(displayInstruction);
+ }, [displayInstruction]);
 
   useEffect(() => {
     const container = containerRef.current
