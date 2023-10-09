@@ -33,7 +33,7 @@ export default function ApmTask({ email } : TaskProps ){
     if(container) {
       import("../../public/static/apm/apm.js")
         .then((module) => { 
-          module.default(email, container,setDisplayInstruction);
+          module.default(email, container, setDisplayInstruction);
         });
         //promissal visszakapni a cleanupot, 
     } 

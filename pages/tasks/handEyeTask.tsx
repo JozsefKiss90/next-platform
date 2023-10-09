@@ -1,6 +1,6 @@
 import { useSession, getSession } from "next-auth/react";
 import { useEffect, useRef } from "react";
-import styles from "./handEye.module.css";
+import styles from "./hand_eye/handEye.module.css";
 import handEyePlugin from "../../plugins/handEyePlugin";
 
 interface TaskProps{

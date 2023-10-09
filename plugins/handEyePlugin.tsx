@@ -3,15 +3,15 @@ import runTask from "../public/static/hand_eye/handEye"
 interface IGamePlugin {
     initialize: (
         email: string,
-        container: HTMLElement,
-        setDisplayInstruction?: React.Dispatch<React.SetStateAction<boolean>>
+        trials: HTMLElement,
+        displayInstruction?: any
     ) => void | (() => void)
     cleanup?: () => void
 }
 
 const handEyePlugin: IGamePlugin = {
-    initialize: (email, container, setDisplayInstruction) => {
-        runTask(container, email)
+    initialize: (email, trials) => {
+        runTask(email, trials)
      
         return () => {
            
