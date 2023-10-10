@@ -1,60 +1,77 @@
-export const navItems = [
-    {
-      titleKey: "Dashboard",
-      iconSrc: "/img/icons/svgDesktop.svg",
-      grayscaleKey: "grayscale_desktop",
-      effectClass: "hover_effect_desktop",
-      href: "/",
-      index: 0
-    },
-    {
-      titleKey: "Experiments",
-      iconSrc: "/img/icons/svgFlask.svg",
-      grayscaleKey: "grayscale_experiment",
-      effectClass: "hover_effect_flask",
-      href: "/experiments",
-      index: 1
-    },
-    {
-      titleKey: "Games",
-      iconSrc: "/img/icons/svgAlien.svg",
-      grayscaleKey: "grayscale_game",
-      effectClass: "hover_effect_alien",
-      href: "/games",
-      index: 2
-    },
-    {
-      titleKey: "Profile",
-      iconSrc: "/img/icons/svgProfile.svg",
-      grayscaleKey: "grayscale_profile",
-      effectClass: "hover_effect_profile",
-      href: "/user_form",
-      index: 3
-    },
-    {
-      titleKey: "Information",
-      iconSrc: "/img/icons/svgInfo.svg",
-      grayscaleKey: "grayscale_info",
-      effectClass: "hover_effect_info",
-      href: "#",
-      index: 4
-    },
-    {
-      titleKey: "Messages",
-      iconSrc: "/img/icons/svgEnvelope.svg",
-      grayscaleKey: "grayscale_message",
-      effectClass: "hover_effect_envelope",
-      href: "#",
-      index: 5
-    },
-    {
-      titleKey: "Logout",
-      iconSrc: "/img/icons/svgPower.svg",
-      grayscaleKey: "grayscale_logout",
-      effectClass: "hover_effect_power",
-      href: "#",
-      index: 6,
-      specialAction: true // To denote this requires special action for logout
-    }
-  ];
-  
+interface NavItems {
+  titleKey: string;
+  path: string;
+  iconPath: string;
+  grayscaleKey: string;
+  hoverEffectClass: string;
+  iconWidth: number;
+  iconHeight: number;
+  signOut?: boolean | undefined;
+}
+
+export const navItems :NavItems[] = [
+  {
+    titleKey: 'Dashboard',
+    path: '/',
+    iconPath: '/img/icons/svgDesktop.svg',
+    grayscaleKey: 'grayscale_desktop',
+    hoverEffectClass: 'hover_effect_desktop',
+    iconWidth: 50,
+    iconHeight: 50
+  },
+  {
+    titleKey: 'Experiments',
+    path: '/experiments',
+    iconPath: '/img/icons/svgFlask.svg',
+    grayscaleKey: 'grayscale_experiment',
+    hoverEffectClass: 'hover_effect_flask',
+    iconWidth: 50,
+    iconHeight: 50
+  },
+  {
+    titleKey: 'Games',
+    path: '/games',
+    iconPath: '/img/icons/svgAlien.svg',
+    grayscaleKey: 'grayscale_game',
+    hoverEffectClass: 'hover_effect_alien',
+    iconWidth: 50,
+    iconHeight: 40
+  },
+  {
+    titleKey: 'Profile',
+    path: '/user_form',
+    iconPath: '/img/icons/svgProfile.svg',
+    grayscaleKey: 'grayscale_profile',
+    hoverEffectClass: 'hover_effect_profile',
+    iconWidth: 50,
+    iconHeight: 40
+  },
+  {
+    titleKey: 'Information',
+    path: '#',
+    iconPath: '/img/icons/svgInfo.svg',
+    grayscaleKey: 'grayscale_info',
+    hoverEffectClass: 'hover_effect_info',
+    iconWidth: 50,
+    iconHeight: 50
+  },
+  {
+    titleKey: 'Messages',
+    path: '#',
+    iconPath: '/img/icons/svgEnvelope.svg',
+    grayscaleKey: 'grayscale_message',
+    hoverEffectClass: 'hover_effect_envelope',
+    iconWidth: 50,
+    iconHeight: 40
+  },
+  {
+    titleKey: 'Logout',
+    path: '#',
+    iconPath: '/img/icons/svgPower.svg',
+    grayscaleKey: 'grayscale_logout',
+    hoverEffectClass: 'hover_effect_power',
+    iconWidth: 45,
+    iconHeight: 45,
+    signOut: true
+  }
+];
