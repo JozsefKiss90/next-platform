@@ -1,25 +1,38 @@
 import { useSession } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState } from "react";
 
-export default function withSessionTask(plugin:any) {
-  return function (WrappedComponent:any) {
-    return function SessionTaskComponent(props:any) {
-      console.log('SessionTaskComponent is rendering');
+interface IGamePlugin {
+  initialize: (
+      email: string,
+      container: HTMLElement,
+      displayInstruction?: Dispatch<SetStateAction<boolean>>
+  ) => void | (() => void)
+  cleanup?: () => void
+}
+
+interface TaskProps {
+  email?: string
+  taskRef?:  MutableRefObject<null>
+  setDisplayInstruction?:Dispatch<SetStateAction<boolean>>
+}
+
+export default function withSessionTask(plugin:IGamePlugin, WrappedComponent:React.FC<TaskProps>) {
+  return function SessionTaskComponent(props:TaskProps) {
       const taskRef = useRef(null);
       const { data: session } = useSession();
-      const [displayInstruction, setDisplayInstruction] = useState(true)
+      const [displayInstruction, setDisplayInstruction] = useState<boolean>(true);
+      
       useEffect(() => {
-        const task = taskRef.current;
-        console.log(task)
-        if (props.email && task && session) {
-          const cleanup = plugin.initialize(props.email, task, setDisplayInstruction);
-          return () => {
-            cleanup && cleanup();
-          };
-        }
+          const task = taskRef.current;
+          console.log(task)
+          if (props.email && task && session) {
+              const cleanup = plugin.initialize(props.email, task, setDisplayInstruction);
+              return () => {
+                  cleanup && cleanup();
+              };
+          }
       }, [session, props.email]);
 
       return <WrappedComponent {...props} taskRef={taskRef} setDisplayInstruction={setDisplayInstruction} />;
-    };
   };
 }

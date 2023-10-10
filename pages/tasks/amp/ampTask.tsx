@@ -1,12 +1,10 @@
 import styles from '../apm.module.css'
 
 interface TaskProps {
-    email?: string
     taskRef?: any
-    setDisplayInstruction?:any
   }
 
-export default function ApmTask({ email, taskRef, setDisplayInstruction } : TaskProps ){
+export default function ApmTask({ taskRef } : TaskProps ){
 
     return (
     <div className={styles.amp_container}>

@@ -1,11 +1,10 @@
 import styles from "./handEye.module.css";
 
 interface TaskProps {
-  email?: string;
   taskRef?: any;
 }
 
-export default function HandEye({ email, taskRef }: TaskProps) {
+export default function HandEye({ taskRef}: TaskProps) {
   return (
     <div id="container-2" className={styles.container_2}>
       <div className={styles.textElement}>
