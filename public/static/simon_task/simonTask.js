@@ -1,4 +1,4 @@
-export default function(containerRef,email, instructionsRef, buttonRef, styles) {
+export default function(email, containerRef,instructionsRef, buttonRef, styles) {
 
     const instructionsElement = instructionsRef
     const startButton = buttonRef

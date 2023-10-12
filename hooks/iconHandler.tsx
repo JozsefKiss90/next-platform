@@ -1,5 +1,34 @@
-import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/router";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import React, { useState } from 'react';
+
+interface Grayscale {
+  [key: string]: string;
+}
+
+interface IconStateSetter {
+  setDesktopIcon: Dispatch<SetStateAction<string>>,
+  setExperimentIcon: Dispatch<SetStateAction<string>>,
+  setGameIcon: Dispatch<SetStateAction<string>>,
+  setProfileIcon: Dispatch<SetStateAction<string>>,
+  setInfoIcon: Dispatch<SetStateAction<string>>,
+  setMessageIcon: Dispatch<SetStateAction<string>>,
+  setLogoutIcon: Dispatch<SetStateAction<string>>,
+  setGrayscale: Dispatch<SetStateAction<Grayscale>>,
+}
+
+interface IconStateUdpater {
+  currentUrl: string, 
+  setGrayscale: Dispatch<SetStateAction<Grayscale>>,
+  grayscaleObj: Grayscale, 
+  setDesktopIcon: Dispatch<SetStateAction<string>>, 
+  handleIconTitle: (title: string) => void, 
+  setExperimentIcon: Dispatch<SetStateAction<string>>, 
+  setGameIcon: Dispatch<SetStateAction<string>>,  
+  setProfileIcon: Dispatch<SetStateAction<string>>,  
+  setInfoIcon: Dispatch<SetStateAction<string>>, 
+  setLogoutIcon : Dispatch<SetStateAction<string>>, 
+}
 
 export const grayscaleObj : Grayscale  = {
     grayscale_desktop : '',
@@ -11,7 +40,64 @@ export const grayscaleObj : Grayscale  = {
     grayscale_logout: '',
   }
 
-export const useIconSetters = () => {
+  export function NavbarState() {
+    const router = useRouter();
+    const currentUrl = router.asPath;
+  
+    
+    const [desktopIcon, setDesktopIcon] = useState("/img/icons/svgDesktop_2.svg")
+    const [experimentIcon, setExperimentIcon] = useState("/img/icons/svgFlask_2.svg")
+    const [gameIcon, setGameIcon] = useState("/img/icons/svgAlien_2.svg")
+    const [profileIcon, setProfileIcon] = useState("/img/icons/svgProfile_2.svg")
+    const [infoIcon, setInfoIcon] = useState("/img/icons/svgInfo_2.svg")
+    const [messageIcon, setMessageIcon] = useState("/img/icons/svgEnvelope_2.svg")
+    const [logoutIcon, setLogoutIcon] = useState("/img/icons/svgPower_2.svg")
+    const [isMobile, setIsMobile] = useState(false);
+    const [grayscale, setGrayscale] = useState(grayscaleObj)
+    const [iconTitle, setIconTitle] = useState<string>('')
+  
+    const iconSetters = useIconSetters();
+  
+    useEffect(() => {
+      function handleResize() {
+        setIsMobile(window.innerWidth < 896); 
+      }
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize); 
+      };
+    }, []);
+  
+    useEffect(() => {
+      handleIconUpdates(
+        { currentUrl, setGrayscale, grayscaleObj, setDesktopIcon, handleIconTitle, setExperimentIcon, setGameIcon, setProfileIcon, setInfoIcon, setLogoutIcon}
+      )
+    }, []);
+
+    const handleIconTitle = (title : string) => {
+      setIconTitle(title);
+    };
+  
+    return {
+      grayscale, 
+      iconTitle, 
+      desktopIcon, 
+      experimentIcon, 
+      gameIcon, 
+      profileIcon, 
+      infoIcon, 
+      messageIcon, 
+      logoutIcon, 
+      isMobile, 
+      iconSetters,
+      handleIconTitle, 
+      setExperimentIcon,
+      setGrayscale
+  };
+  }
+
+const useIconSetters = () => {
     
     const grayscaleObj : Grayscale  = {
         grayscale_desktop : '',
@@ -44,35 +130,6 @@ export const useIconSetters = () => {
       };
     return iconSetters;
 };
-
-
-interface Grayscale {
-    [key: string]: string;
-  }
-
-interface IconStateSetter {
-    setDesktopIcon: Dispatch<SetStateAction<string>>,
-    setExperimentIcon: Dispatch<SetStateAction<string>>,
-    setGameIcon: Dispatch<SetStateAction<string>>,
-    setProfileIcon: Dispatch<SetStateAction<string>>,
-    setInfoIcon: Dispatch<SetStateAction<string>>,
-    setMessageIcon: Dispatch<SetStateAction<string>>,
-    setLogoutIcon: Dispatch<SetStateAction<string>>,
-    setGrayscale: Dispatch<SetStateAction<Grayscale>>,
-}
-
-interface IconStateUdpater {
-    currentUrl: string, 
-    setGrayscale: Dispatch<SetStateAction<Grayscale>>,
-    grayscaleObj: Grayscale, 
-    setDesktopIcon: Dispatch<SetStateAction<string>>, 
-    handleIconTitle: (title: string) => void, 
-    setExperimentIcon: Dispatch<SetStateAction<string>>, 
-    setGameIcon: Dispatch<SetStateAction<string>>,  
-    setProfileIcon: Dispatch<SetStateAction<string>>,  
-    setInfoIcon: Dispatch<SetStateAction<string>>, 
-    setLogoutIcon : Dispatch<SetStateAction<string>>, 
-}
 
 export const handleIconUpdates = (
     {
@@ -147,7 +204,7 @@ export const resetIconStates = (
     });
   };
 
-  interface ResetItem {
+ /*interface ResetItem {
     titleKey: string;
   }
 
@@ -172,4 +229,4 @@ export const resetIconStates = (
       setLogoutIcon,
       setGrayscale
     });
-  }
+  }*/

@@ -6,11 +6,10 @@ import {useContext, useEffect, useState } from "react";
 import Image from 'next/image';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css'; 
-import styles2 from "../styles/Index.module.scss"
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { useRouter } from "next/router"; 
 import { navItems } from "../hooks/navItems";
-import {handleIconUpdates, resetIconStates, useIconSetters, grayscaleObj } from "../hooks/iconHandler";
+import {handleIconUpdates, resetIconStates, grayscaleObj, NavbarState } from "../hooks/iconHandler";
 import LanguageToggler from './LanguageToggler'; 
 
 interface AppContextValue {
@@ -22,21 +21,6 @@ interface AppContextValue {
     setLanguage: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
-interface NavItems {
-  titleKey: string;
-  path: string;
-  iconPath: string;
-  grayscaleKey: string;
-  hoverEffectClass: string;
-  iconWidth: number;
-  iconHeight: number;
-  signOut?: boolean | undefined;
-}
-
-interface Grayscale {
-  [key: string]: string;
-}
-
 export default function Navbar(){
 
   const { setIsHovered, setIsLogin, isDarkMode, languageData, language, setLanguage} = useContext(AppContext) as AppContextValue;;
@@ -46,66 +30,29 @@ export default function Navbar(){
     setIsLogin(true)
   }
 
-  const router = useRouter();
-  const currentUrl = router.asPath;
-  console.log(currentUrl)
+  const {
+    grayscale,
+    iconTitle,
+    setExperimentIcon,
+    isMobile,
+    handleIconTitle,
+    setGrayscale,
+    iconSetters
+} = NavbarState();
 
-  const [grayscale, setGrayscale] = useState<Grayscale>(grayscaleObj)
-  const [iconTitle, setIconTitle] = useState<string>('')
+const handleReset = (item:any) => {
+  resetIconStates(item.titleKey.toLowerCase(), iconSetters);
+}
 
-  const [desktopIcon, setDesktopIcon] = useState("/img/icons/svgDesktop_2.svg")
-  const [experimentIcon, setExperimentIcon] = useState("/img/icons/svgFlask_2.svg")
-  const [gameIcon, setGameIcon] = useState("/img/icons/svgAlien_2.svg")
-  const [profileIcon, setProfileIcon] = useState("/img/icons/svgProfile_2.svg")
-  const [infoIcon, setInfoIcon] = useState("/img/icons/svgInfo_2.svg")
-  const [messageIcon, setMessageIcon] = useState("/img/icons/svgEnvelope_2.svg")
-  const [logoutIcon, setLogoutIcon] = useState("/img/icons/svgPower_2.svg")
-  const [isMobile, setIsMobile] = useState(false);
+const handleMouseEnter = () => {
+  setIsHovered(true);
+};
 
-  const iconSetters = useIconSetters();
+const handleMouseLeave = () => {
+  setIsHovered(false);
+};
+ 
 
-  const handleReset = (item:any) => {
-    resetIconStates(item.titleKey.toLowerCase(), iconSetters);
-  }
-
-  const handleIconTitle = (title : string) => {
-    setIconTitle(title)
-  }
-  
-  const handleMouseEnter = () => {
-      setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-      setIsHovered(false);
-  };
-
-  useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth < 896); 
-    }
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize); 
-    };
-  }, []);
-
-  
-  useEffect(() => {
-    handleIconUpdates(
-      { currentUrl, 
-      setGrayscale, 
-      grayscaleObj, 
-      setDesktopIcon, 
-      handleIconTitle, 
-      setExperimentIcon, 
-      setGameIcon, 
-      setProfileIcon, 
-      setInfoIcon, 
-      setLogoutIcon}
-    )
-  }, []);
 return (
     <div className={styles.main_container}>
       <nav className={styles.mobile_navbar} style={isDarkMode ? { filter: "grayscale(100%)" } : {}}>

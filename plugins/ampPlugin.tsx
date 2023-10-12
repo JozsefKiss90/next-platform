@@ -2,15 +2,15 @@ import runTask from "../public/static/apm/apm"
 interface IGamePlugin {
     initialize: (
         email: string,
-        container: HTMLElement,
+        refObj: any,
         displayInstruction?: any
     ) => void | (() => void)
     cleanup?: () => void
 }
 
 const ampPlugin: IGamePlugin = {
-    initialize: (email, container,displayInstruction) => {
-        runTask(email, container,displayInstruction)
+    initialize: (email, refObj, displayInstruction) => {
+        runTask(email, refObj.ref.taskRef.current,displayInstruction)
         return () => {
            
         }
