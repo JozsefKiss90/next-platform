@@ -12,7 +12,7 @@ export default function Page({ email } : TaskProps) {
 
   useEffect(() => {
     async function runTask() {
-      const module = await import('../../public/static/visual_memory/memory_task.js');
+      const module = await import('../../taskCollection/visual_memory/memory_task.js');
       let grid = document.getElementById("grid");
       let button = document.getElementById("button");
       if (!grid || !button) {

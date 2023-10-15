@@ -31,7 +31,7 @@ export default function ApmTask({ email } : TaskProps ){
   useEffect(() => {
     const container = containerRef.current
     if(container) {
-      import("../../public/static/taskCollection/apm/apm.js")
+      import("../../taskCollection/apm/apm.js")
         .then((module) => { 
           module.default(email, container, setDisplayInstruction);
         });

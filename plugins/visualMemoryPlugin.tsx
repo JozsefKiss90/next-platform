@@ -1,4 +1,4 @@
-import runTask from "../public/static/visual_memory/memory_task"
+import runTask from "../taskCollection/visual_memory/memory_task"
 import styles from '../pages/tasks/visual_memory/visualMemory.module.css'
 import { IGamePlugin } from "../types/types"
 

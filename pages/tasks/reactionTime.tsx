@@ -16,7 +16,7 @@ export default function Page({ email } : TaskProps) {
   useEffect(() => {
     const box = boxRef.current 
     if(box) {
-        import('../../public/static/reaction_time/reaction_time.js')
+        import('../../taskCollection/reaction_time/reaction_time.js')
           .then((module:any) => {
             module.default(box, email);
           });

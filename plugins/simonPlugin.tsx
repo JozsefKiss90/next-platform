@@ -1,4 +1,4 @@
-import runTask from "../public/static/simon_task/simonTask"
+import runTask from "../taskCollection/simon_task/simonTask"
 import styles from '../pages/tasks/simon/simonTask.module.css'
 import { IGamePlugin } from "../types/types"
 

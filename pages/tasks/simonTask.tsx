@@ -24,7 +24,7 @@ export default function Page({ email } : TaskProps) {
     const button = buttonRef.current
 
     if(container && instructions && button) {
-        import('../../public/static/simon_task/simonTask.js')
+        import('../../taskCollection/simon_task/simonTask.js')
           .then((module:any) => {
             module.default(container,email,instructions,button,styles);
           });

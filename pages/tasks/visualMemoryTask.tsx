@@ -14,7 +14,7 @@ export default function Page({ email } : TaskProps ) {
     const grid = gridRef.current;
     const button = buttonRef.current; 
     if(grid && button) {
-      import('../../public/static/visual_memory/memory_task.js')
+      import('../../taskCollection/visual_memory/memory_task.js')
         .then((module) => {
           module.default(grid, button, styles);
         });

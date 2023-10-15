@@ -1,4 +1,4 @@
-import runTask from "../public/static/reaction_time/reaction_time"
+import runTask from "../taskCollection/reaction_time/reaction_time"
 import { IGamePlugin } from "../types/types"
 
 const reactionTimePlugin: IGamePlugin = {

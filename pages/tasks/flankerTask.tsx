@@ -9,7 +9,7 @@ interface TaskProps {
 export default function Flanker({ email} : TaskProps ) {
   useEffect(() => {
     async function runTask(sessionEmail : string) {
-      const module = await import('../../public/static/flanker/flanker.js');
+      const module = await import('../../taskCollection/flanker/flanker.js');
       module.default(sessionEmail);
     }
     runTask(email!);

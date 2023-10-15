@@ -1,4 +1,4 @@
-import runTask from "../public/static/hand_eye/handEye"
+import runTask from "../taskCollection/hand_eye/handEye"
 import { IGamePlugin } from "../types/types"
 
 

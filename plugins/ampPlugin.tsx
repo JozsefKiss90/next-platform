@@ -1,4 +1,4 @@
-import runTask from "../public/static/taskCollection/apm/apm"
+import runTask from "../taskCollection/apm/apm"
 import { IGamePlugin } from "../types/types"
 
 const ampPlugin: IGamePlugin = { 

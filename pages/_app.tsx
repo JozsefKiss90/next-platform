@@ -1,7 +1,7 @@
 import '../styles/globals.scss'
 import Layout from '../components/layout'
 import { SessionProvider } from "next-auth/react"
-import  '../public/static/networks/default_style.css'
+import  '../taskCollection/networks/default_style.css'
 import '../public/static/style.css' 
 import Head from 'next/head';
 import { AppPropsWithSession } from '../types/types'
