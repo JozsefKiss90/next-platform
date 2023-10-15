@@ -1,7 +1,7 @@
 import { fetchSession } from "../../../hooks/sessionUtils"
-import SimonTask from "./simonTask"
+import ReactionTimeTask from "./reactionTimeTask"
 import withSessionTask from '../hocs/hocTest'
-import simonPlugin from '../../../plugins/simonPlugin';
+import reactionTimePlugin from '../../../plugins/reactionTimePlugin';
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
 
 interface TaskProps {
@@ -10,13 +10,13 @@ interface TaskProps {
   setDisplayInstruction?:Dispatch<SetStateAction<boolean>>
 }
 
-function SimonPage(props:TaskProps) {
-  return <SimonTask {...props} />
+function ReactionTimePage(props:TaskProps) {
+  return <ReactionTimeTask {...props} />
 }
 
 export async function getServerSideProps(context:any) {
   return await fetchSession(context.req) 
 }
 
-export default withSessionTask(simonPlugin, SimonPage);
+export default withSessionTask(reactionTimePlugin, ReactionTimePage);
 

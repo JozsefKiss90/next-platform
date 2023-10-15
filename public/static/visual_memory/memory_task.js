@@ -10,7 +10,9 @@ let attempts = 3;
 status.classList.add(styles.status);
 
 const button = buttonProp
-button.addEventListener('click', ()=> startTest())
+if(button != null){
+    button.addEventListener('click', ()=> startTest())
+}
 
 for (let i = 0; i < 9; i++) {
     let square = document.createElement('div');

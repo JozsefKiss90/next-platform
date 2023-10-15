@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react"
-import { Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState } from "react"
+import { Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState, useMemo } from "react"
 
 interface IGamePlugin {
   initialize: (
@@ -21,26 +21,32 @@ export default function withSessionTask(plugin:IGamePlugin, WrappedComponent:Rea
     const taskRef = useRef(null)
     const buttonRef = useRef(null)
     const instuctionRef = useRef(null)
+    const gridRef = useRef(null)
+
+    const { data: session } = useSession()
+    const [displayInstruction, setDisplayInstruction] = useState<boolean>(true)
+    const [started, setStarted] = useState(false)
+
     const refObj = {
       ref:{
         taskRef,
         buttonRef,
         instuctionRef,
+        gridRef,
+        setStarted,
+        started
       }
     }
-    const { data: session } = useSession()
-    const [displayInstruction, setDisplayInstruction] = useState<boolean>(true)
 
     useEffect(() => {
         const task = refObj
         if (props.email && task.ref.taskRef !=null && session) {
-          console.log(task)
             const cleanup = plugin.initialize(props.email, task, setDisplayInstruction)
             return () => {
                 cleanup && cleanup()
             }
         }
-      }, [session, props.email, refObj])
+      }, [session, props.email])
 
       return <WrappedComponent {...props} taskRef={refObj} setDisplayInstruction={setDisplayInstruction} />
   }

@@ -6,7 +6,6 @@ interface TaskProps{
 }
 
 export default function Page({ taskRef } : any ){
-  //console.log(taskRef)
   return( 
       <div ref={taskRef.ref.taskRef} id="container" className={styles.container}>
           <div ref={taskRef.ref.instuctionRef} id="instructions" className={styles.instructions}>
