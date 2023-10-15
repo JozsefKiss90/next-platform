@@ -1,20 +1,14 @@
 import { fetchSession } from "../../../hooks/sessionUtils"
 import ReactionTimeTask from "./reactionTimeTask"
-import withSessionTask from '../hocs/hocTest'
+import withSessionTask from '../../../hocs/Hoc'
 import reactionTimePlugin from '../../../plugins/reactionTimePlugin';
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
-
-interface TaskProps {
-  email?: string
-  taskRef?: any
-  setDisplayInstruction?:Dispatch<SetStateAction<boolean>>
-}
+import { TaskProps } from '../../../types/types';
 
 function ReactionTimePage(props:TaskProps) {
   return <ReactionTimeTask {...props} />
 }
 
-export async function getServerSideProps(context:any) {
+export async function getServerSideProps(context: { req: any; }) {
   return await fetchSession(context.req) 
 }
 

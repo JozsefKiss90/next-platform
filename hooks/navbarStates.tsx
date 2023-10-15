@@ -1,5 +1,3 @@
-// NavbarState.tsx
-
 import { useRouter } from "next/router"; 
 import { useState, useEffect } from "react";
 import { grayscaleObj, useIconSetters } from "../hooks/iconHandler";
@@ -9,7 +7,7 @@ import { grayscaleObj, useIconSetters } from "../hooks/iconHandler";
 export function NavbarState() {
   const router = useRouter();
   const currentUrl = router.asPath;
-
+ 
   const [grayscale, setGrayscale] = useState(grayscaleObj)
   const [iconTitle, setIconTitle] = useState<string>('')
 

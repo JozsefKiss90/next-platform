@@ -1,20 +1,12 @@
 import '../styles/globals.scss'
-import type { AppProps } from 'next/app'
 import Layout from '../components/layout'
 import { SessionProvider } from "next-auth/react"
 import  '../public/static/networks/default_style.css'
 import '../public/static/style.css' 
-import { Session } from 'next-auth';
 import Head from 'next/head';
-
-type AppPropsWithSession = AppProps & {
-  pageProps: {
-    session: Session | null;
-  };
-};
+import { AppPropsWithSession } from '../types/types'
 
 export default function App({ Component, pageProps }: AppPropsWithSession) {
-
   return(
     <>
    <Head>

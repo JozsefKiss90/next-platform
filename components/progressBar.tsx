@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/ProgressBar.module.scss";
-
-interface ProgressProps {
-  completed : number
-} 
+import { ProgressProps } from "../types/types";
 
 export default function ProgressBar({ completed } : ProgressProps) {
   const [width, setWidth] = useState(0);

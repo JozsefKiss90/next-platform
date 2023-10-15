@@ -1,8 +1,20 @@
 import styles from "./handEye.module.css";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 
+type RefObject = {
+  containerRef: MutableRefObject<any>
+  buttonRef: MutableRefObject<any>
+  instructionRef: MutableRefObject<any>
+  gridRef: MutableRefObject<any>
+  setStarted: Dispatch<SetStateAction<boolean>>
+  started: boolean
+  displayInstruction: boolean
+} 
 interface TaskProps {
-  taskRef?: any;
-}
+  email?: string
+  taskRef?: RefObject | undefined
+  setDisplayInstruction?:Dispatch<SetStateAction<boolean>> 
+} 
 
 export default function HandEye({ taskRef}: TaskProps) {
   return (
@@ -12,7 +24,7 @@ export default function HandEye({ taskRef}: TaskProps) {
         középponthoz minnél közelebb megállítani őket.{" "}
       </div>
       <div className={styles.countdown} id="countdown"></div>
-      <div ref={taskRef} id="trials" className={styles.trials}></div>
+      <div ref={taskRef?.containerRef} id="trials" className={styles.trials}></div>
       <div id="container" className={styles.container}>
         <div className={styles.lineX}></div>
         <div className={styles.lineY}></div>

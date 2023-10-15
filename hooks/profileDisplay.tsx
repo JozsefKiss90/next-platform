@@ -1,25 +1,19 @@
 
 import gameRanking from "./gameRanking"
-import { sendGameData, deleteAccount } from './profileHandlers';
-import {signOut} from "next-auth/react";
-import styles from '../styles/UserForm.module.scss';
+import { sendGameData, deleteAccount } from './profileHandlers'
+import {signOut} from "next-auth/react"
+import styles from '../styles/UserForm.module.scss'
 import { AppContext } from "../components/layout"
-import { useContext, useState } from 'react';
+import { useContext, useState } from 'react'
 import {getRankOptions, getBestRankOptions} from './rankOptions'
-
-interface AppContextValue {
-    setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-    isDarkMode: boolean;
-    languageData: any
-    language: boolean
-  }
+import { ProfileAppContextValue } from "../types/types"
 
 const ProfileDisplay = ({email} :any ) => {
 
-    const { setIsDarkMode, languageData, language } = useContext(AppContext)  as AppContextValue;
+    const { setIsDarkMode, languageData, language } = useContext(AppContext)  as ProfileAppContextValue
 
-    const [waringMessage, setWaringMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');  
+    const [waringMessage, setWaringMessage] = useState('')
+    const [successMessage, setSuccessMessage] = useState('')  
     const [verifyModal, setVerifyModal] = useState(false)
 
     const {
@@ -30,7 +24,7 @@ const ProfileDisplay = ({email} :any ) => {
         handleGameBestRankChange,
         handleGameTimeChange,
         handleAgeChange,
-      } = gameRanking();
+      } = gameRanking()
 
       const gameData = {
         games,
@@ -104,7 +98,7 @@ const ProfileDisplay = ({email} :any ) => {
                     {language ? languageData.hun.profile[5] : "Save"}
                     </p>
                 </button>
-                <button style={{padding:'20px 55px'}} className={styles.task_button}  onClick={(e)=>{e.preventDefault(); setVerifyModal(true), setIsDarkMode(true)}}>
+                <button style={{padding:'20px 55px'}} className={styles.task_button}  onClick={(e)=>{e.preventDefault(), setVerifyModal(true), setIsDarkMode(true)}}>
                     <p>
                     {language ? languageData.hun.profile[6] : "Delete Account"}
                     </p>

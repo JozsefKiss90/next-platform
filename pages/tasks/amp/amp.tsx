@@ -1,14 +1,9 @@
 import { fetchSession } from "../../../hooks/sessionUtils"
 import Amp from "./ampTask"
-import withSessionTask from '../hocs/hocTest'
+import withSessionTask from '../../../hocs/Hoc'
 import ampPlugin from '../../../plugins/ampPlugin';
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { TaskProps } from '../../../types/types';
 
-interface TaskProps {
-  email?: string
-  taskRef?:  MutableRefObject<null>
-  setDisplayInstruction?:Dispatch<SetStateAction<boolean>> 
-}
 
 function AmpPage(props:TaskProps) {
   return <Amp {...props} />

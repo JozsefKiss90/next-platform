@@ -1,4 +1,7 @@
+let myIntervalX
+
 export default function runTask(trialsProp,email) {
+
     var elementX = document.getElementById('moveMeX')
     var elementY = document.getElementById('moveMeY')
     var container = document.getElementById('container-2')
@@ -26,6 +29,7 @@ export default function runTask(trialsProp,email) {
         elementY.style.top = "-20px"
         trials += 1
         trialsProp = `${trials}/20`
+        console.log(trialsProp)
         posX = -20
         startPosX = -20
         posY = -20
@@ -82,7 +86,7 @@ export default function runTask(trialsProp,email) {
         }
     });
 
-    var myIntervalX = setInterval(function () {
+     myIntervalX = setInterval(function () {
         document.getElementById('trials').innerHTML = `${trials}/19`
         if(trials == 10) {   
             clearInterval(myIntervalX)
@@ -139,6 +143,7 @@ export default function runTask(trialsProp,email) {
             }
         }
     }, 10);
+    return myIntervalX;
 }
  
 

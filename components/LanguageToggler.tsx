@@ -1,15 +1,9 @@
 import React from 'react';
 import styles from "../styles/Navbar.module.scss";
 import styles2 from "../styles/Index.module.scss"
-import { Session } from 'next-auth';
+import { LanguageProps } from '../types/types';
 
-interface Props {
-    language: boolean;
-    setLanguage: React.Dispatch<React.SetStateAction<boolean>>;
-    session:  Session 
-}
-
-const LanguageToggler: React.FC<Props> = ({ language, setLanguage, session }) => {
+const LanguageToggler: React.FC<LanguageProps> = ({ language, setLanguage, session }) => {
     return (
         <>
             <div className={styles.credentials_container}>

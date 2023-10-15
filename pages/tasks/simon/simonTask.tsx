@@ -1,17 +1,14 @@
 
 import styles from './simonTask.module.css'
+import { TaskProps } from '../../../types/types';
 
-interface TaskProps{
-  email: string | undefined; 
-}
-
-export default function Page({ taskRef } : any ){
+export default function Page({ taskRef } : TaskProps ){
   return( 
-      <div ref={taskRef.ref.taskRef} id="container" className={styles.container}>
-          <div ref={taskRef.ref.instuctionRef} id="instructions" className={styles.instructions}>
+      <div ref={taskRef?.containerRef} id="container" className={styles.container}>
+          <div ref={taskRef?.instructionRef} id="instructions" className={styles.instructions}>
               <p>Press 'A' for "left" and 'L' for "right". Press the start button to begin the task.</p>
           </div>
-          <button ref={taskRef.ref.buttonRef} id="start-button" className={styles.startButton}>Start</button>
+          <button ref={taskRef?.buttonRef} id="start-button" className={styles.startButton}>Start</button>
       </div>
     )
 }

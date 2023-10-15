@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChangeEvent } from 'react';
+import { GameStateType } from '../types/types';
 
 export default function gameRanking() {
 
@@ -44,13 +45,6 @@ export default function gameRanking() {
     bestRank: '',
     time: 0,
   });
-
-  type GameStateType = {
-    checked: boolean,
-    rank: string,
-    bestRank: string,
-    time: number,
-  };
 
   const games = [
     { id: 'cs', label: 'Counter Strike', state: cs, setState: setCs },

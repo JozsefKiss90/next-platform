@@ -1,23 +1,13 @@
-import runTask from "../public/static/apm/apm"
-interface IGamePlugin {
-    initialize: (
-        email: string,
-        refObj: any,
-        displayInstruction?: any
-    ) => void | (() => void)
-    cleanup?: () => void
-}
+import runTask from "../public/static/taskCollection/apm/apm"
+import { IGamePlugin } from "../types/types"
 
-const ampPlugin: IGamePlugin = {
+const ampPlugin: IGamePlugin = { 
     initialize: (email, refObj, displayInstruction) => {
-        runTask(email, refObj.ref.taskRef.current,displayInstruction)
+        runTask(email, refObj.containerRef.current,displayInstruction)
         return () => {
            
         }
     },
-    cleanup: () => {
-   
-    }
 }
 
 export default ampPlugin

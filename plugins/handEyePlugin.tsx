@@ -1,25 +1,16 @@
 import runTask from "../public/static/hand_eye/handEye"
+import { IGamePlugin } from "../types/types"
 
-interface IGamePlugin {
-    initialize: (
-        email: string,
-        trials: HTMLElement,
-        displayInstruction?: any
-    ) => void | (() => void)
-    cleanup?: () => void
-}
 
 const handEyePlugin: IGamePlugin = {
-    initialize: (email, trials) => {
-        runTask(email, trials)
-     
-        return () => {
-           
-        }
+    initialize: (email, refObj) => {
+        const myIntervalX = runTask(email, refObj);
+        const cleanup = () => {
+            clearInterval(myIntervalX); 
+
+        }; 
+        return cleanup;
     },
-    cleanup: () => {
-   
-    }
 }
 
 export default handEyePlugin

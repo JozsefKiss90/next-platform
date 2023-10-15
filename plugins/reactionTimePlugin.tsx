@@ -1,22 +1,12 @@
 import runTask from "../public/static/reaction_time/reaction_time"
-interface IGamePlugin {
-    initialize: (
-        email: string,
-        refObj: any,
-        displayInstruction?: any
-    ) => void | (() => void)
-    cleanup?: () => void
-}
+import { IGamePlugin } from "../types/types"
 
 const reactionTimePlugin: IGamePlugin = {
     initialize: (email, refObj) => {
-        runTask(email, refObj.ref.taskRef.current)
+        runTask(email, refObj.containerRef.current)
         return () => {
            
         }
-    },
-    cleanup: () => {
-   
     }
 }
 

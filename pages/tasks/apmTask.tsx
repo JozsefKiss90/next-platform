@@ -31,7 +31,7 @@ export default function ApmTask({ email } : TaskProps ){
   useEffect(() => {
     const container = containerRef.current
     if(container) {
-      import("../../public/static/apm/apm.js")
+      import("../../public/static/taskCollection/apm/apm.js")
         .then((module) => { 
           module.default(email, container, setDisplayInstruction);
         });
@@ -45,7 +45,7 @@ export default function ApmTask({ email } : TaskProps ){
   console.log(displayInstruction)
     return(
     <div className={styles.amp_container}>
-    {displayInstruction && 
+    {displayInstruction &&  
       <div className={styles.instruction}>
         Kattintsd végig csökkenő sorrendben a  körökön belül lévő számokat,<br /> amilyen gyorsan csak tudod.
       </div>}

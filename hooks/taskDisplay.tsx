@@ -61,13 +61,13 @@ export default function TaskDisplay({props}:any) {
             
             {disableLink ? (
                 <Link href={''}>
-                <button className={styles.task_button} onClick={(e) => { e.preventDefault(); handleCookieWarning(); }}>
+                <button className={styles.task_button} onClick={(e) => { e.preventDefault(), handleCookieWarning(); }}>
                     <p>Start</p>
                 </button>
                 </Link>
             ) : (
                 <Link href={task.link}>
-                <button className={styles.task_button} onClick={handleTaskStart}>
+                <button className={styles.task_button} onClick={(e) => { e.preventDefault(), handleTaskStart(task.link) }}>
                     <p>Start</p>
                 </button>
                 </Link>

@@ -1,30 +1,20 @@
 import styles from "../styles/Navbar.module.scss"
 import Link from "next/link"
-import {signOut, useSession} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react"
 import { AppContext } from "./layout"
-import {useContext, useEffect, useState } from "react";
-import Image from 'next/image';
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css'; 
-import "/node_modules/flag-icons/css/flag-icons.min.css";
-import { useRouter } from "next/router"; 
-import { navItems } from "../hooks/navItems";
-import {handleIconUpdates, resetIconStates, grayscaleObj, NavbarState } from "../hooks/iconHandler";
-import LanguageToggler from './LanguageToggler'; 
-
-interface AppContextValue {
-    setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
-    isDarkMode: boolean;
-    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
-    languageData: any
-    language: boolean
-    setLanguage: React.Dispatch<React.SetStateAction<boolean>>;
-  }
-
+import {useContext} from "react"
+import Image from 'next/image'
+import SimpleBar from 'simplebar-react'
+import 'simplebar/dist/simplebar.min.css' 
+import "/node_modules/flag-icons/css/flag-icons.min.css"
+import { navItems } from "../hooks/navItems"
+import {resetIconStates, grayscaleObj, NavbarState } from "../hooks/iconHandler"
+import LanguageToggler from './LanguageToggler' 
+import { NavAppContextValue } from "../types/types"
 export default function Navbar(){
 
-  const { setIsHovered, setIsLogin, isDarkMode, languageData, language, setLanguage} = useContext(AppContext) as AppContextValue;;
-  const { data: session, status } = useSession(); 
+  const { setIsHovered, setIsLogin, isDarkMode, languageData, language, setLanguage} = useContext(AppContext) as NavAppContextValue
+  const { data: session, status } = useSession() 
 
   if(session) {
     setIsLogin(true)
@@ -38,19 +28,19 @@ export default function Navbar(){
     handleIconTitle,
     setGrayscale,
     iconSetters
-} = NavbarState();
+} = NavbarState()
 
 const handleReset = (item:any) => {
-  resetIconStates(item.titleKey.toLowerCase(), iconSetters);
+  resetIconStates(item.titleKey.toLowerCase(), iconSetters)
 }
 
 const handleMouseEnter = () => {
-  setIsHovered(true);
-};
+  setIsHovered(true)
+}
 
 const handleMouseLeave = () => {
-  setIsHovered(false);
-};
+  setIsHovered(false)
+}
  
 
 return (
@@ -87,10 +77,10 @@ return (
             key={index}
             className={styles.nav_item}
             onTouchStart={() => {
-              handleIconTitle(item.titleKey);
-              setExperimentIcon(item.iconPath);
-              setGrayscale({ ...grayscaleObj, [item.grayscaleKey]: 'grayscale(0)' });
-              handleReset(item);
+              handleIconTitle(item.titleKey)
+              setExperimentIcon(item.iconPath)
+              setGrayscale({ ...grayscaleObj, [item.grayscaleKey]: 'grayscale(0)' })
+              handleReset(item)
             }}
           >
           <Link 
@@ -98,7 +88,7 @@ return (
             className={styles.nav_link} 
             style={{ filter: `${grayscale[item.grayscaleKey]}` }}
             onClick={(e) => { 
-              item.signOut && (e.preventDefault(), signOut());
+              item.signOut && (e.preventDefault(), signOut())
             }}
           >
             <Image
@@ -123,5 +113,5 @@ return (
       <LanguageToggler language={language} setLanguage={setLanguage} session={session} />
   )}
 </div> 
-  );
+  )
 }

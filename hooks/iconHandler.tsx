@@ -1,34 +1,7 @@
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import React, { useState } from 'react';
-
-interface Grayscale {
-  [key: string]: string;
-}
-
-interface IconStateSetter {
-  setDesktopIcon: Dispatch<SetStateAction<string>>,
-  setExperimentIcon: Dispatch<SetStateAction<string>>,
-  setGameIcon: Dispatch<SetStateAction<string>>,
-  setProfileIcon: Dispatch<SetStateAction<string>>,
-  setInfoIcon: Dispatch<SetStateAction<string>>,
-  setMessageIcon: Dispatch<SetStateAction<string>>,
-  setLogoutIcon: Dispatch<SetStateAction<string>>,
-  setGrayscale: Dispatch<SetStateAction<Grayscale>>,
-}
-
-interface IconStateUdpater {
-  currentUrl: string, 
-  setGrayscale: Dispatch<SetStateAction<Grayscale>>,
-  grayscaleObj: Grayscale, 
-  setDesktopIcon: Dispatch<SetStateAction<string>>, 
-  handleIconTitle: (title: string) => void, 
-  setExperimentIcon: Dispatch<SetStateAction<string>>, 
-  setGameIcon: Dispatch<SetStateAction<string>>,  
-  setProfileIcon: Dispatch<SetStateAction<string>>,  
-  setInfoIcon: Dispatch<SetStateAction<string>>, 
-  setLogoutIcon : Dispatch<SetStateAction<string>>, 
-}
+import { useEffect } from "react";
+import { useState } from 'react';
+import { IconStateSetter, Grayscale, IconStateUdpater } from "../types/types";
 
 export const grayscaleObj : Grayscale  = {
     grayscale_desktop : '',
@@ -73,7 +46,7 @@ export const grayscaleObj : Grayscale  = {
       handleIconUpdates(
         { currentUrl, setGrayscale, grayscaleObj, setDesktopIcon, handleIconTitle, setExperimentIcon, setGameIcon, setProfileIcon, setInfoIcon, setLogoutIcon}
       )
-    }, []);
+    }, []); 
 
     const handleIconTitle = (title : string) => {
       setIconTitle(title);

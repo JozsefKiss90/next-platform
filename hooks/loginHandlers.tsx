@@ -1,16 +1,8 @@
-// LoginHandlers.tsx
-import React from 'react';
-import { signIn } from 'next-auth/react';
-import { useFormik } from 'formik';
-import login_validate from '../lib/validate';
-import { useRouter } from 'next/router';
-
-interface LoginHandlersProps {
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
-  language: boolean;
-  baseUrl: string;
-}
+import { signIn } from 'next-auth/react'
+import { useFormik } from 'formik'
+import login_validate from '../lib/validate'
+import { useRouter } from 'next/router'
+import { LoginHandlersProps } from '../types/types'
 
 export default function LoginHandlers({
   setIsLoading,
@@ -18,15 +10,15 @@ export default function LoginHandlers({
   language,
   baseUrl,
 }: LoginHandlersProps) {
-  const router = useRouter();
+  const router = useRouter()
 
   async function handleGoogleSignin() {
-    setIsLoading(true);
-    const result = await signIn('google', { callbackUrl: baseUrl });
+    setIsLoading(true)
+    const result = await signIn('google', { callbackUrl: baseUrl })
     if (result?.error) {
-      console.error('Error signing in:', result.error);
+      console.error('Error signing in:', result.error)
     }
-    setIsLoading(false);
+    setIsLoading(false)
   }
 
   const formik = useFormik({
@@ -36,28 +28,28 @@ export default function LoginHandlers({
     },
     validate: login_validate,
     onSubmit,
-  });
+  })
 
   async function onSubmit(values: any) {
-    setIsLoading(true);
+    setIsLoading(true)
     const result = await signIn('credentials', {
       redirect: false,
       email: values.email,
       password: values.password,
-    });
-    setIsLoading(false);
+    })
+    setIsLoading(false)
 
     if (result?.error) {
-      console.error('Error signing in:', result.error);
-      setErrorMessage(language ? 'Hibás jelszó vagy felhasználónév' : 'Invalid credentials. Please try again.');
+      console.error('Error signing in:', result.error)
+      setErrorMessage(language ? 'Hibás jelszó vagy felhasználónév' : 'Invalid credentials. Please try again.')
     } else {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      router.push('/');
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      router.push('/')
     }
   }
 
   return {
     handleGoogleSignin,
     formik,
-  };
+  }
 }

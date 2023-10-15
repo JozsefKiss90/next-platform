@@ -64,7 +64,6 @@ const LoginDisplay = ({props}:any) => {
               </span>
           </div>
           {errorMessage && <div className={styles.error}>{errorMessage}</div>}
-
             <div className={styles.input_button}>
               <button type="submit" className={styles.button}>{language ? languageData.hun.login[1] : "Login"}</button>
             </div>

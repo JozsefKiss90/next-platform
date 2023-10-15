@@ -1,13 +1,4 @@
-interface NavItems {
-  titleKey: string;
-  path: string;
-  iconPath: string;
-  grayscaleKey: string;
-  hoverEffectClass: string;
-  iconWidth: number;
-  iconHeight: number;
-  signOut?: boolean | undefined;
-}
+import { NavItems } from "../types/types";
 
 export const navItems :NavItems[] = [
   {

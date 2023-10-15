@@ -1,7 +1,6 @@
 import { getSession } from "next-auth/react"
-import { useState, useEffect, useContext, useRef } from "react"
+import { useState, useEffect, useContext } from "react"
 import Navbar from "../components/navbar"
-import { Session } from "next-auth"
 import { AppContext } from "../components/layout"
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { useRouter } from "next/router"
@@ -9,35 +8,7 @@ import TaskDisplay from "../hooks/taskDisplay"
 import MobileCarousel from "../hooks/mobileCarousel"
 import ModalWarning from "../hooks/modalWarning"
 import ProfileWarning from "../hooks/profileWarning"
-
-interface UserData {
-  email: string
-  taskName: string
-  taskResult: number 
-}
-
-interface GameStat {
-  _id: string
-  game: string
-  email: string
-  rank: string
-  bestRank: string
-  gameTime: number
-  age: number
-  __v: number
-}
-
-interface UserProps {
-  session: Session | null | undefined
-  userStats: GameStat | null | undefined
-}
-
-interface AppContextValue {
-  isHovered: boolean
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
-  languageData: any
-  language: boolean
-}
+import { UserData, UserProps, AppContextValue } from "../types/types"
 
 export default function Experiments({ session, userStats }: UserProps) {
 
@@ -47,19 +18,19 @@ export default function Experiments({ session, userStats }: UserProps) {
   const [taskData, setTaskData] = useState<UserData[] | undefined>()
   const [userData, setUserData] = useState<UserData[] | undefined>()
   const [completed, setCompleted] = useState<number>(0)
-  const [disableLink, setDisableLink] = useState(false)
-  const [showModal, setShowModal] = useState(false)
-  const [showWarning, setShowWarning] = useState(false)
+  const [disableLink, setDisableLink] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showWarning, setShowWarning] = useState<boolean>(false)
 
   const handleCookieWarning = () => {
     setShowModal(!showModal)
   }
 
-  const handleTaskStart = () => {
+  const handleTaskStart = (url:string) => {
     if (!userStats) {
       setShowWarning(true)
     } else {
-      router.push('/tasks/reaction_time/reactionTime')
+      router.push(url)
     }
   }
 
@@ -89,7 +60,7 @@ export default function Experiments({ session, userStats }: UserProps) {
         case 3:
           setCompleted(100)
           break
-        default:
+        default: 
           setCompleted(0)
           break
       }
