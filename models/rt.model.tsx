@@ -3,7 +3,6 @@ import mongoose, { Document, Model, Schema } from 'mongoose';
 interface Rt extends Document {
   rt: number;
   email: string;
-  acc: number;
 }
 
 let RtSchema: Model<Rt>;
@@ -19,10 +18,6 @@ try {
       },
       email: {
         type: String,
-        required: true,
-      },
-      acc: {
-        type: Number,
         required: true,
       },
     }, { collection: 'rt_schema' })

@@ -1,4 +1,4 @@
-let mins = 5;
+export let mins = 5;
 let seconds = 60;
 let tens = 0;
 

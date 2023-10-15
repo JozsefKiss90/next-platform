@@ -3,15 +3,16 @@ import {drawCenter, drawController} from "./draw.js"
 import {keyDownHandler, keyUpHandler, rightPressed, leftPressed} from "./handlers.js"
 import {coordinates, parameters, moveCoordiantes, drawCoordinates} from './coordinates.js'
 import {doesLineInterceptCircle, handleCollisons, collisionCoordinates} from "./collision.js"
-import {startTimer,mins} from "./timer.js"   
+import {startTimer} from "./timer.js"   
 import {touchStartHandler, touchEndHandler, touchRight, touchLeft} from './touchHandlers.js'
+import { mins } from "./timer.js"
 
 export const a = 2 * Math.PI / 6
 export const c = 2 * Math.PI / 180
 export const circleCenter = {x : 0, y : 0}
 export let angle = -10
 
-let requestSent = false;
+let requestSent = false; 
 
 export default function runTask(email,redirectCallback, props) {
   
@@ -73,7 +74,7 @@ export default function runTask(email,redirectCallback, props) {
     await drawCoordinates(ctx)
     await drawCenter(70, angle,ctx)
     await drawController(n, color,ctx) 
-    Object.values(collisionCoordinates).forEach(coord => {
+    /*Object.values(collisionCoordinates).forEach(coord => {
       coord.forEach(point => {
           ctx.beginPath();
           ctx.arc(point.x, point.y, 5, 0, 2 * Math.PI, false);
@@ -81,7 +82,7 @@ export default function runTask(email,redirectCallback, props) {
           ctx.fill();
           ctx.closePath();
       });
-  });
+  });*/
     ctx.restore()
     handleCollisons(coordinates, gapped, parameters)
     if (mins < 0 && !requestSent) { 

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styles from '../styles/Layout.module.scss';
-import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css'; 
 
 type CookieHandler = 'github' | 'facebook' | 'google' | 'next' | 'experiments';

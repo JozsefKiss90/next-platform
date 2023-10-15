@@ -3,31 +3,16 @@ import { getSession } from "next-auth/react";
 import { useState, useEffect, useContext, useRef } from "react";
 import Navbar from "../components/navbar";
 import ProgressBar from "../components/progressBar";
-import { Session, User } from "next-auth";
 import { AppContext } from "../components/layout"
 import Image from 'next/image';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Link from 'next/link';
+import { UserData, GameUserProps, GameAppContextValue } from "../types/types";
 
-interface UserData {
-  email: string;
-  taskName: string;
-  taskResult: number; 
-}
+export default function Experiments({ session }: GameUserProps) {
 
-interface UserProps {
-  session: Session | null | undefined;
-}
-
-interface AppContextValue {
-  isHovered: boolean;
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function Experiments({ session }: UserProps) {
-
-  const { isHovered } = useContext(AppContext)  as AppContextValue;
+  const { isHovered } = useContext(AppContext)  as GameAppContextValue;
  
   const [taskData, setTaskData] = useState<UserData[] | undefined>();
   const [userData, setUserData] = useState<UserData[] | undefined>();
@@ -57,11 +42,11 @@ export default function Experiments({ session }: UserProps) {
 
 
   useEffect(() => {
-    fetch('/api/rt')
+    fetch('/api/gameStats')
       .then(res => res.json())
       .then(data => setTaskData(data.data))
       .catch(err => console.log(err)) 
-  }, []);
+  }, []);  
 
   useEffect(() => {
     if (taskData !== undefined && session?.user?.email) {
@@ -153,7 +138,7 @@ export default function Experiments({ session }: UserProps) {
                             </button>
                         </Link>
                     )}
-                  <ProgressBar completed={90} />
+                  <ProgressBar completed={100} />
                 </div>
               </div>
               <div style={{...slideStyle}}>
