@@ -12,7 +12,7 @@ import {resetIconStates, grayscaleObj, NavbarState } from "../hooks/iconHandler"
 import LanguageToggler from './LanguageToggler' 
 import { NavAppContextValue } from "../types/types"
 export default function Navbar(){
-
+ 
   const { setIsHovered, setIsLogin, isDarkMode, languageData, language, setLanguage} = useContext(AppContext) as NavAppContextValue
   const { data: session, status } = useSession() 
 

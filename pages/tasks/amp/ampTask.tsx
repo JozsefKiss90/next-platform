@@ -1,4 +1,4 @@
-import styles from '../apm.module.css'
+import styles from './apm.module.css'
 import { TaskProps } from '../../../types/types';
 
 

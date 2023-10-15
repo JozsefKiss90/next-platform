@@ -9,7 +9,7 @@ import { getData, calculateRt } from "./helpers.js";
 export default async function runTask(email) {
 
   async function getStimuli() {
-    const response = await fetch('../static/flanker/stimuli.svg')
+    const response = await fetch('../../static/flanker/stimuli.svg')
     const text = await response.text();
     const parser = new DOMParser();
     const svgDoc = parser.parseFromString(text, 'image/svg+xml');
@@ -17,7 +17,7 @@ export default async function runTask(email) {
   } 
   
   async function getFixation() {
-    const response = await fetch('../static/flanker/fixation.svg');
+    const response = await fetch('../../static/flanker/fixation.svg');
     const text = await response.text();
     const parser = new DOMParser();
     const svgDoc = parser.parseFromString(text, 'image/svg+xml');

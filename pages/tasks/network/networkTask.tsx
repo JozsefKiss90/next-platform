@@ -13,7 +13,7 @@ export default function NetworkTask({ email } : TaskProps) {
   
   useEffect(() => {
     async function runTask(sessionEmail : string) {
-      const module = await import('../../taskCollection/networks/network.js');
+      const module = await import('../../../taskCollection/networks/network.js');
       module.default(sessionEmail);
     }
     runTask(email!);
