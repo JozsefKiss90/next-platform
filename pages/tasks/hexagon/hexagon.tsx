@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import styles from "./hexagon.module.css"
 import { useRouter } from 'next/router'
 
-interface TaskProps {
+interface TaskProps  {
   email: string | undefined
 }
 
@@ -18,57 +18,40 @@ export default function Page({ email }: TaskProps) {
   const appendTensRef = useRef<HTMLSpanElement>(null)
   const appendSecondsRef = useRef<HTMLSpanElement>(null)
   const appendMinsRef = useRef<HTMLSpanElement>(null)
+  const { data: session, status } = useSession()
 
   useEffect(() => {
     async function runTask(sessionEmail: string, redirectCallback: () => void) {
-      const module = await import('../../../public/static/hexagon/modules/hexagon.js')
-      const hexagonModule = module.default
+      if (!canvasRef.current || !appendTensRef.current || !appendSecondsRef.current || !appendMinsRef.current) return
 
-      let canvas = canvasRef.current
-      let appendTens = appendTensRef.current
-      let appendSeconds = appendSecondsRef.current
-      let appendMins = appendMinsRef.current
+      const module = await import('../../../public/static/hexagon/modules/hexagon')
+      const hexagonModule = module.default 
 
-      let props = {
-        canvas,
-        tens: appendTens,
-        seconds: appendSeconds,
-        mins: appendMins,
+      const props = {
+        canvas: canvasRef.current,
+        tens: appendTensRef.current,
+        seconds: appendSecondsRef.current,
+        mins: appendMinsRef.current,
       }
 
-      if (!props.canvas || !props.mins || !props.tens || !props.seconds) {
-        setTimeout(() => {
-          canvas = canvasRef.current
-          appendTens = appendTensRef.current
-          appendSeconds = appendSecondsRef.current
-          appendMins = appendMinsRef.current
-
-          props = {
-            canvas,
-            tens: appendTens,
-            seconds: appendSeconds,
-            mins: appendMins,
-          }
-
-          if (props.canvas && props.mins && props.tens && props.seconds) {
-            hexagonModule(sessionEmail, redirectCallback, props)
-          }
-        }, 1000)
-      } else {
-        hexagonModule(sessionEmail, redirectCallback, props)
-      }
+      hexagonModule(sessionEmail, redirectCallback, props)
     }
 
-    runTask(email!, handleRedirect)
-  }, [])
+    if (session) {
+      runTask(email!, handleRedirect)
+    }
+  }, [session, canvasRef])
 
-  const { data: session, status } = useSession()
-  if (session) {
+  if (status === 'loading') {
+    return <div>Loading...</div>
+  } 
+
+  if(session) { 
     return (
       <div className={styles.container}>
         <nav className={styles.stopper}>
           <p>Errors: <span id="countErrors">0</span></p>
-          <p id="finishTime">Time: <span ref={appendMinsRef}>00</span>:<span ref={appendSecondsRef}>05</span>:<span ref={appendTensRef}>00</span></p>
+          <p id="finishTime">Time: <span ref={appendMinsRef}>05</span>:<span ref={appendSecondsRef}>00</span>:<span ref={appendTensRef}>00</span></p>
         </nav>
         <canvas id="canvas" ref={canvasRef} width="800" height="500" style={{ border: '1px solid' }} />
       </div>
