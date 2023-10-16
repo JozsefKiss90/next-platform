@@ -110,7 +110,7 @@ export default function Experiments({ session }: GameUserProps) {
                   {disableLink ? (
                     <Link href=""><h2>Super Hexagon</h2></Link>
                   ) : (
-                    <Link href="/tasks/hexagon">
+                    <Link href="/tasks/hexagon/hexagon">
                       <h2>Super Hexagon</h2>
                     </Link>
                   )}
@@ -122,7 +122,7 @@ export default function Experiments({ session }: GameUserProps) {
                       height={60}
                     />      
                     {disableLink ? (
-                      <Link href={'/tasks/hexagon'}>
+                      <Link href={'/tasks/hexagon/hexagon'}>
                         <button className={styles.task_button} onClick={(e)=> {e.preventDefault(); handleCookieWarning() }}>
                           <p>
                             Start
@@ -130,7 +130,7 @@ export default function Experiments({ session }: GameUserProps) {
                         </button>
                       </Link>
                       ) : (
-                        <Link href={'/tasks/hexagon'}>
+                        <Link href={'/tasks/hexagon/hexagon'}>
                             <button className={styles.task_button}>
                             <p>
                                 Start
@@ -144,7 +144,7 @@ export default function Experiments({ session }: GameUserProps) {
               <div style={{...slideStyle}}>
                 <Carousel showStatus={false} className={styles.container_mobile}>
                     <div className={styles.task}>
-                        <a href={'/tasks/hexagon'}>
+                        <a href={'/tasks/hexagon/hexagon'}>
                             <h2>Super Hexagon</h2>
                         </a>
                         <Image
@@ -154,7 +154,7 @@ export default function Experiments({ session }: GameUserProps) {
                             width={60}
                             height={60}
                             />      
-                        <Link href={'/tasks/hexagon'}>
+                        <Link href={'/tasks/hexagon/hexagon'}>
                             <button className={styles.task_button}>
                             <p>
                                 Start

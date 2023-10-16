@@ -1,0 +1,47 @@
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
+    
+  .stopper {
+      width: 802px; 
+      height: 30px;
+      background-color: rgb(55, 55, 55);
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      position: absolute;
+      font-size: 1.2rem;
+      color: white;
+      margin: 0 0 0 0;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.3rem;
+  }
+  
+  .stopper p {
+    margin-right: 20px;
+  }
+  
+  .circle{
+      width:45px;
+      height:45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius:45px;
+      -moz-border-radius:50px;
+      -webkit-border-radius:50px;
+      -khtml-border-radius:50px;
+      color:#fff;
+      background-color:#b9c1de;
+      position: absolute;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      border: 2px solid #666;
+      cursor: pointer;
+      user-select: none;
+  }
