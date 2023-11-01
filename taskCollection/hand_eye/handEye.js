@@ -87,8 +87,8 @@ export default function runTask(trialsProp,email) {
     });
 
      myIntervalX = setInterval(function () {
-        document.getElementById('trials').innerHTML = `${trials}/19`
-        if(trials == 10) {   
+        document.getElementById('trials').innerHTML = `${trials}/12`
+        if(trials == 13) {   
             clearInterval(myIntervalX)
             for (let i = 0; i < performanceX.length; i++) {
                 performance.push(performanceX[i] + performanceY[i])
@@ -100,12 +100,12 @@ export default function runTask(trialsProp,email) {
             fetch('/api/handeye', {
                 method : 'POST',
                 headers: {"Content-type": "application/json; charset=UTF-8"},
-                body : JSON.stringify(data)
+                body : data
             })
             .then(res => res.json)
-            .then(data => console.log(data))
+            .then(data => window.location.href = '/')
             .catch(err => console.log(err))  
-            window.location.href = '/';
+           // window.location.href = '/';
         }
         else if (xIsMoving) {
             if (startPosX == -20) {

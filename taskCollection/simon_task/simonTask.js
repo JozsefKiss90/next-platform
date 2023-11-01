@@ -3,14 +3,14 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
     const instructionsElement = instructionsRef
     const startButton = buttonRef
     const container = containerRef
-
+    console.log(containerRef,instructionsRef, buttonRef)
     startButton.addEventListener('click', () => {
         instructionsElement.style.display = 'none';
         startButton.style.display = 'none';
         console.log("wtf")
         runTask();
     });
-
+ 
     const trials = [
         { condition: "left  leftresponse  compatible", position: -200, stimulus: "left", response: "a" },
         { condition: "right leftresponse  incompatible", position: 200, stimulus: "left", response: "a" },

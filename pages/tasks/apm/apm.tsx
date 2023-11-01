@@ -1,17 +1,17 @@
 import { fetchSession } from "../../../hooks/sessionUtils"
-import Amp from "./ampTask"
+import Apm from "./ampTask"
 import withSessionTask from '../../../hocs/Hoc'
-import ampPlugin from '../../../plugins/ampPlugin';
+import apmPlugin from '../../../plugins/apmPlugin';
 import { TaskProps } from '../../../types/types';
 
 
-function AmpPage(props:TaskProps) {
-  return <Amp {...props} />
+function ApmPage(props:TaskProps) {
+  return <Apm {...props}/>
 }
 
 export async function getServerSideProps(context:any) {
   return await fetchSession(context.req) 
 }
 
-export default withSessionTask(ampPlugin, AmpPage);
+export default withSessionTask(apmPlugin, ApmPage);
 

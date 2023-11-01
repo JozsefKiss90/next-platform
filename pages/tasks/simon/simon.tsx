@@ -12,5 +12,5 @@ export async function getServerSideProps(context: { req: any; }) {
   return await fetchSession(context.req) 
 }
 
-export default withSessionTask(simonPlugin, SimonPage);
+export default withSessionTask(simonPlugin, SimonPage); 
 

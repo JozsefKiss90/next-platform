@@ -5,9 +5,9 @@ import { TaskProps } from '../../../types/types';
 export default function ApmTask({ taskRef } : TaskProps ){
     console.log(taskRef)
     return (
-    <div className={styles.amp_container}> 
+    <div className={styles.apm_container}> 
      {taskRef?.displayInstruction && 
-      <div className={styles.instruction}>
+      <div className={styles.instruction} style={{color:'white'}}>
         Kattintsd végig csökkenő sorrendben a  körökön belül lévő számokat,<br /> amilyen gyorsan csak tudod.
       </div>}
      <div id="container" ref={taskRef?.containerRef} className={styles.container}>

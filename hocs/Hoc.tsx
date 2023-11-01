@@ -25,13 +25,14 @@ export default function withSessionTask(plugin: IGamePlugin, ComponentWrapper: R
 
     useEffect(() => {
       const task = refObj
+      console.log(refObj)
       if (props.email && task.containerRef !== null && session) {
         const cleanup = plugin.initialize(props.email, task, setDisplayInstruction)
         return () => {
           cleanup && cleanup()
         }
       }
-    }, [session, props.email]) 
+    }, [session, props.email])  
 
     return <ComponentWrapper {...props} taskRef={refObj} setDisplayInstruction={setDisplayInstruction} />
   } 

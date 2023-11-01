@@ -4,7 +4,7 @@ import { TaskProps } from '../../../types/types';
 export default function Page({ taskRef } : TaskProps ) {
 
     return(
-       <div className={styles.container}>
+       <div className={styles.container}> 
          <div ref={taskRef?.containerRef} id="box" className={styles.box}>
             <p>
             Amikor a piros mező zöldre vált, kattints a rá, amilyen gyorsan csak tudsz.
