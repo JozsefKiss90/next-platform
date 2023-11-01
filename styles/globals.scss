@@ -23,7 +23,7 @@
   background-color: #c6c6c6; 
   position: relative;
   overflow-x: hidden;
-  overflow-y: hidden;
+//  overflow-y: hidden;
 }
 
 @media (min-width: 375px) {
@@ -48,8 +48,8 @@ body::-webkit-scrollbar-thumb {
 html,
 body {
   max-width: 100%;
-  overflow: hidden;
-  height: 100%;
+ // overflow: hidden;
+  height: 100vh;
   font-weight: 200;
   font-family: 'Batman', monospace;
   //font-family: 'Poppins', sans-serif;

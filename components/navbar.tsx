@@ -64,7 +64,7 @@ return (
             <Link href={""} className={styles.nav_link_arrow}>
               <span className={`${styles.link_text} ${styles.logo_text}`}>Esport Lab</span>
               <Image
-                className={`${styles.icon_style} ${styles.svg_icon}`}
+                className={`${styles.icon_style} ${styles.svg_icon}`} 
                 src="/img/icons/arrowSvg.svg"
                 alt="SVG Icon"
                 width={50}

@@ -15,7 +15,9 @@ export default function TaskDisplay({props}:any) {
         { name: 'Action Per Minute', link: '/tasks/amp/amp', specialH1: 'AMP', specialH1Class: styles.amp_style },
         { name: 'Hand Eye Coordination', link: '/tasks/hand_eye/handEye', imgSrc: '/img/icons/svgAim.svg', imgWidth: 60, imgHeight: 60 },
         { name: 'Visual Memory', link: '/tasks/visual_memory/visualMemory', imgSrc: '/img/icons/svgWm.svg', imgWidth: 60, imgHeight: 60 },
-      ];
+        { name: 'Simon Task', link: '/tasks/simon/simonTask', imgSrc: '/img/icons/svgSimon.svg', imgWidth: 80, imgHeight: 80 },
+
+    ];
 
     return (
         <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>

@@ -7,6 +7,7 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
     startButton.addEventListener('click', () => {
         instructionsElement.style.display = 'none';
         startButton.style.display = 'none';
+        console.log("wtf")
         runTask();
     });
 
