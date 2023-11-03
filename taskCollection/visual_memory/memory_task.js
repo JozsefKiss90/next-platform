@@ -1,5 +1,5 @@
 export default function runTask(gridProp,buttonProp,styles) {
-
+console.log(gridProp)
 const grid = gridProp
 const status = document.getElementById('status');
 const level = document.getElementById('level');

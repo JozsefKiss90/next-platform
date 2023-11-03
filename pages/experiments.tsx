@@ -14,10 +14,6 @@ export default function Experiments({ session, userStats }: UserProps) {
 
   const { isHovered, languageData, language } = useContext(AppContext)  as AppContextValue
   const router = useRouter()
-
-  const [taskData, setTaskData] = useState<UserData[] | undefined>()
-  const [userData, setUserData] = useState<UserData[] | undefined>()
-  const [completed, setCompleted] = useState<number>(0)
   const [disableLink, setDisableLink] = useState<boolean>(false)
   const [showModal, setShowModal] = useState<boolean>(false)
   const [showWarning, setShowWarning] = useState<boolean>(false)
@@ -34,40 +30,6 @@ export default function Experiments({ session, userStats }: UserProps) {
     }
   }
 
-  useEffect(() => {
-    fetch('/api/handeye')
-      .then(res => res.json())
-      .then(data => setTaskData(data.data))
-      .catch(err => console.log(err)) 
-  }, [])
-
-  useEffect(() => {
-    if (taskData !== undefined && session?.user?.email) {
-      const userTaskData = taskData.filter((data: UserData) => data.email === session?.user?.email)
-      setUserData(userTaskData)
-    }
-  }, [taskData, session?.user?.email])
-  
-  useEffect(() => {
-    if (userData !== undefined) {
-      switch (userData.length) {
-        case 1:
-          setCompleted(33)
-          break 
-        case 2:
-          setCompleted(66)
-          break
-        case 3:
-          setCompleted(100)
-          break
-        default: 
-          setCompleted(0)
-          break
-      }
-    } 
-  }, [userData])
-
-  
   const taskDisplayProps = {
     isHovered, disableLink , language, languageData, handleTaskStart, handleCookieWarning, session
   }

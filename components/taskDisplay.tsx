@@ -48,7 +48,6 @@ export default function TaskDisplay({props}:any) {
     const fetchCompletedData = async(completedTaskData) => {
       const completedTaskResults : any = {};
       console.log( completedTaskData)  
-      let completedArr = []
       if(completedTaskData) {
         Object.keys(completedTaskData).map(key=>{
           if(completedTaskData[key].length){
