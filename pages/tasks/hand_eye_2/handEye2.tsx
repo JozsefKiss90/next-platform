@@ -1,6 +1,6 @@
 import { fetchSession } from "../../../hooks/sessionUtils"
-import HandEye from "./handEyeTask"
-import handEyePlugin from '../../../plugins/handEyePlugin';
+import HandEye from "./handEyeTask2"
+import handEyePlugin from '../../../plugins/handEye2Plugin';
 import withSessionTask from '../../../hocs/Hoc'
 import { TaskProps } from '../../../types/types';
 

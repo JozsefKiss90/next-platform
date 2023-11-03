@@ -19,7 +19,6 @@ export default function runTask(email, containerProp, setDisplayInstruction) {
     var sixthElement
 
     var container = containerProp
-     console.log(container)
 
     function init(container) { 
 

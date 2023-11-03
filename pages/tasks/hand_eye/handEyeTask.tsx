@@ -17,6 +17,7 @@ interface TaskProps {
 } 
 
 export default function HandEye({ taskRef}: TaskProps) {
+  console.log(taskRef)
   return (
     <div id="container-2" className={styles.container_2}>
       <div className={styles.textElement}>

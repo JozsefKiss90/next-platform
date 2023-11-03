@@ -2,7 +2,7 @@ import styles from './reactionTime.module.css'
 import { TaskProps } from '../../../types/types';
 
 export default function Page({ taskRef } : TaskProps ) {
-
+   console.log(taskRef)
     return(
        <div className={styles.container}> 
          <div ref={taskRef?.containerRef} id="box" className={styles.box}>

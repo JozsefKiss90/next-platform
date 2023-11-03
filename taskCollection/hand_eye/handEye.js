@@ -1,6 +1,6 @@
 let myIntervalX
 
-export default function runTask(trialsProp,email) {
+export default function runTask(trialsProp, email) {
 
     var elementX = document.getElementById('moveMeX')
     var elementY = document.getElementById('moveMeY')
@@ -11,7 +11,7 @@ export default function runTask(trialsProp,email) {
     var posX = -20
     var startPosX = -20
     var posY = -20
-    var startPosY = -20
+    var startPosY = -20 
     var speed = 1
     var xIsMoving = false
     var yIsMoving = false
