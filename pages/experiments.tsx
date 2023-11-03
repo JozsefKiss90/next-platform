@@ -4,7 +4,7 @@ import Navbar from "../components/navbar"
 import { AppContext } from "../components/layout"
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { useRouter } from "next/router"
-import TaskDisplay from "../hooks/taskDisplay"
+import TaskDisplay from "../components/taskDisplay"
 import MobileCarousel from "../hooks/mobileCarousel"
 import ModalWarning from "../hooks/modalWarning"
 import ProfileWarning from "../hooks/profileWarning"
@@ -35,7 +35,7 @@ export default function Experiments({ session, userStats }: UserProps) {
   }
 
   useEffect(() => {
-    fetch('/api/rt')
+    fetch('/api/handeye')
       .then(res => res.json())
       .then(data => setTaskData(data.data))
       .catch(err => console.log(err)) 
@@ -53,7 +53,7 @@ export default function Experiments({ session, userStats }: UserProps) {
       switch (userData.length) {
         case 1:
           setCompleted(33)
-          break
+          break 
         case 2:
           setCompleted(66)
           break
@@ -69,7 +69,7 @@ export default function Experiments({ session, userStats }: UserProps) {
 
   
   const taskDisplayProps = {
-    isHovered, disableLink , language, languageData, handleTaskStart, handleCookieWarning
+    isHovered, disableLink , language, languageData, handleTaskStart, handleCookieWarning, session
   }
 
   return ( 
@@ -86,7 +86,7 @@ export default function Experiments({ session, userStats }: UserProps) {
                <MobileCarousel language={language} languageData={languageData}/>
               </>
             )
-          }
+          } 
     </>
   )
 }

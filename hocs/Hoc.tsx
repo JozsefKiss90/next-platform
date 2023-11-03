@@ -27,7 +27,6 @@ export default function withSessionTask(plugin: IGamePlugin, ComponentWrapper: R
       const task = refObj
   
       if (props.email && refObj.containerRef.current !== null && session) {
-        console.log(refObj.containerRef.current)
         const cleanup = plugin.initialize(props.email, refObj, setDisplayInstruction)
         return () => {
           cleanup && cleanup()

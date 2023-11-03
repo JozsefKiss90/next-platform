@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "../components/navbar";
 import {getSession} from "next-auth/react";
-import ProfileDisplay from '../hooks/profileDisplay';
+import ProfileDisplay from '../components/profileDisplay';
 
 interface TaskProps{
     email: string | undefined;

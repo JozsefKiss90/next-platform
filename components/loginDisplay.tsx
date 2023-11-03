@@ -1,4 +1,4 @@
-import Spinner from '../components/spinner'
+import Spinner from './spinner'
 import styles from '../styles/Forms.module.scss'
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi"
 import Link from 'next/link'

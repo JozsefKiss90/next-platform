@@ -1,11 +1,11 @@
 
-import gameRanking from "./gameRanking"
-import { sendGameData, deleteAccount } from './profileHandlers'
+import gameRanking from "../hooks/gameRanking"
+import { sendGameData, deleteAccount } from '../hooks/profileHandlers'
 import {signOut} from "next-auth/react"
 import styles from '../styles/UserForm.module.scss'
-import { AppContext } from "../components/layout"
+import { AppContext } from "./layout"
 import { useContext, useState } from 'react'
-import {getRankOptions, getBestRankOptions} from './rankOptions'
+import {getRankOptions, getBestRankOptions} from '../hooks/rankOptions'
 import { ProfileAppContextValue } from "../types/types"
 
 const ProfileDisplay = ({email} :any ) => {

@@ -14,13 +14,10 @@ const HandEyeSchema = new Schema<HandEye>({
     type: String,
     required: true,
   },
-},
-{
-  timestamps: true
 });
 
 const HandEyeModel: Model<HandEye> =
   mongoose.models.handeyetest ||
-  mongoose.model<HandEye>('handeyetest', HandEyeSchema);
+  mongoose.model<HandEye>('handeyetest_2', HandEyeSchema);
 
 export default HandEyeModel;

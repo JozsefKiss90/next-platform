@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react' 
 import { AppContext } from "../components/layout"
 import LoginHandlers from '../hooks/loginHandlers'
-import LoginDisplay from '../hooks/loginDisplay'
+import LoginDisplay from '../components/loginDisplay'
 import { LoginAppContextValue } from '../types/types'
 
 export default function Login() {

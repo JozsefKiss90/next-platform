@@ -1,5 +1,4 @@
 export default function runTask(email, canvasProp) {
-    console.log(canvasProp)
     const canvas = canvasProp;
     const ctx = canvas.getContext("2d");
 
@@ -18,7 +17,7 @@ export default function runTask(email, canvasProp) {
     let hoverDurations = [];  
 
     let currentTrial = 0;
-    const maxTrials = 5;
+    const maxTrials = 1;
     let currentAngleIncrement = Math.PI / 180; 
 
     function isMouseOverSmallCircle(mouseX, mouseY) {
@@ -56,7 +55,6 @@ export default function runTask(email, canvasProp) {
 
     function drawCircles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log(totalHoverDuration)
     ctx.beginPath();
     ctx.arc(centerX_large, centerY_large, radius_large, 0, 2 * Math.PI);
     ctx.strokeStyle = "#999999";
@@ -91,7 +89,20 @@ export default function runTask(email, canvasProp) {
             currentAngleIncrement += Math.PI / 180 / 20;
         } else {
             isMoving = false;
-            console.log("Trials complete. Hover durations (ms):", hoverDurations);
+            const performance = hoverDurations
+            const data = {
+                performance,
+                email
+            }
+            fetch('/api/handeye', {
+                method : 'POST',
+                headers: {"Content-type": "application/json; charset=UTF-8"},
+                body : JSON.stringify(data)
+            })
+            .then(res => res.json)
+            .then(data => console.log(JSON.parse(data)))
+            .catch(err => console.log(err))  
+            //window.location.href = '/'
         }
         }
         requestAnimationFrame(drawCircles);
