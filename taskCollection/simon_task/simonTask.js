@@ -30,11 +30,9 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
 
     async function runTrial(trial) {
         return new Promise(resolve => {
-            // Create the stimulus and fixation elements.
             const stimulusDiv = createStimulus(trial.stimulus, trial.position);
             const fixationDiv = createFixation();
             
-            // Insert fixation, then after 1s replace with stimulus.
             container.appendChild(fixationDiv);
             setTimeout(() => {
                 if (container.contains(fixationDiv)) {
@@ -45,17 +43,13 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
     
             let startTime = Date.now();
             
-            // Listener for keypresses, specific to this trial.
             const keyListener = (e) => {
                 if (container.contains(stimulusDiv) && (e.key === trial.response || e.key === (trial.response === 'a' ? 'l' : 'a'))) {
-                    // Remove the stimulus once a key is pressed.
                     container.removeChild(stimulusDiv);
                     
-                    // Record the response time and status.
                     let rt = Date.now() - startTime;
                     let status = e.key === trial.response ? "correct" : "incorrect";
                     
-                    // If incorrect, show error, then resolve after 1s.
                     if (status === "incorrect") {
                         const errorDiv = createError();
                         container.appendChild(errorDiv);
@@ -69,24 +63,19 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
                         resolve({ status, rt, condition: trial.condition });
                     }
                     
-                    // Remove this listener to prevent it from affecting other trials.
                     document.removeEventListener("keypress", keyListener);
                 }
             };
     
-            // Attach the listener, will only be active during this trial.
             document.addEventListener("keypress", keyListener);
     
-            // Also set a timeout to remove the listener and stimulus in case no key is pressed.
-            // This will cover the case where a user doesn't press any key.
             setTimeout(() => {
                 document.removeEventListener("keypress", keyListener);
                 if (container.contains(stimulusDiv)) {
                     container.removeChild(stimulusDiv);
                 }
-                // Resolve with a "no response" status if no key was pressed.
                 resolve({ status: "no response", rt: null, condition: trial.condition });
-            }, 5000); // Assuming a 5s period for the user to respond.
+            }, 5000); 
         });
     }    
     

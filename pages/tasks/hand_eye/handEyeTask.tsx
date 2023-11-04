@@ -19,7 +19,8 @@ interface TaskProps {
 export default function HandEye({ taskRef}: TaskProps) {
   console.log(taskRef)
   return (
-    <div id="container-2" className={styles.container_2}>
+    <div className={styles.container_3}>
+      <div id="container-2" className={styles.container_2}>
 
       <div className={styles.countdown} id="countdown"></div>
       <div ref={taskRef?.containerRef} id="trials" className={styles.trials}></div>
@@ -29,6 +30,7 @@ export default function HandEye({ taskRef}: TaskProps) {
         <div className={styles.aim_circle}></div>
         <div id="moveMeX" className={styles.circleX}></div>
         <div id="moveMeY" className={styles.circleY}></div>
+      </div>
       </div>
     </div>
   );

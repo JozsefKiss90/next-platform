@@ -4,6 +4,29 @@ function exit() {
     window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
 }
 
+function finishTask(performance,myIntervalX,performanceX,performanceY, instruction, styles) {
+    clearInterval(myIntervalX);
+    for (let i = 0; i < performanceX.length; i++) {
+        performance.push(performanceX[i] + performanceY[i]);
+    }
+    /* const data = {
+        performance,
+        email
+    }
+    fetch('/api/handeye', {
+        method : 'POST',
+        headers: {"Content-type": "application/json; charset=UTF-8"},
+        body : data
+    })
+    .then(res => res.json)
+    .then(data => window.location.href = '/')
+    .catch(err => console.log(err))  */
+    instruction.innerHTML = 'Feladat teljesítve!';
+
+    addExitButton(styles)
+}
+
+
 function addExitButton(styles) {
     let button = document.createElement('button');
     let textNode = document.createTextNode("Exit");
@@ -96,22 +119,35 @@ export default function runTask(trialsProp, email, styles) {
         if(xIsMoving){
             xIsMoving = !xIsMoving;
             yIsMoving = !yIsMoving;
+            performanceX.push(Math.abs(posX + 20 - 110));
         }else if(yIsMoving){
             yIsMoving = !yIsMoving;
-            var timeleft = 3;
-            var downloadTimer = setInterval(function(){ 
+            performanceY.push(Math.abs(posY + 20 - 110));
+    
+            // Check if we have completed the required number of trials
+            if (trials == 2) {   
+                finishTask(performance,myIntervalX,performanceX, performanceY, instruction, styles);
+            } else {
+                // Start countdown only if it's not the last trial
+                startCountdown();
+            }
+        }
+    };
+    
+    function startCountdown() {
+        var timeleft = 3;
+        var downloadTimer = setInterval(function(){ 
             if(timeleft <= 0){
                 clearInterval(downloadTimer);
                 document.getElementById("countdown").innerHTML = "";
-                init()
+                init();
             } else {
-                trialsProp = ""
                 document.getElementById("countdown").innerHTML = timeleft;
             }
             timeleft -= 1;
-            }, 1000);
-        }
+        }, 1000);
     }
+    
     container.addEventListener("mousedown", () => {
         stopX()
         if(xIsStopped === true) {
@@ -126,30 +162,9 @@ export default function runTask(trialsProp, email, styles) {
         }
     });
 
-     myIntervalX = setInterval(function () {
+     myIntervalX = setInterval(function () { 
         document.getElementById('trials').innerHTML = `${trials}/12`
-        if(trials == 2) {   
-            clearInterval(myIntervalX)
-            for (let i = 0; i < performanceX.length; i++) {
-                performance.push(performanceX[i] + performanceY[i])
-            }
-            const data = {
-                performance,
-                email
-            }
-           /* fetch('/api/handeye', {
-                method : 'POST',
-                headers: {"Content-type": "application/json; charset=UTF-8"},
-                body : data
-            })
-            .then(res => res.json)
-            .then(data => window.location.href = '/')
-            .catch(err => console.log(err))  */
-            instruction.innerHTML = 'Feladat teljesítve!';
-
-            addExitButton(styles)
-        }
-        else if (xIsMoving) {
+        if (xIsMoving) {
             if (startPosX == -20) {
                 posX += speed
                 elementX.style.left = posX + 'px'
@@ -187,7 +202,5 @@ export default function runTask(trialsProp, email, styles) {
     }, 10);
     return myIntervalX;
 }
- 
-
 
 

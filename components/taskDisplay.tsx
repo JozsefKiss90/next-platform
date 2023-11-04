@@ -17,11 +17,11 @@ export default function TaskDisplay({props}:any) {
         { name: 'Flanker Task', link: '/tasks/flanker/flankerTask', imgSrc: '/img/icons/svgFlanker.svg', imgWidth: 100, imgHeight: 80, endpoint:"api/flanker" },
         { name: 'Attentional Networks', link: '/tasks/network/networkTask', imgSrc: '/img/icons/svgArrow.svg', imgWidth: 200, imgHeight: 60, endpoint:"api/network" },
         { name: 'Action Per Minute', link: '/tasks/apm/apm', specialH1: 'APM', specialH1Class: styles.apm_style, endpoint:"api/apm" },
-        { name: 'Hand Eye Coordination', link: '/tasks/hand_eye/handEye', imgSrc: '/img/icons/svgAim.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/handeye" },
+        { name: 'Hand Eye Coordination', link: userData['Hand Eye Coordination'] == 1 ? '/tasks/hand_eye_2/handEye2' : '/tasks/hand_eye/handEye', imgSrc: '/img/icons/svgAim.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/handeye" },
         { name: 'Visual Memory', link: '/tasks/visual_memory/visualMemory', imgSrc: '/img/icons/svgWm.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/rt" },
         { name: 'Simon Task', link: '/tasks/simon/simon', imgSrc: '/img/icons/svgSimon.svg', imgWidth: 80, imgHeight: 80, endpoint:"api/simonTask" },
     ];
-
+    console.log(tasksData)
     const fetchTaskData = async () => {
       const taskDataResults : any = {};
         
@@ -64,7 +64,7 @@ export default function TaskDisplay({props}:any) {
           fetchCompletedData(data)
         })
       }, []);
-      console.log(userData)
+      console.log(userData['Hand Eye Coordination'] == 1)
     return ( 
         <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
         {tasksData.map((task, index) => (
@@ -121,7 +121,7 @@ export default function TaskDisplay({props}:any) {
                 </Link>
             )}
             
-            <ProgressBar completed={task.name == "Hand Eye Coordination" ? (100 / userData[task.name]).toFixed(0) 
+            <ProgressBar completed={task.name == "Hand Eye Coordination" ? (50 * (userData[task.name])).toFixed(0) 
               : userData[task.name] != 0 ? 100 / userData[task.name] : 0
             }/>
             </div>
