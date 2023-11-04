@@ -105,8 +105,8 @@ export default function Experiments({ session }: GameUserProps) {
               </div>
             </div>) : (
               <>
-              <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
-                <div className={styles.task}>
+              <div style={{height:'100vh'}} className={` ${styles.main}  ${isHovered ? styles.shrink : ""}`}>
+                <div className={styles.game}>
                   {disableLink ? (
                     <Link href=""><h2>Super Hexagon</h2></Link>
                   ) : (

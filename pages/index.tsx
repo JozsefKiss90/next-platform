@@ -31,7 +31,7 @@ export default function Home({session} : UserProps) {
 function User({ session } : UserProps) {
   const { isHovered, languageData, language} = useContext(AppContext)  as AppContextValue;
   return(
-    <div style={{height:'100vh'}}>
+    <div>
     <Navbar/>
     <div className={`${styles.index_container} ${isHovered ? styles.shrink : ""}`}>
       <Image

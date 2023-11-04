@@ -20,7 +20,8 @@
   display: flex;
   flex-direction: row;
   justify-content: start;
- // overflow: scroll;
+  overflow-y: scroll;
+  height: 65vw;
 }
 
 .container_mobile {
@@ -50,7 +51,6 @@
   word-wrap: break-word;
 }
 
-
 .task:hover {
   transform: scale(1.05);
 }
@@ -79,7 +79,53 @@
   font-size: 18px;
   margin-bottom: 20px;
   word-wrap: break-word;
+}
 
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(33.33% - 160px);
+  height: 250px;
+  margin: 0px 50px 380px 40px; 
+  background-color: rgba(12, 12, 106, 0.70);
+  border: 2px solid rgb(255, 255, 255);
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(8, 8, 8, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  transition: transform 0.2s ease;
+  word-wrap: break-word;
+}
+
+.game:hover {
+  transform: scale(1.05);
+}
+
+.game a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-decoration: none;
+  color: inherit; 
+}
+
+.game > * {
+  text-align: center;
+  white-space: nowrap;
+  color: white;
+}
+
+.game h2 {
+  position: relative;
+  color: rgb(255, 255, 255);
+  font-family: 'Batman', monospace;
+  font-weight: 200;
+  font-size: 18px;
+  margin-bottom: 20px;
+  word-wrap: break-word;
 }
 
 .icon_style {
