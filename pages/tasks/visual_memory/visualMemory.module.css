@@ -33,7 +33,7 @@
     background-color: lightgrey;
     transition: background-color 0.5s;
     margin: 5px;
-    border-radius: 10px;
+    border-radius: 10px; 
 }
 
 .testSquare {
@@ -54,6 +54,31 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.exitButton{
+    width: 130px;
+    background-color: aliceblue;
+    color: black;
+    padding: 10px 20px;
+    align-self: center;
+    margin-top: 150px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+  
 
 .transition_to_red {
     background-color: rgb(255, 38, 38);

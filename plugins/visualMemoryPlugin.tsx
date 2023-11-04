@@ -7,7 +7,9 @@ const ampPlugin: IGamePlugin = {
         runTask(
             refObj.gridRef.current,
             refObj.buttonRef.current,
-            styles)
+            styles,
+            email
+            ) 
         return () => {
            
         }

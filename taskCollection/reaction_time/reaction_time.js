@@ -1,5 +1,5 @@
 export default function runTask(email,boxRef) {
-    console.log(boxRef)
+
     let currentState = 'init';
     let reactionTimes = [];
     let startOfGreen;
@@ -52,10 +52,10 @@ export default function runTask(email,boxRef) {
     }
     boxRef.addEventListener('mousedown', handleMouseDown, true);
 
-    let timeoutId;  // Declare a variable to hold the timeout ID
+    let timeoutId;  
     
     function resetTrial() {
-        clearTimeout(timeoutId);  // Clear the previous timeout
+        clearTimeout(timeoutId); 
     
         setTimeout(() => {
             currentState = 'waiting';
@@ -100,7 +100,6 @@ export default function runTask(email,boxRef) {
         boxRef.style.backgroundColor = 'red';
         let waitTime = Math.random() * 3000 + 1000;
     
-        // Store the timeout ID
         timeoutId = setTimeout(() => {
             if (currentState === 'waiting') {
                 startOfGreen = performance.now();

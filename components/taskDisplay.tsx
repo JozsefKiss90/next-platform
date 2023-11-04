@@ -47,12 +47,10 @@ export default function TaskDisplay({props}:any) {
     let dataByEmail : any 
     const fetchCompletedData = async(completedTaskData) => {
       const completedTaskResults : any = {};
-      console.log( completedTaskData)  
       if(completedTaskData) {
         Object.keys(completedTaskData).map(key=>{
           if(completedTaskData[key].length){
             dataByEmail = completedTaskData[key].filter((data: any) => data.email === session?.user?.email)
-            console.log( dataByEmail.length)  
             completedTaskResults[key] =  dataByEmail.length
           }
         })
@@ -66,9 +64,7 @@ export default function TaskDisplay({props}:any) {
           fetchCompletedData(data)
         })
       }, []);
-
       console.log(userData)
-
     return ( 
         <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
         {tasksData.map((task, index) => (
@@ -125,7 +121,7 @@ export default function TaskDisplay({props}:any) {
                 </Link>
             )}
             
-            <ProgressBar completed={task.name == "Hand Eye Coordination" ? 100 / userData[task.name] 
+            <ProgressBar completed={task.name == "Hand Eye Coordination" ? (100 / userData[task.name]).toFixed(0) 
               : userData[task.name] != 0 ? 100 / userData[task.name] : 0
             }/>
             </div>

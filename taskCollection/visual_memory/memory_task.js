@@ -1,5 +1,5 @@
-export default function runTask(gridProp,buttonProp,styles) {
-console.log(gridProp)
+export default function runTask(gridProp,buttonProp,styles, email) {
+
 const grid = gridProp
 const status = document.getElementById('status');
 const level = document.getElementById('level');
@@ -43,7 +43,6 @@ function startTest() {
     showSequence(0);
 }
 
-
 function showSequence(index) {
     if(index < sequence.length) {
         grid.childNodes[sequence[index]].classList.add(styles.testSquare);
@@ -74,14 +73,14 @@ function verifySequence() {
                 setTimeout(startTest, 1000);
                 return;
             } else {
-                status.innerHTML = "You have used all attempts. Please start again.";
-                sequenceCount = 1;
-                attempts = 3; 
+                //sendData(sequenceCount - 1)
+                status.innerHTML = "You have used all attempts. <br> Task completed!";
+                addExitButton()
                 return;
             }
         }
     }
-    if(sequenceCount < 10) {
+    if(sequenceCount < 1) {
         sequenceCount++;
         attempts = 3;
         setTimeout(() => {
@@ -92,8 +91,54 @@ function verifySequence() {
         }, 900); 
         setTimeout(startTest, 1800); 
     } else {
+        //sendData(sequenceCount)
         status.innerHTML = "Congratulations, you completed all levels!";
+        addExitButton()
     }
 }
+
+function sendData(sequenceCount) {
+    
+    const memorySpan = sequenceCount
+
+    const data = {
+        memorySpan,
+        email,
+    } 
+
+    const options = {
+        method: "POST",
+        headers: {"Content-type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(data)
+    }
+
+    fetch('/api/memory', options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+        })
+        .catch(error => {
+            console.error("There was a problem with the fetch operation:", error.message);
+        });
+    }
+
+    function exit() {
+        window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+    }
+
+    function addExitButton() {
+        let button = document.createElement('button');
+        let textNode = document.createTextNode("Exit");
+        button.appendChild(textNode);
+        button.classList.add(styles.exitButton);
+        let buttonContainer = document.createElement('div');
+        buttonContainer.classList.add(styles.buttonContainer); 
+        button.addEventListener('click', () => {
+            exit() 
+        })
+        buttonContainer.appendChild(button);
+        document.body.appendChild(buttonContainer);
+    }
 
 }

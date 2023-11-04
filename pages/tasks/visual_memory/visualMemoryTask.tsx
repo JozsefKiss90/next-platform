@@ -5,7 +5,6 @@ import { TaskProps } from '../../../types/types';
 export default function Page({ taskRef } : TaskProps  ) {
   
   const [started, setStarted] = useState(false)
-  console.log(taskRef)
 
   return (
     <div className={styles.container}>

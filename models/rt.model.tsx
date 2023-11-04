@@ -19,9 +19,11 @@ try {
       email: {
         type: String,
         required: true,
-      },
+      }
     }, { collection: 'rt_schema' })
-  );
+  ),{
+    timestamps: true
+  };
 }
 
 export default RtSchema;

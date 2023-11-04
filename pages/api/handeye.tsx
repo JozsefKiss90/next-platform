@@ -16,11 +16,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     else if(req.method === 'POST') {
         if (!req.body) return res.status(400).json({ error: 'Form data is missing' });
 
-        console.log("req body:", req.body); // Corrected logging
+        console.log("req body:", req.body); 
         const { performance, email } = req.body;
   
-        const newUser = await HandEye.create({ performance, email });
-        res.status(201).json({ status: true, user: newUser });
+        const newTask = await HandEye.create({ performance, email });
+        res.status(201).json({ status: true, user: newTask });
     }
     else { 
         res.status(500).json({message: 'HTTP method not valid'})
