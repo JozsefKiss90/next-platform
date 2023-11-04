@@ -73,7 +73,7 @@ function verifySequence() {
                 setTimeout(startTest, 1000);
                 return;
             } else {
-                //sendData(sequenceCount - 1)
+                sendData(sequenceCount - 1)
                 status.innerHTML = "You have used all attempts. <br> Task completed!";
                 addExitButton()
                 return;
@@ -91,7 +91,7 @@ function verifySequence() {
         }, 900); 
         setTimeout(startTest, 1800); 
     } else {
-        //sendData(sequenceCount)
+        sendData(sequenceCount)
         status.innerHTML = "Congratulations, you completed all levels!";
         addExitButton()
     }

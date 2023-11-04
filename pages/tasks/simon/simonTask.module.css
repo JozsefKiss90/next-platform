@@ -11,6 +11,10 @@
 .instructions {
     margin-bottom: 2em;
 }
+.instructions p {
+    padding: 10px;
+    text-align: center;
+}
 .startButton {
     padding: 15px 40px;
     margin-bottom: 2em;

@@ -19,7 +19,7 @@ export default function Page({ taskRef } : TaskProps  ) {
         <button ref={taskRef?.buttonRef} className={styles.button} onClick={()=>{setStarted(true)}} id="button">
           Start Test
         </button>
-      </div>}   
+      </div>}    
       <p id="status"></p> 
     </div>
   );

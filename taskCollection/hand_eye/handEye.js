@@ -1,7 +1,46 @@
 let myIntervalX
 
-export default function runTask(trialsProp, email) {
+function exit() {
+    window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+}
 
+function addExitButton(styles) {
+    let button = document.createElement('button');
+    let textNode = document.createTextNode("Exit");
+    button.appendChild(textNode);
+    button.classList.add(styles.exitButton);
+    let buttonContainer = document.createElement('div');
+    buttonContainer.classList.add(styles.buttonContainer); 
+    button.addEventListener('click', () => {
+        exit() 
+    })
+    buttonContainer.appendChild(button);
+    document.body.appendChild(buttonContainer);
+}
+
+function addInstruction(styles) { 
+    let instruction = document.createElement('div');
+    instruction.setAttribute("id", "instruction")
+    let textNode = document.createTextNode("Kattints a zöld területre, hogy a mozgó körök megálljanak. Próbáld a középponthoz minnél közelebb megállítani őket.");
+    instruction.appendChild(textNode);
+    instruction.classList.add(styles.textElement);
+    let instructionContainer = document.getElementById('container-2');
+    //instructionContainer.classList.add(styles.instructionContainer); 
+    instructionContainer.appendChild(instruction);
+    //document.body.appendChild(instructionContainer);
+}
+
+export default function runTask(trialsProp, email, styles) {
+
+    let instruction = document.createElement('div');
+    instruction.setAttribute("id", "instruction")
+    let textNode = document.createTextNode("Kattints a zöld területre, hogy a mozgó körök megálljanak. Próbáld a középponthoz minnél közelebb megállítani őket.");
+    instruction.appendChild(textNode);
+    instruction.classList.add(styles.textElement);
+    let instructionContainer = document.getElementById('container-2');
+    //instructionContainer.classList.add(styles.instructionContainer); 
+    instructionContainer.appendChild(instruction);
+   
     var elementX = document.getElementById('moveMeX')
     var elementY = document.getElementById('moveMeY')
     var container = document.getElementById('container-2')
@@ -24,6 +63,7 @@ export default function runTask(trialsProp, email) {
     var performance = []
 
     function init() {
+      
         elementX = document.getElementById('moveMeX')
         elementY = document.getElementById('moveMeY')
         elementY.style.top = "-20px"
@@ -88,7 +128,7 @@ export default function runTask(trialsProp, email) {
 
      myIntervalX = setInterval(function () {
         document.getElementById('trials').innerHTML = `${trials}/12`
-        if(trials == 13) {   
+        if(trials == 2) {   
             clearInterval(myIntervalX)
             for (let i = 0; i < performanceX.length; i++) {
                 performance.push(performanceX[i] + performanceY[i])
@@ -97,15 +137,17 @@ export default function runTask(trialsProp, email) {
                 performance,
                 email
             }
-            fetch('/api/handeye', {
+           /* fetch('/api/handeye', {
                 method : 'POST',
                 headers: {"Content-type": "application/json; charset=UTF-8"},
                 body : data
             })
             .then(res => res.json)
             .then(data => window.location.href = '/')
-            .catch(err => console.log(err))  
-           // window.location.href = '/';
+            .catch(err => console.log(err))  */
+            instruction.innerHTML = 'Feladat teljesítve!';
+
+            addExitButton(styles)
         }
         else if (xIsMoving) {
             if (startPosX == -20) {

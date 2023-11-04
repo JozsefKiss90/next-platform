@@ -1,5 +1,9 @@
-export default function runTask(email, containerProp, setDisplayInstruction) {
+export default function runTask(email, containerProp, setDisplayInstruction, styles) {
 
+    const instruction = document.getElementById('instuction');
+    if(instruction != null) {
+        instruction.innerHTML = "Kattintsd végig csökkenő sorrendben a  körökön belül lévő számokat,<br /> amilyen gyorsan csak tudod."
+    }
     const randomRange = (min, max) => {
         return Math.random() * (max - min) + min
     }
@@ -166,20 +170,21 @@ export default function runTask(email, containerProp, setDisplayInstruction) {
                         email : email 
                       }
                     const endpoint = "/api/apm"
-                    fetch(endpoint, {
+                    addExitButton()
+                    setDisplayInstruction(true)
+                   /* fetch(endpoint, {
                         method: "POST",
                         headers: {"Content-type": "application/json; charset=UTF-8"},
                         body: JSON.stringify(data)
                     })
                     .then(response => response.json()) 
                     .then(json => console.log(json))
-                    .catch(err => console.log(err))  
-                    window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+                    .catch(err => console.log(err)) */ 
+                     //window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
                 }
                 this.removeEventListener('mousedown', handler_2)
                 thirdElement.addEventListener("mousedown", handler_3)
                 trials -= 1
-                console.log(trials)
         }
 
         function handler_3(event){
@@ -262,5 +267,23 @@ export default function runTask(email, containerProp, setDisplayInstruction) {
     }
 
     handleOrder(setDisplayInstruction)
+
+    function exit() {
+        window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+    }
+
+    function addExitButton() {
+        let button = document.createElement('button');
+        let textNode = document.createTextNode("Exit");
+        button.appendChild(textNode);
+        button.classList.add(styles.exitButton);
+        let buttonContainer = document.createElement('div');
+        buttonContainer.classList.add(styles.buttonContainer); 
+        button.addEventListener('click', () => {
+            exit() 
+        })
+        buttonContainer.appendChild(button);
+        document.body.appendChild(buttonContainer);
+    }
     //return takarító függvény
 }

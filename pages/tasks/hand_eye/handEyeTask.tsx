@@ -20,10 +20,7 @@ export default function HandEye({ taskRef}: TaskProps) {
   console.log(taskRef)
   return (
     <div id="container-2" className={styles.container_2}>
-      <div className={styles.textElement}>
-        Kattints a zöld területre, hogy a mozgó körök megálljanak. Próbáld a
-        középponthoz minnél közelebb megállítani őket.{" "}
-      </div>
+
       <div className={styles.countdown} id="countdown"></div>
       <div ref={taskRef?.containerRef} id="trials" className={styles.trials}></div>
       <div id="container" className={styles.container}>
