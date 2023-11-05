@@ -52,7 +52,7 @@ export const deleteAccount = (gameData:any) => {
     console.log('EMAIL IS: ' + gameData.email);
 
     let options = {
-      method: "PATCH",
+      method: "DELETE",
       headers: { "Content-type": "application/json; charset=UTF-8" },
       body: JSON.stringify({email:gameData.email}) 
     };

@@ -7,7 +7,7 @@ import { AppContext } from "./layout"
 import { useContext, useState } from 'react'
 import {getRankOptions, getBestRankOptions} from '../hooks/rankOptions'
 import { ProfileAppContextValue } from "../types/types"
-
+ 
 const ProfileDisplay = ({email} :any ) => {
 
     const { setIsDarkMode, languageData, language } = useContext(AppContext)  as ProfileAppContextValue
