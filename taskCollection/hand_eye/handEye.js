@@ -4,23 +4,23 @@ function exit() {
     window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
 }
 
-function finishTask(performance,myIntervalX,performanceX,performanceY, instruction, styles) {
+function finishTask(performance,myIntervalX,performanceX,performanceY, instruction, styles, email) {
     clearInterval(myIntervalX);
+
     for (let i = 0; i < performanceX.length; i++) {
         performance.push(performanceX[i] + performanceY[i]);
     }
-    /* const data = {
+    const data = {
         performance,
         email
     }
     fetch('/api/handeye', {
         method : 'POST',
         headers: {"Content-type": "application/json; charset=UTF-8"},
-        body : data
+        body : JSON.stringify(data)
     })
     .then(res => res.json)
-    .then(data => window.location.href = '/')
-    .catch(err => console.log(err))  */
+    .catch(err => console.log(err)) 
     instruction.innerHTML = 'Feladat teljesítve!';
 
     addExitButton(styles)
@@ -41,34 +41,20 @@ function addExitButton(styles) {
     document.body.appendChild(buttonContainer);
 }
 
-function addInstruction(styles) { 
+export default function runTask(email, trialsProp, styles) {
     let instruction = document.createElement('div');
     instruction.setAttribute("id", "instruction")
     let textNode = document.createTextNode("Kattints a zöld területre, hogy a mozgó körök megálljanak. Próbáld a középponthoz minnél közelebb megállítani őket.");
     instruction.appendChild(textNode);
     instruction.classList.add(styles.textElement);
     let instructionContainer = document.getElementById('container-2');
-    //instructionContainer.classList.add(styles.instructionContainer); 
-    instructionContainer.appendChild(instruction);
-    //document.body.appendChild(instructionContainer);
-}
-
-export default function runTask(trialsProp, email, styles) {
-
-    let instruction = document.createElement('div');
-    instruction.setAttribute("id", "instruction")
-    let textNode = document.createTextNode("Kattints a zöld területre, hogy a mozgó körök megálljanak. Próbáld a középponthoz minnél közelebb megállítani őket.");
-    instruction.appendChild(textNode);
-    instruction.classList.add(styles.textElement);
-    let instructionContainer = document.getElementById('container-2');
-    //instructionContainer.classList.add(styles.instructionContainer); 
     instructionContainer.appendChild(instruction);
    
     var elementX = document.getElementById('moveMeX')
     var elementY = document.getElementById('moveMeY')
     var container = document.getElementById('container-2')
     var trials = 0
-    document.getElementById('trials').innerHTML = `${trials}/19`
+    document.getElementById('trials').innerHTML = `${trials}/12`
     elementY.style.top = "-20px"
     var posX = -20
     var startPosX = -20
@@ -92,7 +78,6 @@ export default function runTask(trialsProp, email, styles) {
         elementY.style.top = "-20px"
         trials += 1
         trialsProp = `${trials}/20`
-        console.log(trialsProp)
         posX = -20
         startPosX = -20
         posY = -20
@@ -123,12 +108,9 @@ export default function runTask(trialsProp, email, styles) {
         }else if(yIsMoving){
             yIsMoving = !yIsMoving;
             performanceY.push(Math.abs(posY + 20 - 110));
-    
-            // Check if we have completed the required number of trials
-            if (trials == 2) {   
-                finishTask(performance,myIntervalX,performanceX, performanceY, instruction, styles);
+            if (trials == 12) {   
+                finishTask(performance,myIntervalX,performanceX, performanceY, instruction, styles, email);
             } else {
-                // Start countdown only if it's not the last trial
                 startCountdown();
             }
         }
@@ -150,16 +132,7 @@ export default function runTask(trialsProp, email, styles) {
     
     container.addEventListener("mousedown", () => {
         stopX()
-        if(xIsStopped === true) {
-            xIsStopped = !xIsStopped
-            yIsStopped =! yIsStopped
-            performanceX.push( Math.abs(posX+20-110))
-        }
-        else if (yIsStopped === true) {
-            xIsStopped = !xIsStopped
-            yIsStopped =! yIsStopped
-            performanceY.push(Math.abs(posY+20-110))
-        }
+       
     });
 
      myIntervalX = setInterval(function () { 
@@ -174,7 +147,6 @@ export default function runTask(trialsProp, email, styles) {
             }
             else if (startPosX == maxPos) {
                 posX -= speed
-                //console.log(posX)
                 elementX.style.left = posX + 'px'
                 if (posX == -20) {
                      startPosX = -20
@@ -184,7 +156,6 @@ export default function runTask(trialsProp, email, styles) {
         else if(yIsMoving){
             if (startPosY == -20) {
                 posY += speed
-                //console.log(posY)
                 elementY.style.top = posY + 'px'
                 if (posY == maxPos) {
                     startPosY = maxPos
@@ -192,7 +163,6 @@ export default function runTask(trialsProp, email, styles) {
             }
             else if (startPosY == maxPos) {
                 posY -= speed
-                //console.log(posY)
                 elementY.style.top = posY + 'px'
                 if (posY == -20) {
                     startPosY = -20

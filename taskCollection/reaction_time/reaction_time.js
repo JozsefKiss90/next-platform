@@ -80,7 +80,7 @@ export default function runTask(email,boxRef) {
         }
 
         const options = {
-            method: "POST",
+            method: "POST", 
             headers: {"Content-type": "application/json; charset=UTF-8"},
             body: JSON.stringify(values)
         }

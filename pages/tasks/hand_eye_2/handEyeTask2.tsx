@@ -17,7 +17,7 @@ interface TaskProps {
 export default function HandEye({ taskRef}: TaskProps) {
   return (
     <div className={styles.container} id="canvas-container">
-        <canvas ref={taskRef?.containerRef} id="container" width="1000" height="500"></canvas>
-    </div>
+          <canvas ref={taskRef?.containerRef} id="container" width="1000" height="600"></canvas>
+      </div>
   );
 }

@@ -11,6 +11,7 @@ export default function TaskDisplay({props}:any) {
     
     const [completedTaskData, setCompletedTaskData] = useState<any | undefined>()
     const [userData, setUserData] = useState<number[]>([])
+    console.log(userData)
 
     const tasksData = [
         { name: 'Reaction Time', link: '/tasks/reaction_time/reactionTime', imgSrc: '/img/icons/svgLightning.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/rt" },
@@ -21,7 +22,7 @@ export default function TaskDisplay({props}:any) {
         { name: 'Visual Memory', link: '/tasks/visual_memory/visualMemory', imgSrc: '/img/icons/svgWm.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/rt" },
         { name: 'Simon Task', link: '/tasks/simon/simon', imgSrc: '/img/icons/svgSimon.svg', imgWidth: 80, imgHeight: 60, endpoint:"api/simonTask" },
     ];
-    console.log(tasksData)
+    console.log(userData)
     const fetchTaskData = async () => {
       const taskDataResults : any = {};
         
@@ -49,11 +50,15 @@ export default function TaskDisplay({props}:any) {
       const completedTaskResults : any = {};
       if(completedTaskData) {
         Object.keys(completedTaskData).map(key=>{
-          if(completedTaskData[key].length){
+          if(completedTaskData[key].length) {
             dataByEmail = completedTaskData[key].filter((data: any) => data.email === session?.user?.email)
+            //console.log("DATA: " + dataByEmail)
             completedTaskResults[key] =  dataByEmail.length
+          } else {
+            completedTaskResults[key] =  0
           }
         })
+        
         setUserData(completedTaskResults)
       }
     }
@@ -64,7 +69,7 @@ export default function TaskDisplay({props}:any) {
           fetchCompletedData(data)
         })
       }, []);
-      console.log(userData['Hand Eye Coordination'] == 1)
+      
     return ( 
         <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
         {tasksData.map((task, index) => (
@@ -122,7 +127,7 @@ export default function TaskDisplay({props}:any) {
             )}
             
             <ProgressBar completed={task.name == "Hand Eye Coordination" ? (50 * (userData[task.name])).toFixed(0) 
-              : userData[task.name] != 0 ? 100 / userData[task.name] : 0
+              : userData[task.name] != 0 ? 100 : 0
             }/>
             </div>
         ))}
