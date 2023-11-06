@@ -11,7 +11,8 @@ import SimonModel from '../../models/simon.model'
 import HexagonModel from '../../models/hexagon.model'
 import ANTModel from '../../models/network.model'
 import GameModel from '../../models/game.model'
-import mongoose, { FilterQuery } from 'mongoose'
+import mongoose from 'mongoose'
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

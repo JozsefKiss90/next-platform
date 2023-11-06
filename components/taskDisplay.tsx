@@ -4,14 +4,50 @@ import Link from 'next/link';
 import ProgressBar from "./progressBar";
 import Image from 'next/image';
 import { useEffect, useState } from "react";
+import { Session } from "next-auth";
 
-export default function TaskDisplay({props}:any) {
+type TaskData = {
+  name: string;
+  link: string;
+  imgSrc?: string;
+  imgWidth?: number;
+  imgHeight?: number;
+  specialH1?: string;
+  specialH1Class?: string;
+  endpoint: string;
+};
 
-    const {isHovered, disableLink , language, languageData, handleTaskStart, handleCookieWarning, session} = props
+type TaskDisplayProps = {
+  isHovered: boolean;
+  disableLink: boolean;
+  language: boolean;
+  languageData: {
+    hun: {
+      experiments: string[];
+    };
+  };
+  handleTaskStart: (link: string) => void;
+  handleCookieWarning: () => void;
+  session: Session;
+};
+
+type CompletedTaskData = Record<string, any[] | 'error'>;
+
+type UserData = Record<string, number>;
+
+export default function TaskDisplay({ props }: { props: TaskDisplayProps }) {
+  const {
+    isHovered,
+    disableLink,
+    language,
+    languageData,
+    handleTaskStart,
+    handleCookieWarning,
+    session,
+  } = props;
     
-    const [completedTaskData, setCompletedTaskData] = useState<any | undefined>()
-    const [userData, setUserData] = useState<number[]>([])
-    console.log(userData)
+    const [completedTaskData, setCompletedTaskData] = useState<CompletedTaskData | undefined>();
+    const [userData, setUserData] = useState<UserData>({});
 
     const tasksData = [
         { name: 'Reaction Time', link: '/tasks/reaction_time/reactionTime', imgSrc: '/img/icons/svgLightning.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/rt" },
@@ -46,13 +82,12 @@ export default function TaskDisplay({props}:any) {
     };
 
     let dataByEmail : any 
-    const fetchCompletedData = async(completedTaskData) => {
+    const fetchCompletedData = async(completedTaskData : any) => {
       const completedTaskResults : any = {};
       if(completedTaskData) {
         Object.keys(completedTaskData).map(key=>{
           if(completedTaskData[key].length) {
             dataByEmail = completedTaskData[key].filter((data: any) => data.email === session?.user?.email)
-            //console.log("DATA: " + dataByEmail)
             completedTaskResults[key] =  dataByEmail.length
           } else {
             completedTaskResults[key] =  0
@@ -126,9 +161,14 @@ export default function TaskDisplay({props}:any) {
                 </Link>
             )}
             
-            <ProgressBar completed={task.name == "Hand Eye Coordination" ? (50 * (userData[task.name])).toFixed(0) 
-              : userData[task.name] != 0 ? 100 : 0
-            }/>
+            <ProgressBar completed={
+              task.name == "Hand Eye Coordination" 
+                ? Number((50 * (userData[task.name] ?? 0)).toFixed(0)) 
+                : userData[task.name] != 0 
+                  ? 100 
+                  : 0
+            } />
+
             </div>
         ))}
     </div>

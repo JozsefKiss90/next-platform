@@ -9,6 +9,21 @@ import MobileCarousel from "../hooks/mobileCarousel"
 import ModalWarning from "../hooks/modalWarning"
 import ProfileWarning from "../hooks/profileWarning"
 import { UserData, UserProps, AppContextValue } from "../types/types"
+import { Session } from "next-auth"
+
+type TaskDisplayProps = {
+  isHovered: boolean;
+  disableLink: boolean;
+  language: boolean;
+  languageData: {
+    hun: {
+      experiments: string[];
+    };
+  };
+  handleTaskStart: (link: string) => void;
+  handleCookieWarning: () => void;
+  session: Session;
+};
 
 export default function Experiments({ session, userStats }: UserProps) {
 
@@ -44,7 +59,7 @@ export default function Experiments({ session, userStats }: UserProps) {
           <ModalWarning/>
           ) : (
               <>
-               <TaskDisplay props={taskDisplayProps}/>
+               <TaskDisplay props={taskDisplayProps as TaskDisplayProps}/>
                <MobileCarousel language={language} languageData={languageData}/>
               </>
             )
