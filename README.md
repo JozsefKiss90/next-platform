@@ -13,7 +13,7 @@ Esport Lab is an online experimental psychological platform which is developed w
 ## 🖥️ Visit the site
 
 You can open the application [`here`](https://platform-app.herokuapp.com).
-After you have registered or signed in with Google you can delete your account in the profile page.
+After you have registered or signed in with Google account you can delete your account in the profile page.
 
 ## 🚀 Installation
 To run the Esport Lab Benchmarking Platform locally using Docker:
