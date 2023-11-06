@@ -10,6 +10,11 @@ Esport Lab is an online experimental psychological platform which is developed w
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white).
 ![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
+## 🖥️ Visit the site
+
+You can open the application [`here`](https://platform-app.herokuapp.com).
+After you have registered or signed in with Google you can delete your account in the profile page.
+
 ## 🚀 Installation
 To run the Esport Lab Benchmarking Platform locally using Docker:
 
@@ -31,10 +36,6 @@ Note: The mongoURI can be obtained from either MongoDB Atlas or MongoDB Compass:
 MongoDB Atlas: Set up a cluster on MongoDB Atlas, create a user under the Database Access tab, and obtain your connection string (URI) from the Connect options.
 
 MongoDB Compass: After installing MongoDB Compass, connect to your database and use the connection string (URI) displayed in the application.
-
-## 🖥️ Visit the site
-
-You can open the application [`here`](https://platform-app.herokuapp.com).
    
 ### 👥 Contribution
 
