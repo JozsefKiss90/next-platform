@@ -19,7 +19,7 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
 
     async function runTask() {
         const results = [];
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 30; i++) {
             await new Promise(r => setTimeout(r, 500));
             const trial = trials[Math.floor(Math.random() * trials.length)];
             const result = await runTrial(trial);

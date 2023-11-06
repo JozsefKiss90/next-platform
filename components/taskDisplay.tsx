@@ -51,13 +51,13 @@ export default function TaskDisplay({ props }: { props: TaskDisplayProps }) {
 
     const tasksData = [
         { name: 'Reaction Time', link: '/tasks/reaction_time/reactionTime', imgSrc: '/img/icons/svgLightning.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/rt" },
-        { name: 'Flanker Task', link: '/tasks/flanker/flankerTask', imgSrc: '/img/icons/svgFlanker.svg', imgWidth: 100, imgHeight: 60, endpoint:"api/flanker" },
-        { name: 'Attentional Networks', link: '/tasks/network/networkTask', imgSrc: '/img/icons/svgArrow.svg', imgWidth: 200, imgHeight: 60, endpoint:"api/network" },
         { name: 'Action Per Minute', link: '/tasks/apm/apm', specialH1: 'APM', specialH1Class: styles.apm_style, endpoint:"api/apm" },
         { name: 'Hand Eye Coordination', link: userData['Hand Eye Coordination'] == 1 ? '/tasks/hand_eye_2/handEye2' : '/tasks/hand_eye/handEye', imgSrc: '/img/icons/svgAim.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/handeye" },
-        { name: 'Visual Memory', link: '/tasks/visual_memory/visualMemory', imgSrc: '/img/icons/svgWm.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/rt" },
+        { name: 'Visual Memory', link: '/tasks/visual_memory/visualMemory', imgSrc: '/img/icons/svgWm.svg', imgWidth: 60, imgHeight: 60, endpoint:"api/memory" },
         { name: 'Simon Task', link: '/tasks/simon/simon', imgSrc: '/img/icons/svgSimon.svg', imgWidth: 80, imgHeight: 60, endpoint:"api/simonTask" },
-    ];
+        { name: 'Flanker Task', link: '/tasks/flanker/flankerTask', imgSrc: '/img/icons/svgFlanker.svg', imgWidth: 100, imgHeight: 60, endpoint:"api/flanker" },
+        { name: 'Attentional Networks', link: '/tasks/network/networkTask', imgSrc: '/img/icons/svgArrow.svg', imgWidth: 200, imgHeight: 60, endpoint:"api/network" },
+      ];
     console.log(userData)
     const fetchTaskData = async () => {
       const taskDataResults : any = {};
@@ -108,7 +108,7 @@ export default function TaskDisplay({ props }: { props: TaskDisplayProps }) {
     return ( 
         <div className={`${styles.main} ${isHovered ? styles.shrink : ""}`}>
         {tasksData.map((task, index) => (
-            <div key={index} className={styles.task}>
+            <div key={index} className={index == 5 || index == 6 ? styles.task_disabled : styles.task}>
             {disableLink ? (
                 <Link href="">
                 <h2>{language ? languageData.hun.experiments[index] : task.name}</h2>
@@ -153,13 +153,20 @@ export default function TaskDisplay({ props }: { props: TaskDisplayProps }) {
                     <p>Start</p>
                 </button>
                 </Link>
-            ) : (
+            ) : index == 5 || index == 6 ? (
                 <Link href={task.link}>
-                <button className={styles.task_button} onClick={(e) => { e.preventDefault(), handleTaskStart(task.link) }}>
+                <button className={styles.task_disabled_button} disabled={true} onClick={(e) => { e.preventDefault(), handleTaskStart(task.link) }}>
                     <p>Start</p>
                 </button>
                 </Link>
-            )}
+            ) : (
+              <Link href={task.link}>
+              <button className={styles.task_button} onClick={(e) => { e.preventDefault(), handleTaskStart(task.link) }}>
+                  <p>Start</p>
+              </button>
+              </Link>
+              ) 
+          }
             
             <ProgressBar completed={
               task.name == "Hand Eye Coordination" 

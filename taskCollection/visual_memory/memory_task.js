@@ -10,6 +10,8 @@ let attempts = 3;
 status.classList.add(styles.status);
 
 const button = buttonProp
+const container = document.querySelector('.' + styles.container);
+
 if(button != null){
     button.addEventListener('click', ()=> startTest())
 }
@@ -22,6 +24,7 @@ for (let i = 0; i < 9; i++) {
 }
 
 function startTest() {
+    container.style.backgroundColor = ""; 
     playerSequence = [];
     sequence.length = 0;
     status.innerHTML = "";
@@ -68,7 +71,7 @@ function verifySequence() {
     for (let i = 0; i < sequence.length; i++) {
         if (sequence[i] !== playerSequence[i]) {
             status.innerHTML = `Incorrect, you have ${--attempts} attempts remaining.`;
-            document.body.style.backgroundColor = "red";
+            container.style.backgroundColor = "red"; 
             if(attempts > 0) {
                 setTimeout(startTest, 1000);
                 return;
@@ -80,14 +83,14 @@ function verifySequence() {
             }
         }
     }
-    if(sequenceCount < 1) {
+    if(sequenceCount < 9) {
         sequenceCount++;
         attempts = 3;
         setTimeout(() => {
-            document.body.style.backgroundColor = "#27f827"; 
+            container.style.backgroundColor = "#27f827"; 
         }, 200);
         setTimeout(() => {
-            document.body.style.backgroundColor = ""; 
+            document.querySelector('.' + styles.container).style.backgroundColor = ""; 
         }, 900); 
         setTimeout(startTest, 1800); 
     } else {
@@ -124,8 +127,8 @@ function sendData(sequenceCount) {
     }
 
     function exit() {
-        window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
-    }
+        window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com/experiments" : "http://localhost:3000/experiments";
+    } 
 
     function addExitButton() {
         let button = document.createElement('button');

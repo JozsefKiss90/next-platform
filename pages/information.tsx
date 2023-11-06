@@ -8,11 +8,10 @@ export default function Information() {
         <Navbar />
         <div style={{display:'flex', justifyContent:'center'}}>
             <Image
-               // className={`${styles.icon_style} ${styles.svg_icon}`} 
                 src="/img/poster.platform.jpg"
                 alt="SVG Icon"
                 width={700}
-                height={1500}
+                height={1700}
                 style={{paddingTop:'40px'}}
               />        
         </div>    

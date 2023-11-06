@@ -172,15 +172,14 @@ export default function runTask(email, containerProp, setDisplayInstruction, sty
                     const endpoint = "/api/apm"
                     addExitButton()
                     setDisplayInstruction(true)
-                   /* fetch(endpoint, {
+                    fetch(endpoint, {
                         method: "POST",
                         headers: {"Content-type": "application/json; charset=UTF-8"},
                         body: JSON.stringify(data)
                     })
                     .then(response => response.json()) 
                     .then(json => console.log(json))
-                    .catch(err => console.log(err)) */ 
-                     //window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+                    .catch(err => console.log(err)) 
                 }
                 this.removeEventListener('mousedown', handler_2)
                 thirdElement.addEventListener("mousedown", handler_3)

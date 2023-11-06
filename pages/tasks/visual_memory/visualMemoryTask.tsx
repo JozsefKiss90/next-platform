@@ -13,11 +13,12 @@ export default function Page({ taskRef } : TaskProps  ) {
       <div ref={taskRef?.gridRef} id="grid" className={styles.grid}></div>
       {!started && 
       <div style={{display:'flex', alignSelf:'center', flexDirection:'column', position:'relative', top:'30px'}}>
-        <h3 style={{color:'white'}}>
-          Click on the squares in the order the appear in red.
+        <h3 style={{color:'white', textAlign:'center'}}>
+         Kattintsd végig a négyzeteket megjelenésük sorrendjében. <br />
+         Klikk a Start gombra a kezdéshez.
         </h3>
         <button ref={taskRef?.buttonRef} className={styles.button} onClick={()=>{setStarted(true)}} id="button">
-          Start Test
+          Start 
         </button>
       </div>}    
       <p id="status"></p> 

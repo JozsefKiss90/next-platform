@@ -3,7 +3,7 @@
     "hun": {
         "navbar" : ["Menü", "Kísérletek", "Játékok", "Profil", "Információ", "Kapcsolat", "Kijelentkezés"],
         "index" : ["Benchmarking módszerek kidolgozása e-sportolók számára, videójátékokon keresztül", "Kísérletek", "Profil"],
-        "experiments": ["Reakció Idő", "Flanker Teszt", "Figyelmi Hálózatok", "Action per minute", "Szem-kéz koordináció", "Munkamemória", "Simon Teszt"],
+        "experiments": ["Reakció Idő", "Action per minute", "Szem-kéz koordináció", "Munkamemória", "Simon Teszt", "Flanker Teszt", "Figyelmi Hálózatok"],
         "profile": ["Játék adatok", "Jelenlegi Rang:", "Legjobb Rang:", "Játékidő (óra):", "Életkor: ", "Mentés", "Fiók Törlése", "Biztosan törölni akarod a fiókod?", "Igen", "Nem"],
         "login": ["Kísérleti plaform e-sportolók részére", "Belépés", "Belépés Google fiókkal", "Belépés Facebook fiókkal","Még nem regisztrált?", "Regisztráció"],
         "register": ["Regisztráció", "Felhasználónév", "Jelszó", "Jelszó megerősítése", "Regisztrálás", "Van már fiókja?", "Bejelentkezés"]
