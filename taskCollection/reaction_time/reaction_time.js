@@ -66,7 +66,7 @@ export default function runTask(email,boxRef) {
     
 
     function exit() {
-        window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+        window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com/experiments" : "http://localhost:3000/experiments";
     }
 
     function sendData() {

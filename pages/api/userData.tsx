@@ -13,7 +13,6 @@ import ANTModel from '../../models/network.model'
 import GameModel from '../../models/game.model'
 import mongoose from 'mongoose'
 
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectToDb()

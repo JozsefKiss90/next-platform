@@ -120,7 +120,8 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
             `;
         container.appendChild(feedbackDiv);
     
-        const redirectTo = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+        const redirectTo = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com/experiments" : "http://localhost:3000/experiments";
+
         const exitOnKeyPress = (event) => {
             window.location.href = redirectTo;
             document.removeEventListener('keydown', exitOnKeyPress);
@@ -143,7 +144,7 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
             body: JSON.stringify(data)
         }
 
-       /* fetch('/api/simonTask', options)
+        fetch('/api/simonTask', options)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -151,6 +152,6 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
             })
             .catch(error => {
                 console.error("There was a problem with the fetch operation:", error.message);
-            });*/
+            }) 
     }
 }

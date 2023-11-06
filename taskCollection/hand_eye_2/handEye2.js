@@ -21,7 +21,7 @@ export default function runTask(email, canvasProp, styles) {
     const centerX_large = canvas.width / 2;
     const centerY_large = canvas.height  - 300;
     const radius_large = 200;
-    let radius_small = 50;
+    let radius_small = 30;
     let angle = -Math.PI / 2;
     let isMoving = false;
 
@@ -35,7 +35,7 @@ export default function runTask(email, canvasProp, styles) {
     let started = false
 
     let currentTrial = 0;
-    const maxTrials =1;
+    const maxTrials = 5;
     let currentAngleIncrement = Math.PI / 180; 
 
     function isMouseOverSmallCircle(mouseX, mouseY) {
@@ -126,6 +126,10 @@ export default function runTask(email, canvasProp, styles) {
     drawCircles();
 
     canvas.addEventListener('click', function() {
+        if (started && isMoving) {
+            return;
+        }
+    
         started = true;
         if (currentTrial < maxTrials) {
             isMoving = !isMoving;
@@ -135,13 +139,14 @@ export default function runTask(email, canvasProp, styles) {
                 }
                 requestAnimationFrame(drawCircles);
                 let instructionElement = document.getElementById('instruction');
-
+    
                 if (instructionElement) {
                     instructionElement.remove();
                 }
             }
         }
     });
+    
     
     function addExitButton(styles) {
         let button = document.createElement('button');
@@ -158,7 +163,7 @@ export default function runTask(email, canvasProp, styles) {
     }
 
     function exit() {
-        window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com" : "http://localhost:3000";
+        window.location.href = process.env.NODE_ENV === "production" ? "https://platform-app.herokuapp.com/experiments" : "http://localhost:3000/experiments";
     }
 
     function createTaskFinishedText(styles) {

@@ -39,7 +39,7 @@ export const navItems :NavItems[] = [
   },
   {
     titleKey: 'Information',
-    path: '#',
+    path: '/information',
     iconPath: '/img/icons/svgInfo.svg',
     grayscaleKey: 'grayscale_info',
     hoverEffectClass: 'hover_effect_info',
@@ -48,7 +48,7 @@ export const navItems :NavItems[] = [
   },
   {
     titleKey: 'Messages',
-    path: '#',
+    path: '/contact',
     iconPath: '/img/icons/svgEnvelope.svg',
     grayscaleKey: 'grayscale_message',
     hoverEffectClass: 'hover_effect_envelope',
