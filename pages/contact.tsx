@@ -9,18 +9,16 @@ export default function Contact() {
         message: '',
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setEmailData({
             ...emailData,
             [e.target.name]: e.target.value,
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        // Here you would send a POST request to your API endpoint
-        // This endpoint would be responsible for sending the email
         try {
             const res = await fetch('/api/sendEmail', {
                 method: 'POST',
@@ -32,9 +30,7 @@ export default function Contact() {
 
             const data = await res.json();
             if (data.success) {
-                // Handle success - maybe clear the form or show a success message
             } else {
-                // Handle error - show an error message
             }
         } catch (error) {
             console.error("Failed to send email", error);
