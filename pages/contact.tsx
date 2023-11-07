@@ -47,7 +47,7 @@ export default function Contact() {
                     </Typography>
                     <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                         <TextField
-                            label="Name"
+                            label="Név"
                             name="name"
                             fullWidth
                             margin="normal"
@@ -65,7 +65,7 @@ export default function Contact() {
                             style={{backgroundColor:"white"}}
                         />
                         <TextField
-                            label="Message"
+                            label="Üzenet"
                             name="message"
                             fullWidth
                             margin="normal"
@@ -76,7 +76,7 @@ export default function Contact() {
                             style={{backgroundColor:"white"}}
                         />
                         <Button variant="contained" color="primary" type="submit">
-                            Send
+                            Küldés
                         </Button>
                     </form>
                 </Box>

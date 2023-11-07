@@ -2,6 +2,7 @@ import mongoose, { Document, Model, Schema } from 'mongoose';
 
 interface Rt extends Document {
   rt: number;
+  rtArray:number[];
   email: string;
 }
 
@@ -10,10 +11,14 @@ try {
   RtSchema = mongoose.model<Rt>('rt_schema');
 } catch (error) {
   RtSchema = mongoose.model<Rt>(
-    'rt_schema',
+    'rt_schema', 
     new Schema<Rt>({
       rt: {
-        type: Number,
+        type: Number, 
+        required: true,
+      },
+      rtArray: {
+        type: [Number],  
         required: true,
       },
       email: {

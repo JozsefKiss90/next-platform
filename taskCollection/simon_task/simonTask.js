@@ -3,12 +3,50 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
     const instructionsElement = instructionsRef
     const startButton = buttonRef
     const container = containerRef
-    console.log(containerRef,instructionsRef, buttonRef)
+
     startButton.addEventListener('click', () => {
         instructionsElement.style.display = 'none';
         startButton.style.display = 'none';
         runTask();
     });
+
+    let practiceCompleted = false;
+
+    const practiceTrials = [
+        { condition: "practice", position: -200, stimulus: "bal", response: "a" },
+        { condition: "practice", position:  200, stimulus: "bal", response: "a" },
+        { condition: "practice", position: 200, stimulus: "jobb", response: "l" },
+        { condition: "practice", position: -200, stimulus: "jobb", response: "l" }
+    ];
+
+    async function runPracticeTrials() {
+
+        const practiceStartDiv = document.createElement("div");
+        practiceStartDiv.textContent = "Néhány próba feladat következik...";
+        container.appendChild(practiceStartDiv);
+
+        await new Promise(r => setTimeout(r, 2500));
+        container.removeChild(practiceStartDiv);
+
+        for (const trial of practiceTrials) {
+            await runTrial(trial);
+        }
+        
+        const practiceEndDiv = document.createElement("div");
+        practiceEndDiv.textContent = "Próba feladat teljesítve! Nyomj meg egy gombot, hogy a kísérlet elinduljon.";
+        container.appendChild(practiceEndDiv);
+
+        await new Promise(resolve => {
+            const keyDownHandler = (event) => {
+                container.removeChild(practiceEndDiv);
+                document.removeEventListener('keydown', keyDownHandler);
+                resolve();
+            };
+            document.addEventListener('keydown', keyDownHandler);
+        });
+
+        practiceCompleted = true;
+    }
  
     const trials = [
         { condition: "left  leftresponse  compatible", position: -200, stimulus: "bal", response: "a" },
@@ -18,6 +56,9 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
     ];
 
     async function runTask() {
+        if (!practiceCompleted) {
+            await runPracticeTrials();
+        }
         const results = [];
         for (let i = 0; i < 30; i++) {
             await new Promise(r => setTimeout(r, 500));
@@ -60,7 +101,14 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
                             resolve({ status, rt, condition: trial.condition });
                         }, 1000);
                     } else {
-                        resolve({ status, rt, condition: trial.condition });
+                        const successDiv = createSuccess();
+                        container.appendChild(successDiv);
+                        setTimeout(() => {
+                            if (container.contains(successDiv)) {
+                                container.removeChild(successDiv);
+                            }
+                            resolve({ status, rt, condition: trial.condition });
+                        }, 1000);
                     }
                     
                     document.removeEventListener("keypress", keyListener);
@@ -101,6 +149,14 @@ export default function(email, containerRef,instructionsRef, buttonRef, styles) 
         div.textContent = "Rossz válasz!";
         return div;
     }
+
+    function createSuccess() {
+        const div = document.createElement("div");
+        div.className = styles.success;
+        div.textContent = "Helyes válasz!";
+        return div;
+    }
+
 
     function provideFeedback(results) {
         const compatibleRTs = results.filter(r => r.condition.includes('compatible') && r.status === 'correct').map(r => r.rt);

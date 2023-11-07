@@ -76,6 +76,7 @@ export default function runTask(email,boxRef) {
 
         const values = {
             rt: avg,
+            rtArray: reactionTimes,
             email: email,
         }
 

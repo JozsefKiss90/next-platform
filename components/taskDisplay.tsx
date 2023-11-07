@@ -115,7 +115,7 @@ export default function TaskDisplay({ props }: { props: TaskDisplayProps }) {
                 </Link>
             ) : (
                 <Link href={task.link}>
-                <h2>{language ? languageData.hun.experiments[index] : task.name}</h2>
+                <h2 style={{color: index == 5 || index == 6 ? "rgb(215, 215, 215)" : "" }}>{language ? languageData.hun.experiments[index] : task.name}</h2>
                 </Link>
             )}
             

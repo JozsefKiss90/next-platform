@@ -37,9 +37,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         if(!req.body) return res.status(404).json({error:'form data is missing'})
         console.log("req body: " + {...req.body})
-        const {rt,email} = req.body
+        const {rt,rtArray,email} = req.body
  
-        RtTask.create({rt,email}, function(err, data ){ 
+        RtTask.create({rt,rtArray,email}, function(err, data ){ 
             if(err) {  
                 return res.status(404).json({err})
             }

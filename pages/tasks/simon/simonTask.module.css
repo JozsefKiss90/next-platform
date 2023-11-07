@@ -33,6 +33,9 @@
 .error {
     color: red;
 }
+.success {
+    color: rgb(0, 219, 0);
+}
 .fixation {
     font-size: 2em;
     text-align: center;
