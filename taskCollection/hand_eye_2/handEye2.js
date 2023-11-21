@@ -37,6 +37,7 @@ export default function runTask(email, canvasProp, styles) {
     let currentTrial = 0;
     const maxTrials = 5;
     let currentAngleIncrement = Math.PI / 180; 
+    let lastTime = 0;
 
     function isMouseOverSmallCircle(mouseX, mouseY) {
         const smallCircleX = centerX_large + radius_large * Math.cos(angle);
@@ -67,63 +68,78 @@ export default function runTask(email, canvasProp, styles) {
         }
     
         if (!isMoving) {
-        drawCircles();
+        drawCircles(); //line 71
         }
     });
 
-    function drawCircles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.arc(centerX_large, centerY_large, radius_large, 0, 2 * Math.PI);
-    ctx.strokeStyle = "#999999";
-    ctx.lineWidth = 3;
-    ctx.stroke();
-
-    const smallCircleX = centerX_large + radius_large * Math.cos(angle);
-    const smallCircleY = centerY_large + radius_large * Math.sin(angle);
-    ctx.strokeStyle = smallCircleColor;
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.arc(smallCircleX, smallCircleY, radius_small, 0, 2 * Math.PI);
-    ctx.fillStyle = smallCircleColor;
-    ctx.fill();
-    ctx.stroke();
-
-    if (isMoving) {
-        angle += currentAngleIncrement;
+    function drawCircles(timestamp = 0) {
+        if (!lastTime) lastTime = timestamp;
+        const deltaTime = timestamp - lastTime;
+        lastTime = timestamp;
+    
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+        // Draw the large circle
+        ctx.beginPath();
+        ctx.arc(centerX_large, centerY_large, radius_large, 0, 2 * Math.PI);
+        ctx.strokeStyle = "#999999";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+    
+        // Calculate the position for the small circle
+        const smallCircleX = centerX_large + radius_large * Math.cos(angle);
+        const smallCircleY = centerY_large + radius_large * Math.sin(angle);
+    
+        // Draw the small circle
+        ctx.beginPath();
+        ctx.arc(smallCircleX, smallCircleY, radius_small, 0, 2 * Math.PI);
+        ctx.fillStyle = smallCircleColor;
+        ctx.fill();
+        ctx.stroke();
+    
+        if (isMoving) {
+            // Update angle based on deltaTime
+            const angleIncrement = currentAngleIncrement * deltaTime / (1000 / 60); // Assuming 60 FPS as standard
+            angle += angleIncrement;
+    
+            // Check for the end of a trial or loop
+            checkTrialEnd();
+    
+            requestAnimationFrame(drawCircles);
+        }
+    }
+    
+    
+    function checkTrialEnd() {
         if (angle >= 2 * Math.PI - Math.PI / 2) {
-        if (isMouseOver && started) {
-            totalHoverDuration += Date.now() - hoverStartTime; 
-            isMouseOver = false; 
-        }
-
-        hoverDurations.push(totalHoverDuration); 
-        totalHoverDuration = 0; 
-        currentTrial++;
-        angle = -Math.PI / 2;
-
-        if (currentTrial < maxTrials) {
-            console.log(currentTrial)
-            radius_small -= 5;
-            currentAngleIncrement += Math.PI / 180 / 20;
-        } else {
-            isMoving = false;
-            const performance = hoverDurations
-            console.log(performance)
-            const data = {
-                performance,
-                email
+            if (isMouseOver && started) {
+                totalHoverDuration += Date.now() - hoverStartTime; 
+                isMouseOver = false; 
             }
-            createTaskFinishedText(styles)
-            addExitButton(styles)
-            sendData(data)
+    
+            hoverDurations.push(totalHoverDuration); 
+            totalHoverDuration = 0; 
+            currentTrial++;
+            angle = -Math.PI / 2;
+    
+            if (currentTrial < maxTrials) {
+                console.log("Trial " + currentTrial + " completed");
+                radius_small -= 5;
+                currentAngleIncrement += Math.PI / 180 / 20;
+            } else {
+                console.log("Task completed. Performance:", hoverDurations);
+                isMoving = false;
+                // Insert any additional logic for task completion here
+                createTaskFinishedText(styles);
+                addExitButton(styles);
+                sendData({ performance: hoverDurations, email });
+            }
         }
-        }
-        requestAnimationFrame(drawCircles);
     }
-    }
+    
+    
 
-    drawCircles();
+    requestAnimationFrame(drawCircles);
 
     canvas.addEventListener('click', function() {
         if (started && isMoving) {

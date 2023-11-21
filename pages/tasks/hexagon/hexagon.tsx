@@ -32,7 +32,7 @@ export default function Page({ email }: TaskProps) {
         tens: appendTensRef.current,
         seconds: appendSecondsRef.current,
         mins: appendMinsRef.current,
-      }
+      } 
 
       hexagonModule(sessionEmail, redirectCallback, props)
     }
@@ -46,7 +46,7 @@ export default function Page({ email }: TaskProps) {
     return <div>Loading...</div>
   } 
 
-  if(session) { 
+  if(session) {  
     return (
       <div className={styles.container}>
         <nav className={styles.stopper}>
