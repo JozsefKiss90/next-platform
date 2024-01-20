@@ -31,7 +31,7 @@ export default function Home({session} : UserProps) {
 function User({ session } : UserProps) {
   const { isHovered, languageData, language} = useContext(AppContext)  as AppContextValue;
   return(
-    <div>
+    <div style={{overflowY:"hidden"}}>
     <Navbar/>
     <div className={`${styles.index_container} ${isHovered ? styles.shrink : ""}`}>
       <Image

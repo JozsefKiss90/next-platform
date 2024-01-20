@@ -40,8 +40,11 @@ html,body::before {
   z-index: -999;
 }  
 
-@media (min-width: 375px) {
-
+@media (max-width: 896px) {
+  body, html {
+    overflow: hidden;
+    height: 100%;
+  }
 }
 
 body::-webkit-scrollbar {
