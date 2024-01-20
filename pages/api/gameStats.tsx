@@ -11,13 +11,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     const session = await getServerSession(req, res, authOptions)   
     
-
+    /*
     if(!session || session.user?.role != 'user') {
         return res.status(403).json({ message: 'unauthorized'});
-    }
+    }*/
+    
     connectToDb()
     .catch(err=>res.json(err)) 
-    if(req.method === 'GET') {
+    if(req.method === 'GET') { 
         try {
             const rtData = await GameModel.find();
             res.status(200).json({ data: rtData });

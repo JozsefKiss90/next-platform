@@ -146,7 +146,7 @@
 @media (max-width: 896px) {
   .index_container {
     width: 350px;
-    top: 10%;
+    margin-top: 100px !important; 
   }
 
   .title_text_h1{
@@ -187,5 +187,9 @@
   .icon_style_index{
    position: relative;
    top: 20px;
+  }
+
+  .email {
+    display: none;
   }
 }

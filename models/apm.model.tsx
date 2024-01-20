@@ -1,6 +1,5 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
-
 interface Amp extends Document {
   performance: string,
   email: string,

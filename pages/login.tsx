@@ -12,7 +12,7 @@ export default function Login() {
   const [isImageLoaded, setIsImageLoaded] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('') 
-  console.log(baseUrl)
+  
   useEffect(() => {
     const image = new Image()
     image.src = '/img/login_image.png'

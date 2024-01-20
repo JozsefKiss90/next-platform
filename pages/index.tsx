@@ -39,7 +39,7 @@ function User({ session } : UserProps) {
           src="/img/icons/svgAim.svg"
           alt="SVG Icon"
           width={90}
-          height={90} 
+          height={90}  
         />      
         <div className={styles.title_container}> 
           <h1 className={styles.title_text_h1}>ESPORT LAB</h1>

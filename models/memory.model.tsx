@@ -23,4 +23,4 @@ const MemoryModel: Model<Memory> =
   mongoose.models.memory_test ||
   mongoose.model<Memory>('memory_test', MemorySchema);
 
-export default MemoryModel;
+export default MemoryModel; 
