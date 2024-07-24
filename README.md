@@ -10,11 +10,6 @@ Esport Lab is an online experimental psychological platform which is developed w
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white).
 ![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
-## 🖥️ Visit the site
-
-You can open the application [`here`](https://platform-app.herokuapp.com).
-After you have registered or signed in with Google account you can delete your account in the profile page.
-
 ## 🚀 Installation
 To run the Esport Lab Benchmarking Platform locally using Docker:
 
